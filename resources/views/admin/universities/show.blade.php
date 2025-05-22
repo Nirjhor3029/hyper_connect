@@ -1,0 +1,191 @@
+@extends('layouts.admin')
+@section('content')
+
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.show') }} {{ trans('cruds.university.title') }}
+    </div>
+
+    <div class="card-body">
+        <div class="form-group">
+            <div class="form-group">
+                <a class="btn btn-default" href="{{ route('admin.universities.index') }}">
+                    {{ trans('global.back_to_list') }}
+                </a>
+            </div>
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.id') }}
+                        </th>
+                        <td>
+                            {{ $university->id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.country') }}
+                        </th>
+                        <td>
+                            {{ $university->country->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.name') }}
+                        </th>
+                        <td>
+                            {{ $university->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.code') }}
+                        </th>
+                        <td>
+                            {{ $university->code }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.university_type') }}
+                        </th>
+                        <td>
+                            {{ $university->university_type }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.address') }}
+                        </th>
+                        <td>
+                            {!! $university->address !!}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.accreditation') }}
+                        </th>
+                        <td>
+                            {{ $university->accreditation }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.website') }}
+                        </th>
+                        <td>
+                            {{ $university->website }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.contact_email') }}
+                        </th>
+                        <td>
+                            {{ $university->contact_email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.contact_phone') }}
+                        </th>
+                        <td>
+                            {{ $university->contact_phone }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.logo_url') }}
+                        </th>
+                        <td>
+                            {{ $university->logo_url }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.is_active') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled="disabled" {{ $university->is_active ? 'checked' : '' }}>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <a class="btn btn-default" href="{{ route('admin.universities.index') }}">
+                    {{ trans('global.back_to_list') }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.relatedData') }}
+    </div>
+    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#university_university_partnerships" role="tab" data-toggle="tab">
+                {{ trans('cruds.universityPartnership.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#university_programs" role="tab" data-toggle="tab">
+                {{ trans('cruds.program.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#university_applications" role="tab" data-toggle="tab">
+                {{ trans('cruds.application.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#university_commission_from_universities" role="tab" data-toggle="tab">
+                {{ trans('cruds.commissionFromUniversity.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#university_subjects" role="tab" data-toggle="tab">
+                {{ trans('cruds.subject.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#chossen_university_students" role="tab" data-toggle="tab">
+                {{ trans('cruds.student.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#university_commission_settings" role="tab" data-toggle="tab">
+                {{ trans('cruds.commissionSetting.title') }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="university_university_partnerships">
+            @includeIf('admin.universities.relationships.universityUniversityPartnerships', ['universityPartnerships' => $university->universityUniversityPartnerships])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="university_programs">
+            @includeIf('admin.universities.relationships.universityPrograms', ['programs' => $university->universityPrograms])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="university_applications">
+            @includeIf('admin.universities.relationships.universityApplications', ['applications' => $university->universityApplications])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="university_commission_from_universities">
+            @includeIf('admin.universities.relationships.universityCommissionFromUniversities', ['commissionFromUniversities' => $university->universityCommissionFromUniversities])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="university_subjects">
+            @includeIf('admin.universities.relationships.universitySubjects', ['subjects' => $university->universitySubjects])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="chossen_university_students">
+            @includeIf('admin.universities.relationships.chossenUniversityStudents', ['students' => $university->chossenUniversityStudents])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="university_commission_settings">
+            @includeIf('admin.universities.relationships.universityCommissionSettings', ['commissionSettings' => $university->universityCommissionSettings])
+        </div>
+    </div>
+</div>
+
+@endsection
