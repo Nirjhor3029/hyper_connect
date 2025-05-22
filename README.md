@@ -1,3 +1,24 @@
+Setup Guidelines
+
+1. **Extract the Archive**: Place the extracted files in the desired directory.
+2. **Copy Environment File**: Execute `cp .env.example .env` to duplicate the example environment file.
+3. **Edit Environment Settings**: Modify your `.env` file to include your database credentials and other necessary configurations.
+4. **Install Dependencies**: Run the `composer install` command.
+5. **Run Migrations and Seed Database**: Use `php artisan migrate --seed` to migrate your database. Seeding is crucial as it creates the initial admin user.
+6. **Generate Application Key**: Execute `php artisan key:generate`.
+7. **Link Storage**: If your application includes file/photo fields, run `php artisan storage:link`.
+
+Once complete, visit your domain and log in using the default credentials:
+
+- **Username**: admin@admin.com
+- **Password**: password
+
+
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
