@@ -259,6 +259,12 @@
             left: 100%;
         }
 
+        .logo_img {
+            width: 250px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
         @media (max-width: 768px) {
             .login-container {
                 flex-direction: column;
@@ -280,6 +286,12 @@
 
             .login-title {
                 font-size: 24px;
+            }
+
+            .logo_img {
+                width: 200px;
+                height: auto;
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -313,8 +325,8 @@
                 {{-- <div class="logo">
                     HC
                 </div> --}}
-                <img src="{{ asset('assets/images/hyper_connect_logo.png') }}" alt="" srcset=""
-                    height="100px" style="border-radius: 12px; margin-bottom: 20px;">
+                <img class="logo_img" src="{{ asset('assets/images/hyper_connect_logo.png') }}" alt=""
+                    srcset="" style="border-radius: 12px; margin-bottom: 20px;">
                 {{-- <h2 class="login-title">Agent Portal</h2> --}}
 
             </div>
