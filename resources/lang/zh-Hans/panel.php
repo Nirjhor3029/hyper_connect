@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'site_title' => 'StudyBridge',
+    'site_title' => 'HyperConnect',
 
 ];
