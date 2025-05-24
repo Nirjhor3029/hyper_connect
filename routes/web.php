@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\UniversitiesController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
@@ -42,7 +46,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('students', 'StudentsController');
 
     // Universities
-    Route::delete('universities/destroy', 'UniversitiesController@massDestroy')->name('universities.massDestroy');
+    // Route::delete('universities/destroy', 'UniversitiesController@massDestroy')->name('universities.massDestroy');
+    Route::delete('universities/destroy', [UniversitiesController::class, 'massDestroy'] )->name('universities.massDestroy');
     Route::post('universities/media', 'UniversitiesController@storeMedia')->name('universities.storeMedia');
     Route::post('universities/ckmedia', 'UniversitiesController@storeCKEditorImages')->name('universities.storeCKEditorImages');
     Route::resource('universities', 'UniversitiesController');
