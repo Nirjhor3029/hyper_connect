@@ -41,14 +41,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.universityPartnership.fields.partner_type') }}
-                        </th>
-                        <td>
-                            {{ $universityPartnership->partner_type }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.universityPartnership.fields.agreement_url') }}
                         </th>
                         <td>
@@ -69,6 +61,26 @@
                         </th>
                         <td>
                             {{ $universityPartnership->active_to }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.universityPartnership.fields.partner_type') }}
+                        </th>
+                        <td>
+                            {{ App\Models\UniversityPartnership::PARTNER_TYPE_SELECT[$universityPartnership->partner_type] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.universityPartnership.fields.agreement_file') }}
+                        </th>
+                        <td>
+                            @foreach($universityPartnership->agreement_file as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                    {{ trans('global.view_file') }}
+                                </a>
+                            @endforeach
                         </td>
                     </tr>
                 </tbody>

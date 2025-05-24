@@ -49,6 +49,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // University Partnerships
     Route::delete('university-partnerships/destroy', 'UniversityPartnershipsController@massDestroy')->name('university-partnerships.massDestroy');
+    Route::post('university-partnerships/media', 'UniversityPartnershipsController@storeMedia')->name('university-partnerships.storeMedia');
+    Route::post('university-partnerships/ckmedia', 'UniversityPartnershipsController@storeCKEditorImages')->name('university-partnerships.storeCKEditorImages');
     Route::resource('university-partnerships', 'UniversityPartnershipsController');
 
     // Programs

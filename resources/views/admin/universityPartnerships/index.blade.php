@@ -32,9 +32,6 @@
                             {{ trans('cruds.universityPartnership.fields.partner_name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.universityPartnership.fields.partner_type') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -53,9 +50,6 @@
                             </td>
                             <td>
                                 {{ $universityPartnership->partner_name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $universityPartnership->partner_type ?? '' }}
                             </td>
                             <td>
                                 @can('university_partnership_show')

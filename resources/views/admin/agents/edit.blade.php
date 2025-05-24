@@ -99,11 +99,13 @@
                 <span class="help-block">{{ trans('cruds.agent.fields.commission_policy_helper') }}</span>
             </div>
             <div class="form-group">
-                <div class="form-check {{ $errors->has('is_active') ? 'is-invalid' : '' }}">
-                    <input type="hidden" name="is_active" value="0">
-                    <input class="form-check-input" type="checkbox" name="is_active" id="is_active" value="1" {{ $agent->is_active || old('is_active', 0) === 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="is_active">{{ trans('cruds.agent.fields.is_active') }}</label>
-                </div>
+                <label>{{ trans('cruds.agent.fields.is_active') }}</label>
+                @foreach(App\Models\Agent::IS_ACTIVE_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('is_active') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="is_active_{{ $key }}" name="is_active" value="{{ $key }}" {{ old('is_active', $agent->is_active) === (string) $key ? 'checked' : '' }}>
+                        <label class="form-check-label" for="is_active_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
                 @if($errors->has('is_active'))
                     <div class="invalid-feedback">
                         {{ $errors->first('is_active') }}

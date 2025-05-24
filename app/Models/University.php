@@ -16,6 +16,10 @@ class University extends Model implements HasMedia
 
     public $table = 'universities';
 
+    protected $appends = [
+        'logo',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -28,6 +32,7 @@ class University extends Model implements HasMedia
         'code',
         'university_type',
         'address',
+        'university_details',
         'accreditation',
         'website',
         'contact_email',
@@ -88,5 +93,17 @@ class University extends Model implements HasMedia
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    public function getLogoAttribute()
+    {
+        $file = $this->getMedia('logo')->last();
+        if ($file) {
+            $file->url       = $file->getUrl();
+            $file->thumbnail = $file->getUrl('thumb');
+            $file->preview   = $file->getUrl('preview');
+        }
+
+        return $file;
     }
 }

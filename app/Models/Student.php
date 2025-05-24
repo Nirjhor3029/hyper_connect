@@ -17,11 +17,6 @@ class Student extends Model implements HasMedia
 
     public $table = 'students';
 
-    protected $appends = [
-        'photo',
-        'attachments',
-    ];
-
     protected $dates = [
         'dob',
         'created_at',
@@ -33,6 +28,13 @@ class Student extends Model implements HasMedia
         'male'   => 'Male',
         'felame' => 'Female',
         'others' => 'Others',
+    ];
+
+    protected $appends = [
+        'photo',
+        'attachments',
+        'academic_certificates',
+        'medical_certificates',
     ];
 
     protected $fillable = [
@@ -64,6 +66,10 @@ class Student extends Model implements HasMedia
         'is_commission_claimed_from_univeristy',
         'chossen_university_id',
         'subject_id',
+        'name',
+        'email',
+        'phone',
+        'address',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -150,5 +156,20 @@ class Student extends Model implements HasMedia
     public function getAttachmentsAttribute()
     {
         return $this->getMedia('attachments');
+    }
+
+    public function interested_countries()
+    {
+        return $this->belongsToMany(Country::class);
+    }
+
+    public function getAcademicCertificatesAttribute()
+    {
+        return $this->getMedia('academic_certificates');
+    }
+
+    public function getMedicalCertificatesAttribute()
+    {
+        return $this->getMedia('medical_certificates');
     }
 }

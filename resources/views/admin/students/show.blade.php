@@ -291,6 +291,72 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.name') }}
+                        </th>
+                        <td>
+                            {{ $student->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.email') }}
+                        </th>
+                        <td>
+                            {{ $student->email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.phone') }}
+                        </th>
+                        <td>
+                            {{ $student->phone }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.address') }}
+                        </th>
+                        <td>
+                            {{ $student->address }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.interested_countries') }}
+                        </th>
+                        <td>
+                            @foreach($student->interested_countries as $key => $interested_countries)
+                                <span class="label label-info">{{ $interested_countries->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.academic_certificates') }}
+                        </th>
+                        <td>
+                            @foreach($student->academic_certificates as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                    {{ trans('global.view_file') }}
+                                </a>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.medical_certificates') }}
+                        </th>
+                        <td>
+                            @foreach($student->medical_certificates as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                    {{ trans('global.view_file') }}
+                                </a>
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

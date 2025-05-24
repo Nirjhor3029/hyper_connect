@@ -17,9 +17,13 @@ class UpdateUniversityRequest extends FormRequest
     public function rules()
     {
         return [
+            'country_id' => [
+                'required',
+                'integer',
+            ],
             'name' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'code' => [
                 'string',
@@ -29,13 +33,19 @@ class UpdateUniversityRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'address' => [
+                'required',
+            ],
             'accreditation' => [
                 'string',
                 'nullable',
             ],
             'website' => [
                 'string',
-                'nullable',
+                'required',
+            ],
+            'contact_email' => [
+                'required',
             ],
             'contact_phone' => [
                 'string',

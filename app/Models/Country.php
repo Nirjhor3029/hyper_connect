@@ -43,4 +43,9 @@ class Country extends Model
     {
         return $this->hasMany(University::class, 'country_id', 'id');
     }
+
+    public function interestedCountriesStudents()
+    {
+        return $this->belongsToMany(Student::class);
+    }
 }

@@ -25,8 +25,8 @@
                 <span class="help-block">{{ trans('cruds.student.fields.user_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="nationality">{{ trans('cruds.student.fields.nationality') }}</label>
-                <input class="form-control {{ $errors->has('nationality') ? 'is-invalid' : '' }}" type="text" name="nationality" id="nationality" value="{{ old('nationality', $student->nationality) }}">
+                <label class="required" for="nationality">{{ trans('cruds.student.fields.nationality') }}</label>
+                <input class="form-control {{ $errors->has('nationality') ? 'is-invalid' : '' }}" type="text" name="nationality" id="nationality" value="{{ old('nationality', $student->nationality) }}" required>
                 @if($errors->has('nationality'))
                     <div class="invalid-feedback">
                         {{ $errors->first('nationality') }}
@@ -383,6 +383,86 @@
                 <span class="help-block">{{ trans('cruds.student.fields.attachments_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="name">{{ trans('cruds.student.fields.name') }}</label>
+                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $student->name) }}" required>
+                @if($errors->has('name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('name') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.student.fields.name_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="email">{{ trans('cruds.student.fields.email') }}</label>
+                <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" id="email" value="{{ old('email', $student->email) }}">
+                @if($errors->has('email'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('email') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.student.fields.email_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="phone">{{ trans('cruds.student.fields.phone') }}</label>
+                <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text" name="phone" id="phone" value="{{ old('phone', $student->phone) }}" required>
+                @if($errors->has('phone'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('phone') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.student.fields.phone_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="address">{{ trans('cruds.student.fields.address') }}</label>
+                <textarea class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}" name="address" id="address">{{ old('address', $student->address) }}</textarea>
+                @if($errors->has('address'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('address') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.student.fields.address_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="interested_countries">{{ trans('cruds.student.fields.interested_countries') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('interested_countries') ? 'is-invalid' : '' }}" name="interested_countries[]" id="interested_countries" multiple>
+                    @foreach($interested_countries as $id => $interested_country)
+                        <option value="{{ $id }}" {{ (in_array($id, old('interested_countries', [])) || $student->interested_countries->contains($id)) ? 'selected' : '' }}>{{ $interested_country }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('interested_countries'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('interested_countries') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.student.fields.interested_countries_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="academic_certificates">{{ trans('cruds.student.fields.academic_certificates') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('academic_certificates') ? 'is-invalid' : '' }}" id="academic_certificates-dropzone">
+                </div>
+                @if($errors->has('academic_certificates'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('academic_certificates') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.student.fields.academic_certificates_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="medical_certificates">{{ trans('cruds.student.fields.medical_certificates') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('medical_certificates') ? 'is-invalid' : '' }}" id="medical_certificates-dropzone">
+                </div>
+                @if($errors->has('medical_certificates'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('medical_certificates') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.student.fields.medical_certificates_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
@@ -550,6 +630,118 @@ Dropzone.options.attachmentsDropzone = {
               this.options.addedfile.call(this, file)
               file.previewElement.classList.add('dz-complete')
               $('form').append('<input type="hidden" name="attachments[]" value="' + file.file_name + '">')
+            }
+@endif
+    },
+     error: function (file, response) {
+         if ($.type(response) === 'string') {
+             var message = response //dropzone sends it's own error messages in string
+         } else {
+             var message = response.errors.file
+         }
+         file.previewElement.classList.add('dz-error')
+         _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+         _results = []
+         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+             node = _ref[_i]
+             _results.push(node.textContent = message)
+         }
+
+         return _results
+     }
+}
+</script>
+<script>
+    var uploadedAcademicCertificatesMap = {}
+Dropzone.options.academicCertificatesDropzone = {
+    url: '{{ route('admin.students.storeMedia') }}',
+    maxFilesize: 10, // MB
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 10
+    },
+    success: function (file, response) {
+      $('form').append('<input type="hidden" name="academic_certificates[]" value="' + response.name + '">')
+      uploadedAcademicCertificatesMap[file.name] = response.name
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      var name = ''
+      if (typeof file.file_name !== 'undefined') {
+        name = file.file_name
+      } else {
+        name = uploadedAcademicCertificatesMap[file.name]
+      }
+      $('form').find('input[name="academic_certificates[]"][value="' + name + '"]').remove()
+    },
+    init: function () {
+@if(isset($student) && $student->academic_certificates)
+          var files =
+            {!! json_encode($student->academic_certificates) !!}
+              for (var i in files) {
+              var file = files[i]
+              this.options.addedfile.call(this, file)
+              file.previewElement.classList.add('dz-complete')
+              $('form').append('<input type="hidden" name="academic_certificates[]" value="' + file.file_name + '">')
+            }
+@endif
+    },
+     error: function (file, response) {
+         if ($.type(response) === 'string') {
+             var message = response //dropzone sends it's own error messages in string
+         } else {
+             var message = response.errors.file
+         }
+         file.previewElement.classList.add('dz-error')
+         _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+         _results = []
+         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+             node = _ref[_i]
+             _results.push(node.textContent = message)
+         }
+
+         return _results
+     }
+}
+</script>
+<script>
+    var uploadedMedicalCertificatesMap = {}
+Dropzone.options.medicalCertificatesDropzone = {
+    url: '{{ route('admin.students.storeMedia') }}',
+    maxFilesize: 10, // MB
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 10
+    },
+    success: function (file, response) {
+      $('form').append('<input type="hidden" name="medical_certificates[]" value="' + response.name + '">')
+      uploadedMedicalCertificatesMap[file.name] = response.name
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      var name = ''
+      if (typeof file.file_name !== 'undefined') {
+        name = file.file_name
+      } else {
+        name = uploadedMedicalCertificatesMap[file.name]
+      }
+      $('form').find('input[name="medical_certificates[]"][value="' + name + '"]').remove()
+    },
+    init: function () {
+@if(isset($student) && $student->medical_certificates)
+          var files =
+            {!! json_encode($student->medical_certificates) !!}
+              for (var i in files) {
+              var file = files[i]
+              this.options.addedfile.call(this, file)
+              file.previewElement.classList.add('dz-complete')
+              $('form').append('<input type="hidden" name="medical_certificates[]" value="' + file.file_name + '">')
             }
 @endif
     },

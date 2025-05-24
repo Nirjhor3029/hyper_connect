@@ -17,17 +17,17 @@ class StoreUniversityPartnershipRequest extends FormRequest
     public function rules()
     {
         return [
+            'university_id' => [
+                'required',
+                'integer',
+            ],
             'partner_name' => [
                 'string',
-                'nullable',
-            ],
-            'partner_type' => [
-                'string',
-                'nullable',
+                'required',
             ],
             'agreement_url' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'active_from' => [
                 'date_format:' . config('panel.date_format'),
@@ -36,6 +36,9 @@ class StoreUniversityPartnershipRequest extends FormRequest
             'active_to' => [
                 'date_format:' . config('panel.date_format'),
                 'nullable',
+            ],
+            'agreement_file' => [
+                'array',
             ],
         ];
     }

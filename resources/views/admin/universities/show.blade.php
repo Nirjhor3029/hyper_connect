@@ -65,6 +65,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.university.fields.university_details') }}
+                        </th>
+                        <td>
+                            {!! $university->university_details !!}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.university.fields.accreditation') }}
                         </th>
                         <td>
@@ -93,6 +101,18 @@
                         </th>
                         <td>
                             {{ $university->contact_phone }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.logo') }}
+                        </th>
+                        <td>
+                            @if($university->logo)
+                                <a href="{{ $university->logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $university->logo->getUrl('thumb') }}">
+                                </a>
+                            @endif
                         </td>
                     </tr>
                     <tr>

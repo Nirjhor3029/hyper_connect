@@ -92,7 +92,7 @@
                             {{ trans('cruds.agent.fields.is_active') }}
                         </th>
                         <td>
-                            <input type="checkbox" disabled="disabled" {{ $agent->is_active ? 'checked' : '' }}>
+                            {{ App\Models\Agent::IS_ACTIVE_RADIO[$agent->is_active] ?? '' }}
                         </td>
                     </tr>
                 </tbody>

@@ -49,6 +49,18 @@
                             {{ trans('cruds.student.fields.chossen_university') }}
                         </th>
                         <th>
+                            {{ trans('cruds.student.fields.name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.student.fields.email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.student.fields.phone') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.student.fields.academic_certificates') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -86,6 +98,22 @@
                             </td>
                             <td>
                                 {{ $student->chossen_university->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $student->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $student->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $student->phone ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($student->academic_certificates as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank">
+                                        {{ trans('global.view_file') }}
+                                    </a>
+                                @endforeach
                             </td>
                             <td>
                                 @can('student_show')

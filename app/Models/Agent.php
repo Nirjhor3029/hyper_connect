@@ -22,6 +22,11 @@ class Agent extends Model implements HasMedia
         'deleted_at',
     ];
 
+    public const IS_ACTIVE_RADIO = [
+        '0' => 'Active',
+        '1' => 'Inactive',
+    ];
+
     protected $fillable = [
         'user_id',
         'agency_name',

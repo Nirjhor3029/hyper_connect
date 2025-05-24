@@ -66,8 +66,7 @@
                                 {{ $agent->kyc_status ?? '' }}
                             </td>
                             <td>
-                                <span style="display:none">{{ $agent->is_active ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $agent->is_active ? 'checked' : '' }}>
+                                {{ App\Models\Agent::IS_ACTIVE_RADIO[$agent->is_active] ?? '' }}
                             </td>
                             <td>
                                 @can('agent_show')

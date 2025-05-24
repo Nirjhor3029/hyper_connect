@@ -22,7 +22,7 @@ class UniversitiesController extends Controller
     {
         abort_if(Gate::denies('university_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $universities = University::with(['country'])->get();
+        $universities = University::with(['country', 'media'])->get();
 
         return view('admin.universities.index', compact('universities'));
     }
@@ -39,6 +39,10 @@ class UniversitiesController extends Controller
     public function store(StoreUniversityRequest $request)
     {
         $university = University::create($request->all());
+
+        if ($request->input('logo', false)) {
+            $university->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
+        }
 
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $university->id]);
@@ -61,6 +65,17 @@ class UniversitiesController extends Controller
     public function update(UpdateUniversityRequest $request, University $university)
     {
         $university->update($request->all());
+
+        if ($request->input('logo', false)) {
+            if (! $university->logo || $request->input('logo') !== $university->logo->file_name) {
+                if ($university->logo) {
+                    $university->logo->delete();
+                }
+                $university->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
+            }
+        } elseif ($university->logo) {
+            $university->logo->delete();
+        }
 
         return redirect()->route('admin.universities.index');
     }

@@ -19,7 +19,7 @@ class StoreStudentRequest extends FormRequest
         return [
             'nationality' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'dob' => [
                 'date_format:' . config('panel.date_format'),
@@ -66,6 +66,26 @@ class StoreStudentRequest extends FormRequest
                 'nullable',
             ],
             'attachments' => [
+                'array',
+            ],
+            'name' => [
+                'string',
+                'required',
+            ],
+            'phone' => [
+                'string',
+                'required',
+            ],
+            'interested_countries.*' => [
+                'integer',
+            ],
+            'interested_countries' => [
+                'array',
+            ],
+            'academic_certificates' => [
+                'array',
+            ],
+            'medical_certificates' => [
                 'array',
             ],
         ];
