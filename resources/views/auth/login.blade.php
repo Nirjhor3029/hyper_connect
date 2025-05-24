@@ -259,6 +259,8 @@
             left: 100%;
         }
 
+
+        
         .logo_img {
             width: 250px;
             height: auto;

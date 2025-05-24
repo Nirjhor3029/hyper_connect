@@ -171,9 +171,6 @@
                     </div>
 
 
-
-
-
                     {{-- address --}}
                     <div class="form-group col-md-6">
                         <label class="required" for="address">{{ trans('cruds.university.fields.address') }}</label>
