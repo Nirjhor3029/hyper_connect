@@ -8,9 +8,11 @@ use App\Http\Requests\MassDestroyAgentRequest;
 use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\UpdateAgentRequest;
 use App\Models\Agent;
+use App\Models\Country;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,7 +24,7 @@ class AgentsController extends Controller
     {
         abort_if(Gate::denies('agent_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $agents = Agent::with(['user', 'parent_agent'])->get();
+        $agents = Agent::with(['country', 'parent_agent', 'user'])->get();
 
         return view('admin.agents.index', compact('agents'));
     }
@@ -31,16 +33,31 @@ class AgentsController extends Controller
     {
         abort_if(Gate::denies('agent_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $countries = Country::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $parent_agents = Agent::pluck('agency_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.agents.create', compact('parent_agents', 'users'));
+        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.agents.create', compact('countries', 'parent_agents', 'users'));
     }
 
     public function store(StoreAgentRequest $request)
     {
-        $agent = Agent::create($request->all());
+
+        $user = User::create([
+            'name'       => $request->input('name'),
+            'email'      => $request->input('email'),
+            'phone'      => $request->input('phone'),
+            'country_id' => $request->input('country_id'),
+            'password'   => Hash::make('123456'),
+        ]);
+
+        $user->roles()->sync([3]);
+
+        $agentData = $request->all();
+        $agentData['user_id'] = $user->id;
+        $agent = Agent::create($agentData);
 
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $agent->id]);
@@ -53,13 +70,13 @@ class AgentsController extends Controller
     {
         abort_if(Gate::denies('agent_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $countries = Country::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $parent_agents = Agent::pluck('agency_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $agent->load('user', 'parent_agent');
+        $agent->load('country', 'parent_agent', 'user');
 
-        return view('admin.agents.edit', compact('agent', 'parent_agents', 'users'));
+        return view('admin.agents.edit', compact('agent', 'countries', 'parent_agents'));
     }
 
     public function update(UpdateAgentRequest $request, Agent $agent)
@@ -73,7 +90,7 @@ class AgentsController extends Controller
     {
         abort_if(Gate::denies('agent_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $agent->load('user', 'parent_agent', 'parentAgentAgents', 'agentApplications', 'subAgentApplications', 'agentAgentCommissions', 'leadAgentStudents', 'handellingAgentStudents', 'agentCommissionSettings');
+        $agent->load('country', 'parent_agent', 'user', 'parentAgentAgents', 'agentApplications', 'subAgentApplications', 'agentAgentCommissions', 'leadAgentStudents', 'handellingAgentStudents', 'agentCommissionSettings');
 
         return view('admin.agents.show', compact('agent'));
     }

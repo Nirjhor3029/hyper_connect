@@ -58,6 +58,11 @@ class Program extends Model implements HasMedia
         return $this->hasMany(Application::class, 'program_id', 'id');
     }
 
+    public function programsStudents()
+    {
+        return $this->belongsToMany(Student::class);
+    }
+
     public function university()
     {
         return $this->belongsTo(University::class, 'university_id');

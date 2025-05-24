@@ -9,9 +9,8 @@ use App\Http\Requests\StoreUniversityRequest;
 use App\Http\Requests\UpdateUniversityRequest;
 use App\Models\Country;
 use App\Models\University;
-// use Gate;
+use Gate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -85,7 +84,7 @@ class UniversitiesController extends Controller
     {
         abort_if(Gate::denies('university_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $university->load('country', 'universityUniversityPartnerships', 'universityPrograms', 'universityApplications', 'universityCommissionFromUniversities', 'universitySubjects', 'chossenUniversityStudents', 'universityCommissionSettings');
+        $university->load('country', 'universityUniversityPartnerships', 'universityPrograms', 'universityApplications', 'universityCommissionFromUniversities', 'universitySubjects', 'universityCommissionSettings', 'univertsitiesStudents');
 
         return view('admin.universities.show', compact('university'));
     }

@@ -28,7 +28,7 @@
                             {{ trans('cruds.application.fields.student') }}
                         </th>
                         <td>
-                            {{ $application->student->nationality ?? '' }}
+                            {{ $application->student->name ?? '' }}
                         </td>
                     </tr>
                     <tr>

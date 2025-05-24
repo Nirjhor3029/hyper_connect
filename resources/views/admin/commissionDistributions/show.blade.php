@@ -28,7 +28,7 @@
                             {{ trans('cruds.commissionDistribution.fields.student') }}
                         </th>
                         <td>
-                            {{ $commissionDistribution->student->nationality ?? '' }}
+                            {{ $commissionDistribution->student->name ?? '' }}
                         </td>
                     </tr>
                     <tr>

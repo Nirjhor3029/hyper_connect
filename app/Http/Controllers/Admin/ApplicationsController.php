@@ -34,7 +34,7 @@ class ApplicationsController extends Controller
     {
         abort_if(Gate::denies('application_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $students = Student::pluck('nationality', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $students = Student::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $universities = University::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -62,7 +62,7 @@ class ApplicationsController extends Controller
     {
         abort_if(Gate::denies('application_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $students = Student::pluck('nationality', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $students = Student::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $universities = University::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 

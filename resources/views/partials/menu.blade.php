@@ -291,6 +291,16 @@
                 </a>
             </li>
         @endcan
+        @can('nationality_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.nationalities.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/nationalities") || request()->is("admin/nationalities/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-flag-checkered c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.nationality.title') }}
+                </a>
+            </li>
+        @endcan
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
                 <li class="c-sidebar-nav-item">

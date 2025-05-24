@@ -32,28 +32,28 @@ class Student extends Model implements HasMedia
 
     protected $appends = [
         'photo',
-        'attachments',
         'academic_certificates',
+        'attachments',
         'medical_certificates',
     ];
 
     protected $fillable = [
         'user_id',
-        'nationality',
+        'name',
+        'email',
+        'phone',
+        'nationality_id',
+        'address',
+        'current_address',
+        'permanent_address',
         'dob',
         'gender',
         'passport_no',
-        'visa_status',
         'emergency_contact',
         'guardian_details',
         'education_background',
-        'scholarship_status',
-        'current_address',
-        'permanent_address',
         'lead_agent_id',
         'handelling_agent_id',
-        'current_status',
-        'payment_status',
         'academic_details',
         'offer_letter_details',
         'additional_requirements',
@@ -62,14 +62,12 @@ class Student extends Model implements HasMedia
         'commission_amount',
         'is_offer_given_to_student',
         'offer_details',
+        'visa_status',
+        'payment_status',
+        'current_status',
+        'scholarship_status',
         'enrollement_status',
         'is_commission_claimed_from_univeristy',
-        'chossen_university_id',
-        'subject_id',
-        'name',
-        'email',
-        'phone',
-        'address',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -101,6 +99,11 @@ class Student extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function nationality()
+    {
+        return $this->belongsTo(Nationality::class, 'nationality_id');
+    }
+
     public function getDobAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
@@ -121,6 +124,26 @@ class Student extends Model implements HasMedia
         return $this->belongsTo(Agent::class, 'handelling_agent_id');
     }
 
+    public function interested_countries()
+    {
+        return $this->belongsToMany(Country::class);
+    }
+
+    public function univertsities()
+    {
+        return $this->belongsToMany(University::class);
+    }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
+
+    public function programs()
+    {
+        return $this->belongsToMany(Program::class);
+    }
+
     public function course_interesteds()
     {
         return $this->belongsToMany(Course::class);
@@ -129,16 +152,6 @@ class Student extends Model implements HasMedia
     public function academic_attachments()
     {
         return $this->belongsToMany(Document::class);
-    }
-
-    public function chossen_university()
-    {
-        return $this->belongsTo(University::class, 'chossen_university_id');
-    }
-
-    public function subject()
-    {
-        return $this->belongsTo(Subject::class, 'subject_id');
     }
 
     public function getPhotoAttribute()
@@ -153,19 +166,14 @@ class Student extends Model implements HasMedia
         return $file;
     }
 
-    public function getAttachmentsAttribute()
-    {
-        return $this->getMedia('attachments');
-    }
-
-    public function interested_countries()
-    {
-        return $this->belongsToMany(Country::class);
-    }
-
     public function getAcademicCertificatesAttribute()
     {
         return $this->getMedia('academic_certificates');
+    }
+
+    public function getAttachmentsAttribute()
+    {
+        return $this->getMedia('attachments');
     }
 
     public function getMedicalCertificatesAttribute()

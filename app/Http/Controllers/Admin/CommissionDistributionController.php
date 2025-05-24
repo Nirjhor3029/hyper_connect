@@ -28,7 +28,7 @@ class CommissionDistributionController extends Controller
     {
         abort_if(Gate::denies('commission_distribution_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $students = Student::pluck('nationality', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $students = Student::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $commission_settings = CommissionSetting::pluck('comission_commited', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -46,7 +46,7 @@ class CommissionDistributionController extends Controller
     {
         abort_if(Gate::denies('commission_distribution_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $students = Student::pluck('nationality', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $students = Student::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $commission_settings = CommissionSetting::pluck('comission_commited', 'id')->prepend(trans('global.pleaseSelect'), '');
 

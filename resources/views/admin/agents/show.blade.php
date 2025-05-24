@@ -25,10 +25,50 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.agent.fields.user') }}
+                            {{ trans('cruds.agent.fields.name') }}
                         </th>
                         <td>
-                            {{ $agent->user->name ?? '' }}
+                            {{ $agent->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agent.fields.email') }}
+                        </th>
+                        <td>
+                            {{ $agent->email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agent.fields.phone') }}
+                        </th>
+                        <td>
+                            {{ $agent->phone }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agent.fields.country') }}
+                        </th>
+                        <td>
+                            {{ $agent->country->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agent.fields.address') }}
+                        </th>
+                        <td>
+                            {{ $agent->address }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agent.fields.kyc_status') }}
+                        </th>
+                        <td>
+                            {{ App\Models\Agent::KYC_STATUS_RADIO[$agent->kyc_status] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -65,14 +105,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.agent.fields.kyc_status') }}
-                        </th>
-                        <td>
-                            {{ $agent->kyc_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.agent.fields.banking_info') }}
                         </th>
                         <td>
@@ -93,6 +125,14 @@
                         </th>
                         <td>
                             {{ App\Models\Agent::IS_ACTIVE_RADIO[$agent->is_active] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agent.fields.user') }}
+                        </th>
+                        <td>
+                            {{ $agent->user->name ?? '' }}
                         </td>
                     </tr>
                 </tbody>

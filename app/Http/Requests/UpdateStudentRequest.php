@@ -17,9 +17,17 @@ class UpdateStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'nationality' => [
+            'name' => [
                 'string',
                 'required',
+            ],
+            'phone' => [
+                'string',
+                'required',
+            ],
+            'nationality_id' => [
+                'required',
+                'integer',
             ],
             'dob' => [
                 'date_format:' . config('panel.date_format'),
@@ -29,30 +37,6 @@ class UpdateStudentRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'visa_status' => [
-                'string',
-                'nullable',
-            ],
-            'course_interesteds.*' => [
-                'integer',
-            ],
-            'course_interesteds' => [
-                'array',
-            ],
-            'current_status' => [
-                'string',
-                'nullable',
-            ],
-            'payment_status' => [
-                'string',
-                'nullable',
-            ],
-            'academic_attachments.*' => [
-                'integer',
-            ],
-            'academic_attachments' => [
-                'array',
-            ],
             'val_status' => [
                 'string',
                 'nullable',
@@ -61,20 +45,21 @@ class UpdateStudentRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'enrollement_status' => [
+            'visa_status' => [
                 'string',
                 'nullable',
             ],
-            'attachments' => [
-                'array',
-            ],
-            'name' => [
+            'payment_status' => [
                 'string',
-                'required',
+                'nullable',
             ],
-            'phone' => [
+            'current_status' => [
                 'string',
-                'required',
+                'nullable',
+            ],
+            'enrollement_status' => [
+                'string',
+                'nullable',
             ],
             'interested_countries.*' => [
                 'integer',
@@ -82,7 +67,40 @@ class UpdateStudentRequest extends FormRequest
             'interested_countries' => [
                 'array',
             ],
+            'univertsities.*' => [
+                'integer',
+            ],
+            'univertsities' => [
+                'array',
+            ],
+            'subjects.*' => [
+                'integer',
+            ],
+            'subjects' => [
+                'array',
+            ],
+            'programs.*' => [
+                'integer',
+            ],
+            'programs' => [
+                'array',
+            ],
+            'course_interesteds.*' => [
+                'integer',
+            ],
+            'course_interesteds' => [
+                'array',
+            ],
+            'academic_attachments.*' => [
+                'integer',
+            ],
+            'academic_attachments' => [
+                'array',
+            ],
             'academic_certificates' => [
+                'array',
+            ],
+            'attachments' => [
                 'array',
             ],
             'medical_certificates' => [

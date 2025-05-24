@@ -1,6 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use Illuminate\Http\Request;
+use App\Models\Student;
+use App\Models\Country;
+use App\Models\Nationality;
+use App\Models\Subject;
+use App\Models\University;
+use App\Models\Program;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
@@ -8,15 +15,13 @@ use App\Http\Requests\MassDestroyStudentRequest;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Agent;
-use App\Models\Country;
+
 use App\Models\Course;
 use App\Models\Document;
-use App\Models\Student;
-use App\Models\Subject;
-use App\Models\University;
+
 use App\Models\User;
 use Gate;
-use Illuminate\Http\Request;
+
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,13 +29,56 @@ class StudentsController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index()
+
+
+    public function index(Request $request)
     {
         abort_if(Gate::denies('student_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $students = Student::with(['user', 'lead_agent', 'handelling_agent', 'course_interesteds', 'academic_attachments', 'chossen_university', 'subject', 'interested_countries', 'media'])->get();
+        $query = Student::with(['user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'media']);
 
-        return view('admin.students.index', compact('students'));
+        if ($request->filled('keyword')) {
+            $keyword = $request->keyword;
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name', 'like', "%$keyword%")
+                    ->orWhere('email', 'like', "%$keyword%")
+                    ->orWhere('phone', 'like', "%$keyword%");
+            });
+        }
+
+        if ($request->filled('agent_id')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('lead_agent_id', $request->agent_id)
+                    ->orWhere('handelling_agent_id', $request->agent_id);
+            });
+        }
+
+        if ($request->filled('nationality_id')) {
+            $query->where('nationality_id', $request->nationality_id);
+        }
+
+        if ($request->filled('subject_id')) {
+            $query->whereHas('subjects', fn($q) => $q->where('subjects.id', $request->subject_id));
+        }
+
+        if ($request->filled('university_id')) {
+            $query->whereHas('univertsities', fn($q) => $q->where('universities.id', $request->university_id));
+        }
+
+        if ($request->filled('program_id')) {
+            $query->whereHas('programs', fn($q) => $q->where('programs.id', $request->program_id));
+        }
+
+        $students = $query->get();
+
+        // Dropdown options
+        $agents = Agent::pluck('name', 'id');
+        $nationalities = Nationality::pluck('nationality_en', 'id');
+        $subjects = Subject::pluck('subject_name', 'id');
+        $universities = University::pluck('name', 'id');
+        $programs = Program::pluck('name', 'id');
+
+        return view('admin.students.index', compact('students', 'agents', 'nationalities', 'subjects', 'universities', 'programs'));
     }
 
     public function create()
@@ -39,39 +87,46 @@ class StudentsController extends Controller
 
         $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $lead_agents = Agent::pluck('agency_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $nationalities = Nationality::pluck('nationality_en', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $handelling_agents = Agent::pluck('agency_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $lead_agents = Agent::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $handelling_agents = Agent::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $interested_countries = Country::pluck('name', 'id');
+
+        $univertsities = University::pluck('name', 'id');
+
+        $subjects = Subject::pluck('subject_name', 'id');
+
+        $programs = Program::pluck('name', 'id');
 
         $course_interesteds = Course::pluck('name', 'id');
 
         $academic_attachments = Document::pluck('file_url', 'id');
 
-        $chossen_universities = University::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $subjects = Subject::pluck('subject_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $interested_countries = Country::pluck('name', 'id');
-
-        return view('admin.students.create', compact('academic_attachments', 'chossen_universities', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'subjects', 'users'));
+        return view('admin.students.create', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'subjects', 'univertsities', 'users'));
     }
 
     public function store(StoreStudentRequest $request)
     {
         $student = Student::create($request->all());
+        $student->interested_countries()->sync($request->input('interested_countries', []));
+        $student->univertsities()->sync($request->input('univertsities', []));
+        $student->subjects()->sync($request->input('subjects', []));
+        $student->programs()->sync($request->input('programs', []));
         $student->course_interesteds()->sync($request->input('course_interesteds', []));
         $student->academic_attachments()->sync($request->input('academic_attachments', []));
-        $student->interested_countries()->sync($request->input('interested_countries', []));
         if ($request->input('photo', false)) {
             $student->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
         }
 
-        foreach ($request->input('attachments', []) as $file) {
-            $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('attachments');
-        }
-
         foreach ($request->input('academic_certificates', []) as $file) {
             $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('academic_certificates');
+        }
+
+        foreach ($request->input('attachments', []) as $file) {
+            $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('attachments');
         }
 
         foreach ($request->input('medical_certificates', []) as $file) {
@@ -91,31 +146,38 @@ class StudentsController extends Controller
 
         $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $lead_agents = Agent::pluck('agency_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $nationalities = Nationality::pluck('nationality_en', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $handelling_agents = Agent::pluck('agency_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $lead_agents = Agent::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $handelling_agents = Agent::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $interested_countries = Country::pluck('name', 'id');
+
+        $univertsities = University::pluck('name', 'id');
+
+        $subjects = Subject::pluck('subject_name', 'id');
+
+        $programs = Program::pluck('name', 'id');
 
         $course_interesteds = Course::pluck('name', 'id');
 
         $academic_attachments = Document::pluck('file_url', 'id');
 
-        $chossen_universities = University::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments');
 
-        $subjects = Subject::pluck('subject_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $interested_countries = Country::pluck('name', 'id');
-
-        $student->load('user', 'lead_agent', 'handelling_agent', 'course_interesteds', 'academic_attachments', 'chossen_university', 'subject', 'interested_countries');
-
-        return view('admin.students.edit', compact('academic_attachments', 'chossen_universities', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'student', 'subjects', 'users'));
+        return view('admin.students.edit', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users'));
     }
 
     public function update(UpdateStudentRequest $request, Student $student)
     {
         $student->update($request->all());
+        $student->interested_countries()->sync($request->input('interested_countries', []));
+        $student->univertsities()->sync($request->input('univertsities', []));
+        $student->subjects()->sync($request->input('subjects', []));
+        $student->programs()->sync($request->input('programs', []));
         $student->course_interesteds()->sync($request->input('course_interesteds', []));
         $student->academic_attachments()->sync($request->input('academic_attachments', []));
-        $student->interested_countries()->sync($request->input('interested_countries', []));
         if ($request->input('photo', false)) {
             if (! $student->photo || $request->input('photo') !== $student->photo->file_name) {
                 if ($student->photo) {
@@ -125,20 +187,6 @@ class StudentsController extends Controller
             }
         } elseif ($student->photo) {
             $student->photo->delete();
-        }
-
-        if (count($student->attachments) > 0) {
-            foreach ($student->attachments as $media) {
-                if (! in_array($media->file_name, $request->input('attachments', []))) {
-                    $media->delete();
-                }
-            }
-        }
-        $media = $student->attachments->pluck('file_name')->toArray();
-        foreach ($request->input('attachments', []) as $file) {
-            if (count($media) === 0 || ! in_array($file, $media)) {
-                $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('attachments');
-            }
         }
 
         if (count($student->academic_certificates) > 0) {
@@ -152,6 +200,20 @@ class StudentsController extends Controller
         foreach ($request->input('academic_certificates', []) as $file) {
             if (count($media) === 0 || ! in_array($file, $media)) {
                 $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('academic_certificates');
+            }
+        }
+
+        if (count($student->attachments) > 0) {
+            foreach ($student->attachments as $media) {
+                if (! in_array($media->file_name, $request->input('attachments', []))) {
+                    $media->delete();
+                }
+            }
+        }
+        $media = $student->attachments->pluck('file_name')->toArray();
+        foreach ($request->input('attachments', []) as $file) {
+            if (count($media) === 0 || ! in_array($file, $media)) {
+                $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('attachments');
             }
         }
 
@@ -176,7 +238,7 @@ class StudentsController extends Controller
     {
         abort_if(Gate::denies('student_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $student->load('user', 'lead_agent', 'handelling_agent', 'course_interesteds', 'academic_attachments', 'chossen_university', 'subject', 'interested_countries', 'studentApplications', 'studentCommissionDistributions');
+        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'studentApplications', 'studentCommissionDistributions');
 
         return view('admin.students.show', compact('student'));
     }

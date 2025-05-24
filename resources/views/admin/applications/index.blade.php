@@ -52,7 +52,7 @@
                                 {{ $application->id ?? '' }}
                             </td>
                             <td>
-                                {{ $application->student->nationality ?? '' }}
+                                {{ $application->student->name ?? '' }}
                             </td>
                             <td>
                                 {{ $application->intake_term ?? '' }}

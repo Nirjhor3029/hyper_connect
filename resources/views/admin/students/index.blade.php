@@ -11,8 +11,68 @@
 @endcan
 <div class="card">
     <div class="card-header">
+        <form method="GET" action="{{ route('admin.students.index') }}" class="mb-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" name="keyword" class="form-control" placeholder="Name, Email or Phone" value="{{ request('keyword') }}">
+                </div>
+                <div class="col-md-3">
+                    <select name="agent_id" class="form-control">
+                        <option value=""> Agent</option>
+                        @foreach($agents as $id => $name)
+                            <option value="{{ $id }}" {{ request('agent_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="nationality_id" class="form-control">
+                        <option value=""> Nationality</option>
+                        @foreach($nationalities as $id => $name)
+                            <option value="{{ $id }}" {{ request('nationality_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="subject_id" class="form-control">
+                        <option value=""> Subject</option>
+                        @foreach($subjects as $id => $name)
+                            <option value="{{ $id }}" {{ request('subject_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <select name="university_id" class="form-control">
+                        <option value=""> University</option>
+                        @foreach($universities as $id => $name)
+                            <option value="{{ $id }}" {{ request('university_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 mt-2 ">
+                    <select name="program_id" class="form-control">
+                        <option value=""> Program</option>
+                        @foreach($programs as $id => $name)
+                            <option value="{{ $id }}" {{ request('program_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 mt-2 ">
+                    <button type="submit" class="btn btn-primary w-100">
+                        {{ trans('global.search') }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+<div class="card">
+    <div class="card-header">
         {{ trans('cruds.student.title_singular') }} {{ trans('global.list') }}
     </div>
+
+
+
 
     <div class="card-body">
         <div class="table-responsive">
@@ -26,10 +86,16 @@
                             {{ trans('cruds.student.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.nationality') }}
+                            {{ trans('cruds.student.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.scholarship_status') }}
+                            {{ trans('cruds.student.fields.email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.student.fields.phone') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.student.fields.nationality') }}
                         </th>
                         <th>
                             {{ trans('cruds.student.fields.lead_agent') }}
@@ -38,25 +104,25 @@
                             {{ trans('cruds.student.fields.handelling_agent') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.current_status') }}
+                            {{ trans('cruds.student.fields.commission_amount') }}
                         </th>
                         <th>
                             {{ trans('cruds.student.fields.payment_status') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.commission_amount') }}
+                            {{ trans('cruds.student.fields.current_status') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.chossen_university') }}
+                            {{ trans('cruds.student.fields.scholarship_status') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.name') }}
+                            {{ trans('cruds.student.fields.univertsities') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.email') }}
+                            {{ trans('cruds.student.fields.subjects') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.phone') }}
+                            {{ trans('cruds.student.fields.programs') }}
                         </th>
                         <th>
                             {{ trans('cruds.student.fields.academic_certificates') }}
@@ -76,11 +142,16 @@
                                 {{ $student->id ?? '' }}
                             </td>
                             <td>
-                                {{ $student->nationality ?? '' }}
+                                {{ $student->name ?? '' }}
                             </td>
                             <td>
-                                <span style="display:none">{{ $student->scholarship_status ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $student->scholarship_status ? 'checked' : '' }}>
+                                {{ $student->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $student->phone ?? '' }}
+                            </td>
+                            <td>
+                                {{ $student->nationality->nationality_en ?? '' }}
                             </td>
                             <td>
                                 {{ $student->lead_agent->agency_name ?? '' }}
@@ -89,25 +160,32 @@
                                 {{ $student->handelling_agent->agency_name ?? '' }}
                             </td>
                             <td>
-                                {{ $student->current_status ?? '' }}
+                                {{ $student->commission_amount ?? '' }}
                             </td>
                             <td>
                                 {{ $student->payment_status ?? '' }}
                             </td>
                             <td>
-                                {{ $student->commission_amount ?? '' }}
+                                {{ $student->current_status ?? '' }}
                             </td>
                             <td>
-                                {{ $student->chossen_university->name ?? '' }}
+                                <span style="display:none">{{ $student->scholarship_status ?? '' }}</span>
+                                <input type="checkbox" disabled="disabled" {{ $student->scholarship_status ? 'checked' : '' }}>
                             </td>
                             <td>
-                                {{ $student->name ?? '' }}
+                                @foreach($student->univertsities as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
                             </td>
                             <td>
-                                {{ $student->email ?? '' }}
+                                @foreach($student->subjects as $key => $item)
+                                    <span class="badge badge-info">{{ $item->subject_name }}</span>
+                                @endforeach
                             </td>
                             <td>
-                                {{ $student->phone ?? '' }}
+                                @foreach($student->programs as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
                             </td>
                             <td>
                                 @foreach($student->academic_certificates as $key => $media)
@@ -195,7 +273,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>

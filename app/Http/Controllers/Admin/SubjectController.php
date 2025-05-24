@@ -80,7 +80,7 @@ class SubjectController extends Controller
     {
         abort_if(Gate::denies('subject_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $subject->load('university', 'course', 'tags');
+        $subject->load('university', 'course', 'tags', 'subjectsStudents');
 
         return view('admin.subjects.show', compact('subject'));
     }

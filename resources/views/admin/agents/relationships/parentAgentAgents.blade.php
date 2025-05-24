@@ -25,16 +25,28 @@
                             {{ trans('cruds.agent.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.agent.fields.user') }}
+                            {{ trans('cruds.agent.fields.name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.agent.fields.email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.agent.fields.phone') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.agent.fields.country') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.agent.fields.address') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.agent.fields.kyc_status') }}
                         </th>
                         <th>
                             {{ trans('cruds.agent.fields.agency_name') }}
                         </th>
                         <th>
                             {{ trans('cruds.agent.fields.license_number') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.agent.fields.kyc_status') }}
                         </th>
                         <th>
                             {{ trans('cruds.agent.fields.is_active') }}
@@ -54,16 +66,28 @@
                                 {{ $agent->id ?? '' }}
                             </td>
                             <td>
-                                {{ $agent->user->name ?? '' }}
+                                {{ $agent->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $agent->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $agent->phone ?? '' }}
+                            </td>
+                            <td>
+                                {{ $agent->country->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $agent->address ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Agent::KYC_STATUS_RADIO[$agent->kyc_status] ?? '' }}
                             </td>
                             <td>
                                 {{ $agent->agency_name ?? '' }}
                             </td>
                             <td>
                                 {{ $agent->license_number ?? '' }}
-                            </td>
-                            <td>
-                                {{ $agent->kyc_status ?? '' }}
                             </td>
                             <td>
                                 {{ App\Models\Agent::IS_ACTIVE_RADIO[$agent->is_active] ?? '' }}

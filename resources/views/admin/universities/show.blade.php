@@ -173,13 +173,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#chossen_university_students" role="tab" data-toggle="tab">
-                {{ trans('cruds.student.title') }}
+            <a class="nav-link" href="#university_commission_settings" role="tab" data-toggle="tab">
+                {{ trans('cruds.commissionSetting.title') }}
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#university_commission_settings" role="tab" data-toggle="tab">
-                {{ trans('cruds.commissionSetting.title') }}
+            <a class="nav-link" href="#univertsities_students" role="tab" data-toggle="tab">
+                {{ trans('cruds.student.title') }}
             </a>
         </li>
     </ul>
@@ -199,11 +199,11 @@
         <div class="tab-pane" role="tabpanel" id="university_subjects">
             @includeIf('admin.universities.relationships.universitySubjects', ['subjects' => $university->universitySubjects])
         </div>
-        <div class="tab-pane" role="tabpanel" id="chossen_university_students">
-            @includeIf('admin.universities.relationships.chossenUniversityStudents', ['students' => $university->chossenUniversityStudents])
-        </div>
         <div class="tab-pane" role="tabpanel" id="university_commission_settings">
             @includeIf('admin.universities.relationships.universityCommissionSettings', ['commissionSettings' => $university->universityCommissionSettings])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="univertsities_students">
+            @includeIf('admin.universities.relationships.univertsitiesStudents', ['students' => $university->univertsitiesStudents])
         </div>
     </div>
 </div>

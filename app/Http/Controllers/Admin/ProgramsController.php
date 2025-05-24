@@ -75,7 +75,7 @@ class ProgramsController extends Controller
     {
         abort_if(Gate::denies('program_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $program->load('university', 'tags', 'programApplications');
+        $program->load('university', 'tags', 'programApplications', 'programsStudents');
 
         return view('admin.programs.show', compact('program'));
     }

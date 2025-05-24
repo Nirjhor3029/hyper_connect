@@ -166,10 +166,18 @@
                 {{ trans('cruds.application.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#programs_students" role="tab" data-toggle="tab">
+                {{ trans('cruds.student.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="program_applications">
             @includeIf('admin.programs.relationships.programApplications', ['applications' => $program->programApplications])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="programs_students">
+            @includeIf('admin.programs.relationships.programsStudents', ['students' => $program->programsStudents])
         </div>
     </div>
 </div>

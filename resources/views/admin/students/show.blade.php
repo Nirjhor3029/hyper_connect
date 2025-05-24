@@ -33,10 +33,58 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.student.fields.name') }}
+                        </th>
+                        <td>
+                            {{ $student->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.email') }}
+                        </th>
+                        <td>
+                            {{ $student->email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.phone') }}
+                        </th>
+                        <td>
+                            {{ $student->phone }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.student.fields.nationality') }}
                         </th>
                         <td>
-                            {{ $student->nationality }}
+                            {{ $student->nationality->nationality_en ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.address') }}
+                        </th>
+                        <td>
+                            {{ $student->address }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.current_address') }}
+                        </th>
+                        <td>
+                            {!! $student->current_address !!}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.permanent_address') }}
+                        </th>
+                        <td>
+                            {!! $student->permanent_address !!}
                         </td>
                     </tr>
                     <tr>
@@ -65,14 +113,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.student.fields.visa_status') }}
-                        </th>
-                        <td>
-                            {{ $student->visa_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.student.fields.emergency_contact') }}
                         </th>
                         <td>
@@ -97,30 +137,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.student.fields.scholarship_status') }}
-                        </th>
-                        <td>
-                            <input type="checkbox" disabled="disabled" {{ $student->scholarship_status ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.current_address') }}
-                        </th>
-                        <td>
-                            {!! $student->current_address !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.permanent_address') }}
-                        </th>
-                        <td>
-                            {!! $student->permanent_address !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.student.fields.lead_agent') }}
                         </th>
                         <td>
@@ -137,46 +153,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.student.fields.course_interested') }}
-                        </th>
-                        <td>
-                            @foreach($student->course_interesteds as $key => $course_interested)
-                                <span class="label label-info">{{ $course_interested->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.current_status') }}
-                        </th>
-                        <td>
-                            {{ $student->current_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.payment_status') }}
-                        </th>
-                        <td>
-                            {{ $student->payment_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.student.fields.academic_details') }}
                         </th>
                         <td>
                             {!! $student->academic_details !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.academic_attachments') }}
-                        </th>
-                        <td>
-                            @foreach($student->academic_attachments as $key => $academic_attachments)
-                                <span class="label label-info">{{ $academic_attachments->file_url }}</span>
-                            @endforeach
                         </td>
                     </tr>
                     <tr>
@@ -237,6 +217,38 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.student.fields.visa_status') }}
+                        </th>
+                        <td>
+                            {{ $student->visa_status }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.payment_status') }}
+                        </th>
+                        <td>
+                            {{ $student->payment_status }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.current_status') }}
+                        </th>
+                        <td>
+                            {{ $student->current_status }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.scholarship_status') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled="disabled" {{ $student->scholarship_status ? 'checked' : '' }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.student.fields.enrollement_status') }}
                         </th>
                         <td>
@@ -253,18 +265,62 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.student.fields.chossen_university') }}
+                            {{ trans('cruds.student.fields.interested_countries') }}
                         </th>
                         <td>
-                            {{ $student->chossen_university->name ?? '' }}
+                            @foreach($student->interested_countries as $key => $interested_countries)
+                                <span class="label label-info">{{ $interested_countries->name }}</span>
+                            @endforeach
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.student.fields.subject') }}
+                            {{ trans('cruds.student.fields.univertsities') }}
                         </th>
                         <td>
-                            {{ $student->subject->subject_name ?? '' }}
+                            @foreach($student->univertsities as $key => $univertsities)
+                                <span class="label label-info">{{ $univertsities->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.subjects') }}
+                        </th>
+                        <td>
+                            @foreach($student->subjects as $key => $subjects)
+                                <span class="label label-info">{{ $subjects->subject_name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.programs') }}
+                        </th>
+                        <td>
+                            @foreach($student->programs as $key => $programs)
+                                <span class="label label-info">{{ $programs->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.course_interested') }}
+                        </th>
+                        <td>
+                            @foreach($student->course_interesteds as $key => $course_interested)
+                                <span class="label label-info">{{ $course_interested->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.academic_attachments') }}
+                        </th>
+                        <td>
+                            @foreach($student->academic_attachments as $key => $academic_attachments)
+                                <span class="label label-info">{{ $academic_attachments->file_url }}</span>
+                            @endforeach
                         </td>
                     </tr>
                     <tr>
@@ -281,10 +337,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.student.fields.attachments') }}
+                            {{ trans('cruds.student.fields.academic_certificates') }}
                         </th>
                         <td>
-                            @foreach($student->attachments as $key => $media)
+                            @foreach($student->academic_certificates as $key => $media)
                                 <a href="{{ $media->getUrl() }}" target="_blank">
                                     {{ trans('global.view_file') }}
                                 </a>
@@ -293,52 +349,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.student.fields.name') }}
+                            {{ trans('cruds.student.fields.attachments') }}
                         </th>
                         <td>
-                            {{ $student->name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.email') }}
-                        </th>
-                        <td>
-                            {{ $student->email }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.phone') }}
-                        </th>
-                        <td>
-                            {{ $student->phone }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.address') }}
-                        </th>
-                        <td>
-                            {{ $student->address }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.interested_countries') }}
-                        </th>
-                        <td>
-                            @foreach($student->interested_countries as $key => $interested_countries)
-                                <span class="label label-info">{{ $interested_countries->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.academic_certificates') }}
-                        </th>
-                        <td>
-                            @foreach($student->academic_certificates as $key => $media)
+                            @foreach($student->attachments as $key => $media)
                                 <a href="{{ $media->getUrl() }}" target="_blank">
                                     {{ trans('global.view_file') }}
                                 </a>

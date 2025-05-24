@@ -27,16 +27,26 @@ class Agent extends Model implements HasMedia
         '1' => 'Inactive',
     ];
 
+    public const KYC_STATUS_RADIO = [
+        '1' => 'Active',
+        '0' => 'InActive',
+    ];
+
     protected $fillable = [
-        'user_id',
+        'name',
+        'email',
+        'phone',
+        'country_id',
+        'address',
+        'kyc_status',
         'agency_name',
         'parent_agent_id',
         'tier',
         'license_number',
-        'kyc_status',
         'banking_info',
         'commission_policy',
         'is_active',
+        'user_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -88,13 +98,18 @@ class Agent extends Model implements HasMedia
         return $this->hasMany(CommissionSetting::class, 'agent_id', 'id');
     }
 
-    public function user()
+    public function country()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 
     public function parent_agent()
     {
         return $this->belongsTo(self::class, 'parent_agent_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

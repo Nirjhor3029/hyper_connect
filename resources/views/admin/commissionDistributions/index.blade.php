@@ -29,6 +29,9 @@
                             {{ trans('cruds.commissionDistribution.fields.student') }}
                         </th>
                         <th>
+                            {{ trans('cruds.student.fields.name') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.commissionDistribution.fields.commission_settings') }}
                         </th>
                         <th>
@@ -49,7 +52,10 @@
                                 {{ $commissionDistribution->id ?? '' }}
                             </td>
                             <td>
-                                {{ $commissionDistribution->student->nationality ?? '' }}
+                                {{ $commissionDistribution->student->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $commissionDistribution->student->name ?? '' }}
                             </td>
                             <td>
                                 {{ $commissionDistribution->commission_settings->comission_commited ?? '' }}

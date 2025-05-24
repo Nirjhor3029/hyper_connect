@@ -80,14 +80,14 @@ class University extends Model implements HasMedia
         return $this->hasMany(Subject::class, 'university_id', 'id');
     }
 
-    public function chossenUniversityStudents()
-    {
-        return $this->hasMany(Student::class, 'chossen_university_id', 'id');
-    }
-
     public function universityCommissionSettings()
     {
         return $this->hasMany(CommissionSetting::class, 'university_id', 'id');
+    }
+
+    public function univertsitiesStudents()
+    {
+        return $this->belongsToMany(Student::class);
     }
 
     public function country()

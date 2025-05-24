@@ -17,6 +17,18 @@ class StoreAgentRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => [
+                'string',
+                'required',
+            ],
+            'email' => [
+                'required',
+                'unique:agents',
+            ],
+            'phone' => [
+                'string',
+                'nullable',
+            ],
             'agency_name' => [
                 'string',
                 'nullable',
@@ -26,10 +38,6 @@ class StoreAgentRequest extends FormRequest
                 'nullable',
             ],
             'license_number' => [
-                'string',
-                'nullable',
-            ],
-            'kyc_status' => [
                 'string',
                 'nullable',
             ],
