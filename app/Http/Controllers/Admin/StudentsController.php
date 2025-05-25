@@ -22,6 +22,7 @@ use App\Models\Document;
 use App\Models\User;
 use Gate;
 
+use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -110,7 +111,24 @@ class StudentsController extends Controller
 
     public function store(StoreStudentRequest $request)
     {
-        $student = Student::create($request->all());
+        $data = $request->all();
+
+        $user = Auth::user();
+        $isAgent = $user->roles()->where('id', 3)->exists();
+
+        if ($isAgent) {
+
+            $agent = Agent::where('user_id', $user->id)->first();
+
+            if ($agent) {
+
+                $data['lead_agent_id'] = $agent->id;
+                $data['handelling_agent_id'] = $agent->id;
+            }
+        }
+
+
+        $student = Student::create($data);
         $student->interested_countries()->sync($request->input('interested_countries', []));
         $student->univertsities()->sync($request->input('univertsities', []));
         $student->subjects()->sync($request->input('subjects', []));
