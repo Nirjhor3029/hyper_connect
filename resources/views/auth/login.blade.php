@@ -316,7 +316,7 @@
                 </h1>
                 <p class="hero-subtitle">
                     {{-- Connecting Malaysian students with global education opportunities --}}
-                    {{ __('Study in Malaysia, Connect with the World') }}
+                    {{ __('Connecting to a world of opportunities at hyper speed') }}
                     {{-- {{__("Pathway to Global Education")}} --}}
                 </p>
             </div>
