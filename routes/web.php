@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AgentStudentController;
+use App\Http\Controllers\Admin\ProfileController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
@@ -40,6 +45,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('students/media', 'StudentsController@storeMedia')->name('students.storeMedia');
     Route::post('students/ckmedia', 'StudentsController@storeCKEditorImages')->name('students.storeCKEditorImages');
     Route::resource('students', 'StudentsController');
+
+    Route::get('new-students', [AgentStudentController::class, 'newStudents'])->name('students.new');
+    Route::get('prospected-students', [AgentStudentController::class, 'prospectedStudents'])->name('students.prospected');
+
 
     // Universities
     Route::delete('universities/destroy', 'UniversitiesController@massDestroy')->name('universities.massDestroy');
@@ -132,6 +141,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Nationality
     Route::delete('nationalities/destroy', 'NationalityController@massDestroy')->name('nationalities.massDestroy');
     Route::resource('nationalities', 'NationalityController');
+
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
