@@ -25,6 +25,34 @@
                 <span class="help-block">{{ trans('cruds.university.fields.country_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="state_id">{{ trans('cruds.university.fields.state') }}</label>
+                <select class="form-control select2 {{ $errors->has('state') ? 'is-invalid' : '' }}" name="state_id" id="state_id" required>
+                    @foreach($states as $id => $entry)
+                        <option value="{{ $id }}" {{ (old('state_id') ? old('state_id') : $university->state->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('state'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('state') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.university.fields.state_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="city_id">{{ trans('cruds.university.fields.city') }}</label>
+                <select class="form-control select2 {{ $errors->has('city') ? 'is-invalid' : '' }}" name="city_id" id="city_id" required>
+                    @foreach($cities as $id => $entry)
+                        <option value="{{ $id }}" {{ (old('city_id') ? old('city_id') : $university->city->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('city'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('city') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.university.fields.city_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.university.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $university->name) }}" required>
                 @if($errors->has('name'))

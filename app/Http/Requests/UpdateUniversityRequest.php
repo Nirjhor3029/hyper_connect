@@ -21,6 +21,14 @@ class UpdateUniversityRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'state_id' => [
+                'required',
+                'integer',
+            ],
+            'city_id' => [
+                'required',
+                'integer',
+            ],
             'name' => [
                 'string',
                 'required',

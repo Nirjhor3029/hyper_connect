@@ -29,6 +29,12 @@
                             {{ trans('cruds.university.fields.country') }}
                         </th>
                         <th>
+                            {{ trans('cruds.university.fields.state') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.university.fields.city') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.university.fields.name') }}
                         </th>
                         <th>
@@ -62,6 +68,12 @@
                             </td>
                             <td>
                                 {{ $university->country->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $university->state->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $university->city->name ?? '' }}
                             </td>
                             <td>
                                 {{ $university->name ?? '' }}

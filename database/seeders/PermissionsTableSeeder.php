@@ -524,8 +524,49 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 129,
+                'title' => 'state_create',
+            ],
+            [
+                'id'    => 130,
+                'title' => 'state_edit',
+            ],
+            [
+                'id'    => 131,
+                'title' => 'state_show',
+            ],
+            [
+                'id'    => 132,
+                'title' => 'state_delete',
+            ],
+            [
+                'id'    => 133,
+                'title' => 'state_access',
+            ],
+            [
+                'id'    => 134,
+                'title' => 'city_create',
+            ],
+            [
+                'id'    => 135,
+                'title' => 'city_edit',
+            ],
+            [
+                'id'    => 136,
+                'title' => 'city_show',
+            ],
+            [
+                'id'    => 137,
+                'title' => 'city_delete',
+            ],
+            [
+                'id'    => 138,
+                'title' => 'city_access',
+            ],
+            [
+                'id'    => 139,
                 'title' => 'profile_password_edit',
             ],
+
         ];
 
         Permission::insert($permissions);

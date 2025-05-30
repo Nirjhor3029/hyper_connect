@@ -28,6 +28,8 @@ class University extends Model implements HasMedia
 
     protected $fillable = [
         'country_id',
+        'state_id',
+        'city_id',
         'name',
         'code',
         'university_type',
@@ -93,6 +95,16 @@ class University extends Model implements HasMedia
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     public function getLogoAttribute()

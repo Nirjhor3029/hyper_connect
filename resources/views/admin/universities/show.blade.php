@@ -33,6 +33,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.university.fields.state') }}
+                        </th>
+                        <td>
+                            {{ $university->state->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.city') }}
+                        </th>
+                        <td>
+                            {{ $university->city->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.university.fields.name') }}
                         </th>
                         <td>

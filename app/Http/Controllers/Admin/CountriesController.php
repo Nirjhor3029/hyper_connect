@@ -54,7 +54,7 @@ class CountriesController extends Controller
     {
         abort_if(Gate::denies('country_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $country->load('countryUsers', 'countryUniversities', 'countryAgents', 'interestedCountriesStudents');
+        $country->load('countryUsers', 'countryUniversities', 'countryAgents', 'countryStates', 'interestedCountriesStudents');
 
         return view('admin.countries.show', compact('country'));
     }

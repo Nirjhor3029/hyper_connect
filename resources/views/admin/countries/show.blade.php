@@ -87,6 +87,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#country_states" role="tab" data-toggle="tab">
+                {{ trans('cruds.state.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#interested_countries_students" role="tab" data-toggle="tab">
                 {{ trans('cruds.student.title') }}
             </a>
@@ -101,6 +106,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="country_agents">
             @includeIf('admin.countries.relationships.countryAgents', ['agents' => $country->countryAgents])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="country_states">
+            @includeIf('admin.countries.relationships.countryStates', ['states' => $country->countryStates])
         </div>
         <div class="tab-pane" role="tabpanel" id="interested_countries_students">
             @includeIf('admin.countries.relationships.interestedCountriesStudents', ['students' => $country->interestedCountriesStudents])

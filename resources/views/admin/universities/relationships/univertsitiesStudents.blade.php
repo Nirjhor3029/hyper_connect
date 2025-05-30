@@ -90,7 +90,7 @@
                                 {{ $student->phone ?? '' }}
                             </td>
                             <td>
-                                {{ $student->nationality ?? '' }}
+                                {{ $student->nationality->nationality_en ?? '' }}
                             </td>
                             <td>
                                 {{ $student->lead_agent->agency_name ?? '' }}

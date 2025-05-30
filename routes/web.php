@@ -132,6 +132,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Nationality
     Route::delete('nationalities/destroy', 'NationalityController@massDestroy')->name('nationalities.massDestroy');
     Route::resource('nationalities', 'NationalityController');
+
+    // State
+    Route::delete('states/destroy', 'StateController@massDestroy')->name('states.massDestroy');
+    Route::resource('states', 'StateController');
+
+    // City
+    Route::delete('cities/destroy', 'CityController@massDestroy')->name('cities.massDestroy');
+    Route::resource('cities', 'CityController');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

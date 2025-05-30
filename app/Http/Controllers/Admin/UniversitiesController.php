@@ -7,7 +7,9 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyUniversityRequest;
 use App\Http\Requests\StoreUniversityRequest;
 use App\Http\Requests\UpdateUniversityRequest;
+use App\Models\City;
 use App\Models\Country;
+use App\Models\State;
 use App\Models\University;
 use Gate;
 use Illuminate\Http\Request;
@@ -22,7 +24,7 @@ class UniversitiesController extends Controller
     {
         abort_if(Gate::denies('university_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $universities = University::with(['country', 'media'])->get();
+        $universities = University::with(['country', 'state', 'city', 'media'])->get();
 
         return view('admin.universities.index', compact('universities'));
     }
@@ -33,7 +35,11 @@ class UniversitiesController extends Controller
 
         $countries = Country::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.universities.create', compact('countries'));
+        $states = State::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $cities = City::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.universities.create', compact('cities', 'countries', 'states'));
     }
 
     public function store(StoreUniversityRequest $request)
@@ -57,9 +63,13 @@ class UniversitiesController extends Controller
 
         $countries = Country::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $university->load('country');
+        $states = State::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.universities.edit', compact('countries', 'university'));
+        $cities = City::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $university->load('country', 'state', 'city');
+
+        return view('admin.universities.edit', compact('cities', 'countries', 'states', 'university'));
     }
 
     public function update(UpdateUniversityRequest $request, University $university)
@@ -84,7 +94,7 @@ class UniversitiesController extends Controller
     {
         abort_if(Gate::denies('university_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $university->load('country', 'universityUniversityPartnerships', 'universityPrograms', 'universityApplications', 'universityCommissionFromUniversities', 'universitySubjects', 'universityCommissionSettings', 'univertsitiesStudents');
+        $university->load('country', 'state', 'city', 'universityUniversityPartnerships', 'universityPrograms', 'universityApplications', 'universityCommissionFromUniversities', 'universitySubjects', 'universityCommissionSettings', 'univertsitiesStudents');
 
         return view('admin.universities.show', compact('university'));
     }
