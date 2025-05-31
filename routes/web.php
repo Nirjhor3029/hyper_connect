@@ -151,6 +151,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('cities/destroy', 'CityController@massDestroy')->name('cities.massDestroy');
     Route::resource('cities', 'CityController');
 
+
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 
 });

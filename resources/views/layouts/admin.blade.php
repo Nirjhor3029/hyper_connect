@@ -26,6 +26,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/css/perfect-scrollbar.min.css"
         rel="stylesheet" />
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+
+    <style>
+        .select2-container--default .select2-selection--single {
+            padding-top: 10px;
+            height: 50px;
+        }
+    </style>
     @yield('styles')
 </head>
 
@@ -33,7 +40,7 @@
     @include('layouts.admin_partials.menu')
     <div class="c-wrapper">
         @include('layouts.admin_partials.header')
-        
+
 
         <div class="c-body">
             <main class="c-main">

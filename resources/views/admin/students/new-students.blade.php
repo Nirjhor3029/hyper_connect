@@ -391,33 +391,67 @@
                 <form class="search-form" id="searchForm">
                     <div class="form-group">
                         <label class="form-label">From Date</label>
-                        <input type="date" class="form-input" id="fromDate">
+                        <input type="date" name="form" class="form-input" id="fromDate">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">To Date</label>
-                        <input type="date" class="form-input" id="toDate">
+                        <input type="date" name="to" class="form-input" id="toDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Student Name</label>
+                        <input type="text" name="keyword" class="form-input" id="studentName" placeholder="Enter student name">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Agent Name</label>
-                        <select class="form-input" id="agentName">
-                            <option value="">All Agents</option>
-                            <option value="agent_1">Agent 1 - John Smith</option>
-                            <option value="agent_3">Agent 3 - Sarah Johnson</option>
-                            <option value="agent_4">Agent 4 - Mike Chen</option>
-                            <option value="agent_5">Agent 5 - Emma Wilson</option>
+
+                        <select name="agent_id" class="form-control select2" name="agentName" id="agentName" >
+                            <option value=""> All Agents </option>
+                            @foreach($agents as $id => $name)
+                                <option value="{{ $id }}" {{ request('agent_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <select name="nationality_id" class="form-input select2">
+                            <option value=""> Nationality</option>
+                            @foreach($nationalities as $id => $name)
+                                <option value="{{ $id }}" {{ request('nationality_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="subject_id" class="form-control select2">
+                            <option value=""> Subject</option>
+                            @foreach($subjects as $id => $name)
+                                <option value="{{ $id }}" {{ request('subject_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <select name="university_id" class="form-control select2">
+                            <option value=""> University</option>
+                            @foreach($universities as $id => $name)
+                                <option value="{{ $id }}" {{ request('university_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <select name="program_id" class="form-control select2">
+                            <option value=""> Program</option>
+                            @foreach($programs as $id => $name)
+                                <option value="{{ $id }}" {{ request('program_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Student Name</label>
-                        <input type="text" class="form-input" id="studentName" placeholder="Enter student name">
-                    </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Status</label>
-                        <select class="form-input" id="status">
+                        <select class="form-input select2" id="status">
                             <option value="">All Status</option>
                             <option value="new">New</option>
                             <option value="contacted">Contacted</option>
@@ -456,30 +490,22 @@
             <form class="prospect-form" id="prospectForm">
                 <input type="hidden" id="selectedStudentId">
 
-                <div class="form-group">
-                    <label class="form-label">Home Country</label>
-                    <select class="form-input" id="homeCountry" required>
+          {{--      <div class="form-group">
+                    <label class="form-label"> Country</label>
+                    <select class="form-input select2" id="homeCountry" required>
+
+
                         <option value="">Select Country</option>
-                        <option value="IN">India</option>
-                        <option value="CN">China</option>
-                        <option value="PK">Pakistan</option>
-                        <option value="BD">Bangladesh</option>
-                        <option value="NP">Nepal</option>
-                        <option value="LK">Sri Lanka</option>
-                        <option value="NG">Nigeria</option>
-                        <option value="KE">Kenya</option>
-                        <option value="GH">Ghana</option>
-                        <option value="BR">Brazil</option>
-                        <option value="MX">Mexico</option>
-                        <option value="VN">Vietnam</option>
-                        <option value="TH">Thailand</option>
-                        <option value="ID">Indonesia</option>
+                        @foreach($countries as $id => $name)
+                            <option value="{{ $id }}" {{ request('program_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                        @endforeach
+
                     </select>
-                </div>
+                </div>--}}
 
                 <div class="form-group">
                     <label class="form-label">Maximum Tuition Fee (USD)</label>
-                    <select class="form-input" id="maxTuitionFee" required>
+                    <select class="form-input select2" id="maxTuitionFee" required>
                         <option value="">Select Range</option>
                         <option value="10000">Up to $10,000</option>
                         <option value="20000">Up to $20,000</option>
@@ -498,38 +524,14 @@
                     <label class="form-label">Interested Countries (Select multiple)</label>
                     <div
                         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px;">
+
+                        @foreach($countries as $id => $name)
+
                         <div class="checkbox-group">
-                            <input type="checkbox" id="country_us" name="interestedCountries" value="US">
-                            <label for="country_us">United States</label>
+                            <input type="checkbox" id="country_us" name="interestedCountries" value="{{$id}}">
+                            <label for="country_us">{{$name}}</label>
                         </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="country_ca" name="interestedCountries" value="CA">
-                            <label for="country_ca">Canada</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="country_uk" name="interestedCountries" value="UK">
-                            <label for="country_uk">United Kingdom</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="country_au" name="interestedCountries" value="AU">
-                            <label for="country_au">Australia</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="country_de" name="interestedCountries" value="DE">
-                            <label for="country_de">Germany</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="country_fr" name="interestedCountries" value="FR">
-                            <label for="country_fr">France</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="country_nl" name="interestedCountries" value="NL">
-                            <label for="country_nl">Netherlands</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="country_se" name="interestedCountries" value="SE">
-                            <label for="country_se">Sweden</label>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -565,21 +567,10 @@
                     <label class="form-label">Interested Subject for Study</label>
                     <select class="form-input" id="interestedSubject" required>
                         <option value="">Select Subject</option>
-                        <option value="computer_science">Computer Science</option>
-                        <option value="business">Business Administration</option>
-                        <option value="engineering">Engineering</option>
-                        <option value="medicine">Medicine</option>
-                        <option value="law">Law</option>
-                        <option value="psychology">Psychology</option>
-                        <option value="education">Education</option>
-                        <option value="arts">Arts & Humanities</option>
-                        <option value="economics">Economics</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="finance">Finance</option>
-                        <option value="data_science">Data Science</option>
-                        <option value="nursing">Nursing</option>
-                        <option value="hospitality">Hospitality Management</option>
-                        <option value="other">Other</option>
+                        @foreach($subjects as $id => $name)
+                        <option value="{{$id}}">{{$name}}</option>
+                        @endforeach
+
                     </select>
                 </div>
 
@@ -637,58 +628,9 @@
 @section('scripts')
     @parent
     <script>
+
         // Sample student data
-        let studentsData = [{
-                id: 1,
-                name: "Rahul Sharma",
-                email: "rahul.sharma@email.com",
-                phone: "+91 9876543210",
-                entryDate: "2024-05-20",
-                agentName: "agent_1",
-                agentDisplayName: "John Smith",
-                status: "new"
-            },
-            {
-                id: 2,
-                name: "Li Wei",
-                email: "li.wei@email.com",
-                phone: "+86 138-0013-8000",
-                entryDate: "2024-05-22",
-                agentName: "agent_1",
-                agentDisplayName: "John Smith",
-                status: "contacted"
-            },
-            {
-                id: 3,
-                name: "Maria Santos",
-                email: "maria.santos@email.com",
-                phone: "+55 11 98765-4321",
-                entryDate: "2024-05-18",
-                agentName: "agent_3",
-                agentDisplayName: "Sarah Johnson",
-                status: "new"
-            },
-            {
-                id: 4,
-                name: "Ahmed Hassan",
-                email: "ahmed.hassan@email.com",
-                phone: "+20 100 123 4567",
-                entryDate: "2024-05-25",
-                agentName: "agent_4",
-                agentDisplayName: "Mike Chen",
-                status: "prospect"
-            },
-            {
-                id: 5,
-                name: "Priya Patel",
-                email: "priya.patel@email.com",
-                phone: "+91 9123456789",
-                entryDate: "2024-05-19",
-                agentName: "agent_1",
-                agentDisplayName: "John Smith",
-                status: "new"
-            }
-        ];
+        let studentsData = @json($students);
 
         let filteredStudents = [...studentsData];
 
@@ -736,53 +678,55 @@
 
             if (students.length === 0) {
                 studentsList.innerHTML = `
-                    <div class="no-results">
-                        <h3>No students found</h3>
-                        <p>Try adjusting your search criteria</p>
-                    </div>
-                `;
+            <div class="no-results">
+                <h3>No students found</h3>
+                <p>Try adjusting your search criteria</p>
+            </div>
+        `;
                 return;
             }
 
             studentsList.innerHTML = students.map(student => `
-                <div class="student-card">
-                    <div class="student-header">
-                        <div class="student-name">${student.name}</div>
-                        <div class="status-badge status-${student.status}">
-                            ${student.status.charAt(0).toUpperCase() + student.status.slice(1)}
-                        </div>
-                    </div>
-                    
-                    <div class="student-info">
-                        <div class="info-item">
-                            <div class="info-label">Email</div>
-                            <div class="info-value">${student.email}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Phone</div>
-                            <div class="info-value">${student.phone}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Entry Date</div>
-                            <div class="info-value">${new Date(student.entryDate).toLocaleDateString()}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Entered by</div>
-                            <div class="info-value">${student.agentDisplayName}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="student-actions">
-                        <button class="btn btn-info btn-sm" onclick="contactStudent(${student.id})">📞 Contact</button>
-                        <button class="btn btn-success btn-sm" onclick="openProspectModal(${student.id})" 
-                                ${student.status === 'prospect' ? 'disabled' : ''}>
-                            ✅ Convert to Prospect
-                        </button>
-                        <button class="btn btn-primary btn-sm" onclick="viewDetails(${student.id})">👁️ View Details</button>
-                    </div>
+        <div class="student-card">
+            <div class="student-header">
+                <div class="student-name">${student.name}</div>
+                <div class="status-badge status-${student.status}">
+                    ${student.status}
                 </div>
-            `).join('');
+            </div>
+
+            <div class="student-info">
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">${student.email}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Phone</div>
+                    <div class="info-value">${student.phone}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Entry Date</div>
+                    <div class="info-value">${new Date(student.created_at).toLocaleDateString()}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Entered by</div>
+                    <div class="info-value">${student.lead_agent?.name ?? 'N/A'}</div>
+                </div>
+            </div>
+
+            <div class="student-actions">
+                <button class="btn btn-info btn-sm" onclick="contactStudent(${student.id})">📞 Contact</button>
+                <button class="btn btn-success btn-sm" onclick="openProspectModal(${student.id})"
+                        ${student.status === 'prospect' ? 'disabled' : ''}>
+                    ✅ Convert to Prospect
+                </button>
+                <button class="btn btn-primary btn-sm" onclick="viewDetails(${student.id})">👁️ View Details</button>
+            </div>
+        </div>
+    `).join('');
         }
+
+
 
         // Contact student
         function contactStudent(studentId) {
