@@ -48,6 +48,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::get('new-students', [AgentStudentController::class, 'newStudents'])->name('students.new');
     Route::get('prospected-students', [AgentStudentController::class, 'prospectedStudents'])->name('students.prospected');
+    Route::post('students/convert-to-prospective', [AgentStudentController::class, 'convertToProspective'])->name('students.convertToProspective');
 
 
     // Universities

@@ -159,18 +159,14 @@
                 <li class="c-sidebar-nav-item">
                     <a href="{{ route('admin.students.new') }}"
                         class="c-sidebar-nav-link {{ request()->is('new-students') || request()->is('new-students/*') ? 'c-active' : '' }}">
-                        <i class="fa-fw fas fa-flag c-sidebar-nav-icon">
-
-                        </i>
+                        <i class="fa-fw fas fa-flag c-sidebar-nav-icon"></i>
                         {{ __('New Students') }}
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a href="{{ route('admin.students.new') }}"
+                    <a href="{{ route('admin.students.prospected') }}"
                         class="c-sidebar-nav-link {{ request()->is('prospected-students') || request()->is('prospected-students/*') ? 'c-active' : '' }}">
-                        <i class="fa-fw fas fa-flag c-sidebar-nav-icon">
-
-                        </i>
+                        <i class="fa-fw fas fa-flag c-sidebar-nav-icon"></i>
                         {{ __('prospect Students') }}
                     </a>
                 </li>

@@ -5,17 +5,17 @@
     @parent
     <style>
         /* * {
-                                    margin: 0;
-                                    padding: 0;
-                                    box-sizing: border-box;
-                                }
+                                        margin: 0;
+                                        padding: 0;
+                                        box-sizing: border-box;
+                                    }
 
-                                body {
-                                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                                    min-height: 100vh;
-                                    padding: 20px;
-                                } */
+                                    body {
+                                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                        min-height: 100vh;
+                                        padding: 20px;
+                                    } */
 
         .container {
             max-width: 1400px;
@@ -376,8 +376,8 @@
 @section('content')
     <div class="container">
         <div class="header">
-            <h1>Student Search & Prospect Management</h1>
-            <p>Search students and convert them to prospects with detailed information</p>
+            <h1>Student Search & Documentation, Offer Processing Management</h1>
+            <p>Search students and Apply for Admission</p>
         </div>
 
         <div class="main-content">
@@ -654,12 +654,16 @@
             </div>
         </div>
     </div>
+
+
+
 @endsection
 @section('scripts')
     @parent
     <script>
         // Sample student data
         let studentsData = @json($students);
+        let admissionStages = @json($admission_stage);
 
         let filteredStudents = [...studentsData];
 
@@ -743,57 +747,36 @@
                 </div>
             </div>
 
-            <div class="student-actions">
-                <button class="btn btn-info btn-sm" onclick="contactStudent(${student.id})">📞 Contact</button>
-                <button class="btn btn-success btn-sm" onclick="openProspectModal(${student.id})"
-                        ${student.status === 'prospect' ? 'disabled' : ''}>
-                    ✅ Convert to Prospect
-                </button>
-                <button class="btn btn-primary btn-sm" onclick="viewDetails(${student.id})">👁️ View Details</button>
+            <div class="student-actions row">
+                <div class="form-group col-md-3">
+                    <label for="admission_stage" class="form-label">Admission Stage</label>
+                    <select class="form-control select2" id="admission_stage" required>
+                        <option value="">Select Stage</option>
+                        @foreach($admission_stage as $stage)
+                            <option value="{{ $stage->id }}" style="">
+                                {{ ucwords(str_replace('_', ' ', $stage->title)) }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="admission_status" class="form-label">Admission Status</label>
+                    <select class="form-control select2" id="admission_status" required>
+                        <option value="">Select Status</option>
+                        
+                    </select>
+                </div>
             </div>
         </div>
     `).join('');
         }
 
 
+        $(document).on('change', "#admission_stage", function (e) { 
+            e.preventDefault();
+            let admission_stage = $(this).val();
 
-        // Contact student
-        function contactStudent(studentId) {
-            const student = studentsData.find(s => s.id === studentId);
-            if (student && student.status === 'new') {
-                student.status = 'contacted';
-                displayStudents(filteredStudents);
-                alert(`Marked ${student.name} as contacted. You can now call them to gather additional information.`);
-            } else {
-                alert(`Student already contacted or converted to prospect.`);
-            }
-        }
-
-        // Open prospect modal
-        function openProspectModal(studentId) {
-            const student = studentsData.find(s => s.id === studentId);
-            if (!student) return;
-
-            if (student.status === 'prospect') {
-                alert('This student is already a prospect.');
-                return;
-            }
-
-            document.getElementById('selectedStudentId').value = studentId;
-            document.getElementById('prospectModal').style.display = 'block';
-        }
-
-        // Close modal
-        function closeModal() {
-            document.getElementById('prospectModal').style.display = 'none';
-            document.getElementById('prospectForm').reset();
-        }
-
-        // Save prospect
-        function saveProspect() {
-
-            let prospectForm = $('#prospectForm');
-            var formData = prospectForm.serialize();
             $.ajax({
                 type: 'POST',
                 url: '/admin/students/convert-to-prospective',
@@ -813,122 +796,13 @@
                 }
             });
 
-            // const studentId = parseInt(document.getElementById('selectedStudentId').value);
-            // const student = studentsData.find(s => s.id === studentId);
+            let admission_status = admissionStages.find(stage => stage.id == admission_stage);
+            let options = admission_status.admissionStageAdmissionStatuses.map(status => `<option value="${status}">${status}</option>`).join('');
+            $("#admission_status").html(options);
+        });
 
 
-            // Validate required fields
-            // const requiredFields = ['homeCountry', 'maxTuitionFee', 'completedSubject', 'completionYear',
-            //     'interestedSubject', 'studyLevel', 'ieltsStatus', 'moiStatus'
-            // ];
-            // let isValid = true;
 
-            // for (let field of requiredFields) {
-            //     const element = document.getElementById(field);
-            //     if (!element.value.trim()) {
-            //         element.style.borderColor = '#dc3545';
-            //         isValid = false;
-            //     } else {
-            //         element.style.borderColor = '#e9ecef';
-            //     }
-            // }
-
-            // Check if at least one interested country is selected
-            // const interestedCountries = Array.from(document.querySelectorAll('input[name="interestedCountries"]:checked'))
-            //     .map(cb => cb.value);
-            // if (interestedCountries.length === 0) {
-            //     alert('Please select at least one interested country.');
-            //     return;
-            // }
-
-            // if (!isValid) {
-            //     alert('Please fill in all required fields.');
-            //     return;
-            // }
-
-            // Collect prospect data
-            // const prospectData = {
-            //     homeCountry: document.getElementById('homeCountry').value,
-            //     maxTuitionFee: document.getElementById('maxTuitionFee').value,
-            //     interestedCountries: interestedCountries,
-            //     completedSubject: document.getElementById('completedSubject').value,
-            //     completionYear: document.getElementById('completionYear').value,
-            //     gpa: document.getElementById('gpa').value,
-            //     interestedSubject: document.getElementById('interestedSubject').value,
-            //     studyLevel: document.getElementById('studyLevel').value,
-            //     ieltsStatus: document.getElementById('ieltsStatus').value,
-            //     ieltsScore: document.getElementById('ieltsScore').value,
-            //     moiStatus: document.getElementById('moiStatus').value,
-            //     additionalNotes: document.getElementById('additionalNotes').value,
-            //     convertedDate: new Date().toISOString().split('T')[0],
-            //     convertedBy: 'agent_2' // Current agent
-            // };
-
-            // Update student status and add prospect data
-            // student.status = 'prospect';
-            // student.prospectData = prospectData;
-
-            // Log the data (in real app, send to server)
-            // console.log('Student converted to prospect:', {
-            //     studentId: studentId,
-            //     studentName: student.name,
-            //     prospectData: prospectData
-            // });
-
-            // Update display
-            // displayStudents(filteredStudents);
-            // closeModal();
-            // alert(`${student.name} has been successfully converted to a prospect!`);
-        }
-
-        // View student details
-        function viewDetails(studentId) {
-            const student = studentsData.find(s => s.id === studentId);
-            if (!student) return;
-
-            let details = `
-                    Student Details:
-                    ================
-                    Name: ${student.name}
-                    Email: ${student.email}
-                    Phone: ${student.phone}
-                    Entry Date: ${new Date(student.entryDate).toLocaleDateString()}
-                    Entered by: ${student.agentDisplayName}
-                    Status: ${student.status.charAt(0).toUpperCase() + student.status.slice(1)}
-                                `;
-
-            if (student.prospectData) {
-                details += `
-
-                    Prospect Information:
-                    ====================
-                    Home Country: ${student.prospectData.homeCountry}
-                    Max Tuition Fee: ${student.prospectData.maxTuitionFee === 'unlimited' ? 'No Limit' : student.prospectData.maxTuitionFee}
-                    Interested Countries: ${student.prospectData.interestedCountries.join(', ')}
-                    Completed Subject: ${student.prospectData.completedSubject}
-                    Completion Year: ${student.prospectData.completionYear}
-                    GPA: ${student.prospectData.gpa || 'Not provided'}
-                    Interested Subject: ${student.prospectData.interestedSubject}
-                    Study Level: ${student.prospectData.studyLevel}
-                    IELTS Status: ${student.prospectData.ieltsStatus}
-                    IELTS Score: ${student.prospectData.ieltsScore || 'Not provided'}
-                    MOI Status: ${student.prospectData.moiStatus}
-                    Additional Notes: ${student.prospectData.additionalNotes || 'None'}
-                    Converted Date: ${new Date(student.prospectData.convertedDate).toLocaleDateString()}
-                    Converted By: Agent 2
-                                    `;
-            }
-
-            alert(details);
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('prospectModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
 
         // Auto-set date range to current month
         document.addEventListener('DOMContentLoaded', function() {
@@ -938,51 +812,5 @@
             document.getElementById('fromDate').value = firstDay.toISOString().split('T')[0];
             document.getElementById('toDate').value = today.toISOString().split('T')[0];
         });
-
-        // Enable/disable IELTS score field based on status
-        document.getElementById('ieltsStatus').addEventListener('change', function() {
-            const ieltsScore = document.getElementById('ieltsScore');
-            if (this.value === 'done') {
-                ieltsScore.required = true;
-                ieltsScore.style.opacity = '1';
-            } else {
-                ieltsScore.required = false;
-                ieltsScore.style.opacity = '0.6';
-                ieltsScore.value = '';
-            }
-        });
-
-        // Format phone number display
-        function formatPhoneNumber(phone) {
-            // Simple formatting for display
-            return phone.replace(/(\+\d{1,3})\s?(\d{3})(\d{3})(\d{4})/, '$1 $2-$3-$4');
-        }
-
-        // Export prospects (bonus feature)
-        function exportProspects() {
-            const prospects = studentsData.filter(student => student.status === 'prospect');
-            if (prospects.length === 0) {
-                alert('No prospects to export.');
-                return;
-            }
-
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent +=
-                "Name,Email,Phone,Home Country,Max Tuition Fee,Interested Countries,Completed Subject,Interested Subject,IELTS Status,IELTS Score,MOI Status,Converted Date\n";
-
-            prospects.forEach(student => {
-                const data = student.prospectData;
-                csvContent +=
-                    `"${student.name}","${student.email}","${student.phone}","${data.homeCountry}","${data.maxTuitionFee}","${data.interestedCountries.join('; ')}","${data.completedSubject}","${data.interestedSubject}","${data.ieltsStatus}","${data.ieltsScore || ''}","${data.moiStatus}","${data.convertedDate}"\n`;
-            });
-
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `prospects_${new Date().toISOString().split('T')[0]}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
     </script>
 @endsection
