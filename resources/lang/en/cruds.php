@@ -838,4 +838,48 @@ return [
         ],
     ],
 
+
+
+    'admissionStage' => [
+        'title'          => 'Admission Stage',
+        'title_singular' => 'Admission Stage',
+        'fields'         => [
+            'id'                 => 'ID',
+            'id_helper'          => ' ',
+            'title'              => 'Title',
+            'title_helper'       => ' ',
+            'description'        => 'Description',
+            'description_helper' => ' ',
+            'sequence'           => 'Sequence',
+            'sequence_helper'    => ' ',
+            'created_at'         => 'Created at',
+            'created_at_helper'  => ' ',
+            'updated_at'         => 'Updated at',
+            'updated_at_helper'  => ' ',
+            'deleted_at'         => 'Deleted at',
+            'deleted_at_helper'  => ' ',
+        ],
+    ],
+    'admissionStatus' => [
+        'title'          => 'Admission Status',
+        'title_singular' => 'Admission Status',
+        'fields'         => [
+            'id'                     => 'ID',
+            'id_helper'              => ' ',
+            'title'                  => 'Title',
+            'title_helper'           => ' ',
+            'description'            => 'Description',
+            'description_helper'     => ' ',
+            'sequence'               => 'Sequence',
+            'sequence_helper'        => ' ',
+            'admission_stage'        => 'Admission Stage',
+            'admission_stage_helper' => ' ',
+            'created_at'             => 'Created at',
+            'created_at_helper'      => ' ',
+            'updated_at'             => 'Updated at',
+            'updated_at_helper'      => ' ',
+            'deleted_at'             => 'Deleted at',
+            'deleted_at_helper'      => ' ',
+        ],
+    ],
 ];

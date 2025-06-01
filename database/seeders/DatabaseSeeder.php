@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
 
+            // new seeders
+            AdmissionStageSeeder::class,
+            AdmissionStatusSeeder::class,
         ]);
     }
 }

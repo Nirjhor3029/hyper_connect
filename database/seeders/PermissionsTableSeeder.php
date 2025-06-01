@@ -562,8 +562,50 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 138,
                 'title' => 'city_access',
             ],
+
             [
                 'id'    => 139,
+                'title' => 'admission_stage_create',
+            ],
+            [
+                'id'    => 140,
+                'title' => 'admission_stage_edit',
+            ],
+            [
+                'id'    => 141,
+                'title' => 'admission_stage_show',
+            ],
+            [
+                'id'    => 142,
+                'title' => 'admission_stage_delete',
+            ],
+            [
+                'id'    => 143,
+                'title' => 'admission_stage_access',
+            ],
+            [
+                'id'    => 144,
+                'title' => 'admission_status_create',
+            ],
+            [
+                'id'    => 145,
+                'title' => 'admission_status_edit',
+            ],
+            [
+                'id'    => 146,
+                'title' => 'admission_status_show',
+            ],
+            [
+                'id'    => 147,
+                'title' => 'admission_status_delete',
+            ],
+            [
+                'id'    => 148,
+                'title' => 'admission_status_access',
+            ],
+
+            [
+                'id'    => 149,
                 'title' => 'profile_password_edit',
             ],
 

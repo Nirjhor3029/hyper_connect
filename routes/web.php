@@ -152,8 +152,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('cities', 'CityController');
 
 
-    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    // Admission Stage
+    Route::delete('admission-stages/destroy', 'AdmissionStageController@massDestroy')->name('admission-stages.massDestroy');
+    Route::resource('admission-stages', 'AdmissionStageController');
 
+    // Admission Status
+    Route::delete('admission-statuses/destroy', 'AdmissionStatusController@massDestroy')->name('admission-statuses.massDestroy');
+    Route::post('admission-statuses/media', 'AdmissionStatusController@storeMedia')->name('admission-statuses.storeMedia');
+    Route::post('admission-statuses/ckmedia', 'AdmissionStatusController@storeCKEditorImages')->name('admission-statuses.storeCKEditorImages');
+    Route::resource('admission-statuses', 'AdmissionStatusController');
+
+
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

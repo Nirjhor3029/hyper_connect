@@ -73,10 +73,16 @@
             </li>
         @endcan
         @can('setting_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is('admin/countries*') ? 'c-show' : '' }}">
+            <li
+                class="c-sidebar-nav-dropdown 
+                {{ request()->is('admin/countries*') ? 'c-show' : '' }} 
+                {{ request()->is('admin/states*') ? 'c-show' : '' }}
+			    {{ request()->is('admin/cities*') ? 'c-show' : '' }} 
+                {{ request()->is('admin/admission-stages*') ? 'c-show' : '' }} 
+                {{ request()->is('admin/admission-statuses*') ? 'c-show' : '' }}
+                ">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
-
                     </i>
                     {{ trans('cruds.setting.title') }}
                 </a>
@@ -92,11 +98,56 @@
                             </a>
                         </li>
                     @endcan
+                    @can('state_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route('admin.states.index') }}"
+                                class="c-sidebar-nav-link {{ request()->is('admin/states') || request()->is('admin/states/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-map-pin c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.state.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('city_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route('admin.cities.index') }}"
+                                class="c-sidebar-nav-link {{ request()->is('admin/cities') || request()->is('admin/cities/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-map-marked-alt c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.city.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('admission_stage_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route('admin.admission-stages.index') }}"
+                                class="c-sidebar-nav-link {{ request()->is('admin/admission-stages') || request()->is('admin/admission-stages/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-school c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.admissionStage.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('admission_status_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route('admin.admission-statuses.index') }}"
+                                class="c-sidebar-nav-link {{ request()->is('admin/admission-statuses') || request()->is('admin/admission-statuses/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-signal c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.admissionStatus.title') }}
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
             </li>
         @endcan
 
-        <li class="c-sidebar-nav-dropdown {{ request()->is('new-students*') ? 'c-show' : '' }} {{ request()->is('prospected-students*') ? 'c-show' : '' }}">
+        <li
+            class="c-sidebar-nav-dropdown {{ request()->is('new-students*') ? 'c-show' : '' }} {{ request()->is('prospected-students*') ? 'c-show' : '' }}">
             <a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
@@ -163,7 +214,8 @@
         @endcan
         @can('program_setting_access')
             <li
-                class="c-sidebar-nav-dropdown {{ request()->is('admin/programs*') ? 'c-show' : '' }} {{ request()->is('admin/tags*') ? 'c-show' : '' }}">
+                class="c-sidebar-nav-dropdown {{ request()->is('admin/programs*') ? 'c-show' : '' }} 
+                {{ request()->is('admin/tags*') ? 'c-show' : '' }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-blender c-sidebar-nav-icon">
 
