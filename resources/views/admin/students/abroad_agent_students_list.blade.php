@@ -5,17 +5,17 @@
     @parent
     <style>
         /* * {
-                                        margin: 0;
-                                        padding: 0;
-                                        box-sizing: border-box;
-                                    }
+                                            margin: 0;
+                                            padding: 0;
+                                            box-sizing: border-box;
+                                        }
 
-                                    body {
-                                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                                        min-height: 100vh;
-                                        padding: 20px;
-                                    } */
+                                        body {
+                                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                            min-height: 100vh;
+                                            padding: 20px;
+                                        } */
 
         .container {
             max-width: 1400px;
@@ -752,7 +752,7 @@
                     <label for="admission_stage" class="form-label">Admission Stage</label>
                     <select class="form-control select2" id="admission_stage" required>
                         <option value="">Select Stage</option>
-                        @foreach($admission_stage as $stage)
+                        @foreach ($admission_stage as $stage)
                             <option value="{{ $stage->id }}" style="">
                                 {{ ucwords(str_replace('_', ' ', $stage->title)) }}
                             </option>
@@ -773,7 +773,7 @@
         }
 
 
-        $(document).on('change', "#admission_stage", function (e) { 
+        $(document).on('change', "#admission_stage", function(e) {
             e.preventDefault();
             let admission_stage = $(this).val();
 
@@ -797,7 +797,8 @@
             });
 
             let admission_status = admissionStages.find(stage => stage.id == admission_stage);
-            let options = admission_status.admissionStageAdmissionStatuses.map(status => `<option value="${status}">${status}</option>`).join('');
+            let options = admission_status.admissionStageAdmissionStatuses.map(status =>
+                `<option value="${status}">${status}</option>`).join('');
             $("#admission_status").html(options);
         });
 
