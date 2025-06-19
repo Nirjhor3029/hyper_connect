@@ -4,6 +4,12 @@
 @section('styles')
     @parent
     <style>
+
+           .select2-container--default .select2-selection--single {
+            padding-top: 10px;
+            height: 50px;
+        }
+
         /* * {
                                     margin: 0;
                                     padding: 0;
@@ -749,7 +755,10 @@
                         ${student.status === 'prospect' ? 'disabled' : ''}>
                     ✅ Convert to Prospect
                 </button>
-                <button class="btn btn-primary btn-sm" onclick="viewDetails(${student.id})">👁️ View Details</button>
+
+                <a href="/admin/offer-letter/${student.id}" class="btn btn-primary btn-sm" >✅ Offer letter</a>
+
+ <button class="btn btn-secondary btn-sm" onclick="viewDetails(${student.id})">👁️ View Details</button>
             </div>
         </div>
     `).join('');
@@ -771,6 +780,10 @@
 
         // Open prospect modal
         function openProspectModal(studentId) {
+
+
+            window.location.href = `/admin/convert-prospectus/${studentId}`;
+
             const student = studentsData.find(s => s.id === studentId);
             if (!student) return;
 
@@ -883,6 +896,8 @@
 
         // View student details
         function viewDetails(studentId) {
+
+            window.location.href = `/admin/students/${studentId}`;
             const student = studentsData.find(s => s.id === studentId);
             if (!student) return;
 

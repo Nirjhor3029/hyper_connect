@@ -609,6 +609,28 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'profile_password_edit',
             ],
 
+
+            [
+                'id'    => 150,
+                'title' => 'education_level_edit',
+            ],
+            [
+                'id'    => 151,
+                'title' => 'education_level_show',
+            ],
+            [
+                'id'    => 152,
+                'title' => 'education_level_delete',
+            ],
+            [
+                'id'    => 153,
+                'title' => 'education_level_access',
+            ],
+            [
+                'id'    => 154,
+                'title' => 'education_level_create',
+            ],
+
         ];
 
         Permission::insert($permissions);

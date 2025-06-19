@@ -320,21 +320,22 @@
             <div class="sidebar">
                 <div class="profile-photo">
                     <div class="photo-placeholder" id="photoPlaceholder">
-                        JD
+                        {{ strtoupper(substr($user->name, 0, 1)) }}
                     </div>
                 </div>
                 <button class="upload-btn" onclick="uploadPhoto()">Change Photo</button>
-                <input type="file" id="photoInput" accept="image/*" style="display: none;"
-                    onchange="handlePhotoUpload(event)">
+                <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
 
                 <div class="agent-status">
-                    <div class="status-badge">Active Agent</div>
+                    <div class="status-badge">
+                        {{ $user->is_active ? 'Active Agent' : 'Inactive Agent' }}
+                    </div>
                 </div>
 
                 <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #dee2e6;">
                     <p style="font-size: 0.9rem; color: #6c757d; text-align: center;">
                         <strong>Member Since:</strong><br>
-                        January 2024
+                        {{ \Carbon\Carbon::parse($user->created_at)->format('F Y') }}
                     </p>
                 </div>
             </div>
@@ -343,36 +344,40 @@
                 <form id="profileForm">
                     <!-- Personal Information Section -->
                     <div class="section">
-                        <h2 class="section-title">
-                            <span class="section-icon">👤</span>
-                            Personal Information
-                        </h2>
+                        <h2 class="section-title"><span class="section-icon">👤</span> Personal Information</h2>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label class="form-label" for="fullName">Full Name</label>
-                                <input type="text" id="fullName" class="form-input" value="John Doe" required>
+                                <input type="text" id="fullName" class="form-input" value="{{ $user->name }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="email">Email Address</label>
-                                <input type="email" id="email" class="form-input" value="john.doe@example.com"
-                                    required>
+                                <input type="email" id="email" class="form-input" value="{{ $user->email }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="phone">Phone Number</label>
-                                <input type="tel" id="phone" class="form-input" value="+1 (555) 123-4567" required>
+                                <input type="tel" id="phone" class="form-input" value="{{ $user->phone }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="country">Country</label>
                                 <select id="country" class="form-input" required>
                                     <option value="">Select Country</option>
-                                    <option value="US" selected>United States</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="UK">United Kingdom</option>
-                                    <option value="AU">Australia</option>
-                                    <option value="IN">India</option>
-                                    <option value="CN">China</option>
-                                    <option value="DE">Germany</option>
-                                    <option value="FR">France</option>
+                                    @php
+                                        $countries = [
+                                            1 => 'United States',
+                                            2 => 'Canada',
+                                            3 => 'United Kingdom',
+                                            4 => 'Australia',
+                                            5 => 'India',
+                                            6 => 'China',
+                                            7 => 'Germany',
+                                            8 => 'France',
+                                            18 => 'Bangladesh',
+                                        ];
+                                    @endphp
+                                    @foreach($countries as $id => $name)
+                                        <option value="{{ $id }}" {{ $user->country_id == $id ? 'selected' : '' }}>{{ $name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -380,100 +385,77 @@
 
                     <!-- Professional Information Section -->
                     <div class="section">
-                        <h2 class="section-title">
-                            <span class="section-icon">🏢</span>
-                            Professional Information
-                        </h2>
+                        <h2 class="section-title"><span class="section-icon">🏢</span> Professional Information</h2>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label class="form-label" for="agencyName">Agency Name</label>
-                                <input type="text" id="agencyName" class="form-input" value="Global Education Partners"
-                                    required>
+                                <input type="text" id="agencyName" class="form-input" value="{{ $user->agent->agency_name ?? '' }}">
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="licenseNumber">License Number</label>
-                                <input type="text" id="licenseNumber" class="form-input" value="EDU-2024-1234567"
-                                    required>
+                                <input type="text" id="licenseNumber" class="form-input" value="{{ $user->agent->license_number ?? '' }}">
                             </div>
                         </div>
-
                         <div class="alert alert-info">
-                            <strong>Note:</strong> Your license information is verified by our compliance team. Contact
-                            support if you need to update your license details.
+                            <strong>Note:</strong> Your license information is verified by our compliance team. Contact support if you need to update your license details.
                         </div>
                     </div>
 
                     <!-- Banking Information Section -->
                     <div class="section">
-                        <h2 class="section-title">
-                            <span class="section-icon">💳</span>
-                            Banking Information
-                        </h2>
+                        <h2 class="section-title"><span class="section-icon">💳</span> Banking Information</h2>
                         <div class="banking-details">
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label class="form-label" for="bankName">Bank Name</label>
-                                    <input type="text" id="bankName" class="form-input" value="First National Bank">
+                                    <input type="text" id="bankName" class="form-input" value="{{ $user->agent->banking_info['bank_name'] ?? '' }}">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="accountHolder">Account Holder Name</label>
-                                    <input type="text" id="accountHolder" class="form-input" value="John Doe">
+                                    <input type="text" id="accountHolder" class="form-input" value="{{ $user->agent->banking_info['account_holder'] ?? '' }}">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="accountNumber">Account Number</label>
-                                    <input type="text" id="accountNumber" class="form-input" value="****-****-1234"
-                                        readonly>
+                                    <input type="text" id="accountNumber" class="form-input" value="{{ $user->agent->banking_info['account_number'] ?? '****-****-1234' }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="routingNumber">Routing Number</label>
-                                    <input type="text" id="routingNumber" class="form-input" value="****5678"
-                                        readonly>
+                                    <input type="text" id="routingNumber" class="form-input" value="{{ $user->agent->banking_info['routing_number'] ?? '****5678' }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="bankAddress">Bank Address</label>
-                                    <input type="text" id="bankAddress" class="form-input"
-                                        value="123 Main St, New York, NY 10001">
+                                    <input type="text" id="bankAddress" class="form-input" value="{{ $user->agent->banking_info['bank_address'] ?? '' }}">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="swiftCode">SWIFT/BIC Code</label>
-                                    <input type="text" id="swiftCode" class="form-input" value="FNBKUS33">
+                                    <input type="text" id="swiftCode" class="form-input" value="{{ $user->agent->banking_info['swift_code'] ?? '' }}">
                                 </div>
                             </div>
                             <div class="alert alert-info">
-                                <strong>Security Notice:</strong> Sensitive banking details are masked for security. Contact
-                                support to update account or routing numbers.
+                                <strong>Security Notice:</strong> Sensitive banking details are masked for security. Contact support to update account or routing numbers.
                             </div>
                         </div>
                     </div>
 
                     <!-- Password Change Section -->
                     <div class="section">
-                        <h2 class="section-title">
-                            <span class="section-icon">🔐</span>
-                            Change Password
-                        </h2>
+                        <h2 class="section-title"><span class="section-icon">🔐</span> Change Password</h2>
                         <div class="password-section">
                             <div class="password-grid">
                                 <div class="form-group">
                                     <label class="form-label" for="currentPassword">Current Password</label>
-                                    <input type="password" id="currentPassword" class="form-input"
-                                        placeholder="Enter current password">
+                                    <input type="password" id="currentPassword" class="form-input" placeholder="Enter current password">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="newPassword">New Password</label>
-                                    <input type="password" id="newPassword" class="form-input"
-                                        placeholder="Enter new password">
+                                    <input type="password" id="newPassword" class="form-input" placeholder="Enter new password">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="confirmPassword">Confirm New Password</label>
-                                    <input type="password" id="confirmPassword" class="form-input"
-                                        placeholder="Confirm new password">
+                                    <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm new password">
                                 </div>
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-secondary" onclick="changePassword()"
-                                        style="width: 100%;">
-                                        Update Password
-                                    </button>
+                                    <button type="button" class="btn btn-secondary" onclick="changePassword()" style="width: 100%;">Update Password</button>
                                 </div>
                             </div>
                         </div>

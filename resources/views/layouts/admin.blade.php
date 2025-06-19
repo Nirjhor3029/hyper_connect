@@ -27,12 +27,7 @@
         rel="stylesheet" />
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
-    <style>
-        .select2-container--default .select2-selection--single {
-            padding-top: 10px;
-            height: 50px;
-        }
-    </style>
+
     @yield('styles')
 </head>
 

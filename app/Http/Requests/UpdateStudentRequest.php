@@ -26,7 +26,7 @@ class UpdateStudentRequest extends FormRequest
                 'required',
             ],
             'nationality_id' => [
-                'required',
+
                 'integer',
             ],
             'dob' => [
@@ -105,6 +105,10 @@ class UpdateStudentRequest extends FormRequest
             ],
             'medical_certificates' => [
                 'array',
+            ],
+            'max_education_level_id' => [
+
+                'integer',
             ],
         ];
     }

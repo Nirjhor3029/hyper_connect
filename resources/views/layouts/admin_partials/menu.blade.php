@@ -74,11 +74,11 @@
         @endcan
         @can('setting_access')
             <li
-                class="c-sidebar-nav-dropdown 
-                {{ request()->is('admin/countries*') ? 'c-show' : '' }} 
+                class="c-sidebar-nav-dropdown
+                {{ request()->is('admin/countries*') ? 'c-show' : '' }}
                 {{ request()->is('admin/states*') ? 'c-show' : '' }}
-			    {{ request()->is('admin/cities*') ? 'c-show' : '' }} 
-                {{ request()->is('admin/admission-stages*') ? 'c-show' : '' }} 
+			    {{ request()->is('admin/cities*') ? 'c-show' : '' }}
+                {{ request()->is('admin/admission-stages*') ? 'c-show' : '' }}
                 {{ request()->is('admin/admission-statuses*') ? 'c-show' : '' }}
                 ">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
@@ -214,7 +214,7 @@
         @endcan
         @can('program_setting_access')
             <li
-                class="c-sidebar-nav-dropdown {{ request()->is('admin/programs*') ? 'c-show' : '' }} 
+                class="c-sidebar-nav-dropdown {{ request()->is('admin/programs*') ? 'c-show' : '' }}
                 {{ request()->is('admin/tags*') ? 'c-show' : '' }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-blender c-sidebar-nav-icon">
@@ -410,6 +410,16 @@
 
                     </i>
                     {{ trans('cruds.nationality.title') }}
+                </a>
+            </li>
+        @endcan
+        @can('education_level_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.education-levels.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/education-levels") || request()->is("admin/education-levels/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-graduation-cap c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.educationLevel.title') }}
                 </a>
             </li>
         @endcan

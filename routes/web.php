@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AgentStudentController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\StudentsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('students/media', 'StudentsController@storeMedia')->name('students.storeMedia');
     Route::post('students/ckmedia', 'StudentsController@storeCKEditorImages')->name('students.storeCKEditorImages');
     Route::resource('students', 'StudentsController');
+    Route::get('/get-nationalities/{country}', [StudentsController::class, 'getNationalities']);
+    Route::get('/convert-prospectus/{id}', [StudentsController::class, 'convertProspectus'])->name('students.convertProspectus');
+    Route::get('/offer-letter/{id}', [StudentsController::class, 'offerLetters'])->name('students.offerLetters');
+
 
     Route::get('new-students', [AgentStudentController::class, 'newStudents'])->name('students.new');
     Route::get('prospected-students', [AgentStudentController::class, 'prospectedStudents'])->name('students.prospected');
@@ -162,6 +167,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('admission-statuses/media', 'AdmissionStatusController@storeMedia')->name('admission-statuses.storeMedia');
     Route::post('admission-statuses/ckmedia', 'AdmissionStatusController@storeCKEditorImages')->name('admission-statuses.storeCKEditorImages');
     Route::resource('admission-statuses', 'AdmissionStatusController');
+
+    // Education Level
+    Route::delete('education-levels/destroy', 'EducationLevelController@massDestroy')->name('education-levels.massDestroy');
+    Route::resource('education-levels', 'EducationLevelController');
 
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');

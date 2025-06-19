@@ -16,10 +16,10 @@
                         <a class="nav-link active" id="basic-tab" data-toggle="tab" href="#basic" role="tab">Basic
                             Info</a>
                     </li>
-                    <li class="nav-item">
+                  {{--  <li class="nav-item">
                         <a class="nav-link" id="advanced-tab" data-toggle="tab" href="#advanced" role="tab">Advanced
                             Info</a>
-                    </li>
+                    </li>--}}
                 </ul>
 
                 <!-- Tab Contents -->
@@ -58,37 +58,70 @@
                                         <label class="required"
                                                for="phone">{{ trans('cruds.student.fields.phone') }}</label>
                                         <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-                                               type="text" name="phone" id="phone" value="{{ old('phone', '') }}"
+                                               type="text"
+                                               name="phone"
+                                               id="phone"
+                                               value="{{ old('phone', '') }}"
+                                               pattern="[0-9]*"
+                                               inputmode="numeric"
                                                required>
-                                        @if($errors->has('phone'))
+
+                                    @if($errors->has('phone'))
                                             <div class="invalid-feedback">
                                                 {{ $errors->first('phone') }}
                                             </div>
                                         @endif
                                         <span class="help-block">{{ trans('cruds.student.fields.phone_helper') }}</span>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label class="required"
-                                               for="nationality_id">{{ trans('cruds.student.fields.nationality') }}</label>
+                                    @php
+                                        $user = auth()->user();
+
+                                           $isAgent = $user->roles()->where('id', 3)->exists();
+                                   @endphp
+
+                                    <div class="form-group col-md-3">
+                                        <label class="required" for="country_id">Country</label>
                                         <select
-                                            class="form-control select2 {{ $errors->has('nationality') ? 'is-invalid' : '' }}"
-                                            name="nationality_id" id="nationality_id" required>
-                                            @foreach($nationalities as $id => $entry)
-                                                <option
-                                                    value="{{ $id }}" {{ old('nationality_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                            class="form-control select2 {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
+                                            name="country_id" id="country_id" {{ $isAgent ? 'disabled' : '' }} required>
+                                            @foreach($countries as $id => $entry)
+                                                <option value="{{ $id }}"
+                                                    {{ (old('country_id', $isAgent ? $user->country_id : null) == $id) ? 'selected' : '' }}>
+                                                    {{ $entry }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        @if($errors->has('nationality'))
-                                            <div class="invalid-feedback">
-                                                {{ $errors->first('nationality') }}
-                                            </div>
+                                        @if($errors->has('country_id'))
+                                            <div class="invalid-feedback">{{ $errors->first('country_id') }}</div>
                                         @endif
-                                        <span
-                                            class="help-block">{{ trans('cruds.student.fields.nationality_helper') }}</span>
                                     </div>
 
+                                    <div class="form-group col-md-3">
+                                        <label class="required" for="nationality_id">Nationality</label>
+                                        <select
+                                            class="form-control select2 {{ $errors->has('nationality_id') ? 'is-invalid' : '' }}"
+                                            name="nationality_id" id="nationality_id" {{ $isAgent ? 'disabled' : '' }} required>
+                                            @foreach($nationalities as $id => $entry)
+                                                <option value="{{ $id }}"
+                                                    {{ (old('nationality_id', $isAgent ? $user->nationality_id : null) == $id) ? 'selected' : '' }}>
+                                                    {{ $entry }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('nationality_id'))
+                                            <div class="invalid-feedback">{{ $errors->first('nationality_id') }}</div>
+                                        @endif
+                                    </div>
 
-                                    <div class="form-group col-md-4">
+                                    @if($isAgent)
+                                        <!-- Hidden fields to make sure disabled fields' values are submitted -->
+                                        <input type="hidden" name="country_id" value="{{ $user->country_id }}">
+                                        <input type="hidden" name="nationality_id" value="{{ $user->nationality_id }}">
+                                    @endif
+
+
+
+                                    <div class="form-group col-md-3">
                                         <label>{{ trans('cruds.student.fields.gender') }}</label>
                                         <select class="form-control {{ $errors->has('gender') ? 'is-invalid' : '' }}"
                                                 name="gender" id="gender">
@@ -107,7 +140,7 @@
                                         <span
                                             class="help-block">{{ trans('cruds.student.fields.gender_helper') }}</span>
                                     </div>
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-3">
                                         <label for="dob">{{ trans('cruds.student.fields.dob') }}</label>
                                         <input class="form-control date {{ $errors->has('dob') ? 'is-invalid' : '' }}"
                                                type="text" name="dob" id="dob" value="{{ old('dob') }}">
@@ -130,36 +163,132 @@
                                          <span
                                              class="help-block">{{ trans('cruds.student.fields.address_helper') }}</span>
                                      </div>--}}
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-4">
+
+                                        <div class="form-group">
+                                            <label class="required" for="education_level_id">{{ trans('cruds.student.fields.max_education_level') }}</label>
+                                            <select class="form-control  select2 {{ $errors->has('max_education_level') ? 'is-invalid' : '' }} mt-2" name="education_level_id" id="education_level_id" required>
+                                                @foreach($max_education_levels as $id => $entry)
+                                                    <option value="{{ $id }}" {{ old('education_level_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if($errors->has('max_education_level'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('max_education_level') }}
+                                                </div>
+                                            @endif
+                                            <span class="help-block">{{ trans('cruds.student.fields.max_education_level_helper') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+
+                                    <div class="form-group">
                                         <label
-                                            for="current_address">{{ trans('cruds.student.fields.current_address') }}</label>
-                                        <textarea
-                                            class="form-control  {{ $errors->has('current_address') ? 'is-invalid' : '' }}"
-                                            name="current_address"
-                                            id="current_address">{!! old('current_address') !!}</textarea>
-                                        @if($errors->has('current_address'))
+                                            for="interested_countries">{{ trans('cruds.student.fields.interested_countries') }}</label>
+                                        <div style="padding-bottom: 4px">
+                                        <span class="btn btn-info btn-xs select-all"
+                                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                            <span class="btn btn-info btn-xs deselect-all"
+                                                  style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                                        </div>
+                                        <select
+                                            class="form-control select2 {{ $errors->has('interested_countries') ? 'is-invalid' : '' }}"
+                                            name="interested_countries[]" id="interested_countries" multiple>
+                                            @foreach($interested_countries as $id => $interested_country)
+                                                <option
+                                                    value="{{ $id }}" {{ in_array($id, old('interested_countries', [])) ? 'selected' : '' }}>{{ $interested_country }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('interested_countries'))
                                             <div class="invalid-feedback">
-                                                {{ $errors->first('current_address') }}
+                                                {{ $errors->first('interested_countries') }}
                                             </div>
                                         @endif
                                         <span
-                                            class="help-block">{{ trans('cruds.student.fields.current_address_helper') }}</span>
+                                            class="help-block">{{ trans('cruds.student.fields.interested_countries_helper') }}</span>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                    <div class="form-group">
                                         <label
-                                            for="permanent_address">{{ trans('cruds.student.fields.permanent_address') }}</label>
-                                        <textarea
-                                            class="form-control  {{ $errors->has('permanent_address') ? 'is-invalid' : '' }}"
-                                            name="permanent_address"
-                                            id="permanent_address">{!! old('permanent_address') !!}</textarea>
-                                        @if($errors->has('permanent_address'))
+                                            for="univertsities">{{ trans('cruds.student.fields.univertsities') }}</label>
+                                        <div style="padding-bottom: 4px">
+                                        <span class="btn btn-info btn-xs select-all"
+                                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                            <span class="btn btn-info btn-xs deselect-all"
+                                                  style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                                        </div>
+                                        <select
+                                            class="form-control select2 {{ $errors->has('univertsities') ? 'is-invalid' : '' }}"
+                                            name="univertsities[]" id="univertsities" multiple>
+                                            @foreach($univertsities as $id => $univertsity)
+                                                <option
+                                                    value="{{ $id }}" {{ in_array($id, old('univertsities', [])) ? 'selected' : '' }}>{{ $univertsity }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('univertsities'))
                                             <div class="invalid-feedback">
-                                                {{ $errors->first('permanent_address') }}
+                                                {{ $errors->first('univertsities') }}
                                             </div>
                                         @endif
                                         <span
-                                            class="help-block">{{ trans('cruds.student.fields.permanent_address_helper') }}</span>
+                                            class="help-block">{{ trans('cruds.student.fields.univertsities_helper') }}</span>
                                     </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="subjects">{{ trans('cruds.student.fields.subjects') }}</label>
+                                        <div style="padding-bottom: 4px">
+                                        <span class="btn btn-info btn-xs select-all"
+                                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                            <span class="btn btn-info btn-xs deselect-all"
+                                                  style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                                        </div>
+                                        <select
+                                            class="form-control select2 {{ $errors->has('subjects') ? 'is-invalid' : '' }}"
+                                            name="subjects[]" id="subjects" multiple>
+                                            @foreach($subjects as $id => $subject)
+                                                <option
+                                                    value="{{ $id }}" {{ in_array($id, old('subjects', [])) ? 'selected' : '' }}>{{ $subject }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('subjects'))
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('subjects') }}
+                                            </div>
+                                        @endif
+                                        <span
+                                            class="help-block">{{ trans('cruds.student.fields.subjects_helper') }}</span>
+                                    </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label
+                                            for="course_interesteds">{{ trans('cruds.student.fields.course_interested') }}</label>
+                                        <div style="padding-bottom: 4px">
+                                        <span class="btn btn-info btn-xs select-all"
+                                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                            <span class="btn btn-info btn-xs deselect-all"
+                                                  style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                                        </div>
+                                        <select
+                                            class="form-control select2 {{ $errors->has('course_interesteds') ? 'is-invalid' : '' }}"
+                                            name="course_interesteds[]" id="course_interesteds" multiple>
+                                            @foreach($course_interesteds as $id => $course_interested)
+                                                <option
+                                                    value="{{ $id }}" {{ in_array($id, old('course_interesteds', [])) ? 'selected' : '' }}>{{ $course_interested }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('course_interesteds'))
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('course_interesteds') }}
+                                            </div>
+                                        @endif
+                                        <span
+                                            class="help-block">{{ trans('cruds.student.fields.course_interested_helper') }}</span>
+                                    </div>
+                                    </div>
+
 
                                 </div>
                             </div>
@@ -171,6 +300,37 @@
                         <div class="card mb-4">
                             <div class="card-header bg-primary text-white">Advanced Information</div>
                             <div class="card-body">
+
+                                <div class="form-group col-md-6">
+                                    <label
+                                        for="current_address">{{ trans('cruds.student.fields.current_address') }}</label>
+                                    <textarea
+                                        class="form-control  {{ $errors->has('current_address') ? 'is-invalid' : '' }}"
+                                        name="current_address"
+                                        id="current_address">{!! old('current_address') !!}</textarea>
+                                    @if($errors->has('current_address'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('current_address') }}
+                                        </div>
+                                    @endif
+                                    <span
+                                        class="help-block">{{ trans('cruds.student.fields.current_address_helper') }}</span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label
+                                        for="permanent_address">{{ trans('cruds.student.fields.permanent_address') }}</label>
+                                    <textarea
+                                        class="form-control  {{ $errors->has('permanent_address') ? 'is-invalid' : '' }}"
+                                        name="permanent_address"
+                                        id="permanent_address">{!! old('permanent_address') !!}</textarea>
+                                    @if($errors->has('permanent_address'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('permanent_address') }}
+                                        </div>
+                                    @endif
+                                    <span
+                                        class="help-block">{{ trans('cruds.student.fields.permanent_address_helper') }}</span>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="passport_no">{{ trans('cruds.student.fields.passport_no') }}</label>
@@ -477,80 +637,7 @@
                                     <span
                                         class="help-block">{{ trans('cruds.student.fields.is_commission_claimed_from_univeristy_helper') }}</span>
                                 </div>
-                                <div class="form-group">
-                                    <label
-                                        for="interested_countries">{{ trans('cruds.student.fields.interested_countries') }}</label>
-                                    <div style="padding-bottom: 4px">
-                                        <span class="btn btn-info btn-xs select-all"
-                                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                        <span class="btn btn-info btn-xs deselect-all"
-                                              style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                                    </div>
-                                    <select
-                                        class="form-control select2 {{ $errors->has('interested_countries') ? 'is-invalid' : '' }}"
-                                        name="interested_countries[]" id="interested_countries" multiple>
-                                        @foreach($interested_countries as $id => $interested_country)
-                                            <option
-                                                value="{{ $id }}" {{ in_array($id, old('interested_countries', [])) ? 'selected' : '' }}>{{ $interested_country }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('interested_countries'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('interested_countries') }}
-                                        </div>
-                                    @endif
-                                    <span
-                                        class="help-block">{{ trans('cruds.student.fields.interested_countries_helper') }}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        for="univertsities">{{ trans('cruds.student.fields.univertsities') }}</label>
-                                    <div style="padding-bottom: 4px">
-                                        <span class="btn btn-info btn-xs select-all"
-                                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                        <span class="btn btn-info btn-xs deselect-all"
-                                              style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                                    </div>
-                                    <select
-                                        class="form-control select2 {{ $errors->has('univertsities') ? 'is-invalid' : '' }}"
-                                        name="univertsities[]" id="univertsities" multiple>
-                                        @foreach($univertsities as $id => $univertsity)
-                                            <option
-                                                value="{{ $id }}" {{ in_array($id, old('univertsities', [])) ? 'selected' : '' }}>{{ $univertsity }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('univertsities'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('univertsities') }}
-                                        </div>
-                                    @endif
-                                    <span
-                                        class="help-block">{{ trans('cruds.student.fields.univertsities_helper') }}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="subjects">{{ trans('cruds.student.fields.subjects') }}</label>
-                                    <div style="padding-bottom: 4px">
-                                        <span class="btn btn-info btn-xs select-all"
-                                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                        <span class="btn btn-info btn-xs deselect-all"
-                                              style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                                    </div>
-                                    <select
-                                        class="form-control select2 {{ $errors->has('subjects') ? 'is-invalid' : '' }}"
-                                        name="subjects[]" id="subjects" multiple>
-                                        @foreach($subjects as $id => $subject)
-                                            <option
-                                                value="{{ $id }}" {{ in_array($id, old('subjects', [])) ? 'selected' : '' }}>{{ $subject }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('subjects'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('subjects') }}
-                                        </div>
-                                    @endif
-                                    <span
-                                        class="help-block">{{ trans('cruds.student.fields.subjects_helper') }}</span>
-                                </div>
+
                                 {{-- <div class="form-group">
                                      <label for="programs">{{ trans('cruds.student.fields.programs') }}</label>
                                      <div style="padding-bottom: 4px">
@@ -569,31 +656,7 @@
                                      @endif
                                      <span class="help-block">{{ trans('cruds.student.fields.programs_helper') }}</span>
                                  </div>--}}
-                                <div class="form-group">
-                                    <label
-                                        for="course_interesteds">{{ trans('cruds.student.fields.course_interested') }}</label>
-                                    <div style="padding-bottom: 4px">
-                                        <span class="btn btn-info btn-xs select-all"
-                                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                        <span class="btn btn-info btn-xs deselect-all"
-                                              style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                                    </div>
-                                    <select
-                                        class="form-control select2 {{ $errors->has('course_interesteds') ? 'is-invalid' : '' }}"
-                                        name="course_interesteds[]" id="course_interesteds" multiple>
-                                        @foreach($course_interesteds as $id => $course_interested)
-                                            <option
-                                                value="{{ $id }}" {{ in_array($id, old('course_interesteds', [])) ? 'selected' : '' }}>{{ $course_interested }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('course_interesteds'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('course_interesteds') }}
-                                        </div>
-                                    @endif
-                                    <span
-                                        class="help-block">{{ trans('cruds.student.fields.course_interested_helper') }}</span>
-                                </div>
+
                                 <div class="form-group">
                                     <label
                                         for="academic_attachments">{{ trans('cruds.student.fields.academic_attachments') }}</label>
@@ -998,4 +1061,41 @@
             }
         }
     </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#country_id').on('change', function () {
+                const countryId = $(this).val();
+                if (!countryId) return;
+
+                $.ajax({
+                    url: `/admin/get-nationalities/${countryId}`,
+                    method: 'GET',
+                    success: function (response) {
+                        const $nationality = $('#nationality_id');
+                        $nationality.empty();
+
+                        // যদি একটা মাত্র nationality থাকে
+                        if (Object.keys(response).length === 1) {
+                            const id = Object.keys(response)[0];
+                            const name = response[id];
+                            $nationality.append(`<option value="${id}" selected>${name}</option>`);
+                            $nationality.prop('readonly', true);
+                            $nationality.prop('disabled', true); // দেখতে readonly
+                        } else {
+                            $nationality.append('<option value="">Select Nationality</option>');
+                            $.each(response, function (id, name) {
+                                $nationality.append(`<option value="${id}">${name}</option>`);
+                            });
+                            $nationality.prop('readonly', false);
+                            $nationality.prop('disabled', false);
+                        }
+                    }
+                });
+            });
+
+        });
+    </script>
+
 @endsection

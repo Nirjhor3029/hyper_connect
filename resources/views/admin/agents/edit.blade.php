@@ -41,8 +41,8 @@
                 <span class="help-block">{{ trans('cruds.agent.fields.phone_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="country_id">{{ trans('cruds.agent.fields.country') }}</label>
-                <select class="form-control select2 {{ $errors->has('country') ? 'is-invalid' : '' }}" name="country_id" id="country_id">
+                <label for="country_id" class="required">{{ trans('cruds.agent.fields.country') }}</label>
+                <select class="form-control select2 {{ $errors->has('country') ? 'is-invalid' : '' }}" name="country_id" id="country_id" required>
                     @foreach($countries as $id => $entry)
                         <option value="{{ $id }}" {{ (old('country_id') ? old('country_id') : $agent->country->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach

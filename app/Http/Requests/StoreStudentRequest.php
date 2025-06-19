@@ -106,6 +106,10 @@ class StoreStudentRequest extends FormRequest
             'medical_certificates' => [
                 'array',
             ],
+            'max_education_level_id' => [
+                'required',
+                'integer',
+            ],
         ];
     }
 }

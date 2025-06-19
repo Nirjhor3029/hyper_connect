@@ -25,7 +25,7 @@ class Student extends Model implements HasMedia
     ];
 
     public const GENDER_SELECT = [
-        'male'   => 'Male',
+        'male' => 'Male',
         'felame' => 'Female',
         'others' => 'Others',
     ];
@@ -35,6 +35,7 @@ class Student extends Model implements HasMedia
         'academic_certificates',
         'attachments',
         'medical_certificates',
+        'offer_letter_attachments',
     ];
 
     protected $fillable = [
@@ -43,6 +44,14 @@ class Student extends Model implements HasMedia
         'email',
         'phone',
         'nationality_id',
+        'country_id',
+        'education_level_id',
+        'confirm_university_id',
+        'confirm_country_id',
+        'confirm_subject_id',
+        'confirm_program_id',
+        'blood_group',
+        'passport_expiry',
         'address',
         'current_address',
         'permanent_address',
@@ -104,6 +113,11 @@ class Student extends Model implements HasMedia
         return $this->belongsTo(Nationality::class, 'nationality_id');
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
     public function getDobAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
@@ -158,9 +172,9 @@ class Student extends Model implements HasMedia
     {
         $file = $this->getMedia('photo')->last();
         if ($file) {
-            $file->url       = $file->getUrl();
+            $file->url = $file->getUrl();
             $file->thumbnail = $file->getUrl('thumb');
-            $file->preview   = $file->getUrl('preview');
+            $file->preview = $file->getUrl('preview');
         }
 
         return $file;
@@ -179,5 +193,9 @@ class Student extends Model implements HasMedia
     public function getMedicalCertificatesAttribute()
     {
         return $this->getMedia('medical_certificates');
+    }
+    public function getOfferLetterAttachmentsAttribute()
+    {
+        return $this->getMedia('offer_letter_attachments');
     }
 }

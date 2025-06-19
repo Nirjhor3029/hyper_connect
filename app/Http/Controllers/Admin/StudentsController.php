@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Models\EducationLevel;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Country;
@@ -87,6 +88,7 @@ class StudentsController extends Controller
         abort_if(Gate::denies('student_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $countries = Country::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $nationalities = Nationality::pluck('nationality_en', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -105,9 +107,22 @@ class StudentsController extends Controller
         $course_interesteds = Course::pluck('name', 'id');
 
         $academic_attachments = Document::pluck('file_url', 'id');
+        $max_education_levels = EducationLevel::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.students.create', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'subjects', 'univertsities', 'users'));
+
+
+        return view('admin.students.create', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'subjects', 'univertsities', 'users','countries','max_education_levels'));
     }
+
+    public function getNationalities($countryId)
+    {
+        $country = Country::findOrFail($countryId);
+        $nationality = Nationality::where('country', $country->name)->first();
+
+        return response()->json($nationality ? [$nationality->id => $nationality->nationality_en] : []);
+    }
+
+
 
     public function store(StoreStudentRequest $request)
     {
@@ -181,10 +196,81 @@ class StudentsController extends Controller
         $course_interesteds = Course::pluck('name', 'id');
 
         $academic_attachments = Document::pluck('file_url', 'id');
+        $max_education_levels = EducationLevel::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+
 
         $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments');
 
-        return view('admin.students.edit', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users'));
+        $url = url()->previous();
+
+        return view('admin.students.edit', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users','max_education_levels','url'));
+    }
+
+    public function convertProspectus($id)
+    {
+        abort_if(Gate::denies('student_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $url = url()->previous();
+
+
+        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $nationalities = Nationality::pluck('nationality_en', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $lead_agents = Agent::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $handelling_agents = Agent::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $interested_countries = Country::pluck('name', 'id');
+
+        $univertsities = University::pluck('name', 'id');
+
+        $subjects = Subject::pluck('subject_name', 'id');
+
+        $programs = Program::pluck('name', 'id');
+
+        $course_interesteds = Course::pluck('name', 'id');
+
+        $academic_attachments = Document::pluck('file_url', 'id');
+        $max_education_levels = EducationLevel::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $student= Student::find($id);
+        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments');
+
+        return view('admin.students.convert_prospectus', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users','max_education_levels','url'));
+    }
+    public function offerLetters($id)
+    {
+        abort_if(Gate::denies('student_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+
+        $url = url()->previous();
+
+        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $nationalities = Nationality::pluck('nationality_en', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $lead_agents = Agent::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $handelling_agents = Agent::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $interested_countries = Country::pluck('name', 'id');
+
+        $univertsities = University::pluck('name', 'id');
+
+        $subjects = Subject::pluck('subject_name', 'id');
+
+        $programs = Program::pluck('name', 'id');
+
+        $course_interesteds = Course::pluck('name', 'id');
+
+        $academic_attachments = Document::pluck('file_url', 'id');
+        $max_education_levels = EducationLevel::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $student= Student::find($id);
+        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments');
+
+        return view('admin.students.offer_letter', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users','max_education_levels','url'));
     }
 
     public function update(UpdateStudentRequest $request, Student $student)
@@ -249,7 +335,27 @@ class StudentsController extends Controller
             }
         }
 
-        return redirect()->route('admin.students.index');
+        if (count($student->offer_letter_attachments) > 0) {
+            foreach ($student->offer_letter_attachments as $media) {
+                if (! in_array($media->file_name, $request->input('offer_letter_attachments', []))) {
+                    $media->delete();
+                }
+            }
+        }
+        $media = $student->offer_letter_attachments->pluck('file_name')->toArray();
+        foreach ($request->input('offer_letter_attachments', []) as $file) {
+            if (count($media) === 0 || ! in_array($file, $media)) {
+                $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('offer_letter_attachments');
+            }
+        }
+
+        if ($request->url) {
+            return redirect()->to($request->url);
+        } else {
+            return redirect()->route('admin.students.index');
+        }
+
+
     }
 
     public function show(Student $student)

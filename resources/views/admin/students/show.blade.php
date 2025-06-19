@@ -1,20 +1,20 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.student.title') }}
-    </div>
+    <div class="card">
+        <div class="card-header">
+            {{ trans('global.show') }} {{ trans('cruds.student.title') }}
+        </div>
 
-    <div class="card-body">
-        <div class="form-group">
+        <div class="card-body">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.students.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
-            <table class="table table-bordered table-striped">
-                <tbody>
+                <div class="form-group">
+                    <a class="btn btn-default" href="{{ route('admin.students.index') }}">
+                        {{ trans('global.back_to_list') }}
+                    </a>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <tbody>
                     <tr>
                         <th>
                             {{ trans('cruds.student.fields.id') }}
@@ -371,41 +371,61 @@
                             @endforeach
                         </td>
                     </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.students.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.max_education_level') }}
+                        </th>
+                        <td>
+                            {{ $student->max_education_level->title ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.student.fields.offer_letter_attachments') }}
+                        </th>
+                        <td>
+                            @foreach($student->offer_letter_attachments as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                    {{ trans('global.view_file') }}
+                                </a>
+                            @endforeach
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <a class="btn btn-default" href="{{ route('admin.students.index') }}">
+                        {{ trans('global.back_to_list') }}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#student_applications" role="tab" data-toggle="tab">
-                {{ trans('cruds.application.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#student_commission_distributions" role="tab" data-toggle="tab">
-                {{ trans('cruds.commissionDistribution.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="student_applications">
-            @includeIf('admin.students.relationships.studentApplications', ['applications' => $student->studentApplications])
+    <div class="card">
+        <div class="card-header">
+            {{ trans('global.relatedData') }}
         </div>
-        <div class="tab-pane" role="tabpanel" id="student_commission_distributions">
-            @includeIf('admin.students.relationships.studentCommissionDistributions', ['commissionDistributions' => $student->studentCommissionDistributions])
+        <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="#student_applications" role="tab" data-toggle="tab">
+                    {{ trans('cruds.application.title') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#student_commission_distributions" role="tab" data-toggle="tab">
+                    {{ trans('cruds.commissionDistribution.title') }}
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" role="tabpanel" id="student_applications">
+                @includeIf('admin.students.relationships.studentApplications', ['applications' => $student->studentApplications])
+            </div>
+            <div class="tab-pane" role="tabpanel" id="student_commission_distributions">
+                @includeIf('admin.students.relationships.studentCommissionDistributions', ['commissionDistributions' => $student->studentCommissionDistributions])
+            </div>
         </div>
     </div>
-</div>
 
 @endsection

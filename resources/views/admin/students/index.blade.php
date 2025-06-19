@@ -16,7 +16,9 @@
                 <div class="col-md-3">
                     <input type="text" name="keyword" class="form-control" placeholder="Name, Email or Phone" value="{{ request('keyword') }}">
                 </div>
-                <div class="col-md-3">
+
+
+              {{--  <div class="col-md-3">
                     <select name="agent_id" class="form-control">
                         <option value=""> Agent</option>
                         @foreach($agents as $id => $name)
@@ -31,7 +33,7 @@
                             <option value="{{ $id }}" {{ request('nationality_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div>--}}
                 <div class="col-md-3">
                     <select name="subject_id" class="form-control">
                         <option value=""> Subject</option>
@@ -40,7 +42,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3 mt-2">
+                <div class="col-md-3 ">
                     <select name="university_id" class="form-control">
                         <option value=""> University</option>
                         @foreach($universities as $id => $name)
@@ -48,7 +50,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3 mt-2 ">
+                <div class="col-md-3  ">
                     <select name="program_id" class="form-control">
                         <option value=""> Program</option>
                         @foreach($programs as $id => $name)
@@ -56,7 +58,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3 mt-2 ">
+                <div class="col-md-3  mt-2">
                     <button type="submit" class="btn btn-primary w-100">
                         {{ trans('global.search') }}
                     </button>
@@ -206,6 +208,18 @@
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
+
+                                    @can('student_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.students.convertProspectus', $student->id) }}">
+                                            Covert to prospectus
+                                        </a>
+                                    @endcan
+
+                                    @can('student_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.students.offerLetters', $student->id) }}">
+                                            Offer Letter
+                                        </a>
+                                    @endcan
 
                                 @can('student_delete')
                                     <form action="{{ route('admin.students.destroy', $student->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
