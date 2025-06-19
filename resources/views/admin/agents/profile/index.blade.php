@@ -118,6 +118,7 @@
             font-weight: 500;
         }
 
+
         .main-content {
             padding: 40px;
         }
@@ -342,7 +343,7 @@
 
             <div class="main-content">
                 <form id="profileForm">
-                    <!-- Personal Information Section -->
+
                     <div class="section">
                         <h2 class="section-title"><span class="section-icon">👤</span> Personal Information</h2>
                         <div class="form-grid">
