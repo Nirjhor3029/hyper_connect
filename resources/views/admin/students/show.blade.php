@@ -269,7 +269,7 @@
                         </th>
                         <td>
                             @foreach($student->interested_countries as $key => $interested_countries)
-                                <span class="label label-info">{{ $interested_countries->name }}</span>
+                                <span class="badge badge-info">{{ $interested_countries->name }}</span>
                             @endforeach
                         </td>
                     </tr>
@@ -279,7 +279,7 @@
                         </th>
                         <td>
                             @foreach($student->univertsities as $key => $univertsities)
-                                <span class="label label-info">{{ $univertsities->name }}</span>
+                                <span class="badge badge-info">{{ $univertsities->name }}</span>
                             @endforeach
                         </td>
                     </tr>
@@ -289,7 +289,7 @@
                         </th>
                         <td>
                             @foreach($student->subjects as $key => $subjects)
-                                <span class="label label-info">{{ $subjects->subject_name }}</span>
+                                <span class="badge badge-info">{{ $subjects->subject_name }}</span>
                             @endforeach
                         </td>
                     </tr>
@@ -299,7 +299,7 @@
                         </th>
                         <td>
                             @foreach($student->programs as $key => $programs)
-                                <span class="label label-info">{{ $programs->name }}</span>
+                                <span class="badge badge-info">{{ $programs->name }}</span>
                             @endforeach
                         </td>
                     </tr>
@@ -309,7 +309,7 @@
                         </th>
                         <td>
                             @foreach($student->course_interesteds as $key => $course_interested)
-                                <span class="label label-info">{{ $course_interested->name }}</span>
+                                <span class="badge badge-info">{{ $course_interested->name }}</span>
                             @endforeach
                         </td>
                     </tr>
@@ -319,7 +319,7 @@
                         </th>
                         <td>
                             @foreach($student->academic_attachments as $key => $academic_attachments)
-                                <span class="label label-info">{{ $academic_attachments->file_url }}</span>
+                                <span class="badge badge-info">{{ $academic_attachments->file_url }}</span>
                             @endforeach
                         </td>
                     </tr>
