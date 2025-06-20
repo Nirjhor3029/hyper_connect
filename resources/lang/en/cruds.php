@@ -219,7 +219,7 @@ return [
             'programs_helper'                              => ' ',
             'nationality'                                  => 'Nationality',
             'nationality_helper'                           => ' ',
-            'max_education_level'                          => 'Max Education Level',
+            'max_education_level'                          => 'Latest Education ',
             'max_education_level_helper'                   => ' ',
             'offer_letter_attachments'                     => 'Offer Letter Attachments',
             'offer_letter_attachments_helper'              => ' ',

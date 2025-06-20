@@ -15,14 +15,14 @@
             </div>
             <table class="table table-bordered table-striped">
                 <tbody>
-                    <tr>
+                    {{--<tr>
                         <th>
                             {{ trans('cruds.subject.fields.id') }}
                         </th>
                         <td>
                             {{ $subject->id }}
                         </td>
-                    </tr>
+                    </tr>--}}
                     <tr>
                         <th>
                             {{ trans('cruds.subject.fields.university') }}
@@ -164,7 +164,7 @@
     </div>
 </div>
 
-<div class="card">
+{{--<div class="card">
     <div class="card-header">
         {{ trans('global.relatedData') }}
     </div>
@@ -180,6 +180,6 @@
             @includeIf('admin.subjects.relationships.subjectsStudents', ['students' => $subject->subjectsStudents])
         </div>
     </div>
-</div>
+</div>--}}
 
 @endsection

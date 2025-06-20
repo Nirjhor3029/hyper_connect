@@ -25,10 +25,10 @@ class StoreStudentRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'nationality_id' => [
+           /* 'nationality_id' => [
 
                 'integer',
-            ],
+            ],*/
             'dob' => [
                 'date_format:' . config('panel.date_format'),
                 'nullable',
@@ -106,7 +106,7 @@ class StoreStudentRequest extends FormRequest
             'medical_certificates' => [
                 'array',
             ],
-            'max_education_level_id' => [
+            'education_level_id' => [
                 'required',
                 'integer',
             ],
