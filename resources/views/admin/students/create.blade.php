@@ -97,7 +97,7 @@
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label class="required" for="nationality_id">Nationality</label>
+                                        <label {{--class="required"--}} for="nationality_id">Nationality</label>
                                         <select
                                             class="form-control select2 {{ $errors->has('nationality_id') ? 'is-invalid' : '' }}"
                                             name="nationality_id" id="nationality_id" {{ $isAgent ? 'disabled' : '' }} required>

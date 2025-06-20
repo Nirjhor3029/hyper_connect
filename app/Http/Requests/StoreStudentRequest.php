@@ -26,7 +26,7 @@ class StoreStudentRequest extends FormRequest
                 'required',
             ],
             'nationality_id' => [
-                'required',
+
                 'integer',
             ],
             'dob' => [
