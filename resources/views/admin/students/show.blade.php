@@ -313,6 +313,30 @@
                             @endforeach
                         </td>
                     </tr>
+                  <tr>
+                      <th>
+                         Confirm Country
+                      </th>
+                      <td>
+                         {{$student->confirm_country->name ?? ''}}
+                      </td>
+                  </tr>
+                  <tr>
+                      <th>
+                         Confirm University
+                      </th>
+                      <td>
+                         {{$student->confirm_university->name ?? ''}}
+                      </td>
+                  </tr>
+                  <tr>
+                      <th>
+                         Confirm Subject
+                      </th>
+                      <td>
+                         {{$student->confirm_subject->subject_name ?? ''}}
+                      </td>
+                  </tr>
                     <tr>
                         <th>
                             {{ trans('cruds.student.fields.academic_attachments') }}

@@ -137,6 +137,22 @@ class Student extends Model implements HasMedia
     {
         return $this->belongsTo(Agent::class, 'handelling_agent_id');
     }
+    public function confirm_country()
+    {
+        return $this->belongsTo(Country::class, 'confirm_country_id');
+    }
+    public function confirm_university()
+    {
+        return $this->belongsTo(University::class, 'confirm_university_id');
+    }
+    public function confirm_program()
+    {
+        return $this->belongsTo(Program::class, 'confirm_program_id');
+    }
+    public function confirm_subject()
+    {
+        return $this->belongsTo(Subject::class, 'confirm_subject_id');
+    }
 
     public function interested_countries()
     {

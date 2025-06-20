@@ -37,7 +37,7 @@ class StudentsController extends Controller
     {
         abort_if(Gate::denies('student_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $query = Student::with(['user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'media']);
+        $query = Student::with(['user', 'nationality','confirm_country','confirm_university','confirm_program' ,'confirm_subject','lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'media']);
 
         if ($request->filled('keyword')) {
             $keyword = $request->keyword;
@@ -362,7 +362,7 @@ class StudentsController extends Controller
     {
         abort_if(Gate::denies('student_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'studentApplications', 'studentCommissionDistributions');
+        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent','confirm_country','confirm_university','confirm_program' ,'confirm_subject', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'studentApplications', 'studentCommissionDistributions');
 
         return view('admin.students.show', compact('student'));
     }
