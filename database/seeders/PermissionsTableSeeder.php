@@ -631,6 +631,31 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'education_level_create',
             ],
 
+            [
+                'id'    => 155,
+                'title' => 'other_fee_show',
+            ],
+            [
+                'id'    => 156,
+                'title' => 'other_fee_delete',
+            ],
+            [
+                'id'    => 157,
+                'title' => 'other_fee_access',
+            ],
+            [
+                'id'    => 158,
+                'title' => 'other_fee_create',
+            ],
+            [
+                'id'    => 159,
+                'title' => 'other_fee_edit',
+            ],
+            [
+                'id'    => 160,
+                'title' => 'university_manage_access',
+            ],
+
         ];
 
         Permission::insert($permissions);

@@ -25,11 +25,11 @@ class StoreCountryRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'region' => [
+            'currency' => [
                 'string',
                 'nullable',
             ],
-            'iso_code' => [
+            'mobile_no_prefix' => [
                 'string',
                 'nullable',
             ],

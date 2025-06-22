@@ -17,45 +17,8 @@ class UpdateProgramRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'string',
-                'nullable',
-            ],
-            'short_code' => [
-                'string',
-                'nullable',
-            ],
-            'field_of_study' => [
-                'string',
-                'nullable',
-            ],
-            'education_type' => [
-                'string',
-                'nullable',
-            ],
-            'level' => [
-                'string',
-                'nullable',
-            ],
-            'duration_months' => [
-                'string',
-                'nullable',
-            ],
-            'credit_hours' => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-            ],
-            'teaching_language' => [
-                'string',
-                'nullable',
-            ],
-            'tags.*' => [
-                'integer',
-            ],
-            'tags' => [
-                'array',
+            'type' => [
+                'required',
             ],
         ];
     }

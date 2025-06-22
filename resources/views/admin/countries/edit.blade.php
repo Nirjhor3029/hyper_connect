@@ -31,24 +31,24 @@
                 <span class="help-block">{{ trans('cruds.country.fields.short_code_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="region">{{ trans('cruds.country.fields.region') }}</label>
-                <input class="form-control {{ $errors->has('region') ? 'is-invalid' : '' }}" type="text" name="region" id="region" value="{{ old('region', $country->region) }}">
-                @if($errors->has('region'))
+                <label for="currency">{{ trans('cruds.country.fields.currency') }}</label>
+                <input class="form-control {{ $errors->has('currency') ? 'is-invalid' : '' }}" type="text" name="currency" id="currency" value="{{ old('currency', $country->currency) }}">
+                @if($errors->has('currency'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('region') }}
+                        {{ $errors->first('currency') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.country.fields.region_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.country.fields.currency_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="iso_code">{{ trans('cruds.country.fields.iso_code') }}</label>
-                <input class="form-control {{ $errors->has('iso_code') ? 'is-invalid' : '' }}" type="text" name="iso_code" id="iso_code" value="{{ old('iso_code', $country->iso_code) }}">
-                @if($errors->has('iso_code'))
+                <label for="mobile_no_prefix">{{ trans('cruds.country.fields.mobile_no_prefix') }}</label>
+                <input class="form-control {{ $errors->has('mobile_no_prefix') ? 'is-invalid' : '' }}" type="text" name="mobile_no_prefix" id="mobile_no_prefix" value="{{ old('mobile_no_prefix', $country->mobile_no_prefix) }}">
+                @if($errors->has('mobile_no_prefix'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('iso_code') }}
+                        {{ $errors->first('mobile_no_prefix') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.country.fields.iso_code_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.country.fields.mobile_no_prefix_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

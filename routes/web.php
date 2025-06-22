@@ -122,8 +122,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('status-logs/ckmedia', 'StatusLogsController@storeCKEditorImages')->name('status-logs.storeCKEditorImages');
     Route::resource('status-logs', 'StatusLogsController');
 
+
     // Courses
     Route::delete('courses/destroy', 'CoursesController@massDestroy')->name('courses.massDestroy');
+    Route::post('courses/media', 'CoursesController@storeMedia')->name('courses.storeMedia');
+    Route::post('courses/ckmedia', 'CoursesController@storeCKEditorImages')->name('courses.storeCKEditorImages');
     Route::resource('courses', 'CoursesController');
 
     // Commission From University
@@ -171,6 +174,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Education Level
     Route::delete('education-levels/destroy', 'EducationLevelController@massDestroy')->name('education-levels.massDestroy');
     Route::resource('education-levels', 'EducationLevelController');
+
+    // Program
+    Route::delete('programs/destroy', 'ProgramController@massDestroy')->name('programs.massDestroy');
+    Route::post('programs/media', 'ProgramController@storeMedia')->name('programs.storeMedia');
+    Route::post('programs/ckmedia', 'ProgramController@storeCKEditorImages')->name('programs.storeCKEditorImages');
+    Route::resource('programs', 'ProgramController');
+
+    // Other Fee
+    Route::delete('other-fees/destroy', 'OtherFeeController@massDestroy')->name('other-fees.massDestroy');
+    Route::post('other-fees/media', 'OtherFeeController@storeMedia')->name('other-fees.storeMedia');
+    Route::post('other-fees/ckmedia', 'OtherFeeController@storeCKEditorImages')->name('other-fees.storeCKEditorImages');
+    Route::resource('other-fees', 'OtherFeeController');
 
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');

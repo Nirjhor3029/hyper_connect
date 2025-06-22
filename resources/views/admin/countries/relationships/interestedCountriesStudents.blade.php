@@ -61,10 +61,13 @@
                             {{ trans('cruds.student.fields.subjects') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.programs') }}
+                            {{ trans('cruds.student.fields.academic_certificates') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.academic_certificates') }}
+                            {{ trans('cruds.student.fields.max_education_level') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.student.fields.offer_letter_attachments') }}
                         </th>
                         <th>
                             &nbsp;
@@ -122,12 +125,17 @@
                                 @endforeach
                             </td>
                             <td>
-                                @foreach($student->programs as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @foreach($student->academic_certificates as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank">
+                                        {{ trans('global.view_file') }}
+                                    </a>
                                 @endforeach
                             </td>
                             <td>
-                                @foreach($student->academic_certificates as $key => $media)
+                                {{ $student->max_education_level->title ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($student->offer_letter_attachments as $key => $media)
                                     <a href="{{ $media->getUrl() }}" target="_blank">
                                         {{ trans('global.view_file') }}
                                     </a>

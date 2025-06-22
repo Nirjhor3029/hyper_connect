@@ -63,6 +63,12 @@ class StoreUniversityRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'tags.*' => [
+                'integer',
+            ],
+            'tags' => [
+                'array',
+            ],
         ];
     }
 }

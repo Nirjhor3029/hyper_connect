@@ -12,8 +12,8 @@ class CreateCountriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('short_code')->nullable();
-            $table->string('region')->nullable();
-            $table->string('iso_code')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('mobile_no_prefix')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -1,11 +1,11 @@
 /* Custom Code: Start */
 .c-sidebar-nav {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #355EA9;
 }
 
 .c-sidebar .c-sidebar-brand,
 .c-sidebar .c-sidebar-header {
-    background: linear-gradient(135deg, #667eea 0%, #3f38b3 100%);
+    background: #022c68;
 }
 
 /* Custom Code: End */

@@ -62,11 +62,6 @@ class University extends Model implements HasMedia
         return $this->hasMany(UniversityPartnership::class, 'university_id', 'id');
     }
 
-    public function universityPrograms()
-    {
-        return $this->hasMany(Program::class, 'university_id', 'id');
-    }
-
     public function universityApplications()
     {
         return $this->hasMany(Application::class, 'university_id', 'id');
@@ -85,6 +80,11 @@ class University extends Model implements HasMedia
     public function universityCommissionSettings()
     {
         return $this->hasMany(CommissionSetting::class, 'university_id', 'id');
+    }
+
+    public function universityCourses()
+    {
+        return $this->hasMany(Course::class, 'university_id', 'id');
     }
 
     public function univertsitiesStudents()
@@ -117,5 +117,10 @@ class University extends Model implements HasMedia
         }
 
         return $file;
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

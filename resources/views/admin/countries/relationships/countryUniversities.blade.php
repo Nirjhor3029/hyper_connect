@@ -52,6 +52,9 @@
                             {{ trans('cruds.university.fields.is_active') }}
                         </th>
                         <th>
+                            {{ trans('cruds.university.fields.tags') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -92,6 +95,11 @@
                             <td>
                                 <span style="display:none">{{ $university->is_active ?? '' }}</span>
                                 <input type="checkbox" disabled="disabled" {{ $university->is_active ? 'checked' : '' }}>
+                            </td>
+                            <td>
+                                @foreach($university->tags as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
                             </td>
                             <td>
                                 @can('university_show')

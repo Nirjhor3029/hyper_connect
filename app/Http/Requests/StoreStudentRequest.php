@@ -25,10 +25,10 @@ class StoreStudentRequest extends FormRequest
                 'string',
                 'required',
             ],
-           /* 'nationality_id' => [
-
+            'nationality_id' => [
+                'required',
                 'integer',
-            ],*/
+            ],
             'dob' => [
                 'date_format:' . config('panel.date_format'),
                 'nullable',
@@ -79,12 +79,6 @@ class StoreStudentRequest extends FormRequest
             'subjects' => [
                 'array',
             ],
-            'programs.*' => [
-                'integer',
-            ],
-            'programs' => [
-                'array',
-            ],
             'course_interesteds.*' => [
                 'integer',
             ],
@@ -106,9 +100,12 @@ class StoreStudentRequest extends FormRequest
             'medical_certificates' => [
                 'array',
             ],
-            'education_level_id' => [
+            'max_education_level_id' => [
                 'required',
                 'integer',
+            ],
+            'offer_letter_attachments' => [
+                'array',
             ],
         ];
     }

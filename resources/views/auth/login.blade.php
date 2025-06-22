@@ -19,7 +19,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #022c68;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -53,7 +53,7 @@
 
         .login-left {
             flex: 1;
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            background: #355EA9;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -132,7 +132,7 @@
         .logo {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            background: #022c68;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -223,7 +223,7 @@
         .login-button {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            background: #355EA9;
             color: white;
             border: none;
             border-radius: 12px;
@@ -312,7 +312,7 @@
                 </div>
                 <h1 class="hero-title">
                     {{-- {{__("HyperConnect Malaysia")}} --}}
-                    {{ env('APP_NAME') }}
+                    {{ trans('panel.site_title') }}
                 </h1>
                 <p class="hero-subtitle">
                     {{-- Connecting Malaysian students with global education opportunities --}}

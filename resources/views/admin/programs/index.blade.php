@@ -26,19 +26,10 @@
                             {{ trans('cruds.program.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.program.fields.university') }}
+                            {{ trans('cruds.program.fields.type') }}
                         </th>
                         <th>
-                            {{ trans('cruds.program.fields.name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.program.fields.short_code') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.program.fields.fees') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.program.fields.is_active') }}
+                            {{ trans('cruds.program.fields.commission') }}
                         </th>
                         <th>
                             &nbsp;
@@ -55,20 +46,10 @@
                                 {{ $program->id ?? '' }}
                             </td>
                             <td>
-                                {{ $program->university->name ?? '' }}
+                                {{ App\Models\Program::TYPE_SELECT[$program->type] ?? '' }}
                             </td>
                             <td>
-                                {{ $program->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $program->short_code ?? '' }}
-                            </td>
-                            <td>
-                                {{ $program->fees ?? '' }}
-                            </td>
-                            <td>
-                                <span style="display:none">{{ $program->is_active ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $program->is_active ? 'checked' : '' }}>
+                                {{ $program->commission ?? '' }}
                             </td>
                             <td>
                                 @can('program_show')

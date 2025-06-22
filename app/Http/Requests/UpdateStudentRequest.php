@@ -26,7 +26,7 @@ class UpdateStudentRequest extends FormRequest
                 'required',
             ],
             'nationality_id' => [
-
+                'required',
                 'integer',
             ],
             'dob' => [
@@ -79,12 +79,6 @@ class UpdateStudentRequest extends FormRequest
             'subjects' => [
                 'array',
             ],
-            'programs.*' => [
-                'integer',
-            ],
-            'programs' => [
-                'array',
-            ],
             'course_interesteds.*' => [
                 'integer',
             ],
@@ -107,8 +101,11 @@ class UpdateStudentRequest extends FormRequest
                 'array',
             ],
             'max_education_level_id' => [
-
+                'required',
                 'integer',
+            ],
+            'offer_letter_attachments' => [
+                'array',
             ],
         ];
     }

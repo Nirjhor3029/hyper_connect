@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateUniversityRequest;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\State;
+use App\Models\Tag;
 use App\Models\University;
 use Gate;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class UniversitiesController extends Controller
     {
         abort_if(Gate::denies('university_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $universities = University::with(['country', 'state', 'city', 'media'])->get();
+        $universities = University::with(['country', 'state', 'city', 'tags', 'media'])->get();
 
         return view('admin.universities.index', compact('universities'));
     }
@@ -39,13 +40,15 @@ class UniversitiesController extends Controller
 
         $cities = City::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.universities.create', compact('cities', 'countries', 'states'));
+        $tags = Tag::pluck('name', 'id');
+
+        return view('admin.universities.create', compact('cities', 'countries', 'states', 'tags'));
     }
 
     public function store(StoreUniversityRequest $request)
     {
         $university = University::create($request->all());
-
+        $university->tags()->sync($request->input('tags', []));
         if ($request->input('logo', false)) {
             $university->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
         }
@@ -67,15 +70,17 @@ class UniversitiesController extends Controller
 
         $cities = City::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $university->load('country', 'state', 'city');
+        $tags = Tag::pluck('name', 'id');
 
-        return view('admin.universities.edit', compact('cities', 'countries', 'states', 'university'));
+        $university->load('country', 'state', 'city', 'tags');
+
+        return view('admin.universities.edit', compact('cities', 'countries', 'states', 'tags', 'university'));
     }
 
     public function update(UpdateUniversityRequest $request, University $university)
     {
         $university->update($request->all());
-
+        $university->tags()->sync($request->input('tags', []));
         if ($request->input('logo', false)) {
             if (! $university->logo || $request->input('logo') !== $university->logo->file_name) {
                 if ($university->logo) {
@@ -94,7 +99,7 @@ class UniversitiesController extends Controller
     {
         abort_if(Gate::denies('university_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $university->load('country', 'state', 'city', 'universityUniversityPartnerships', 'universityPrograms', 'universityApplications', 'universityCommissionFromUniversities', 'universitySubjects', 'universityCommissionSettings', 'univertsitiesStudents');
+        $university->load('country', 'state', 'city', 'tags', 'universityUniversityPartnerships', 'universityApplications', 'universityCommissionFromUniversities', 'universitySubjects', 'universityCommissionSettings', 'universityCourses', 'univertsitiesStudents');
 
         return view('admin.universities.show', compact('university'));
     }

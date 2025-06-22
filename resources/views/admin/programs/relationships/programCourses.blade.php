@@ -1,8 +1,8 @@
-@can('student_create')
+@can('course_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.students.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.student.title_singular') }}
+            <a class="btn btn-success" href="{{ route('admin.courses.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.course.title_singular') }}
             </a>
         </div>
     </div>
@@ -10,55 +10,49 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.student.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.course.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-chossenUniversityStudents">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-programCourses">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.id') }}
+                            {{ trans('cruds.course.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.nationality') }}
+                            {{ trans('cruds.course.fields.university') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.scholarship_status') }}
+                            {{ trans('cruds.course.fields.program') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.lead_agent') }}
+                            {{ trans('cruds.course.fields.course_mode') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.handelling_agent') }}
+                            {{ trans('cruds.course.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.current_status') }}
+                            {{ trans('cruds.course.fields.duration') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.payment_status') }}
+                            {{ trans('cruds.course.fields.total_fees') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.commission_amount') }}
+                            {{ trans('cruds.course.fields.no_of_semester') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.chossen_university') }}
+                            {{ trans('cruds.course.fields.scholarship') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.name') }}
+                            {{ trans('cruds.course.fields.commission') }}
                         </th>
                         <th>
-                            {{ trans('cruds.student.fields.email') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.student.fields.phone') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.student.fields.academic_certificates') }}
+                            {{ trans('cruds.course.fields.english_requirement') }}
                         </th>
                         <th>
                             &nbsp;
@@ -66,70 +60,59 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($students as $key => $student)
-                        <tr data-entry-id="{{ $student->id }}">
+                    @foreach($courses as $key => $course)
+                        <tr data-entry-id="{{ $course->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $student->id ?? '' }}
+                                {{ $course->id ?? '' }}
                             </td>
                             <td>
-                                {{ $student->nationality ?? '' }}
+                                {{ $course->university->name ?? '' }}
                             </td>
                             <td>
-                                <span style="display:none">{{ $student->scholarship_status ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $student->scholarship_status ? 'checked' : '' }}>
+                                {{ $course->program->type ?? '' }}
                             </td>
                             <td>
-                                {{ $student->lead_agent->agency_name ?? '' }}
+                                {{ App\Models\Course::COURSE_MODE_RADIO[$course->course_mode] ?? '' }}
                             </td>
                             <td>
-                                {{ $student->handelling_agent->agency_name ?? '' }}
+                                {{ $course->name ?? '' }}
                             </td>
                             <td>
-                                {{ $student->current_status ?? '' }}
+                                {{ $course->duration ?? '' }}
                             </td>
                             <td>
-                                {{ $student->payment_status ?? '' }}
+                                {{ $course->total_fees ?? '' }}
                             </td>
                             <td>
-                                {{ $student->commission_amount ?? '' }}
+                                {{ $course->no_of_semester ?? '' }}
                             </td>
                             <td>
-                                {{ $student->chossen_university->name ?? '' }}
+                                {{ $course->scholarship ?? '' }}
                             </td>
                             <td>
-                                {{ $student->name ?? '' }}
+                                {{ $course->commission ?? '' }}
                             </td>
                             <td>
-                                {{ $student->email ?? '' }}
+                                {{ App\Models\Course::ENGLISH_REQUIREMENT_RADIO[$course->english_requirement] ?? '' }}
                             </td>
                             <td>
-                                {{ $student->phone ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($student->academic_certificates as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                @can('student_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.students.show', $student->id) }}">
+                                @can('course_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.courses.show', $course->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('student_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.students.edit', $student->id) }}">
+                                @can('course_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.courses.edit', $course->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('student_delete')
-                                    <form action="{{ route('admin.students.destroy', $student->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('course_delete')
+                                    <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -151,11 +134,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('student_delete')
+@can('course_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.students.massDestroy') }}",
+    url: "{{ route('admin.courses.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -186,7 +169,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-chossenUniversityStudents:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-programCourses:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();

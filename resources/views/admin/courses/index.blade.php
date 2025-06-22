@@ -26,7 +26,34 @@
                             {{ trans('cruds.course.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.course.fields.university') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.course.fields.program') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.course.fields.course_mode') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.course.fields.name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.course.fields.duration') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.course.fields.total_fees') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.course.fields.no_of_semester') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.course.fields.scholarship') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.course.fields.commission') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.course.fields.english_requirement') }}
                         </th>
                         <th>
                             &nbsp;
@@ -43,7 +70,34 @@
                                 {{ $course->id ?? '' }}
                             </td>
                             <td>
+                                {{ $course->university->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $course->program->type ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Course::COURSE_MODE_RADIO[$course->course_mode] ?? '' }}
+                            </td>
+                            <td>
                                 {{ $course->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $course->duration ?? '' }}
+                            </td>
+                            <td>
+                                {{ $course->total_fees ?? '' }}
+                            </td>
+                            <td>
+                                {{ $course->no_of_semester ?? '' }}
+                            </td>
+                            <td>
+                                {{ $course->scholarship ?? '' }}
+                            </td>
+                            <td>
+                                {{ $course->commission ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Course::ENGLISH_REQUIREMENT_RADIO[$course->english_requirement] ?? '' }}
                             </td>
                             <td>
                                 @can('course_show')

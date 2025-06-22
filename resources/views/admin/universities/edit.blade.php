@@ -72,7 +72,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.university.fields.code_helper') }}</span>
             </div>
-            <div class="form-group">
+          {{--  <div class="form-group">
                 <label for="university_type">{{ trans('cruds.university.fields.university_type') }}</label>
                 <input class="form-control {{ $errors->has('university_type') ? 'is-invalid' : '' }}" type="text" name="university_type" id="university_type" value="{{ old('university_type', $university->university_type) }}">
                 @if($errors->has('university_type'))
@@ -81,7 +81,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.university.fields.university_type_helper') }}</span>
-            </div>
+            </div>--}}
             <div class="form-group">
                 <label for="address">{{ trans('cruds.university.fields.address') }}</label>
                 <textarea class="form-control ckeditor {{ $errors->has('address') ? 'is-invalid' : '' }}" name="address" id="address">{!! old('address', $university->address) !!}</textarea>
@@ -102,7 +102,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.university.fields.university_details_helper') }}</span>
             </div>
-            <div class="form-group">
+        {{--    <div class="form-group">
                 <label for="accreditation">{{ trans('cruds.university.fields.accreditation') }}</label>
                 <input class="form-control {{ $errors->has('accreditation') ? 'is-invalid' : '' }}" type="text" name="accreditation" id="accreditation" value="{{ old('accreditation', $university->accreditation) }}">
                 @if($errors->has('accreditation'))
@@ -111,7 +111,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.university.fields.accreditation_helper') }}</span>
-            </div>
+            </div>--}}
             <div class="form-group">
                 <label class="required" for="website">{{ trans('cruds.university.fields.website') }}</label>
                 <input class="form-control {{ $errors->has('website') ? 'is-invalid' : '' }}" type="text" name="website" id="website" value="{{ old('website', $university->website) }}" required>
@@ -132,16 +132,15 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.university.fields.contact_email_helper') }}</span>
             </div>
-            <div class="form-group">
-                <label for="contact_phone">{{ trans('cruds.university.fields.contact_phone') }}</label>
-                <input class="form-control {{ $errors->has('contact_phone') ? 'is-invalid' : '' }}" type="text" name="contact_phone" id="contact_phone" value="{{ old('contact_phone', $university->contact_phone) }}">
-                @if($errors->has('contact_phone'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('contact_phone') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.university.fields.contact_phone_helper') }}</span>
-            </div>
+            <input class="form-control {{ $errors->has('contact_phone') ? 'is-invalid' : '' }}"
+                   type="text"
+                   name="contact_phone"
+                   id="contact_phone"
+                   value="{{ old('contact_phone', $university->contact_phone) }}"
+                   pattern="^\+8801[3-9][0-9]{8}$"
+                   maxlength="14"
+                   title="Enter a valid phone number in format +8801XXXXXXXXX">
+
             <div class="form-group">
                 <label for="logo">{{ trans('cruds.university.fields.logo') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('logo') ? 'is-invalid' : '' }}" id="logo-dropzone">
@@ -153,7 +152,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.university.fields.logo_helper') }}</span>
             </div>
-            <div class="form-group">
+        {{--    <div class="form-group">
                 <label for="logo_url">{{ trans('cruds.university.fields.logo_url') }}</label>
                 <input class="form-control {{ $errors->has('logo_url') ? 'is-invalid' : '' }}" type="text" name="logo_url" id="logo_url" value="{{ old('logo_url', $university->logo_url) }}">
                 @if($errors->has('logo_url'))
@@ -162,7 +161,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.university.fields.logo_url_helper') }}</span>
-            </div>
+            </div>--}}
             <div class="form-group">
                 <div class="form-check {{ $errors->has('is_active') ? 'is-invalid' : '' }}">
                     <input type="hidden" name="is_active" value="0">
@@ -175,6 +174,24 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.university.fields.is_active_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="tags">{{ trans('cruds.university.fields.tags') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('tags') ? 'is-invalid' : '' }}" name="tags[]" id="tags" multiple>
+                    @foreach($tags as $id => $tag)
+                        <option value="{{ $id }}" {{ (in_array($id, old('tags', [])) || $university->tags->contains($id)) ? 'selected' : '' }}>{{ $tag }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('tags'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('tags') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.university.fields.tags_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

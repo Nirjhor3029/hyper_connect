@@ -15,14 +15,14 @@
             </div>
             <table class="table table-bordered table-striped">
                 <tbody>
-                  {{--  <tr>
+                    <tr>
                         <th>
                             {{ trans('cruds.university.fields.id') }}
                         </th>
                         <td>
                             {{ $university->id }}
                         </td>
-                    </tr>--}}
+                    </tr>
                     <tr>
                         <th>
                             {{ trans('cruds.university.fields.country') }}
@@ -147,6 +147,16 @@
                             <input type="checkbox" disabled="disabled" {{ $university->is_active ? 'checked' : '' }}>
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.university.fields.tags') }}
+                        </th>
+                        <td>
+                            @foreach($university->tags as $key => $tags)
+                                <span class="label label-info">{{ $tags->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -158,7 +168,7 @@
     </div>
 </div>
 
-{{--<div class="card">
+<div class="card">
     <div class="card-header">
         {{ trans('global.relatedData') }}
     </div>
@@ -166,11 +176,6 @@
         <li class="nav-item">
             <a class="nav-link" href="#university_university_partnerships" role="tab" data-toggle="tab">
                 {{ trans('cruds.universityPartnership.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#university_programs" role="tab" data-toggle="tab">
-                {{ trans('cruds.program.title') }}
             </a>
         </li>
         <li class="nav-item">
@@ -194,6 +199,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#university_courses" role="tab" data-toggle="tab">
+                {{ trans('cruds.course.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#univertsities_students" role="tab" data-toggle="tab">
                 {{ trans('cruds.student.title') }}
             </a>
@@ -202,9 +212,6 @@
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="university_university_partnerships">
             @includeIf('admin.universities.relationships.universityUniversityPartnerships', ['universityPartnerships' => $university->universityUniversityPartnerships])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="university_programs">
-            @includeIf('admin.universities.relationships.universityPrograms', ['programs' => $university->universityPrograms])
         </div>
         <div class="tab-pane" role="tabpanel" id="university_applications">
             @includeIf('admin.universities.relationships.universityApplications', ['applications' => $university->universityApplications])
@@ -218,10 +225,13 @@
         <div class="tab-pane" role="tabpanel" id="university_commission_settings">
             @includeIf('admin.universities.relationships.universityCommissionSettings', ['commissionSettings' => $university->universityCommissionSettings])
         </div>
+        <div class="tab-pane" role="tabpanel" id="university_courses">
+            @includeIf('admin.universities.relationships.universityCourses', ['courses' => $university->universityCourses])
+        </div>
         <div class="tab-pane" role="tabpanel" id="univertsities_students">
             @includeIf('admin.universities.relationships.univertsitiesStudents', ['students' => $university->univertsitiesStudents])
         </div>
     </div>
-</div>--}}
+</div>
 
 @endsection

@@ -2,61 +2,59 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Course;
+use App\Models\OtherFee;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 
-class StoreCourseRequest extends FormRequest
+class StoreOtherFeeRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('course_create');
+        return Gate::allows('other_fee_create');
     }
 
     public function rules()
     {
         return [
-            'university_id' => [
+            'country_id' => [
                 'required',
                 'integer',
             ],
-            'program_id' => [
-                'required',
-                'integer',
-            ],
-            'course_mode' => [
+            'service_fee' => [
                 'required',
             ],
-            'name' => [
-                'string',
-                'required',
-            ],
-            'duration' => [
-                'string',
-                'required',
-            ],
-            'total_fees' => [
-                'required',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-            ],
-            'no_of_semester' => [
+            'admission_fee' => [
                 'nullable',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
             ],
-            'url' => [
-                'string',
+            'visa_fee' => [
                 'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
             ],
-            'scholarship' => [
-                'string',
+            'emgs_fee' => [
                 'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
             ],
-            'commission' => [
+            'registration_fee' => [
+                'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
+            'resource_fee' => [
+                'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
+            'caution_fee' => [
                 'nullable',
                 'integer',
                 'min:-2147483648',

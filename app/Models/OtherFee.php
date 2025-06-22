@@ -10,11 +10,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Program extends Model implements HasMedia
+class OtherFee extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia, HasFactory;
 
-    public $table = 'programs';
+    public $table = 'other_fees';
 
     protected $dates = [
         'created_at',
@@ -23,22 +23,18 @@ class Program extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'type',
-        'commission',
-        'details',
+        'country_id',
+        'service_fee',
+        'admission_fee',
+        'visa_fee',
+        'emgs_fee',
+        'registration_fee',
+        'resource_fee',
+        'caution_fee',
+        'other_fee_deatils',
         'created_at',
         'updated_at',
         'deleted_at',
-    ];
-
-    public const TYPE_SELECT = [
-        'school'     => 'School',
-        'diploma'    => 'Diploma',
-        'degree'     => 'Degree',
-        'foundation' => 'Foundation',
-        'undergrad'  => 'Undergrad',
-        'postgrad'   => 'Postgrad',
-        'phd'        => 'Phd',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -52,8 +48,8 @@ class Program extends Model implements HasMedia
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
 
-    public function programCourses()
+    public function country()
     {
-        return $this->hasMany(Course::class, 'program_id', 'id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 }

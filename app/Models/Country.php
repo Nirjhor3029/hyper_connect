@@ -22,8 +22,8 @@ class Country extends Model
     protected $fillable = [
         'name',
         'short_code',
-        'region',
-        'iso_code',
+        'currency',
+        'mobile_no_prefix',
         'created_at',
         'updated_at',
         'deleted_at',

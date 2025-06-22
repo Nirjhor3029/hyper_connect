@@ -29,7 +29,10 @@
                             {{ trans('cruds.country.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.country.fields.iso_code') }}
+                            {{ trans('cruds.country.fields.currency') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.country.fields.mobile_no_prefix') }}
                         </th>
                         <th>
                             &nbsp;
@@ -49,7 +52,10 @@
                                 {{ $country->name ?? '' }}
                             </td>
                             <td>
-                                {{ $country->iso_code ?? '' }}
+                                {{ $country->currency ?? '' }}
+                            </td>
+                            <td>
+                                {{ $country->mobile_no_prefix ?? '' }}
                             </td>
                             <td>
                                 @can('country_show')

@@ -17,14 +17,6 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.country.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $country->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.country.fields.name') }}
                         </th>
                         <td>
@@ -41,18 +33,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.country.fields.region') }}
+                            {{ trans('cruds.country.fields.currency') }}
                         </th>
                         <td>
-                            {{ $country->region }}
+                            {{ $country->currency }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.country.fields.iso_code') }}
+                            {{ trans('cruds.country.fields.mobile_no_prefix') }}
                         </th>
                         <td>
-                            {{ $country->iso_code }}
+                            {{ $country->mobile_no_prefix }}
                         </td>
                     </tr>
                 </tbody>

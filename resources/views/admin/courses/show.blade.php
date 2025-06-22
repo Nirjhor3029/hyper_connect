@@ -17,10 +17,26 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.course.fields.id') }}
+                            {{ trans('cruds.course.fields.university') }}
                         </th>
                         <td>
-                            {{ $course->id }}
+                            {{ $course->university->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.program') }}
+                        </th>
+                        <td>
+                            {{ $course->program->type ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.course_mode') }}
+                        </th>
+                        <td>
+                            {{ App\Models\Course::COURSE_MODE_RADIO[$course->course_mode] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -29,6 +45,78 @@
                         </th>
                         <td>
                             {{ $course->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.duration') }}
+                        </th>
+                        <td>
+                            {{ $course->duration }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.total_fees') }}
+                        </th>
+                        <td>
+                            {{ $course->total_fees }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.no_of_semester') }}
+                        </th>
+                        <td>
+                            {{ $course->no_of_semester }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.course_details') }}
+                        </th>
+                        <td>
+                            {!! $course->course_details !!}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.url') }}
+                        </th>
+                        <td>
+                            {{ $course->url }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.scholarship') }}
+                        </th>
+                        <td>
+                            {{ $course->scholarship }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.commission') }}
+                        </th>
+                        <td>
+                            {{ $course->commission }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.english_requirement') }}
+                        </th>
+                        <td>
+                            {{ App\Models\Course::ENGLISH_REQUIREMENT_RADIO[$course->english_requirement] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.course.fields.custom_message_for_student') }}
+                        </th>
+                        <td>
+                            {!! $course->custom_message_for_student !!}
                         </td>
                     </tr>
                 </tbody>

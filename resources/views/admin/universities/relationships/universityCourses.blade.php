@@ -1,59 +1,58 @@
-@extends('layouts.admin')
-@section('content')
-@can('university_create')
+@can('course_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.universities.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.university.title_singular') }}
+            <a class="btn btn-success" href="{{ route('admin.courses.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.course.title_singular') }}
             </a>
         </div>
     </div>
 @endcan
+
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.university.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.course.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-University">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-universityCourses">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.id') }}
+                            {{ trans('cruds.course.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.country') }}
+                            {{ trans('cruds.course.fields.university') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.state') }}
+                            {{ trans('cruds.course.fields.program') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.city') }}
+                            {{ trans('cruds.course.fields.course_mode') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.name') }}
+                            {{ trans('cruds.course.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.code') }}
+                            {{ trans('cruds.course.fields.duration') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.website') }}
+                            {{ trans('cruds.course.fields.total_fees') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.contact_email') }}
+                            {{ trans('cruds.course.fields.no_of_semester') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.contact_phone') }}
+                            {{ trans('cruds.course.fields.scholarship') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.is_active') }}
+                            {{ trans('cruds.course.fields.commission') }}
                         </th>
                         <th>
-                            {{ trans('cruds.university.fields.tags') }}
+                            {{ trans('cruds.course.fields.english_requirement') }}
                         </th>
                         <th>
                             &nbsp;
@@ -61,62 +60,59 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($universities as $key => $university)
-                        <tr data-entry-id="{{ $university->id }}">
+                    @foreach($courses as $key => $course)
+                        <tr data-entry-id="{{ $course->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $university->id ?? '' }}
+                                {{ $course->id ?? '' }}
                             </td>
                             <td>
-                                {{ $university->country->name ?? '' }}
+                                {{ $course->university->name ?? '' }}
                             </td>
                             <td>
-                                {{ $university->state->name ?? '' }}
+                                {{ $course->program->type ?? '' }}
                             </td>
                             <td>
-                                {{ $university->city->name ?? '' }}
+                                {{ App\Models\Course::COURSE_MODE_RADIO[$course->course_mode] ?? '' }}
                             </td>
                             <td>
-                                {{ $university->name ?? '' }}
+                                {{ $course->name ?? '' }}
                             </td>
                             <td>
-                                {{ $university->code ?? '' }}
+                                {{ $course->duration ?? '' }}
                             </td>
                             <td>
-                                {{ $university->website ?? '' }}
+                                {{ $course->total_fees ?? '' }}
                             </td>
                             <td>
-                                {{ $university->contact_email ?? '' }}
+                                {{ $course->no_of_semester ?? '' }}
                             </td>
                             <td>
-                                {{ $university->contact_phone ?? '' }}
+                                {{ $course->scholarship ?? '' }}
                             </td>
                             <td>
-                                <span style="display:none">{{ $university->is_active ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $university->is_active ? 'checked' : '' }}>
+                                {{ $course->commission ?? '' }}
                             </td>
                             <td>
-                                @foreach($university->tags as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
+                                {{ App\Models\Course::ENGLISH_REQUIREMENT_RADIO[$course->english_requirement] ?? '' }}
                             </td>
                             <td>
-                                @can('university_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.universities.show', $university->id) }}">
+                                @can('course_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.courses.show', $course->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('university_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.universities.edit', $university->id) }}">
+                                @can('course_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.courses.edit', $course->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('university_delete')
-                                    <form action="{{ route('admin.universities.destroy', $university->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('course_delete')
+                                    <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -133,19 +129,16 @@
     </div>
 </div>
 
-
-
-@endsection
 @section('scripts')
 @parent
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('university_delete')
+@can('course_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.universities.massDestroy') }}",
+    url: "{{ route('admin.courses.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -176,7 +169,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-University:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-universityCourses:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
