@@ -78,7 +78,7 @@ class StudentsController extends Controller
         $nationalities = Nationality::pluck('nationality_en', 'id');
         $subjects = Subject::pluck('subject_name', 'id');
         $universities = University::pluck('name', 'id');
-        $programs = Program::pluck('name', 'id');
+        $programs = Program::pluck('type', 'id');
 
         return view('admin.students.index', compact('students', 'agents', 'nationalities', 'subjects', 'universities', 'programs'));
     }
@@ -102,7 +102,7 @@ class StudentsController extends Controller
 
         $subjects = Subject::pluck('subject_name', 'id');
 
-        $programs = Program::pluck('name', 'id');
+        $programs = Program::pluck('type', 'id');
 
         $course_interesteds = Course::pluck('name', 'id');
 
@@ -191,7 +191,7 @@ class StudentsController extends Controller
 
         $subjects = Subject::pluck('subject_name', 'id');
 
-        $programs = Program::pluck('name', 'id');
+        $programs = Program::pluck('type', 'id');
 
         $course_interesteds = Course::pluck('name', 'id');
 
@@ -227,7 +227,7 @@ class StudentsController extends Controller
 
         $subjects = Subject::pluck('subject_name', 'id');
 
-        $programs = Program::pluck('name', 'id');
+        $programs = Program::pluck('type', 'id');
 
         $course_interesteds = Course::pluck('name', 'id');
 
@@ -260,7 +260,7 @@ class StudentsController extends Controller
 
         $subjects = Subject::pluck('subject_name', 'id');
 
-        $programs = Program::pluck('name', 'id');
+        $programs = Program::pluck('type', 'id');
 
         $course_interesteds = Course::pluck('name', 'id');
 
