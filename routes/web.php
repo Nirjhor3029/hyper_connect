@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AgentStudentController;
+use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\StudentAuthController;
@@ -129,6 +130,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('courses/media', 'CoursesController@storeMedia')->name('courses.storeMedia');
     Route::post('courses/ckmedia', 'CoursesController@storeCKEditorImages')->name('courses.storeCKEditorImages');
     Route::resource('courses', 'CoursesController');
+
+    Route::get('/get-universities-programs/{country_id}', [CoursesController::class, 'getUniversitiesPrograms'])->name('get.universities.programs');
+
 
     // Commission From University
     Route::delete('commission-from-universities/destroy', 'CommissionFromUniversityController@massDestroy')->name('commission-from-universities.massDestroy');

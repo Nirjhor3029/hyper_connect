@@ -9,34 +9,60 @@
     <div class="card-body">
         <form method="POST" action="{{ route("admin.courses.store") }}" enctype="multipart/form-data">
             @csrf
+            {{-- Country Select --}}
+            <div class="form-group">
+                <label class="required" for="country_id">{{ trans('cruds.university.fields.country') }}</label>
+                <select class="form-control select2 {{ $errors->has('country_id') ? 'is-invalid' : '' }}"
+                        name="country_id" id="country_id" required>
+
+                    @foreach($countries as $id => $entry)
+                        <option value="{{ $id }}" {{ old('country_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('country_id'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('country_id') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.university.fields.country_helper') }}</span>
+            </div>
+
+            {{-- University Select --}}
             <div class="form-group">
                 <label class="required" for="university_id">{{ trans('cruds.course.fields.university') }}</label>
-                <select class="form-control select2 {{ $errors->has('university') ? 'is-invalid' : '' }}" name="university_id" id="university_id" required>
+                <select class="form-control select2 {{ $errors->has('university_id') ? 'is-invalid' : '' }}"
+                        name="university_id" id="university_id" required>
+                    <option value="">Select University</option>
                     @foreach($universities as $id => $entry)
                         <option value="{{ $id }}" {{ old('university_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach
                 </select>
-                @if($errors->has('university'))
+                @if($errors->has('university_id'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('university') }}
+                        {{ $errors->first('university_id') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.course.fields.university_helper') }}</span>
             </div>
+
+            {{-- Program Select --}}
             <div class="form-group">
                 <label class="required" for="program_id">{{ trans('cruds.course.fields.program') }}</label>
-                <select class="form-control select2 {{ $errors->has('program') ? 'is-invalid' : '' }}" name="program_id" id="program_id" required>
+                <select class="form-control select2 {{ $errors->has('program_id') ? 'is-invalid' : '' }}"
+                        name="program_id" id="program_id" required>
+                    <option value="">Select Program</option>
                     @foreach($programs as $id => $entry)
                         <option value="{{ $id }}" {{ old('program_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach
                 </select>
-                @if($errors->has('program'))
+                @if($errors->has('program_id'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('program') }}
+                        {{ $errors->first('program_id') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.course.fields.program_helper') }}</span>
             </div>
+
             <div class="form-group">
                 <label class="required">{{ trans('cruds.course.fields.course_mode') }}</label>
                 @foreach(App\Models\Course::COURSE_MODE_RADIO as $key => $label)
@@ -274,6 +300,54 @@
             });
         });
     </script>
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#country_id').on('change', function () {
+                const countryId = this.value;
+
+                $('#university_id').html('<option value="">Loading...</option>');
+                $('#program_id').html('<option value="">Loading...</option>');
+
+                if (!countryId) return;
+
+                fetch(`/admin/get-universities-programs/${countryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let universityOptions = '<option value="">Select University</option>';
+                        $.each(data.universities, function (id, name) {
+                            universityOptions += `<option value="${id}">${name}</option>`;
+                        });
+                        $('#university_id').html(universityOptions);
+
+                        let programOptions = '<option value="">Select Program</option>';
+                        $.each(data.programs, function (id, name) {
+                            programOptions += `<option value="${id}">${name}</option>`;
+                        });
+                        $('#program_id').html(programOptions);
+
+                        // Only re-initialize select2 for university and program
+                        $('#university_id').select2();
+                        $('#program_id').select2();
+
+                        console.log('Response data:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+
+
+    </script>
+
+
+
+
 
 
 @endsection

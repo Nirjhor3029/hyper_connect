@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyCourseRequest;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Models\Country;
 use App\Models\Course;
 use App\Models\Program;
 use App\Models\University;
@@ -32,16 +33,25 @@ class CoursesController extends Controller
     {
         abort_if(Gate::denies('course_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $universities = University::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $countries = Country::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $programs = Program::pluck('type', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $universities = collect(); // Empty collection initially
+        $programs = collect();     // Empty collection initially
 
-        return view('admin.courses.create', compact('programs', 'universities'));
+        // যদি validation error-এর কারণে পুরনো country select করা থাকে, সেই অনুযায়ী populate করা
+        if (old('country_id')) {
+            $universities = University::where('country_id', old('country_id'))->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+            $programs = Program::where('country_id', old('country_id'))->pluck('type', 'id')->prepend(trans('global.pleaseSelect'), '');
+        }
+
+        return view('admin.courses.create', compact('countries', 'universities', 'programs'));
     }
+
 
     public function store(StoreCourseRequest $request)
     {
-        $course = Course::create($request->all());
+        $course = Course::create($request->except('country_id'));
+
 
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $course->id]);
@@ -110,4 +120,16 @@ class CoursesController extends Controller
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
+
+    public function getUniversitiesPrograms($country_id)
+    {
+        $universities = University::where('country_id', $country_id)->pluck('name', 'id');
+        $programs = Program::where('country_id', $country_id)->pluck('type', 'id');
+
+        return response()->json([
+            'universities' => $universities,
+            'programs' => $programs
+        ]);
+    }
+
 }

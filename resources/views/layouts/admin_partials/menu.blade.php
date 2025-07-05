@@ -171,6 +171,7 @@
                 </ul>
             </li>
         @endcan
+        @can('student_access')
 
         <li
             class="c-sidebar-nav-dropdown {{ request()->is('new-students*') ? 'c-show' : '' }} {{ request()->is('prospected-students*') ? 'c-show' : '' }}">
@@ -203,6 +204,7 @@
 
             </ul>
         </li>
+        @endcan
         @can('student_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.students.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/students") || request()->is("admin/students/*") ? "c-active" : "" }}">
