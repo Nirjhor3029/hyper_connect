@@ -26,6 +26,9 @@
                             {{ trans('cruds.program.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.university.fields.country') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.program.fields.type') }}
                         </th>
                         <th>
@@ -44,6 +47,9 @@
                             </td>
                             <td>
                                 {{ $program->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $program->country->name ?? '' }}
                             </td>
                             <td>
                                 {{ App\Models\Program::TYPE_SELECT[$program->type] ?? '' }}
@@ -130,7 +136,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>

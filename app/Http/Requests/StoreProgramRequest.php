@@ -20,6 +20,9 @@ class StoreProgramRequest extends FormRequest
             'type' => [
                 'required',
             ],
+            'country_id' => [
+                'required',
+            ],
         ];
     }
 }

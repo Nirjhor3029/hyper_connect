@@ -23,9 +23,9 @@ class Course extends Model implements HasMedia
     ];
 
     public const COURSE_MODE_RADIO = [
-        'full_time' => 'Full_time',
-        'part_time' => 'Part_time',
-        'odl'       => 'Odl',
+        'full_time' => 'Full Time',
+        'part_time' => 'Part Time',
+        'odl'       => 'ODL',
     ];
 
     public const ENGLISH_REQUIREMENT_RADIO = [
@@ -50,6 +50,7 @@ class Course extends Model implements HasMedia
         'scholarship',
         'commission',
         'english_requirement',
+        'minimum_english_score',
         'custom_message_for_student',
         'created_at',
         'updated_at',

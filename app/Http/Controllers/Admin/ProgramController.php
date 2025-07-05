@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyProgramRequest;
 use App\Http\Requests\StoreProgramRequest;
 use App\Http\Requests\UpdateProgramRequest;
+use App\Models\Country;
 use App\Models\Program;
 use Gate;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class ProgramController extends Controller
     {
         abort_if(Gate::denies('program_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $programs = Program::all();
+        $programs = Program::with(['country'])->get();
 
         return view('admin.programs.index', compact('programs'));
     }
@@ -29,8 +30,9 @@ class ProgramController extends Controller
     public function create()
     {
         abort_if(Gate::denies('program_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $countries = Country::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.programs.create');
+        return view('admin.programs.create',compact('countries'));
     }
 
     public function store(StoreProgramRequest $request)
@@ -47,8 +49,9 @@ class ProgramController extends Controller
     public function edit(Program $program)
     {
         abort_if(Gate::denies('program_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $countries = Country::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.programs.edit', compact('program'));
+        return view('admin.programs.edit', compact('program','countries'));
     }
 
     public function update(UpdateProgramRequest $request, Program $program)

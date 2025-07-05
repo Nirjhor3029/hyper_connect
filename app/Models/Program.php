@@ -24,6 +24,7 @@ class Program extends Model implements HasMedia
 
     protected $fillable = [
         'type',
+        'country_id',
         'commission',
         'details',
         'created_at',
@@ -50,6 +51,10 @@ class Program extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    }
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id');
     }
 
     public function programCourses()

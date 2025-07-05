@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AgentStudentController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StudentsController;
+use App\Http\Controllers\StudentAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -199,3 +200,30 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
         Route::post('profile/destroy', 'ChangePasswordController@destroy')->name('password.destroyProfile');
     }
 });
+
+
+Route::prefix('student')->name('student.')->group(function () {
+    Route::get('login', [StudentAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [StudentAuthController::class, 'login']);
+    Route::get('register', [StudentAuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('register', [StudentAuthController::class, 'register'])->name('register.submit');
+
+    Route::post('send-otp', [StudentAuthController::class, 'send'])->name('sendOtp');
+    Route::post('/send-otp/verify', [StudentAuthController::class, 'verify'])->name('verifyOtp');
+
+
+    Route::middleware(['auth:student'])->group(function () {
+        Route::get('/dashboard', [StudentAuthController::class, 'dashboard'])->name('dashboard');
+        Route::post('/data-update', [StudentAuthController::class, 'dataUpdate'])->name('data.update');
+        Route::get('/data-show', [StudentAuthController::class, 'dataShow'])->name('data.show');
+        Route::get('/data-edit', [StudentAuthController::class, 'dataEdit'])->name('data.edit');
+        Route::any('logout', [StudentAuthController::class, 'logout'])->name('logout');
+        Route::get('profile', [StudentAuthController::class, 'profile'])->name('profile.index');
+        Route::post('/profile/update', [StudentAuthController::class, 'updateProfile'])->name('profile.update');
+        Route::post('/profile/password', [StudentAuthController::class, 'updatePassword'])->name('profile.password');
+        Route::post('/profile/photo-upload', [StudentAuthController::class, 'uploadPhoto'])->name('profile.photo.upload');
+
+
+    });
+});
+

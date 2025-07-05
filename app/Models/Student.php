@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Student extends Model implements HasMedia
+class Student extends Authenticatable implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, HasFactory;
+    use Notifiable, SoftDeletes, InteractsWithMedia, HasFactory;
+
+    protected $guard = 'student';
 
     public $table = 'students';
 
@@ -80,7 +84,9 @@ class Student extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
+        'password',
     ];
+    protected $hidden = ['password'];
 
     protected function serializeDate(DateTimeInterface $date)
     {

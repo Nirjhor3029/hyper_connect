@@ -136,7 +136,14 @@
                 <label>{{ trans('cruds.course.fields.english_requirement') }}</label>
                 @foreach(App\Models\Course::ENGLISH_REQUIREMENT_RADIO as $key => $label)
                     <div class="form-check {{ $errors->has('english_requirement') ? 'is-invalid' : '' }}">
-                        <input class="form-check-input" type="radio" id="english_requirement_{{ $key }}" name="english_requirement" value="{{ $key }}" {{ old('english_requirement', 'no') === (string) $key ? 'checked' : '' }}>
+                        <input
+                            class="form-check-input english-requirement-radio"
+                            type="radio"
+                            id="english_requirement_{{ $key }}"
+                            name="english_requirement"
+                            value="{{ $key }}"
+                            {{ old('english_requirement', 'no') === (string) $key ? 'checked' : '' }}
+                        >
                         <label class="form-check-label" for="english_requirement_{{ $key }}">{{ $label }}</label>
                     </div>
                 @endforeach
@@ -147,6 +154,16 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.course.fields.english_requirement_helper') }}</span>
             </div>
+
+            {{-- ✅ minimum_english_score input --}}
+            <div class="form-group" id="minimum-score-wrapper" style="display: none;">
+                <label for="minimum_english_score">Minimum English Score</label>
+                <input type="text" name="minimum_english_score" id="minimum_english_score" class="form-control" value="{{ old('minimum_english_score') }}">
+                <span class="help-block">Provide the minimum required score.</span>
+            </div>
+
+
+
             <div class="form-group">
                 <label for="custom_message_for_student">{{ trans('cruds.course.fields.custom_message_for_student') }}</label>
                 <textarea class="form-control ckeditor {{ $errors->has('custom_message_for_student') ? 'is-invalid' : '' }}" name="custom_message_for_student" id="custom_message_for_student">{!! old('custom_message_for_student') !!}</textarea>
@@ -234,5 +251,29 @@
   }
 });
 </script>
+
+{{-- ✅ JS to toggle --}}
+
+    <script>
+        function toggleMinimumScore() {
+            let selected = document.querySelector('input[name="english_requirement"]:checked')?.value;
+            if (selected && selected !== 'no') {
+                document.getElementById('minimum-score-wrapper').style.display = 'block';
+            } else {
+                document.getElementById('minimum-score-wrapper').style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initially check
+            toggleMinimumScore();
+
+            // On change
+            document.querySelectorAll('.english-requirement-radio').forEach(function (radio) {
+                radio.addEventListener('change', toggleMinimumScore);
+            });
+        });
+    </script>
+
 
 @endsection
