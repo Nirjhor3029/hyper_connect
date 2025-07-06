@@ -63,12 +63,9 @@ class StoreUniversityRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'tags.*' => [
-                'integer',
-            ],
-            'tags' => [
-                'array',
-            ],
+            'tags' => ['array'],
+            'tags.*' => ['string', 'max:255'],
+
         ];
     }
 }

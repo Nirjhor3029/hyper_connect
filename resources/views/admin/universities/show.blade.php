@@ -1,237 +1,114 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.university.title') }}
-    </div>
+    <div class="card">
+        <div class="card-header">
+            {{ trans('global.show') }} {{ trans('cruds.university.title') }}
+        </div>
 
-    <div class="card-body">
-        <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.universities.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
+        <div class="card-body">
+
+            {{-- Logo and Name --}}
+            <div class="text-center mb-4">
+                @if($university->logo)
+                    <img src="{{ $university->logo->getUrl('preview') }}" class="img-thumbnail" alt="Logo" style="max-width: 150px;">
+                @else
+                    <img src="https://via.placeholder.com/150?text=No+Logo" class="img-thumbnail" alt="No Logo" style="max-width: 150px;">
+                @endif
+                <h3 class="mt-3">{{ $university->name }}</h3>
+                <p class="text-muted">{{ $university->university_type }} - {{ $university->code }}</p>
             </div>
-            <table class="table table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $university->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.country') }}
-                        </th>
-                        <td>
-                            {{ $university->country->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.state') }}
-                        </th>
-                        <td>
-                            {{ $university->state->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.city') }}
-                        </th>
-                        <td>
-                            {{ $university->city->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.name') }}
-                        </th>
-                        <td>
-                            {{ $university->name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.code') }}
-                        </th>
-                        <td>
-                            {{ $university->code }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.university_type') }}
-                        </th>
-                        <td>
-                            {{ $university->university_type }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.address') }}
-                        </th>
-                        <td>
-                            {!! $university->address !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.university_details') }}
-                        </th>
-                        <td>
-                            {!! $university->university_details !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.accreditation') }}
-                        </th>
-                        <td>
-                            {{ $university->accreditation }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.website') }}
-                        </th>
-                        <td>
-                            {{ $university->website }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.contact_email') }}
-                        </th>
-                        <td>
-                            {{ $university->contact_email }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.contact_phone') }}
-                        </th>
-                        <td>
-                            {{ $university->contact_phone }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.logo') }}
-                        </th>
-                        <td>
-                            @if($university->logo)
-                                <a href="{{ $university->logo->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $university->logo->getUrl('thumb') }}">
-                                </a>
+            <div class="row">
+                <div class="col-md-6">
+                    {{-- General Information --}}
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <strong>General Information</strong>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Country:</strong> {{ $university->country->name ?? 'N/A' }}</p>
+                            <p><strong>State:</strong> {{ $university->state->name ?? 'N/A' }}</p>
+                            <p><strong>City:</strong> {{ $university->city->name ?? 'N/A' }}</p>
+                            <p><strong>Accreditation:</strong> {{ $university->accreditation ?? 'N/A' }}</p>
+                            <p>
+                                <strong>Status:</strong>
+                                @if($university->is_active)
+                                    <span class="badge badge-success">Active</span>
+                                @else
+                                    <span class="badge badge-danger">Inactive</span>
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    {{-- Contact Information --}}
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <strong>Contact Information</strong>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Website:</strong>
+                                @if($university->website)
+                                    <a href="{{ $university->website }}" target="_blank">{{ $university->website }}</a>
+                                @else
+                                    N/A
+                                @endif
+                            </p>
+                            <p><strong>Email:</strong>
+                                @if($university->contact_email)
+                                    <a href="mailto:{{ $university->contact_email }}">{{ $university->contact_email }}</a>
+                                @else
+                                    N/A
+                                @endif
+                            </p>
+                            <p><strong>Phone:</strong> {{ $university->contact_phone ?? 'N/A' }}</p>
+                            @if($university->logo_url)
+                                <p><strong>Logo URL:</strong> <a href="{{ $university->logo_url }}" target="_blank">{{ $university->logo_url }}</a></p>
                             @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.logo_url') }}
-                        </th>
-                        <td>
-                            {{ $university->logo_url }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.is_active') }}
-                        </th>
-                        <td>
-                            <input type="checkbox" disabled="disabled" {{ $university->is_active ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.university.fields.tags') }}
-                        </th>
-                        <td>
-                            @foreach($university->tags as $key => $tags)
-                                <span class="label label-info">{{ $tags->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.universities.index') }}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            {{-- Address & Details --}}
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <strong>Address & Details</strong>
+                </div>
+                <div class="card-body">
+                    <p><strong>Address:</strong> {!! $university->address ?? 'N/A' !!}</p>
+                    <hr>
+                    <p><strong>University Details:</strong> {!! $university->university_details ?? 'N/A' !!}</p>
+                </div>
+            </div>
+
+            {{-- Tags --}}
+            @if($university->tags->isNotEmpty())
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <strong>Tags</strong>
+                    </div>
+                    <div class="card-body">
+                        @foreach($university->tags as $tag)
+                            <span class="badge badge-info mr-1">{{ $tag->name }}</span>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            {{-- Back Button --}}
+            <div class="form-group mt-4">
+                <a class="btn btn-secondary" href="{{ route('admin.universities.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
         </div>
     </div>
-</div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#university_university_partnerships" role="tab" data-toggle="tab">
-                {{ trans('cruds.universityPartnership.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#university_applications" role="tab" data-toggle="tab">
-                {{ trans('cruds.application.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#university_commission_from_universities" role="tab" data-toggle="tab">
-                {{ trans('cruds.commissionFromUniversity.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#university_subjects" role="tab" data-toggle="tab">
-                {{ trans('cruds.subject.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#university_commission_settings" role="tab" data-toggle="tab">
-                {{ trans('cruds.commissionSetting.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#university_courses" role="tab" data-toggle="tab">
-                {{ trans('cruds.course.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#univertsities_students" role="tab" data-toggle="tab">
-                {{ trans('cruds.student.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="university_university_partnerships">
-            @includeIf('admin.universities.relationships.universityUniversityPartnerships', ['universityPartnerships' => $university->universityUniversityPartnerships])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="university_applications">
-            @includeIf('admin.universities.relationships.universityApplications', ['applications' => $university->universityApplications])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="university_commission_from_universities">
-            @includeIf('admin.universities.relationships.universityCommissionFromUniversities', ['commissionFromUniversities' => $university->universityCommissionFromUniversities])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="university_subjects">
-            @includeIf('admin.universities.relationships.universitySubjects', ['subjects' => $university->universitySubjects])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="university_commission_settings">
-            @includeIf('admin.universities.relationships.universityCommissionSettings', ['commissionSettings' => $university->universityCommissionSettings])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="university_courses">
-            @includeIf('admin.universities.relationships.universityCourses', ['courses' => $university->universityCourses])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="univertsities_students">
-            @includeIf('admin.universities.relationships.univertsitiesStudents', ['students' => $university->univertsitiesStudents])
-        </div>
-    </div>
-</div>
+
+
 
 @endsection

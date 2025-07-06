@@ -137,9 +137,8 @@
                    name="contact_phone"
                    id="contact_phone"
                    value="{{ old('contact_phone', $university->contact_phone) }}"
-                   pattern="^\+8801[3-9][0-9]{8}$"
-                   maxlength="14"
-                   title="Enter a valid phone number in format +8801XXXXXXXXX">
+
+                   title="Enter a valid phone number ">
 
             <div class="form-group">
                 <label for="logo">{{ trans('cruds.university.fields.logo') }}</label>

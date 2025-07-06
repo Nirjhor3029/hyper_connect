@@ -32,16 +32,17 @@ class CoursesController extends Controller
     public function create()
     {
         abort_if(Gate::denies('course_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $defaultCountryId = 127; // Malaysia ID
 
         $countries = Country::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $universities = collect(); // Empty collection initially
         $programs = collect();     // Empty collection initially
 
-        // যদি validation error-এর কারণে পুরনো country select করা থাকে, সেই অনুযায়ী populate করা
-        if (old('country_id')) {
-            $universities = University::where('country_id', old('country_id'))->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-            $programs = Program::where('country_id', old('country_id'))->pluck('type', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        if (old('country_id', $defaultCountryId)) {
+            $universities = University::where('country_id', old('country_id', $defaultCountryId))->pluck('name', 'id');
+            $programs = Program::where('country_id', old('country_id', $defaultCountryId))->pluck('type', 'id');
         }
 
         return view('admin.courses.create', compact('countries', 'universities', 'programs'));

@@ -16,7 +16,10 @@
                         name="country_id" id="country_id" required>
 
                     @foreach($countries as $id => $entry)
-                        <option value="{{ $id }}" {{ old('country_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                        <option value="{{ $id }}"
+                            {{ old('country_id', 127) == $id ? 'selected' : '' }}>
+                            {{ $entry }}
+                        </option>
                     @endforeach
                 </select>
                 @if($errors->has('country_id'))
@@ -305,45 +308,55 @@
 
 
 
-    <script>
-        $(document).ready(function () {
-            $('#country_id').on('change', function () {
-                const countryId = this.value;
+<script>
+    $(document).ready(function () {
+        function loadUniversityAndProgram(countryId, selectedUniversityId = null, selectedProgramId = null) {
+            $('#university_id').html('<option value="">Loading...</option>');
+            $('#program_id').html('<option value="">Loading...</option>');
 
-                $('#university_id').html('<option value="">Loading...</option>');
-                $('#program_id').html('<option value="">Loading...</option>');
+            if (!countryId) return;
 
-                if (!countryId) return;
-
-                fetch(`/admin/get-universities-programs/${countryId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        let universityOptions = '<option value="">Select University</option>';
-                        $.each(data.universities, function (id, name) {
-                            universityOptions += `<option value="${id}">${name}</option>`;
-                        });
-                        $('#university_id').html(universityOptions);
-
-                        let programOptions = '<option value="">Select Program</option>';
-                        $.each(data.programs, function (id, name) {
-                            programOptions += `<option value="${id}">${name}</option>`;
-                        });
-                        $('#program_id').html(programOptions);
-
-                        // Only re-initialize select2 for university and program
-                        $('#university_id').select2();
-                        $('#program_id').select2();
-
-                        console.log('Response data:', data);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
+            fetch(`/admin/get-universities-programs/${countryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    let universityOptions = '<option value="">Select University</option>';
+                    $.each(data.universities, function (id, name) {
+                        const selected = (id == selectedUniversityId) ? 'selected' : '';
+                        universityOptions += `<option value="${id}" ${selected}>${name}</option>`;
                     });
-            });
+                    $('#university_id').html(universityOptions);
+
+                    let programOptions = '<option value="">Select Program</option>';
+                    $.each(data.programs, function (id, name) {
+                        const selected = (id == selectedProgramId) ? 'selected' : '';
+                        programOptions += `<option value="${id}" ${selected}>${name}</option>`;
+                    });
+                    $('#program_id').html(programOptions);
+
+                    $('#university_id').select2();
+                    $('#program_id').select2();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // On country change
+        $('#country_id').on('change', function () {
+            const countryId = this.value;
+            loadUniversityAndProgram(countryId);
         });
 
+        // Trigger load on page load if default country is selected
+        const defaultCountryId = $('#country_id').val();
+        const oldUniversityId = "{{ old('university_id') }}";
+        const oldProgramId = "{{ old('program_id') }}";
+        if (defaultCountryId) {
+            loadUniversityAndProgram(defaultCountryId, oldUniversityId, oldProgramId);
+        }
+    });
+</script>
 
-    </script>
 
 
 

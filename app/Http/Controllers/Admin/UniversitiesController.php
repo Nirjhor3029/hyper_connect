@@ -48,7 +48,17 @@ class UniversitiesController extends Controller
     public function store(StoreUniversityRequest $request)
     {
         $university = University::create($request->all());
-        $university->tags()->sync($request->input('tags', []));
+
+        $submittedTags = $request->input('tags', []); // These are tag names (strings)
+        $tagIds = [];
+
+        foreach ($submittedTags as $tagName) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $tagIds[] = $tag->id;
+        }
+
+        $university->tags()->sync($tagIds);
+
         if ($request->input('logo', false)) {
             $university->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
         }
@@ -135,4 +145,17 @@ class UniversitiesController extends Controller
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
+
+    public function getStates($countryId)
+    {
+        $states = State::where('country_id', $countryId)->pluck('name', 'id');
+        return response()->json(['states' => $states]);
+    }
+
+    public function getCities($stateId)
+    {
+        $cities = City::where('state_id', $stateId)->pluck('name', 'id');
+        return response()->json(['cities' => $cities]);
+    }
+
 }

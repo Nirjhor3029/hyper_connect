@@ -14,8 +14,11 @@
                     <select class="form-control select2 {{ $errors->has('country') ? 'is-invalid' : '' }}"
                             name="country_id" id="country_id" required>
                         @foreach($countries as $id => $entry)
-                            <option
-                                value="{{ $id }}" {{ old('country_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                            <option value="{{ $id }}"
+                                {{ old('country_id', 127) == $id ? 'selected' : '' }}>
+                                {{ $entry }}
+                            </option>
+
                         @endforeach
                     </select>
                     @if($errors->has('country'))
@@ -90,7 +93,7 @@
                      <span class="help-block">{{ trans('cruds.university.fields.university_type_helper') }}</span>
                  </div>--}}
                 <div class="form-group">
-                    <label for="address">{{ trans('cruds.university.fields.address') }}</label>
+                    <label for="address" class="required">{{ trans('cruds.university.fields.address') }}</label>
                     <textarea class="form-control ckeditor {{ $errors->has('address') ? 'is-invalid' : '' }}"
                               name="address" id="address">{!! old('address') !!}</textarea>
                     @if($errors->has('address'))
@@ -154,11 +157,12 @@
                         id="contact_phone"
                         value="{{ old('contact_phone', '') }}"
                         maxlength="20"
-                        title="Only numbers and an optional + sign are allowed"
-                        required
-                        oninput="this.value = this.value.replace(/[^\d+]/g, '')"
+                        pattern="^\+?\d*$"
+                        title="Only numbers and an optional + sign at the beginning are allowed"
+                        oninput="validatePhone(this)"
                     >
-                    @if($errors->has('contact_phone'))
+
+                @if($errors->has('contact_phone'))
                         <div class="invalid-feedback">
                             {{ $errors->first('contact_phone') }}
                         </div>
@@ -213,14 +217,13 @@
                         <span class="btn btn-info btn-xs deselect-all"
                               style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                     </div>
-                    <select class="form-control select2 {{ $errors->has('tags') ? 'is-invalid' : '' }}" name="tags[]"
-                            id="tags" multiple>
+                    <select class="form-control select2-tagging {{ $errors->has('tags') ? 'is-invalid' : '' }}" name="tags[]" id="tags" multiple>
                         @foreach($tags as $id => $tag)
-                            <option
-                                value="{{ $id }}" {{ in_array($id, old('tags', [])) ? 'selected' : '' }}>{{ $tag }}</option>
+                            <option value="{{ $tag }}" {{ in_array($tag, old('tags', [])) ? 'selected' : '' }}>{{ $tag }}</option>
                         @endforeach
                     </select>
-                    @if($errors->has('tags'))
+
+                @if($errors->has('tags'))
                         <div class="invalid-feedback">
                             {{ $errors->first('tags') }}
                         </div>
@@ -365,11 +368,83 @@
 
     <script>
         function validatePhone(input) {
-            // Allow only + at the beginning and numbers afterward
-            input.value = input.value.replace(/(?!^\+)\D/g, ''); // remove all non-digits except first +
-            if (!input.value.startsWith('+')) {
-                input.value = '+' + input.value.replace(/\+/g, '');
+            input.value = input.value.replace(/(?!^\+)\D/g, ''); // only digits after +
+            if (input.value.indexOf('+') > 0) {
+                input.value = input.value.replace(/\+/g, ''); // remove extra '+' inside
             }
         }
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select2-tagging').select2({
+                tags: true,
+                tokenSeparators: [',']
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            function loadStates(countryId) {
+                $('#state_id').html('<option value="">Loading...</option>');
+                $('#city_id').html('<option value="">Select City</option>');
+
+                if (!countryId) return;
+
+                fetch(`/admin/get-states/${countryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let options = '<option value="">Select State</option>';
+                        for (const [id, name] of Object.entries(data.states)) {
+                            options += `<option value="${id}">${name}</option>`;
+                        }
+                        $('#state_id').html(options).trigger('change.select2');
+                    });
+            }
+
+            function loadCities(stateId) {
+                $('#city_id').html('<option value="">Loading...</option>');
+
+                if (!stateId) return;
+
+                fetch(`/admin/get-cities/${stateId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let options = '<option value="">Select City</option>';
+                        for (const [id, name] of Object.entries(data.cities)) {
+                            options += `<option value="${id}">${name}</option>`;
+                        }
+                        $('#city_id').html(options).trigger('change.select2');
+                    });
+            }
+
+            // Load states when country changes
+            $('#country_id').on('change', function () {
+                const countryId = this.value;
+                loadStates(countryId);
+            });
+
+            // Load cities when state changes
+            $('#state_id').on('change', function () {
+                const stateId = this.value;
+                loadCities(stateId);
+            });
+
+            // Trigger default country on page load (e.g., Malaysia)
+            const initialCountryId = $('#country_id').val();
+            if (initialCountryId) {
+                loadStates(initialCountryId);
+            }
+
+            const initialStateId = $('#state_id').val();
+            if (initialStateId) {
+                loadCities(initialStateId);
+            }
+        });
+    </script>
+
+
+
 @endsection

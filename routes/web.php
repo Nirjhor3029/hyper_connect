@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AgentStudentController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StudentsController;
+use App\Http\Controllers\Admin\UniversitiesController;
 use App\Http\Controllers\StudentAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -132,6 +133,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('courses', 'CoursesController');
 
     Route::get('/get-universities-programs/{country_id}', [CoursesController::class, 'getUniversitiesPrograms'])->name('get.universities.programs');
+    Route::get('/get-states/{country_id}', [UniversitiesController::class, 'getStates']);
+    Route::get('/get-cities/{state_id}', [UniversitiesController::class, 'getCities']);
+
 
 
     // Commission From University
