@@ -3,410 +3,153 @@
 
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <span>Your All Information</span>
-
+            <h4 class="mb-0">Student Profile</h4>
             <a href="{{ route('student.data.edit') }}" class="btn btn-sm btn-primary">
                 <i class="fas fa-edit"></i> Edit
             </a>
         </div>
 
-
         <div class="card-body">
-            <div class="form-group">
 
-                <table class="table table-bordered table-striped">
-                    <tbody>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.name') }}
-                        </th>
-                        <td>
-                            {{ $student->name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.email') }}
-                        </th>
-                        <td>
-                            {{ $student->email }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.phone') }}
-                        </th>
-                        <td>
-                            {{ $student->phone }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.nationality') }}
-                        </th>
-                        <td>
-                            {{ $student->nationality->nationality_en ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.address') }}
-                        </th>
-                        <td>
-                            {{ $student->address }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.current_address') }}
-                        </th>
-                        <td>
-                            {!! $student->current_address !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.permanent_address') }}
-                        </th>
-                        <td>
-                            {!! $student->permanent_address !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.dob') }}
-                        </th>
-                        <td>
-                            {{ $student->dob }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.gender') }}
-                        </th>
-                        <td>
-                            {{ App\Models\Student::GENDER_SELECT[$student->gender] ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.passport_no') }}
-                        </th>
-                        <td>
-                            {{ $student->passport_no }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.emergency_contact') }}
-                        </th>
-                        <td>
-                            {{ $student->emergency_contact }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.guardian_details') }}
-                        </th>
-                        <td>
-                            {!! $student->guardian_details !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.education_background') }}
-                        </th>
-                        <td>
-                            {!! $student->education_background !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.lead_agent') }}
-                        </th>
-                        <td>
-                            {{ $student->lead_agent->agency_name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.handelling_agent') }}
-                        </th>
-                        <td>
-                            {{ $student->handelling_agent->agency_name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.academic_details') }}
-                        </th>
-                        <td>
-                            {!! $student->academic_details !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.offer_letter_details') }}
-                        </th>
-                        <td>
-                            {!! $student->offer_letter_details !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.additional_requirements') }}
-                        </th>
-                        <td>
-                            {!! $student->additional_requirements !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.val_status') }}
-                        </th>
-                        <td>
-                            {{ $student->val_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.emgs_status') }}
-                        </th>
-                        <td>
-                            {{ $student->emgs_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.commission_amount') }}
-                        </th>
-                        <td>
-                            {{ $student->commission_amount }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.is_offer_given_to_student') }}
-                        </th>
-                        <td>
-                            <input type="checkbox" disabled="disabled" {{ $student->is_offer_given_to_student ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.offer_details') }}
-                        </th>
-                        <td>
-                            {!! $student->offer_details !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.visa_status') }}
-                        </th>
-                        <td>
-                            {{ $student->visa_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.payment_status') }}
-                        </th>
-                        <td>
-                            {{ $student->payment_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.current_status') }}
-                        </th>
-                        <td>
-                            {{ $student->current_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.scholarship_status') }}
-                        </th>
-                        <td>
-                            <input type="checkbox" disabled="disabled" {{ $student->scholarship_status ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.enrollement_status') }}
-                        </th>
-                        <td>
-                            {{ $student->enrollement_status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.is_commission_claimed_from_univeristy') }}
-                        </th>
-                        <td>
-                            <input type="checkbox" disabled="disabled" {{ $student->is_commission_claimed_from_univeristy ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.interested_countries') }}
-                        </th>
-                        <td>
-                            @foreach($student->interested_countries as $key => $interested_countries)
-                                <span class="badge badge-info">{{ $interested_countries->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.univertsities') }}
-                        </th>
-                        <td>
-                            @foreach($student->univertsities as $key => $univertsities)
-                                <span class="badge badge-info">{{ $univertsities->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.subjects') }}
-                        </th>
-                        <td>
-                            @foreach($student->subjects as $key => $subjects)
-                                <span class="badge badge-info">{{ $subjects->subject_name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.programs') }}
-                        </th>
-                        <td>
-                            @foreach($student->programs as $key => $programs)
-                                <span class="badge badge-info">{{ $programs->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.course_interested') }}
-                        </th>
-                        <td>
-                            @foreach($student->course_interesteds as $key => $course_interested)
-                                <span class="badge badge-info">{{ $course_interested->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Confirm Country
-                        </th>
-                        <td>
-                            {{$student->confirm_country->name ?? ''}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Confirm University
-                        </th>
-                        <td>
-                            {{$student->confirm_university->name ?? ''}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Confirm Subject
-                        </th>
-                        <td>
-                            {{$student->confirm_subject->subject_name ?? ''}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.academic_attachments') }}
-                        </th>
-                        <td>
-                            @foreach($student->academic_attachments as $key => $academic_attachments)
-                                <span class="badge badge-info">{{ $academic_attachments->file_url }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.photo') }}
-                        </th>
-                        <td>
-                            @if($student->photo)
-                                <a href="{{ $student->photo->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $student->photo->getUrl('thumb') }}">
-                                </a>
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.academic_certificates') }}
-                        </th>
-                        <td>
-                            @foreach($student->academic_certificates as $key => $media)
-                                <a href="{{ $media->getUrl() }}" target="_blank">
-                                    {{ trans('global.view_file') }}
-                                </a>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.attachments') }}
-                        </th>
-                        <td>
-                            @foreach($student->attachments as $key => $media)
-                                <a href="{{ $media->getUrl() }}" target="_blank">
-                                    {{ trans('global.view_file') }}
-                                </a>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.medical_certificates') }}
-                        </th>
-                        <td>
-                            @foreach($student->medical_certificates as $key => $media)
-                                <a href="{{ $media->getUrl() }}" target="_blank">
-                                    {{ trans('global.view_file') }}
-                                </a>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.max_education_level') }}
-                        </th>
-                        <td>
-                            {{ $student->max_education_level->title ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.student.fields.offer_letter_attachments') }}
-                        </th>
-                        <td>
-                            @foreach($student->offer_letter_attachments as $key => $media)
-                                <a href="{{ $media->getUrl() }}" target="_blank">
-                                    {{ trans('global.view_file') }}
-                                </a>
-                            @endforeach
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+            {{-- Profile Header with Photo --}}
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-9">
+                    <h5 class="mb-1">{{ $student->name }}</h5>
+                    <p class="mb-0"><strong>Email:</strong> {{ $student->email }}</p>
+                    <p class="mb-0"><strong>Phone:</strong> {{ $student->phone }}</p>
+                </div>
+                <div class="col-md-3 text-end">
+                    @if($student->photo)
+                        <a href="{{ $student->photo->getUrl() }}" target="_blank">
+                            <img src="{{ $student->photo->getUrl('thumb') }}" class="img-thumbnail rounded" style="max-width: 120px;">
+                        </a>
+                    @else
+                        <img src="{{ asset('assets/images/img_avatar.png') }}" class="img-thumbnail rounded" style="max-width: 120px;">
+                    @endif
+                </div>
+            </div>
 
+            {{-- Basic Info --}}
+            <h5 class="border-bottom pb-2">Basic Information</h5>
+            <div class="row mb-3">
+                <div class="col-md-4"><strong>Gender:</strong> {{ App\Models\Student::GENDER_SELECT[$student->gender] ?? '' }}</div>
+                <div class="col-md-4"><strong>DOB:</strong> {{ $student->dob }}</div>
+                <div class="col-md-4"><strong>Country:</strong> {{ $student->country->name ?? '' }}</div>
+            </div>
+
+            {{-- Address Info --}}
+            <h5 class="border-bottom pb-2 mt-4">Address</h5>
+            <div class="row mb-2">
+                <div class="col-md-6"><strong>Current Address:</strong><br> {!! $student->current_address !!}</div>
+                <div class="col-md-6"><strong>Permanent Address:</strong><br> {!! $student->permanent_address !!}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-6"><strong>Full Address:</strong> {{ $student->address }}</div>
+                <div class="col-md-6"><strong>Passport No:</strong> {{ $student->passport_no }}</div>
+            </div>
+
+            {{-- Guardian & Emergency --}}
+            <h5 class="border-bottom pb-2 mt-4">Guardian & Emergency</h5>
+            <div class="row mb-2">
+                <div class="col-md-6"><strong>Guardian Details:</strong><br> {!! $student->guardian_details !!}</div>
+                <div class="col-md-6"><strong>Emergency Contact:</strong> {{ $student->emergency_contact }}</div>
+            </div>
+
+            {{-- Academic Info --}}
+            <h5 class="border-bottom pb-2 mt-4">Academic</h5>
+            <div class="mb-2"><strong>Education Background:</strong><br> {!! $student->education_background !!}</div>
+            <div class="row mb-2">
+                <div class="col-md-6"><strong>Max Education Level:</strong> {{ $student->max_education_level->title ?? '' }}</div>
+                <div class="col-md-6"><strong>Academic Details:</strong> {!! $student->academic_details !!}</div>
+            </div>
+
+            {{-- Interest & Confirmation --}}
+            <h5 class="border-bottom pb-2 mt-4">Interests & Confirmed Choices</h5>
+            <div class="row mb-2">
+                <div class="col-md-4"><strong>Interested Countries:</strong><br>
+                    @foreach($student->interested_countries as $item)
+                        <span class="badge bg-info">{{ $item->name }}</span>
+                    @endforeach
+                </div>
+                <div class="col-md-4"><strong>Universities:</strong><br>
+                    @foreach($student->univertsities as $item)
+                        <span class="badge bg-info">{{ $item->name }}</span>
+                    @endforeach
+                </div>
+                <div class="col-md-4"><strong>Subjects:</strong><br>
+                    @foreach($student->subjects as $item)
+                        <span class="badge bg-info">{{ $item->subject_name }}</span>
+                    @endforeach
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4"><strong>Programs:</strong><br>
+                    @foreach($student->programs as $item)
+                        <span class="badge bg-info">{{ $item->name }}</span>
+                    @endforeach
+                </div>
+                <div class="col-md-4"><strong>Course Interested:</strong><br>
+                    @foreach($student->course_interesteds as $item)
+                        <span class="badge bg-info">{{ $item->name }}</span>
+                    @endforeach
+                </div>
+                <div class="col-md-4"><strong>Confirmed Country:</strong> {{ $student->confirm_country->name ?? '' }}<br>
+                    <strong>Confirmed University:</strong> {{ $student->confirm_university->name ?? '' }}<br>
+                    <strong>Confirmed Subject:</strong> {{ $student->confirm_subject->subject_name ?? '' }}
+                </div>
+            </div>
+
+            {{-- Offer & Visa --}}
+            <h5 class="border-bottom pb-2 mt-4">Offer & Visa</h5>
+            <div class="row mb-2">
+                <div class="col-md-6"><strong>Offer Given:</strong> <input type="checkbox" disabled {{ $student->is_offer_given_to_student ? 'checked' : '' }}></div>
+                <div class="col-md-6"><strong>Offer Details:</strong> {!! $student->offer_details !!}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4"><strong>Visa Status:</strong> {{ $student->visa_status }}</div>
+                <div class="col-md-4"><strong>EMGS Status:</strong> {{ $student->emgs_status }}</div>
+                <div class="col-md-4"><strong>VAL Status:</strong> {{ $student->val_status }}</div>
+            </div>
+
+            {{-- Finance --}}
+            <h5 class="border-bottom pb-2 mt-4">Finance</h5>
+            <div class="row mb-2">
+                <div class="col-md-4"><strong>Commission Amount:</strong> {{ $student->commission_amount }}</div>
+                <div class="col-md-4"><strong>Payment Status:</strong> {{ $student->payment_status }}</div>
+                <div class="col-md-4"><strong>Commission Claimed:</strong> <input type="checkbox" disabled {{ $student->is_commission_claimed_from_univeristy ? 'checked' : '' }}></div>
+            </div>
+
+            {{-- Final Status --}}
+            <h5 class="border-bottom pb-2 mt-4">Status</h5>
+            <div class="row mb-2">
+                <div class="col-md-4"><strong>Enrollment Status:</strong> {{ $student->enrollement_status }}</div>
+                <div class="col-md-4"><strong>Current Status:</strong> {{ $student->current_status }}</div>
+                <div class="col-md-4"><strong>Scholarship:</strong> <input type="checkbox" disabled {{ $student->scholarship_status ? 'checked' : '' }}></div>
+            </div>
+
+            {{-- Files --}}
+            <h5 class="border-bottom pb-2 mt-4">Attachments</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <strong>Academic Certificates:</strong><br>
+                    @foreach($student->academic_certificates as $media)
+                        <a href="{{ $media->getUrl() }}" target="_blank">{{ trans('global.view_file') }}</a><br>
+                    @endforeach
+                </div>
+                <div class="col-md-4">
+                    <strong>Medical Certificates:</strong><br>
+                    @foreach($student->medical_certificates as $media)
+                        <a href="{{ $media->getUrl() }}" target="_blank">{{ trans('global.view_file') }}</a><br>
+                    @endforeach
+                </div>
+                <div class="col-md-4">
+                    <strong>Other Attachments:</strong><br>
+                    @foreach($student->attachments as $media)
+                        <a href="{{ $media->getUrl() }}" target="_blank">{{ trans('global.view_file') }}</a><br>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
-
-
 
 @endsection

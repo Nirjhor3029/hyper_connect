@@ -24,6 +24,7 @@ use App\Models\User;
 use Gate;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -126,6 +127,7 @@ class StudentsController extends Controller
 
     public function store(StoreStudentRequest $request)
     {
+       $request['password'] = Hash::make('123456');
         $data = $request->all();
 
         $user = Auth::user();
@@ -357,6 +359,8 @@ class StudentsController extends Controller
 
 
     }
+
+
 
     public function show(Student $student)
     {

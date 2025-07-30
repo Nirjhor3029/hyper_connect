@@ -9,6 +9,7 @@ use App\Http\Requests\StoreUniversityRequest;
 use App\Http\Requests\UpdateUniversityRequest;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Course;
 use App\Models\State;
 use App\Models\Tag;
 use App\Models\University;
@@ -29,6 +30,52 @@ class UniversitiesController extends Controller
 
         return view('admin.universities.index', compact('universities'));
     }
+    // StudentsController.php
+
+    public function universityShow(Request $request)
+    {
+        $query = University::query();
+
+        if ($request->filled('country')) {
+            $query->where('country_id', $request->country);
+        }
+        if ($request->filled('tag')) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('tags.id', $request->tag);
+            });
+        }
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        $universities = $query->with('country')->paginate(12); // Grid view supports pagination
+
+        $countries = Country::all();
+        $tags = Tag::all();
+
+        return view('student.university.index', compact('universities', 'countries','tags'));
+    }
+
+    // For university courses
+
+    public function showCourses($id)
+    {
+        $university = University::findOrFail($id);
+        $courses = Course::where('university_id', $id)->get();
+
+        return view('student.university.courses', compact('university', 'courses'));
+    }
+
+
+// For university details
+    public function universityDetails($id)
+    {
+        $university = University::with('country')->findOrFail($id);
+        return view('student.university.details', compact('university'));
+    }
+
+
 
     public function create()
     {

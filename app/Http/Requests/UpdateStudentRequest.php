@@ -101,7 +101,7 @@ class UpdateStudentRequest extends FormRequest
                 'array',
             ],
             'max_education_level_id' => [
-                'required',
+               
                 'integer',
             ],
             'offer_letter_attachments' => [

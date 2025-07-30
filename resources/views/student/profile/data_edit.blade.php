@@ -7,10 +7,11 @@
         </div>
 
         <div class="card-body">
-            <form method="POST" action="{{ route("admin.students.update", [$student->id]) }}"
+            <form method="POST" action="{{ route("student.data.update", [$student->id]) }}"
                   enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
+                <input type="hidden" name="student_id" value="{{$student->id}}">
 
                 <div class="row">
                     <div class="col-md-4">

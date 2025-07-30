@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Agent;
 use App\Models\Country;
 use App\Models\Course;
@@ -243,6 +244,91 @@ class StudentAuthController extends Controller
         } else {
             return response()->json(['status' => 'invalid']);
         }
+    }
+
+    public function dataUpdate(Request $request, Student $student)
+    {
+        $student->update($request->all());
+        $student->interested_countries()->sync($request->input('interested_countries', []));
+        $student->univertsities()->sync($request->input('univertsities', []));
+        $student->subjects()->sync($request->input('subjects', []));
+        $student->programs()->sync($request->input('programs', []));
+        $student->course_interesteds()->sync($request->input('course_interesteds', []));
+        $student->academic_attachments()->sync($request->input('academic_attachments', []));
+        if ($request->input('photo', false)) {
+            if (! $student->photo || $request->input('photo') !== $student->photo->file_name) {
+                if ($student->photo) {
+                    $student->photo->delete();
+                }
+                $student->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
+            }
+        } elseif ($student->photo) {
+            $student->photo->delete();
+        }
+
+        if (count($student->academic_certificates) > 0) {
+            foreach ($student->academic_certificates as $media) {
+                if (! in_array($media->file_name, $request->input('academic_certificates', []))) {
+                    $media->delete();
+                }
+            }
+        }
+        $media = $student->academic_certificates->pluck('file_name')->toArray();
+        foreach ($request->input('academic_certificates', []) as $file) {
+            if (count($media) === 0 || ! in_array($file, $media)) {
+                $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('academic_certificates');
+            }
+        }
+
+        if (count($student->attachments) > 0) {
+            foreach ($student->attachments as $media) {
+                if (! in_array($media->file_name, $request->input('attachments', []))) {
+                    $media->delete();
+                }
+            }
+        }
+        $media = $student->attachments->pluck('file_name')->toArray();
+        foreach ($request->input('attachments', []) as $file) {
+            if (count($media) === 0 || ! in_array($file, $media)) {
+                $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('attachments');
+            }
+        }
+
+        if (count($student->medical_certificates) > 0) {
+            foreach ($student->medical_certificates as $media) {
+                if (! in_array($media->file_name, $request->input('medical_certificates', []))) {
+                    $media->delete();
+                }
+            }
+        }
+        $media = $student->medical_certificates->pluck('file_name')->toArray();
+        foreach ($request->input('medical_certificates', []) as $file) {
+            if (count($media) === 0 || ! in_array($file, $media)) {
+                $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('medical_certificates');
+            }
+        }
+
+        if (count($student->offer_letter_attachments) > 0) {
+            foreach ($student->offer_letter_attachments as $media) {
+                if (! in_array($media->file_name, $request->input('offer_letter_attachments', []))) {
+                    $media->delete();
+                }
+            }
+        }
+        $media = $student->offer_letter_attachments->pluck('file_name')->toArray();
+        foreach ($request->input('offer_letter_attachments', []) as $file) {
+            if (count($media) === 0 || ! in_array($file, $media)) {
+                $student->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('offer_letter_attachments');
+            }
+        }
+
+        if ($request->url) {
+            return redirect()->to($request->url);
+        } else {
+            return redirect()->route('student.data.show');
+        }
+
+
     }
 
 

@@ -20,7 +20,15 @@
                 <i class="c-sidebar-nav-icon fas fa-user fa-tachometer-alt">
 
                 </i>
-                All Information
+                Profile Info
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
+            <a href="{{ route("student.university.show") }}" class="c-sidebar-nav-link">
+                <i class="c-sidebar-nav-icon fas fa-university fa-tachometer-alt">
+
+                </i>
+                Search Universities
             </a>
         </li>
         <li class="c-sidebar-nav-item">

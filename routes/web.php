@@ -222,7 +222,7 @@ Route::prefix('student')->name('student.')->group(function () {
 
     Route::middleware(['auth:student'])->group(function () {
         Route::get('/dashboard', [StudentAuthController::class, 'dashboard'])->name('dashboard');
-        Route::post('/data-update', [StudentAuthController::class, 'dataUpdate'])->name('data.update');
+        Route::put('/data-update/{student}', [StudentAuthController::class, 'dataUpdate'])->name('data.update');
         Route::get('/data-show', [StudentAuthController::class, 'dataShow'])->name('data.show');
         Route::get('/data-edit', [StudentAuthController::class, 'dataEdit'])->name('data.edit');
         Route::any('logout', [StudentAuthController::class, 'logout'])->name('logout');
@@ -230,6 +230,11 @@ Route::prefix('student')->name('student.')->group(function () {
         Route::post('/profile/update', [StudentAuthController::class, 'updateProfile'])->name('profile.update');
         Route::post('/profile/password', [StudentAuthController::class, 'updatePassword'])->name('profile.password');
         Route::post('/profile/photo-upload', [StudentAuthController::class, 'uploadPhoto'])->name('profile.photo.upload');
+
+        Route::get('/university-show', [UniversitiesController::class, 'universityShow'])->name('university.show');
+        Route::get('/university/{id}/courses', [UniversitiesController::class, 'showCourses'])->name('university.courses');
+        Route::get('/university/{id}/details', [UniversitiesController::class, 'universityDetails'])->name('university.details');
+
 
 
     });

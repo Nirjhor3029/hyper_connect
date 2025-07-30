@@ -26,6 +26,13 @@
             justify-content: center;
             padding: 20px;
         }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
 
         .login-container {
             background: white;

@@ -9,6 +9,8 @@
     </title>
 
     <link rel="icon" href="{{ asset('assets/images/cropped_hyper_connect_logo_32x32.png') }}" sizes="32x32">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
+
 
     <style>
         * {
@@ -107,6 +109,14 @@
             font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.2;
+            color: #355EA9;
+        }
+        .logo-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: white;
         }
 
         .hero-subtitle {
@@ -310,7 +320,7 @@
                     <path d="M6 12v5c3 3 9 3 12 0v-5" />
                 </svg>
             </div>
-            <h1 class="hero-title">{{ trans('panel.site_title') }}</h1>
+            <h1 class="logo-title">{{ trans('panel.site_title') }}</h1>
             <p class="hero-subtitle">{{ __('Connecting to a world of opportunities at hyper speed') }}</p>
         </div>
     </div>
@@ -427,8 +437,8 @@
         </div>
     </div>
 </div>
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const sendOtpBtn = document.getElementById('sendOtpBtn');

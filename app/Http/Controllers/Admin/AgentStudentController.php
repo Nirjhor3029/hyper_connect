@@ -59,7 +59,7 @@ class AgentStudentController extends Controller
         $nationalities = Nationality::pluck('nationality_en', 'id');
         $subjects = Subject::pluck('subject_name', 'id');
         $universities = University::pluck('name', 'id');
-        $programs = Program::pluck('name', 'id');
+        $programs = Program::pluck('type', 'id');
         $countries = Country::pluck('name', 'id');
 
         return view('admin.students.new-students', compact('students', 'agents', 'nationalities', 'subjects', 'universities', 'programs', 'countries'));
@@ -107,7 +107,7 @@ class AgentStudentController extends Controller
         $nationalities = Nationality::pluck('nationality_en', 'id');
         $subjects = Subject::pluck('subject_name', 'id');
         $universities = University::pluck('name', 'id');
-        $programs = Program::pluck('name', 'id');
+        $programs = Program::pluck('type', 'id');
         $countries = Country::pluck('name', 'id');
 
         $admission_stage = AdmissionStage::orderBy('sequence', 'asc')
