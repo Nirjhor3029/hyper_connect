@@ -9,6 +9,27 @@ use App\Http\Controllers\StudentAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
+// Test Design pages
+Route::get('/signup', function () {
+    return view('signup');
+});
+Route::get('/signup-otp', function () {
+    return view('signup_otp');
+});
+Route::get('/signin', function () {
+    return view('signin');
+});
+Route::get('/signin-otp', function () {
+    return view('signin_otp');
+});
+Route::get('/forgot-password', function () {
+    return view('forgot_password');
+});
+Route::get('/set-password', function () {
+    return view('set_password');
+});
+
 Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
