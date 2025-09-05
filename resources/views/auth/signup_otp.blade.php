@@ -1,4 +1,4 @@
-@extends('signup_layout')
+@extends('layouts.signup_layout')
 
 
 @section('custom_styles')

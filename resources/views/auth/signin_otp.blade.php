@@ -1,4 +1,4 @@
-@extends('signup_layout')
+@extends('layouts.signup_layout')
 @section('photo_section')
     <img src="{{ asset('assets/images/sign_in.png') }}" alt="Hyper Connect Logo">
 @endsection
