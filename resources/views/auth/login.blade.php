@@ -60,5 +60,5 @@
             Sign in with OTP
         </a>
     </div>
-    <p class="mt-3 text-center text-small">New to Canam? <a class="text-danger" href="/signup">Create an account</a></p>
+    <p class="mt-3 text-center text-small">New to Canam? <a class="text-danger" href="/register">Create an account</a></p>
 @endsection
