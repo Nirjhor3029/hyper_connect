@@ -13,7 +13,7 @@
     <form id="loginForm" method="POST" action="{{ route('login') }}">
         @csrf
         <div class="form-group float-group  position-relative">
-            <input type="email" class="form-control form-input" placeholder="" id="email" name="email" required>
+            <input type="email" value="{{ old('email') }}" class="form-control form-input {{ $errors->has('email') ? 'is-invalid' : '' }}" placeholder="" id="email" name="email" required>
             <label>Email</label>
             <span class="input-field-icon">
                 <i class="bi bi-envelope"></i>
@@ -25,7 +25,7 @@
             @endif
         </div>
         <div class="form-group float-group  position-relative">
-            <input type="password" class="form-control form-input" id="password" name="password" placeholder="" required>
+            <input type="password" value="{{ old('password') }}" class="form-control form-input {{ $errors->has('password') ? 'is-invalid' : '' }}" id="password" name="password" placeholder="" required>
             <label for="password">Password</label>
             <span class="input-field-icon">
                 <i class="bi bi-bi bi-eye-slash password-icon"></i>
@@ -52,10 +52,10 @@
     </form>
     <div class="text-center my-3">Or</div>
     <div style="display: flex; gap: 10px;">
-        <button class="google-btn">
+        <a href="{{ route('auth.google') }}" class="google-btn">
             <img src="https://img.icons8.com/fluency/48/google-logo.png" alt="google-logo" />
             Google
-        </button>
+        </a>
         <a href="/signin-otp" class="btn btn-default google-btn">
             Sign in with OTP
         </a>

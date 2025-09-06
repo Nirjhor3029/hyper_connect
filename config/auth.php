@@ -13,9 +13,13 @@ return [
     |
     */
 
+    // 'defaults' => [
+    //     'guard'     => 'web',
+    //     'passwords' => 'users',
+    // ],
     'defaults' => [
-        'guard'     => 'web',
-        'passwords' => 'users',
+        'guard' => 'student',
+        'passwords' => 'students',
     ],
 
     /*
@@ -103,6 +107,12 @@ return [
     */
 
     'passwords' => [
+        'students' => [
+            'provider' => 'students',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
         'users' => [
             'provider' => 'users',
             'table'    => 'password_resets',

@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\UniversitiesController;
+use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\Mails\MailController;
 use App\Http\Controllers\StudentAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,8 +41,17 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
+Route::get('/send-mail',[MailController::class,'sendTestMail'] );
+Route::get('/send-otp-by-mail',[MailController::class,'sendOtpByMail'] );
+
 // Auth::routes(['register' => false]);
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::controller(SocialiteController::class)->as('auth.')->group(function () {
+    Route::get('auth/google', 'googleLogin')->name('google');
+    Route::get('auth/google-callback', 'handleGoogleCallback')->name('google.callback');
+});
+Route::get('auth/google', [SocialiteController::class, 'googleLogin'])->name('auth.google');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
@@ -232,17 +243,17 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 });
 
 
-Route::prefix('student')->name('student.')->group(function () {
-    Route::get('login', [StudentAuthController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [StudentAuthController::class, 'login']);
-    Route::get('register', [StudentAuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('register', [StudentAuthController::class, 'register'])->name('register.submit');
+Route::prefix('')->name('student.')->group(function () {
+    // Route::get('login', [StudentAuthController::class, 'showLoginForm'])->name('login');
+    // Route::post('login', [StudentAuthController::class, 'login']);
+    // Route::get('register', [StudentAuthController::class, 'showRegisterForm'])->name('register');
+    // Route::post('register', [StudentAuthController::class, 'register'])->name('register.submit');
 
-    Route::post('send-otp', [StudentAuthController::class, 'send'])->name('sendOtp');
-    Route::post('/send-otp/verify', [StudentAuthController::class, 'verify'])->name('verifyOtp');
+    // Route::post('send-otp', [StudentAuthController::class, 'send'])->name('sendOtp');
+    // Route::post('/send-otp/verify', [StudentAuthController::class, 'verify'])->name('verifyOtp');
 
 
-    Route::middleware(['auth:student'])->group(function () {
+    Route::middleware(['auth:student','verified'])->group(function () {
         Route::get('/dashboard', [StudentAuthController::class, 'dashboard'])->name('dashboard');
         Route::put('/data-update/{student}', [StudentAuthController::class, 'dataUpdate'])->name('data.update');
         Route::get('/data-show', [StudentAuthController::class, 'dataShow'])->name('data.show');

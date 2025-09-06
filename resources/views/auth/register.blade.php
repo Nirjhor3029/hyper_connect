@@ -78,5 +78,5 @@
         <img src="https://img.icons8.com/fluency/48/google-logo.png" alt="google-logo" />
         Sign up with Google
     </button>
-    <p class="mt-3 text-center text-small">Already a member? <a href="/signin" class="text-danger">Sign in</a></p>
+    <p class="mt-3 text-center text-small">Already a member? <a href="/login" class="text-danger">Sign in</a></p>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
 use DateTimeInterface;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +14,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Student extends Authenticatable implements HasMedia
+class Student extends Authenticatable implements HasMedia, MustVerifyEmail 
 {
     use Notifiable, SoftDeletes, InteractsWithMedia, HasFactory;
 
@@ -86,7 +87,7 @@ class Student extends Authenticatable implements HasMedia
         'deleted_at',
         'password',
     ];
-    protected $hidden = ['password'];
+    protected $hidden = ['password','remember_token'];
 
     protected function serializeDate(DateTimeInterface $date)
     {
