@@ -47,6 +47,8 @@ class Student extends Authenticatable implements HasMedia, MustVerifyEmail
         'user_id',
         'name',
         'email',
+        'email_verified_at',
+        'google_id',
         'phone',
         'nationality_id',
         'country_id',
