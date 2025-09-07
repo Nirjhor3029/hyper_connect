@@ -27,8 +27,9 @@ class Kernel extends HttpKernel
         'signed'           => \App\Http\Middleware\ValidateSignature::class,
         'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'student' => \App\Http\Middleware\RedirectIfNotStudent::class,
-
+        'student'          => \App\Http\Middleware\RedirectIfNotStudent::class,
+        'admin.auth'       => \App\Http\Middleware\AdminAuthMiddleware::class,
+        'auth.gates' => \App\Http\Middleware\AuthGates::class,
     ];
 
     protected $middlewareGroups = [
@@ -39,7 +40,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\AuthGates::class,
+            // \App\Http\Middleware\AuthGates::class,
             \App\Http\Middleware\SetLocale::class,
         ],
         'api' => [

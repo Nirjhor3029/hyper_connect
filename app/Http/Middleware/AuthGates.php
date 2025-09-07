@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Role;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthGates
@@ -11,6 +12,7 @@ class AuthGates
     public function handle($request, Closure $next)
     {
         $user = auth()->user();
+        // $user = Auth::guard('admin')->user() ?? Auth::user();
 
         if (! $user) {
             return $next($request);

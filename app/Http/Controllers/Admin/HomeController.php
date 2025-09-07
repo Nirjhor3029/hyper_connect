@@ -11,7 +11,10 @@ class HomeController
 {
     public function index()
     {
-        $user = auth()->user();
+        // return "admin home";
+        // $user = auth()->user();
+        $user = auth()->guard('admin')->user();
+        // dd($user);
 
         $month = request('month');
 

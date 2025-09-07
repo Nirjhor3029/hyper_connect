@@ -51,6 +51,11 @@ return [
             'provider' => 'students',
         ],
 
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
         'api' => [
             'driver'   => 'token',
             'provider' => 'users',
@@ -84,6 +89,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Student::class,
         ],
+
 
         // 'users' => [
         //     'driver' => 'database',

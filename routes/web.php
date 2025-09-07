@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AgentStudentController;
+use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\CoursesController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\UniversitiesController;
@@ -41,8 +43,8 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
-Route::get('/send-mail',[MailController::class,'sendTestMail'] );
-Route::get('/send-otp-by-mail',[MailController::class,'sendOtpByMail'] );
+Route::get('/send-mail', [MailController::class, 'sendTestMail']);
+Route::get('/send-otp-by-mail', [MailController::class, 'sendOtpByMail']);
 
 // Auth::routes(['register' => false]);
 Auth::routes(['verify' => true]);
@@ -53,8 +55,18 @@ Route::controller(SocialiteController::class)->as('auth.')->group(function () {
 });
 Route::get('auth/google', [SocialiteController::class, 'googleLogin'])->name('auth.google');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
-    Route::get('/', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'], function () {
+    Route::get('login', [AdminLoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AdminLoginController::class, 'login']);
+
+    Route::any('logout', [AdminLoginController::class, 'logout'])->name('logout');
+});
+// Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['admin.auth','auth.gates']], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
@@ -253,7 +265,7 @@ Route::prefix('')->name('student.')->group(function () {
     // Route::post('/send-otp/verify', [StudentAuthController::class, 'verify'])->name('verifyOtp');
 
 
-    Route::middleware(['auth:student','verified'])->group(function () {
+    Route::middleware(['auth:student', 'verified'])->group(function () {
         Route::get('/dashboard', [StudentAuthController::class, 'dashboard'])->name('dashboard');
         Route::put('/data-update/{student}', [StudentAuthController::class, 'dataUpdate'])->name('data.update');
         Route::get('/data-show', [StudentAuthController::class, 'dataShow'])->name('data.show');
@@ -267,9 +279,5 @@ Route::prefix('')->name('student.')->group(function () {
         Route::get('/university-show', [UniversitiesController::class, 'universityShow'])->name('university.show');
         Route::get('/university/{id}/courses', [UniversitiesController::class, 'showCourses'])->name('university.courses');
         Route::get('/university/{id}/details', [UniversitiesController::class, 'universityDetails'])->name('university.details');
-
-
-
     });
 });
-

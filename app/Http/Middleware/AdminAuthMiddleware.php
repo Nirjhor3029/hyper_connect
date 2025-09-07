@@ -7,21 +7,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class RedirectIfNotStudent
+class AdminAuthMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next, $guard = 'student')
+    public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::guard($guard)->check()) {
-            return redirect()->route('student.login');
+        if (!Auth::guard('admin')->check()) {
+            return redirect()->route('admin.login');
         }
 
-        // Optional: force student guard
-        Auth::shouldUse('student');
+        //Tell Laravel: for this request, use the admin guard by default
+        Auth::shouldUse('admin');
 
         return $next($request);
     }

@@ -31,7 +31,8 @@
                 <li class="c-header-nav-item dropdown">
                     <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                         aria-expanded="false">
-                        <i class="fa fa-user mr-2"></i> {{ auth()->user()->name }}
+                        <i class="fa fa-user mr-2"></i> 
+                        {{ auth()->guard('admin')->user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="{{ route('admin.profile.index') }}">
