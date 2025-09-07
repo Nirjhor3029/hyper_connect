@@ -21,22 +21,23 @@ use Illuminate\Support\Facades\Hash;
 
 class StudentAuthController extends Controller
 {
-    public function showLoginForm() {
-        return view('student.auth.login');
-    }
-    public function dashboard() {
+    // public function showLoginForm() {
+    //     return view('student.auth.login');
+    // }
+    public function dashboard()
+    {
         return view('student.dashboard');
     }
 
-    public function login(Request $request) {
-        $credentials = $request->only('phone', 'password');
+    // public function login(Request $request) {
+    //     $credentials = $request->only('phone', 'password');
 
-        if (Auth::guard('student')->attempt($credentials)) {
-            return redirect()->route('student.dashboard');
-        }
+    //     if (Auth::guard('student')->attempt($credentials)) {
+    //         return redirect()->route('student.dashboard');
+    //     }
 
-        return back()->withErrors(['phone' => 'Invalid credentials']);
-    }
+    //     return back()->withErrors(['phone' => 'Invalid credentials']);
+    // }
     public function logout(Request $request)
     {
         Auth::guard('student')->logout();
@@ -54,17 +55,15 @@ class StudentAuthController extends Controller
         $countries = Country::pluck('name', 'id');
 
 
-        return view('student.profile.index', compact('user','countries'));
+        return view('student.profile.index', compact('user', 'countries'));
     }
     public function dataShow()
     {
         $student = Student::where('id', Auth::guard('student')->user()->id)->first();
 
-        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent','confirm_country','confirm_university','confirm_program' ,'confirm_subject', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'studentApplications', 'studentCommissionDistributions');
+        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'confirm_country', 'confirm_university', 'confirm_program', 'confirm_subject', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'studentApplications', 'studentCommissionDistributions');
 
         return view('student.profile.data_show', compact('student'));
-
-
     }
     public function dataEdit()
     {
@@ -94,10 +93,7 @@ class StudentAuthController extends Controller
         $student = Student::where('id', Auth::guard('student')->user()->id)->first();
         $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments');
 
-        return view('student.profile.data_edit', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users','max_education_levels'));
-
-
-
+        return view('student.profile.data_edit', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users', 'max_education_levels'));
     }
     public function updateProfile(Request $request)
     {
@@ -163,51 +159,51 @@ class StudentAuthController extends Controller
 
 
 
-    public function showRegisterForm() {
+    // public function showRegisterForm() {
 
-        $countries = Country::pluck('name', 'id');
-        $prefixes = Country::pluck('mobile_no_prefix', 'id');
-        return view('student.auth.new',compact('countries','prefixes'));
-    }
+    //     $countries = Country::pluck('name', 'id');
+    //     $prefixes = Country::pluck('mobile_no_prefix', 'id');
+    //     return view('student.auth.new',compact('countries','prefixes'));
+    // }
 
-    public function register(Request $request) {
-        $request->validate([
-            'phone' => 'required|unique:students',
-            'otp' => 'required',
-            'password' => 'required|confirmed',
-            'name' => 'required',
-            'country_id' => 'required',
-            'address' => 'required'
-        ]);
+    // public function register(Request $request) {
+    //     $request->validate([
+    //         'phone' => 'required|unique:students',
+    //         'otp' => 'required',
+    //         'password' => 'required|confirmed',
+    //         'name' => 'required',
+    //         'country_id' => 'required',
+    //         'address' => 'required'
+    //     ]);
 
-        $otpRecord = Otp::where('phone', $request->phone)->where('otp', $request->otp)->first();
+    //     $otpRecord = Otp::where('phone', $request->phone)->where('otp', $request->otp)->first();
 
-        if (!$otpRecord) {
-            return back()->withErrors(['otp' => 'Invalid OTP'])->withInput();
+    //     if (!$otpRecord) {
+    //         return back()->withErrors(['otp' => 'Invalid OTP'])->withInput();
 
-        }
+    //     }
 
-        $student = Student::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'country_id' => $request->country_id,
-            'address' => $request->address,
-        ]);
+    //     $student = Student::create([
+    //         'name' => $request->name,
+    //         'phone' => $request->phone,
+    //         'email' => $request->email,
+    //         'password' => bcrypt($request->password),
+    //         'country_id' => $request->country_id,
+    //         'address' => $request->address,
+    //     ]);
 
-        $otpRecord->update(['verified' => true]);
+    //     $otpRecord->update(['verified' => true]);
 
-        Auth::guard('student')->login($student);
+    //     Auth::guard('student')->login($student);
 
-        return redirect()->route('student.dashboard');
-    }
+    //     return redirect()->route('student.dashboard');
+    // }
 
     public function send(Request $request)
     {
         $request->validate(['phone' => 'required']);
 
-        $exist = Student::where('phone', $request->phone) ->first();
+        $exist = Student::where('phone', $request->phone)->first();
         if ($exist) {
             return response()->json(['status' => 'error', 'message' => "This Phone Number Already Have an Account Please Login"]); // return OTP for testing only
 
@@ -243,6 +239,50 @@ class StudentAuthController extends Controller
             return response()->json(['status' => 'verified']);
         } else {
             return response()->json(['status' => 'invalid']);
+        }
+    }
+
+    public function verifyOtpFormShow(Request $request)
+    {
+        $email = $request->session()->get('email');
+        return view('auth.signup_otp', compact('email'));
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        // $otp = Otp::where('email', $request->email)
+        //     ->where('otp', $request->otp)
+        //     ->first();
+
+        // Collect user input (array of digits)
+        $otp = implode('', $request->otp);
+        $email = $request->email;
+        // $request->merge(['otp' => $otpInput]);
+
+        // return $request->all();
+
+        // $request->validate([
+        //     'email' => 'required',
+        //     'otp' => 'required'
+        // ]);
+        $student = Student::where('email', $email)->first();
+        if (!$student) {
+            return response()->json(['status' => 'error', 'message' => "This Email Address Doesn't Have an Account Please Register"]); // return OTP for testing only
+        }
+
+        // return $student;
+
+        if ($student->otp == $otp) {
+            $student->email_verified_at = now();
+            $student->save();
+            Auth::login($student);
+            return redirect()->route('student.dashboard')->with('success', 'Successfully logged in');
+            // return response()->json(['status' => 'verified']);
+        } else {
+            // return response()->json(['status' => 'Invalid OTP']);
+            return redirect()->back()
+            ->with('email', $student->email)
+            ->with('error', 'Invalid OTP');
         }
     }
 
@@ -327,9 +367,5 @@ class StudentAuthController extends Controller
         } else {
             return redirect()->route('student.data.show');
         }
-
-
     }
-
-
 }

@@ -31,9 +31,14 @@
     <p>
         Please enter the verification code shared to
         <br>
-        <strong>91****8345</strong>
+        <strong>
+            {{-- 91****8345 --}}
+            {{ session('email') ?? ($email ?? 'your email address') }}
+        </strong>
     </p>
-    <form id="signupForm">
+
+    <form id="" method="POST" action="{{ route('student.otp.verify') }}">
+        @csrf
         {{-- <div class=" position-relative float-group">
             <input type="email" name="email" class="form-control"  required>
             <label>Email</label>
@@ -41,12 +46,22 @@
                 <i class="bi bi-envelope"></i>
             </span>
         </div> --}}
-        <div class="otp-inputs d-flex justify-content-center gap-2 mb-3">
-            <input type="text" maxlength="1" class="otp-field form-control text-center" />
-            <input type="text" maxlength="1" class="otp-field form-control text-center" />
-            <input type="text" maxlength="1" class="otp-field form-control text-center" />
-            <input type="text" maxlength="1" class="otp-field form-control text-center" />
+        <input type="hidden" name="email" value="{{ session('email') ?? ($email ?? '') }}">
+        <div class="otp-inputs d-flex  gap-4 mb-3">
+            <input type="text" name="otp[]" maxlength="1" class="otp-field form-control text-center"
+                style="border-color: {{ session('error') ? 'red' : '' }}" />
+            <input type="text" name="otp[]" maxlength="1" class="otp-field form-control text-center"
+                style="border-color: {{ session('error') ? 'red' : '' }}" />
+            <input type="text" name="otp[]" maxlength="1" class="otp-field form-control text-center"
+                style="border-color: {{ session('error') ? 'red' : '' }}" />
+            <input type="text" name="otp[]" maxlength="1" class="otp-field form-control text-center"
+                style="border-color: {{ session('error') ? 'red' : '' }}" />
         </div>
+        @if (session('error'))
+            {{-- <div class="alert alert-danger" role="alert"> --}}
+                <small class="text-danger">{{ session('error') }}</small>
+            {{-- </div> --}}
+        @endif
         <p class="mt-3 text-center text-small">
             Still not received OTP? <a href="/resend-otp" class="text-danger">Resend OTP</a>
         </p>

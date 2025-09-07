@@ -74,9 +74,9 @@
         <button type="submit" class="btn btn-primary">Sign up</button>
     </form>
     <div class="text-center my-3">Or</div>
-    <button class="google-btn">
+    <a href="{{ route('auth.google') }}" class="google-btn">
         <img src="https://img.icons8.com/fluency/48/google-logo.png" alt="google-logo" />
         Sign up with Google
-    </button>
+    </a>
     <p class="mt-3 text-center text-small">Already a member? <a href="/login" class="text-danger">Sign in</a></p>
 @endsection

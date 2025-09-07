@@ -18,14 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/signup', function () {
     return view('signup');
 });
-Route::get('/signup-otp', function () {
-    return view('signup_otp');
-});
+
 Route::get('/signin', function () {
-    return view('signin');
+    return view('auth.signin');
 });
 Route::get('/signin-otp', function () {
-    return view('signin_otp');
+    return view('auth.signin_otp');
 });
 Route::get('/forgot-password', function () {
     return view('forgot_password');
@@ -62,7 +60,7 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
     Route::any('logout', [AdminLoginController::class, 'logout'])->name('logout');
 });
 // Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
-Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['admin.auth','auth.gates']], function () {
+Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['admin.auth', 'auth.gates']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
@@ -263,6 +261,12 @@ Route::prefix('')->name('student.')->group(function () {
 
     // Route::post('send-otp', [StudentAuthController::class, 'send'])->name('sendOtp');
     // Route::post('/send-otp/verify', [StudentAuthController::class, 'verify'])->name('verifyOtp');
+    
+    Route::get('verify-otp', [StudentAuthController::class, 'verifyOtpFormShow'])->name('otp.form');
+    Route::post('verify-otp', [StudentAuthController::class, 'verifyOtp'])->name('otp.verify');
+    // Route::get('/signup-otp', function () {
+    //     return view('auth.signup_otp');
+    // });
 
 
     Route::middleware(['auth:student', 'verified'])->group(function () {
