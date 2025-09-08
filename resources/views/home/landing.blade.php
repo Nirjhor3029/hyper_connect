@@ -5,7 +5,7 @@
     <div id="heroCarousel" class="carousel slide hero-slider" data-bs-ride="carousel">
         <div class="carousel-inner">
             @php
-                $images = ['hero_slider_1.png', 'hero_slider_2.png', 'hero_slider_3.png'];
+                $images = ['hero_slider_11.png', 'hero_slider_21.png', 'hero_slider_31.png'];
             @endphp
             @foreach ($images as $key => $item)
                 <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
