@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\UniversitiesController;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Mails\MailController;
 use App\Http\Controllers\StudentAuthController;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,9 @@ Route::get('/set-password', function () {
     return view('set_password');
 });
 
-Route::redirect('/', '/login');
+Route::get('/', [LandingPageController::class, 'index'] );
+
+// Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
