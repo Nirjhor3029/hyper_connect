@@ -22,3 +22,11 @@ yarn-error.log
 /storage
 /composer.lock
 
+
+/node_modules
+/public/storage
+/storage/*.key
+/storage/app/*
+/storage/framework/*
+/storage/logs/*
+/bootstrap/cache/*
