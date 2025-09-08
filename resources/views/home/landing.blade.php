@@ -206,7 +206,7 @@
                     </div>
 
                     <!-- Advertisement Banners -->
-                    <div class="ad-banner-container">
+                    <div class="add-banner-container">
                         <img src="{{ asset('assets/home/images/add_banner_right_side.png') }}" height="400px;" alt="" srcset="">
                     </div>
                     {{-- <div class="ad-banner mt-4">
