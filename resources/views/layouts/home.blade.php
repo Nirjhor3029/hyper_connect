@@ -170,7 +170,8 @@
     @yield('main_content')
 
 
-
+    <div class="rounded-edge">
+    </div>
     <div class="footer-section">
         <!-- Newsletter -->
         <div class="newsletter">
@@ -250,6 +251,7 @@
             </div>
         </footer>
     </div>
+
 
 
     <!-- Scripts -->

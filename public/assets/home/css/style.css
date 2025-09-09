@@ -376,27 +376,34 @@ body {
 }
 
 
+/* HTML: <div class="rounded-edge"></div> */
+.rounded-edge {
+    height: 150px;
+    /* aspect-ratio: 3/2; */
+    /* update the 85% to control the curvature
+        you can also update the 50% to control the position
+    */
+    /* clip-path: ellipse(85% 100% at 50% 0); */
+    clip-path: ellipse(68% 100% at 50% 0);
+    background: var(--secondary-bg-color);
+}
 
 /* footer-section */
-
 .footer-section {
     margin: 0 10% 0 10%;
 }
 
 /* Newsletter */
 .newsletter {
-    /* background: var(--dark-color); */
-    /* color: white; */
-    /* padding: 40px 0; */
-    /* margin-top: 80px; */
-
     background: var(--dark-blue);
     color: white;
     padding: 60px 40px;
-    margin: 80px 2% 60px 2%;
+    margin: -76px 2% 60px 2%;
     border-radius: 10px;
-    /* Box shadow */
     box-shadow: 0px 20px 39px -16px #252627;
+    /* z-index: 100; */
+    position: relative;
+    /* display: none; */
 }
 
 
@@ -571,6 +578,7 @@ body {
     object-fit: contain;
     cursor: pointer;
 }
+
 .university-logos .logo:hover {
     transform: scale(1.1);
     transition: transform 0.3s ease;
