@@ -101,43 +101,43 @@
                         $university_logos = [
                             [
                                 'image_path' => 'university_logo_1.png',
-                                'href' => '#',
+                                'href' => 'https://www.apu.edu.my',
                             ],
                             [
                                 'image_path' => 'university_logo_2.png',
-                                'href' => '#',
+                                'href' => 'https://cyberjaya.edu.my',
                             ],
                             [
                                 'image_path' => 'university_logo_3.png',
-                                'href' => '#',
+                                'href' => 'https://www.msu.edu.my',
                             ],
                             [
                                 'image_path' => 'university_logo_4.png',
-                                'href' => '#',
+                                'href' => 'https://sunwayuniversity.edu.my',
                             ],
                             [
                                 'image_path' => 'university_logo_5.png',
-                                'href' => '#',
+                                'href' => 'https://www.ucsiuniversity.edu.my',
                             ],
                             [
                                 'image_path' => 'university_logo_6.png',
-                                'href' => '#',
+                                'href' => 'https://mahsa.edu.my',
                             ],
                             [
                                 'image_path' => 'university_logo_7.png',
-                                'href' => '#',
+                                'href' => 'https://binary.edu.my',
                             ],
                             [
                                 'image_path' => 'university_logo_8.png',
-                                'href' => '#',
+                                'href' => 'https://www.perdanauniversity.edu.my',
                             ],
                             [
                                 'image_path' => 'university_logo_9.png',
-                                'href' => '#',
+                                'href' => 'https://university.taylors.edu.my/en.html',
                             ],
                             [
                                 'image_path' => 'university_logo_10.png',
-                                'href' => '#',
+                                'href' => 'https://www.mmu.edu.my',
                             ],
                         ];
                         // $university_logos = range(1, 10);
