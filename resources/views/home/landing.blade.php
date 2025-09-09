@@ -146,7 +146,7 @@
                     <div class="university-logos-wrapper">
                         <div class="university-logos">
                             @foreach ($university_logos as $logo)
-                                <a href="{{ $logo['href'] }}" class="logo">
+                                <a href="{{ $logo['href'] }}" target="_blank" class="logo">
                                     <img src="{{ asset('assets/home/images/university/' . $logo['image_path']) }}"
                                         class="logo" alt="">
                                 </a>
