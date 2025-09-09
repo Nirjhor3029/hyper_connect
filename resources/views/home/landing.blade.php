@@ -260,21 +260,37 @@
 
                         <form>
                             <div class="mb-3">
-                                <label class="form-label">Your Name</label>
-                                <input type="text" class="form-control" placeholder="Your Name">
+                                <label class="form-label" for="name">Your Name</label>
+                                <input type="text" name="name" class="form-control" id="name"
+                                    placeholder="Your Name...">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Your Email</label>
-                                <input type="email" class="form-control" placeholder="Your Email">
+                                {{-- <label class="form-label" for="email">Your Email</label> --}}
+                                <input type="email" name="email" class="form-control" id="email"
+                                    placeholder="Your Email...">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Message</label>
-                                <textarea class="form-control" rows="3" placeholder="Send us your message..."></textarea>
+                                {{-- <label class="form-label" for="email">Your Email</label> --}}
+                                <input type="tel" name="mobile" class="form-control"
+                                    placeholder="Your Number...">
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="nationality">Nationality</label>
+                                    <input type="text" name="nationality" class="form-control" id="nationality"
+                                        placeholder="Nationality...">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="dob">Date of Birth</label>
+                                    <input type="date" name="dob" class="form-control date" id="dob"
+                                        placeholder="Date of Birth...">
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control"
-                                    placeholder="Please leave your Whatsapp num...">
+                                <label class="form-label" for="message">Message</label>
+                                <textarea class="form-control" name="message" id="message" rows="3" placeholder="Please leave your message here..."></textarea>
                             </div>
+
                             <button type="submit" class="btn btn-inquiry">Send Inquiry</button>
                         </form>
                     </div>
