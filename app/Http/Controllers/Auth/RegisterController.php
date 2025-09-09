@@ -118,7 +118,8 @@ class RegisterController extends Controller
                 'subject' => 'OTP Verification',
                 'otp' =>  $otp,
             ];
-            Mail::to('me.nirjhor007@gmail.com')->send(new SendOtpMail($data));
+            Mail::to($user->email)->send(new SendOtpMail($data));
+            // Mail::to('me.nirjhor007@gmail.com')->send(new SendOtpMail($data));
         } catch (\Throwable $th) {
             //throw $th;
             // Handle the error, maybe log it or notify admin
