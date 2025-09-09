@@ -60,10 +60,11 @@
                                 <label class="form-label" for="search">
                                     <h3 class="">Where to study</h3>
                                 </label>
-                                <input type="text" class="form-control" name="search" id="search" placeholder="What you are looking for">
+                                <input type="text" class="form-control" name="search" id="search"
+                                    placeholder="What you are looking for">
                             </div>
                         </div>
-                        
+
 
                         {{-- <p class="mb-4">Choose your way forward</p> --}}
                         <div class="row g-3">
@@ -91,8 +92,74 @@
                         </div>
                     </div>
 
+
+
+
+
+
+                    @php
+                        $university_logos = [
+                            [
+                                'image_path' => 'university_logo_1.png',
+                                'href' => '#',
+                            ],
+                            [
+                                'image_path' => 'university_logo_2.png',
+                                'href' => '#',
+                            ],
+                            [
+                                'image_path' => 'university_logo_3.png',
+                                'href' => '#',
+                            ],
+                            [
+                                'image_path' => 'university_logo_4.png',
+                                'href' => '#',
+                            ],
+                            [
+                                'image_path' => 'university_logo_5.png',
+                                'href' => '#',
+                            ],
+                            [
+                                'image_path' => 'university_logo_6.png',
+                                'href' => '#',
+                            ],
+                            [
+                                'image_path' => 'university_logo_7.png',
+                                'href' => '#',
+                            ],
+                            [
+                                'image_path' => 'university_logo_8.png',
+                                'href' => '#',
+                            ],
+                            [
+                                'image_path' => 'university_logo_9.png',
+                                'href' => '#',
+                            ],
+                            [
+                                'image_path' => 'university_logo_10.png',
+                                'href' => '#',
+                            ],
+                        ];
+                        // $university_logos = range(1, 10);
+                    @endphp
                     <!-- University Logos -->
-                    <div class="university-logos">
+                    <div class="university-logos-wrapper">
+                        <div class="university-logos">
+                            @foreach ($university_logos as $logo)
+                                <a href="{{ $logo['href'] }}" class="logo">
+                                    <img src="{{ asset('assets/home/images/university/' . $logo['image_path']) }}"
+                                        class="logo" alt="">
+                                </a>
+                            @endforeach
+                            @for ($i = 0; $i < 10; $i++)
+                                <img src="{{ asset('assets/home/images/university/university_logo_' . ($i + 1) . '.png') }}"
+                                    class="logo" alt="">
+                            @endfor
+                        </div>
+                    </div>
+
+                    <!-- University Logos -->
+                    {{-- <div class="university-logos">
                         <div class="text-center" style="width: 120px;">
                             <div
                                 style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
@@ -117,7 +184,12 @@
                                 <span style="font-weight: bold; color: #666;">MSU</span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+
+
+
+
+
 
                     <!-- University Cards -->
                     <div class="row">
@@ -133,7 +205,8 @@
                                     </div>
                                     <div class="card-content">
                                         <div class="title-container">
-                                            <img src="{{ url('/assets/home/images/university/university_pp_1.png') }}" alt="" srcset="">
+                                            <img src="{{ url('/assets/home/images/university/university_pp_1.png') }}"
+                                                alt="" srcset="">
                                             <h6>Title</h6>
                                         </div>
                                         <p class="text-muted small mb-3">Brief Info</p>
@@ -199,7 +272,8 @@
                                 <textarea class="form-control" rows="3" placeholder="Send us your message..."></textarea>
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="Please leave your Whatsapp num...">
+                                <input type="text" class="form-control"
+                                    placeholder="Please leave your Whatsapp num...">
                             </div>
                             <button type="submit" class="btn btn-inquiry">Send Inquiry</button>
                         </form>
@@ -207,7 +281,8 @@
 
                     <!-- Advertisement Banners -->
                     <div class="add-banner-container">
-                        <img src="{{ asset('assets/home/images/add_banner_right_side.png') }}" height="400px;" alt="" srcset="">
+                        <img src="{{ asset('assets/home/images/add_banner_right_side.png') }}" height="400px;"
+                            alt="" srcset="">
                     </div>
                     {{-- <div class="ad-banner mt-4">
                         <div style="background: #2c3e50; color: white; padding: 20px; text-align: center;">
@@ -228,3 +303,29 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        window.addEventListener('load', () => {
+            const logos = document.querySelector('.university-logos');
+            const logosWrapper = document.querySelector('.university-logos-wrapper');
+
+            // Duplicate the logos for infinite scroll
+            const clone = logos.innerHTML;
+            logos.innerHTML += clone;
+
+            let scrollAmount = 0;
+
+            function slide() {
+                scrollAmount += 1; // adjust speed
+                if (scrollAmount >= logos.scrollWidth / 2) {
+                    scrollAmount = 0; // reset to start
+                }
+                logos.style.transform = `translateX(-${scrollAmount}px)`;
+                requestAnimationFrame(slide);
+            }
+
+            slide();
+        });
+    </script>
+@endpush

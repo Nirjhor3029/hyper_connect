@@ -9,6 +9,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/home/css/style.css') }}">
 
+    <!-- Stack for page-specific CSS -->
+    @stack('styles')
 </head>
 
 <body>
@@ -239,7 +241,7 @@
                 <div class="terms-section">
                     <p>© @php echo date('Y'); @endphp All rights reserved By VenusIT.</p>
                     <img src="{{ asset('assets/images/hyper_connect_logo_no_bg.png') }}" height="60px"
-                            alt="Hyper Connect" srcset="">
+                        alt="Hyper Connect" srcset="">
                     <div class="terms-links">
                         <a href="#">Terms of Service</a>
                         <a href="#">Privacy Policy</a>
@@ -254,6 +256,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="{{ asset('assets/home/js/script.js') }}"></script>
+
+    <!-- Stack for page-specific scripts -->
+    @stack('scripts')
+
 </body>
 
 </html>
