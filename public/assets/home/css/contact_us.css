@@ -22,6 +22,7 @@
 .contact-us-card {
     /* max-width: 1000px; */
     max-width: 80vw;
+    /* min-height: 70vh; */
     margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
@@ -52,10 +53,10 @@
 .contact-us-info::before {
     content: '';
     position: absolute;
-   bottom: -72px;
-    right: -72px;
-    width: 230px;
-    height: 230px;
+    bottom: -4rem;
+    right: -4rem;
+    width: 16rem;
+    height: 16rem;
     background: rgb(255 255 255 / 29%);
     border-radius: 50%;
     opacity: 0.3;
@@ -64,10 +65,10 @@
 .contact-us-info::after {
     content: '';
     position: absolute;
-    bottom: 60px;
-    right: 56px;
-    width: 120px;
-    height: 120px;
+    bottom: 5rem;
+    right: 4rem;
+    width: 9rem;
+    height: 9rem;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 50%;
 }
@@ -161,7 +162,7 @@ textarea.form-control {
     font-size: 1.1rem;
     color: white;
     transition: all 0.3s ease;
-    width: 50%;
+    width: 13rem;
     margin-top: 20px;
 }
 
@@ -186,7 +187,7 @@ textarea.form-control {
     }
 
     .contact-us-item {
-        justify-content: center;
+        /* justify-content: center; */
         text-align: left;
     }
 

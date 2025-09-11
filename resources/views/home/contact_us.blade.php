@@ -111,7 +111,7 @@
             <div class="contact-us-form-section">
 
                 <div class="contact-us-card">
-                    <div class="row g-0">
+                    <div class="row g-0" style="height: 100%;">
                         <!-- Contact Information Section -->
                         <div class="col-lg-5 contact-us-info-container">
                             <div class="contact-us-info">
@@ -188,9 +188,11 @@
                                         <textarea class="form-control" placeholder="Write your message.."></textarea>
                                     </div>
 
-                                    <button type="submit" class="btn btn-send">
-                                        Send Message
-                                    </button>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-send">
+                                            Send Message
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
