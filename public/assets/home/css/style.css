@@ -1,6 +1,6 @@
 :root {
     --primary-color: #1976d2;
-    --secondary-color: #f8f9fa;
+    --secondary-color: #F1F2F3;
     /* --dark-color: #2c3e50; */
     --dark-color: #2B2A29;
     --dark-blue: #0A142F;
@@ -17,6 +17,7 @@
 body {
     font-family: 'Arial', sans-serif;
     padding-left: var(--sidebar-width);
+    background-color: var(--secondary-color);
 }
 
 /* Fixed Sidebar */
@@ -159,7 +160,7 @@ body {
 }
 
 .navbar-nav .nav-link {
-    color: var(--dark-color) !important;
+    color: var(--dark-color);
     /* font-weight: 500; */
     margin: 0 15px;
     font-weight: bold;

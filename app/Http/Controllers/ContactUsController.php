@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LandingPageController extends Controller
+class ContactUsController extends Controller
 {
     public function index()
     {
@@ -50,6 +50,6 @@ class LandingPageController extends Controller
                 'href' => 'https://www.mmu.edu.my',
             ],
         ];
-        return view('home.landing',compact('university_logos'));
+        return view('home.contact_us',compact('university_logos'));
     }
 }
