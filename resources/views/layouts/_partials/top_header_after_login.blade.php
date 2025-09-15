@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg top-nav fixed-top">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{ asset('assets/images/hyper_connect_logo_no_bg.png') }}" alt="Logo" height="40">
+        </a>
+
+        <div class="navbar-nav ms-auto d-flex flex-row align-items-center">
+            <!-- Search -->
+            <div class="nav-item me-3">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="nav-item me-3 position-relative">
+                <i class="fas fa-bell nav-icon"></i>
+            </div>
+
+            <!-- Chat with badge -->
+            <div class="nav-item me-3 position-relative">
+                <i class="fas fa-comment nav-icon"></i>
+                <span class="badge bg-danger chat-badge">5</span>
+            </div>
+
+            <!-- Profile -->
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
+                    role="button" data-bs-toggle="dropdown">
+                    <div class="profile-avatar me-2">MS</div>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

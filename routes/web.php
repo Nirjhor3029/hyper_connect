@@ -5,12 +5,15 @@ use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProgramsController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\UniversitiesController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\ContactUsPageController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Mails\MailController;
+use App\Http\Controllers\ProgramPageController;
 use App\Http\Controllers\StudentAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +38,8 @@ Route::get('/set-password', function () {
 });
 
 Route::get('/', [LandingPageController::class, 'index'] )->name('home');
-Route::get('/contact-us', [ContactUsController::class, 'index'] )->name('contactUs');
+Route::get('/contact-us', [ContactUsPageController::class, 'index'] )->name('contactUs');
+Route::get('/programs', [ProgramPageController::class, 'index'] )->name('programs');
 
 // Route::redirect('/', '/login');
 Route::get('/home', function () {

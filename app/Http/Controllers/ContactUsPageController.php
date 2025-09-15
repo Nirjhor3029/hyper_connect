@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ContactUsController extends Controller
+class ContactUsPageController extends Controller
 {
     public function index()
     {

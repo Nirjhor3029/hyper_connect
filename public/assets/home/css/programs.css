@@ -1,0 +1,153 @@
+:root {
+    --top-headerafter-login-height: 70px;
+}
+
+.main-content {
+    margin-top: var(--top-headerafter-login-height);
+    padding: 20px;
+    min-height: calc(100vh - var(--top-headerafter-login-height));
+}
+
+.sidebar{
+        margin-top: var(--top-headerafter-login-height);
+}
+
+/* Nav-bar or header style: start */
+.top-nav {
+    background-color: #fff;
+    box-shadow: 0 4px 24px #0000000a;
+    z-index: 1030;
+    height: var(--top-headerafter-login-height);
+}
+
+.search-box {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid rgba(43, 42, 41, .1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s ease
+}
+
+.search-box:hover {
+    background-color: #f8f9fa
+}
+
+.search-box i {
+    color: #2b2a29;
+    font-size: 16px
+}
+
+.nav-icon {
+    color: #2b2a29;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color .3s ease
+}
+
+.nav-icon:hover {
+    color: #0b66c2
+}
+
+.chat-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fc5959 !important
+}
+
+.profile-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #df252a26;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #df252a;
+    font-weight: 500;
+    font-size: 14px
+}
+
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0)
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg)
+    }
+}
+
+/* Nav-bar or header style: end */
+
+
+
+
+/* Programs style: start */
+body {
+    background: #f8f9fa;
+}
+
+.programs-leftbar {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.program-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.program-card h5 {
+    font-weight: 600;
+}
+
+.program-meta {
+    font-size: 14px;
+    color: #555;
+}
+
+.filter-toggle {
+    display: none;
+}
+
+.search-bar {
+    display: none;
+    max-width: 250px;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-institutes {
+    display: none;
+    margin-top: 10px;
+}
+
+@media (max-width: 991px) {
+    .programs-leftbar {
+        display: none;
+    }
+
+    .filter-toggle {
+        display: block;
+        margin-bottom: 15px;
+    }
+}
+
+/* Programs style: end */

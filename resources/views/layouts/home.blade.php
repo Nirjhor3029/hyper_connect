@@ -7,15 +7,15 @@
     <title>Hyper Connect - Education Platform</title>
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"> --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
 
-    
+
+
     {{-- CDNs in Local: start --}}
     <link rel="stylesheet" href="{{ asset('assets/home/css/cdns/bootstrap-5.3.0-bootstrap.min.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('assets/home/css/cdns/font-awesome-6.4.0-all.min.css') }}"> --}}
     {{-- CDNs in Local: end --}}
-    
-    
+
+
     <link rel="stylesheet" href="{{ asset('assets/home/css/style.css') }}">
 
     <!-- Stack for page-specific CSS -->
@@ -31,70 +31,12 @@
 
 <body>
     <!-- Fixed Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-item">
-            <i class="fas fa-home"></i>
-        </div>
-        <div class="sidebar-item">
-            <i class="fas fa-user"></i>
-        </div>
-        <div class="sidebar-item">
-            <i class="fas fa-graduation-cap"></i>
-        </div>
-        <div class="sidebar-item">
-            <i class="fas fa-book"></i>
-        </div>
-        <div class="sidebar-item">
-            <i class="fas fa-envelope"></i>
-        </div>
-    </div>
+    @include('layouts._partials.sidebar')
 
-    <!-- Header -->
-    <header class="header" style="padding:10px 25px">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-lg-3">
-                    <a class="navbar-brand" href="#">
-                        {{-- HYPER<br><small style="font-size: 14px;">CONNECT</small> --}}
-                        <img src="{{ asset('assets/images/hyper_connect_logo_no_bg.png') }}" height="60px"
-                            alt="Hyper Connect" srcset="">
-                    </a>
-                </div>
-                <div class="col-lg-8">
-                    <nav class="navbar navbar-expand-lg">
-                        <div class="navbar-nav mx-auto">
-                            <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
-                            <a class="nav-link" href="#">About Us</a>
-                            <a class="nav-link" href="#">Services</a>
-                            <a class="nav-link {{ request()->routeIs('contactUs') ? 'active' : '' }}" href="{{ route('contactUs') }}" >Contact Us</a>
-                            <a class="nav-link" href="/login">Sign In</a>
-                        </div>
-                    </nav>
-                </div>
-                {{-- <div class="col-lg-1">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user-circle"></i>
-                            {{ auth()->user()->name ?? 'User' }}
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </div>
-
-                </div> --}}
-
-            </div>
-        </div>
-    </header>
     
+    @yield('header')
+    
+
 
     @yield('main_content')
 
@@ -188,11 +130,11 @@
     <script src="{{ asset('assets/home/js/cdns/bootstrap-5.3.0.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/home/js/cdns/jquery-3.7.0.min.js') }}"></script>
     {{-- CDNs local: End --}}
-    
-    
+
+
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> --}}
-    
+
     <script src="{{ asset('assets/home/js/script.js') }}"></script>
 
     <!-- Stack for page-specific scripts -->
