@@ -214,8 +214,10 @@
                     <!-- Inquiry Form -->
                     <div class="inquiry-form">
                         <h5 class="mb-3">Ask a Question</h5>
-                        <p class="small text-muted mb-4">Need more information about courses, places, and financial data
-                            related to English University in Malaysia? Please feel free to ask</p>
+                        <p class="small text-muted mb-4">
+                            Need more information about courses, places, and financial data
+                            related to Any University in Malaysia? Please feel free to ask
+                        </p>
 
                         <form>
                             <div class="mb-3">

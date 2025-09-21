@@ -676,6 +676,27 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'newsletter_access',
             ],
 
+            [
+                'id'    => 166,
+                'title' => 'inquiry_create',
+            ],
+            [
+                'id'    => 167,
+                'title' => 'inquiry_edit',
+            ],
+            [
+                'id'    => 168,
+                'title' => 'inquiry_show',
+            ],
+            [
+                'id'    => 169,
+                'title' => 'inquiry_delete',
+            ],
+            [
+                'id'    => 170,
+                'title' => 'inquiry_access',
+            ],
+
         ];
 
         Permission::insert($permissions);

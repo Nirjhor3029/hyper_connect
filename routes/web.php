@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AgentStudentController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProgramsController;
@@ -255,6 +256,12 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
     // Newsletter
     Route::delete('newsletters/destroy', [NewsletterController::class, 'massDestroy'])->name('newsletters.massDestroy');
     Route::resource('newsletters', 'NewsletterController');
+
+    // Inquiry
+    Route::delete('inquiries/destroy',[InquiryController::class, 'massDestroy'])->name('inquiries.massDestroy');
+    Route::post('inquiries/media', [InquiryController::class, 'storeMedia'])->name('inquiries.storeMedia');
+    Route::post('inquiries/ckmedia', [InquiryController::class, 'storeCKEditorImages'])->name('inquiries.storeCKEditorImages');
+    Route::resource('inquiries', InquiryController::class);
 
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
