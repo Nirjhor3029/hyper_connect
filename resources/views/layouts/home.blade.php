@@ -33,9 +33,9 @@
     <!-- Fixed Sidebar -->
     @include('layouts._partials.sidebar')
 
-    
+
     @yield('header')
-    
+
 
 
     @yield('main_content')
@@ -53,9 +53,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Enter your email">
-                            <button class="btn" type="button">Subscribe</button>
+                            <input type="email" id="newsletter-email" class="form-control"
+                                placeholder="Enter your email">
+                            <button class="btn" id="subscribe-btn" type="button">Subscribe</button>
                         </div>
+
+                        <!-- Success/Error Message -->
+                        <small id="newsletter-message" class="text-success" style="display:none;"></small>
                     </div>
                 </div>
             </div>
@@ -136,9 +140,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> --}}
 
     <script src="{{ asset('assets/home/js/script.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#subscribe-btn').on('click', function() {
+                let email = $('#newsletter-email').val();
+                let messageBox = $('#newsletter-message');
+
+
+                $.ajax({
+                    url: "{{ route('newsletters.subscribe') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        email: email
+                    },
+                    success: function(response) {
+                        messageBox
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .text(response.message)
+                            .show();
+                        $('#newsletter-email').val(''); // clear input
+                    },
+                    error: function(xhr) {
+                        let errorMsg = "Something went wrong!";
+                        if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            errorMsg = Object.values(xhr.responseJSON.errors)[0][0];
+                        }
+                        messageBox
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .text(errorMsg)
+                            .show();
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- Stack for page-specific scripts -->
     @stack('scripts')
+
 
 </body>
 

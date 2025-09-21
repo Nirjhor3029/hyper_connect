@@ -24,15 +24,15 @@ $(document).ready(function () {
     });
 
     // Newsletter subscription
-    $('.newsletter button').on('click', function () {
-        const email = $('.newsletter input').val();
-        if (email) {
-            alert('Thank you for subscribing to our newsletter!');
-            $('.newsletter input').val('');
-        } else {
-            alert('Please enter a valid email address.');
-        }
-    });
+    // $('.newsletter button').on('click', function () {
+    //     const email = $('.newsletter input').val();
+    //     if (email) {
+    //         alert('Thank you for subscribing to our newsletter!');
+    //         $('.newsletter input').val('');
+    //     } else {
+    //         alert('Please enter a valid email address.');
+    //     }
+    // });
 
     // Smooth scrolling for sidebar items
     $('.sidebar-item').on('click', function () {

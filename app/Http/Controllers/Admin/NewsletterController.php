@@ -7,8 +7,9 @@ use App\Http\Requests\MassDestroyNewsletterRequest;
 use App\Http\Requests\StoreNewsletterRequest;
 use App\Http\Requests\UpdateNewsletterRequest;
 use App\Models\Newsletter;
-use Gate;
+// use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class NewsletterController extends Controller
@@ -35,6 +36,24 @@ class NewsletterController extends Controller
 
         return redirect()->route('admin.newsletters.index');
     }
+
+
+    public function storeByAjax(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:newsletters,email',
+        ]);
+
+        Newsletter::create([
+            'email' => $request->email,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Thank you for subscribing!',
+        ]);
+    }
+
 
     public function edit(Newsletter $newsletter)
     {

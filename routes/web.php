@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AgentStudentController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProgramsController;
 use App\Http\Controllers\Admin\StudentsController;
@@ -37,9 +38,9 @@ Route::get('/set-password', function () {
     return view('set_password');
 });
 
-Route::get('/', [LandingPageController::class, 'index'] )->name('home');
-Route::get('/contact-us', [ContactUsPageController::class, 'index'] )->name('contactUs');
-Route::get('/programs', [ProgramPageController::class, 'index'] )->name('programs');
+Route::get('/', [LandingPageController::class, 'index'])->name('home');
+Route::get('/contact-us', [ContactUsPageController::class, 'index'])->name('contactUs');
+Route::get('/programs', [ProgramPageController::class, 'index'])->name('programs');
 
 // Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -52,6 +53,9 @@ Route::get('/home', function () {
 
 Route::get('/send-mail', [MailController::class, 'sendTestMail']);
 Route::get('/send-otp-by-mail', [MailController::class, 'sendOtpByMail']);
+
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'storeByAjax'])->name('newsletters.subscribe');
+
 
 // Auth::routes(['register' => false]);
 Auth::routes(['verify' => true]);
@@ -249,7 +253,7 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
     Route::resource('other-fees', 'OtherFeeController');
 
     // Newsletter
-    Route::delete('newsletters/destroy', 'NewsletterController@massDestroy')->name('newsletters.massDestroy');
+    Route::delete('newsletters/destroy', [NewsletterController::class, 'massDestroy'])->name('newsletters.massDestroy');
     Route::resource('newsletters', 'NewsletterController');
 
 
@@ -274,7 +278,7 @@ Route::prefix('')->name('student.')->group(function () {
 
     // Route::post('send-otp', [StudentAuthController::class, 'send'])->name('sendOtp');
     // Route::post('/send-otp/verify', [StudentAuthController::class, 'verify'])->name('verifyOtp');
-    
+
     Route::get('verify-otp', [StudentAuthController::class, 'verifyOtpFormShow'])->name('otp.form');
     Route::post('verify-otp', [StudentAuthController::class, 'verifyOtp'])->name('otp.verify');
     // Route::get('/signup-otp', function () {
