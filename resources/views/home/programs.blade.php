@@ -172,22 +172,46 @@
                     </div>
 
                     <!-- Example Program Card -->
-                    <div class="program-card">
+                    <div class="university-card-item">
                         <h5>Asia Pacific University (APU)</h5>
-                        <div class="border p-3 rounded mb-2">
-                            <h6>Master of Science in Computing</h6>
-                            <div class="program-meta">Open: Jan 22 | Closed: May 22</div>
-                            <div class="row mt-2">
-                                <div class="col-md-2">RM 00000 <br><small>Total Fee</small></div>
-                                <div class="col-md-2">00 Months <br><small>Duration</small></div>
-                                <div class="col-md-2">70 <br><small>IELTS/MOI</small></div>
-                                <div class="col-md-2">70% <br><small>Min GPA</small></div>
-                                <div class="col-md-4 text-end">
-                                    <button class="btn btn-outline-primary btn-sm">Check Eligibility</button>
-                                    <button class="btn btn-primary btn-sm">Apply Now</button>
+                        @for ($i = 0; $i < 4; $i++)
+                            <div class="card program-card">
+                                <div class="card-body">
+                                    {{-- <div class="border p-3 rounded mb-2"> --}}
+                                    <div class="d-flex align-items-center justify-content-between ">
+                                        <div>
+                                            <h6 class="program-title">Master of Science in Computing</h6>
+                                            <div class="program-meta d-flex">
+                                                <div class="program-date-container-open" style="border-right: 1px solid #ccc;">
+                                                    Open: <span class="date">Jan 22</span>
+                                                </div>
+                                                <div class="program-date-container-close">
+                                                    Closed: <span class="date">May 22</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 text-end">
+                                            <button class="btn btn-nd btn-round btn-not-primary">
+                                                <i class="fa-regular fa-bookmark"></i>
+                                                {{-- <i class="fa-solid fa-bookmark"></i> --}}
+                                            </button>
+                                            <button class="btn btn-md btn-round btn-not-primary">Check Eligibility</button>
+                                            <button class="btn btn-primary btn-md btn-round">Apply Now</button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row mt-2">
+                                        <div class="col-md-2">RM 00000 <br><small>Total Fee</small></div>
+                                        <div class="col-md-2">00 Months <br><small>Duration</small></div>
+                                        <div class="col-md-2">70 <br><small>IELTS/MOI</small></div>
+                                        <div class="col-md-2">70% <br><small>Min GPA</small></div>
+
+                                    </div>
+                                    {{-- </div> --}}
                                 </div>
                             </div>
-                        </div>
+                        @endfor
                     </div>
 
                 </div>

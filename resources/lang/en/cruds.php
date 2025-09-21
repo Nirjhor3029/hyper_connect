@@ -1012,4 +1012,20 @@ return [
         'title'          => 'University Manage',
         'title_singular' => 'University Manage',
     ],
+    'newsletter' => [
+        'title'          => 'Newsletter',
+        'title_singular' => 'Newsletter',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => ' ',
+            'email'             => 'Email',
+            'email_helper'      => 'email',
+            'created_at'        => 'Created at',
+            'created_at_helper' => ' ',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => ' ',
+            'deleted_at'        => 'Deleted at',
+            'deleted_at_helper' => ' ',
+        ],
+    ],
 ];

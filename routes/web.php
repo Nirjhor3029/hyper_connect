@@ -248,6 +248,10 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
     Route::post('other-fees/ckmedia', 'OtherFeeController@storeCKEditorImages')->name('other-fees.storeCKEditorImages');
     Route::resource('other-fees', 'OtherFeeController');
 
+    // Newsletter
+    Route::delete('newsletters/destroy', 'NewsletterController@massDestroy')->name('newsletters.massDestroy');
+    Route::resource('newsletters', 'NewsletterController');
+
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 });

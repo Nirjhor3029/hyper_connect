@@ -1,5 +1,7 @@
 :root {
     --top-headerafter-login-height: 70px;
+    --text-color-primary: #2B2A29;
+    --text-color-secondary: #727271;
 }
 
 .main-content {
@@ -107,7 +109,7 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.program-card {
+.university-card-item {
     background: #fff;
     border-radius: 10px;
     padding: 20px;
@@ -115,7 +117,7 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.program-card h5 {
+.university-card-item h5 {
     font-weight: 600;
 }
 
@@ -149,5 +151,56 @@ body {
         margin-bottom: 15px;
     }
 }
+
+
+
+/* Own Custom CSS:Start */
+.btn-round {
+    border-radius: 50px;
+}
+.btn-not-primary{
+    background-color: #fff;
+    color: var(--text-color-primary);
+    border-color: #EAEAEA;
+}
+.btn-not-primary:hover{
+    background-color: #0b66c2;
+    color: #fff;
+    border-color: #EAEAEA;
+}
+.program-title{
+    color: var(--text-color-primary);
+    font-weight: 600;
+    font-size: 20px
+}
+.program-card{
+    margin-bottom: 20px;
+}
+
+.program-card:hover{
+    transform: translateY(0px); box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+}
+
+.program-meta{
+    font-size: 18px;
+    color: var(--text-color-secondary);
+}
+.program-date-container-open{
+    padding-right: 15px;
+}
+.program-date-container-close{
+    padding-left: 15px;
+    
+}
+.program-date-container-open .date{
+    color: #1BB161;
+    /* font-weight: 600; */
+}
+.program-date-container-close .date{
+    color: var(--text-color-primary);
+    /* font-weight: 600; */
+}
+/* Own Custom CSS:End */
+
 
 /* Programs style: end */

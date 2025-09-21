@@ -655,6 +655,26 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 160,
                 'title' => 'university_manage_access',
             ],
+			[
+                'id'    => 161,
+                'title' => 'newsletter_create',
+            ],
+            [
+                'id'    => 162,
+                'title' => 'newsletter_edit',
+            ],
+            [
+                'id'    => 163,
+                'title' => 'newsletter_show',
+            ],
+            [
+                'id'    => 164,
+                'title' => 'newsletter_delete',
+            ],
+            [
+                'id'    => 165,
+                'title' => 'newsletter_access',
+            ],
 
         ];
 
