@@ -1,7 +1,7 @@
 @extends('layouts.home')
 
 @section('header')
-<!-- Top-Header -->
+    <!-- Top-Header -->
     @include('layouts._partials.top_header')
     <!-- Contact Bar header -->
     @include('layouts._partials.contact_bar_header')
@@ -94,7 +94,7 @@
                                 </select>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
-                                <button class="btn btn-search">Search</button>
+                                <a href="{{route('programs')}}" class="btn btn-search" >Search</a>
                             </div>
                         </div>
                     </div>
@@ -219,41 +219,45 @@
                             related to Any University in Malaysia? Please feel free to ask
                         </p>
 
-                        <form>
+                        <form id="inquiry-form">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Your Name</label>
                                 <input type="text" name="name" class="form-control" id="name"
-                                    placeholder="Your Name...">
+                                    value="{{ old('name') }}" placeholder="Your Name...">
                             </div>
                             <div class="mb-3">
                                 {{-- <label class="form-label" for="email">Your Email</label> --}}
                                 <input type="email" name="email" class="form-control" id="email"
-                                    placeholder="Your Email...">
+                                    value="{{ old('email') }}" placeholder="Your Email...">
                             </div>
                             <div class="mb-3">
                                 {{-- <label class="form-label" for="email">Your Email</label> --}}
-                                <input type="tel" name="mobile" class="form-control" placeholder="Your Number...">
+                                <input type="tel" name="contact_number" class="form-control"
+                                    value="{{ old('contact_number') }}" placeholder="Your Number...">
                             </div>
                             <div class="mb-3 row">
                                 <div class="col-md-6">
                                     <label class="form-label" for="nationality">Nationality</label>
                                     <input type="text" name="nationality" class="form-control" id="nationality"
-                                        placeholder="Nationality...">
+                                        value="{{ old('nationality') }}" placeholder="Nationality...">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" for="dob">Date of Birth</label>
                                     <input type="date" name="dob" class="form-control date" id="dob"
-                                        placeholder="Date of Birth...">
+                                        value="{{ old('dob') }}" placeholder="Date of Birth...">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="message">Message</label>
-                                <textarea class="form-control" name="message" id="message" rows="3"
+                                <textarea class="form-control" name="message" id="message" rows="3" value="{{ old('message') }}"
                                     placeholder="Please leave your message here..."></textarea>
                             </div>
 
                             <button type="submit" class="btn btn-inquiry">Send Inquiry</button>
                         </form>
+
+                        <!-- Success/Error -->
+                        <small id="inquiry-message" class="mt-2 d-block" style="display:none;"></small>
                     </div>
 
                     <!-- Advertisement Banners -->
@@ -282,6 +286,45 @@
 @endsection
 
 @push('scripts')
+    <script>
+         console.log('Script loaded. jQuery? ->', typeof $ !== 'undefined');
+        $(document).ready(function() {
+            $('#inquiry-form').on('submit', function(e) {
+                e.preventDefault();
+
+                // console.log({{ route('inquiries.storeByAjax') }});
+
+
+                let formData = $(this).serialize();
+                let messageBox = $('#inquiry-message');
+
+                $.ajax({
+                    url: "{{ route('inquiries.storeByAjax') }}",
+                    type: "POST",
+                    data: formData + "&_token={{ csrf_token() }}",
+                    success: function(response) {
+                        messageBox
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .text(response.message)
+                            .show();
+                        $('#inquiry-form')[0].reset(); // clear form
+                    },
+                    error: function(xhr) {
+                        let errorMsg = "Something went wrong!";
+                        if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            errorMsg = Object.values(xhr.responseJSON.errors)[0][0];
+                        }
+                        messageBox
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .text(errorMsg)
+                            .show();
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         window.addEventListener('load', () => {
             const logos = document.querySelector('.university-logos');

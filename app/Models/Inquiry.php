@@ -54,6 +54,16 @@ class Inquiry extends Model implements HasMedia
 
     public function setDobAttribute($value)
     {
-        $this->attributes['dob'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+        if (!$value) {
+            $this->attributes['dob'] = null;
+            return;
+        }
+
+        try {
+            $this->attributes['dob'] = Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d');
+        } catch (\Exception $e) {
+            // fallback to Y-m-d if panel format fails
+            $this->attributes['dob'] = Carbon::createFromFormat('Y-m-d', $value)->format('Y-m-d');
+        }
     }
 }

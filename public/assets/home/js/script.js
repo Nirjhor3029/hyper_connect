@@ -17,11 +17,11 @@ $(document).ready(function () {
     });
 
     // Form validation
-    $('form').on('submit', function (e) {
-        e.preventDefault();
-        alert('Thank you for your inquiry! We will get back to you soon.');
-        this.reset();
-    });
+    // $('form').on('submit', function (e) {
+    //     e.preventDefault();
+    //     alert('Thank you for your inquiry! We will get back to you soon.');
+    //     this.reset();
+    // });
 
     // Newsletter subscription
     // $('.newsletter button').on('click', function () {
@@ -46,16 +46,16 @@ $(document).ready(function () {
     });
 
     // Search functionality
-    $('.btn-search').on('click', function () {
-        const instituteType = $('select').eq(0).val();
-        const location = $('select').eq(1).val();
+    // $('.btn-search').on('click', function () {
+    //     const instituteType = $('select').eq(0).val();
+    //     const location = $('select').eq(1).val();
 
-        if (instituteType === 'Select Type' || location === 'Select City') {
-            alert('Please select both institute type and location to search.');
-        } else {
-            alert('Searching for ' + instituteType + ' in ' + location + '...');
-        }
-    });
+    //     if (instituteType === 'Select Type' || location === 'Select City') {
+    //         alert('Please select both institute type and location to search.');
+    //     } else {
+    //         alert('Searching for ' + instituteType + ' in ' + location + '...');
+    //     }
+    // });
 
     // University card hover effects
     $('.university-card').hover(
