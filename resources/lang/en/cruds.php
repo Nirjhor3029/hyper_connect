@@ -1057,8 +1057,8 @@ return [
     ],
 
     'contact' => [
-        'title'          => 'Contact',
-        'title_singular' => 'Contact',
+        'title'          => 'Contact Us',
+        'title_singular' => 'Contact Us',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => ' ',

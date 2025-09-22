@@ -18,14 +18,13 @@
 @endpush
 
 @section('header')
-<!-- Top-Header -->
+    <!-- Top-Header -->
     @include('layouts._partials.top_header')
     <!-- Contact Bar header -->
     @include('layouts._partials.header_with_logos', compact('university_logos'))
 @endsection
 
 @section('main_content')
-    
     <!-- Hero Slider -->
     <div id="heroCarousel" class="carousel slide hero-slider" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -126,18 +125,21 @@
                         <!-- Contact Form Section -->
                         <div class="col-lg-7">
                             <div class="contact-us-form">
-                                <form>
+                                <div id="formMessage"></div> <!-- For success/error messages -->
+
+                                <form id="contactForm">
+                                    @csrf
                                     <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label class="form-label">First Name</label>
-                                                <input type="text" class="form-control" placeholder="">
+                                                <input type="text" class="form-control" name="first_name" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label class="form-label">Last Name</label>
-                                                <input type="text" class="form-control" placeholder="">
+                                                <input type="text" class="form-control" name="last_name" placeholder="">
                                             </div>
                                         </div>
                                     </div>
@@ -146,20 +148,21 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label class="form-label">Email</label>
-                                                <input type="email" class="form-control" placeholder="">
+                                                <input type="email" class="form-control" name="email" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label class="form-label">Phone Number</label>
-                                                <input type="tel" class="form-control" placeholder="+1 012 3456 789">
+                                                <input type="tel" class="form-control" name="phone"
+                                                    placeholder="+1 012 3456 789">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label">Message</label>
-                                        <textarea class="form-control" placeholder="Write your message.."></textarea>
+                                        <textarea class="form-control" placeholder="Write your message.." name="message"></textarea>
                                     </div>
 
                                     <div class="text-end">
@@ -183,6 +186,42 @@
 @endsection
 
 @push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#contactForm').on('submit', function(e) {
+                e.preventDefault();
+                let form = $(this);
+                let formData = form.serialize();
+
+                $.ajax({
+                    url: "{{ route('contactUs.storeByAjax') }}",
+                    method: "POST",
+                    data: formData,
+                    success: function(response) {
+                        $('#formMessage').html(`
+                    <div class="alert alert-success">${response.message}</div>
+                `);
+                        form[0].reset(); // reset form
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.errors;
+                            let errorHtml = '<div class="alert alert-danger"><ul>';
+                            $.each(errors, function(key, value) {
+                                errorHtml += '<li>' + value[0] + '</li>';
+                            });
+                            errorHtml += '</ul></div>';
+                            $('#formMessage').html(errorHtml);
+                        } else {
+                            $('#formMessage').html(`
+                        <div class="alert alert-danger">Something went wrong. Please try again.</div>
+                    `);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         window.addEventListener('load', () => {
             const logos = document.querySelector('.university-logos');

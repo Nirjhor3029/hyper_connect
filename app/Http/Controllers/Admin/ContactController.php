@@ -7,8 +7,9 @@ use App\Http\Requests\MassDestroyContactRequest;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use App\Models\Contact;
-use Gate;
+// use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class ContactController extends Controller
@@ -76,4 +77,29 @@ class ContactController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+
+    public function storeByAjax(Request $request)
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:100',
+            'last_name'  => 'required|string|max:100',
+            'email'      => 'required|email',
+            'phone'      => 'nullable|string|max:20',
+            'message'    => 'required|string|max:1000',
+        ]);
+
+        $validated['name'] = $validated['first_name'] . ' ' . $validated['last_name'];
+
+        Contact::create($validated);
+
+        // You can save to DB or send email here
+        // Example: ContactMessage::create($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Thank you! Your message has been sent successfully.'
+        ]);
+    }
+
 }

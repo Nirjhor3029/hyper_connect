@@ -41,7 +41,10 @@ Route::get('/set-password', function () {
 });
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
+
 Route::get('/contact-us', [ContactUsPageController::class, 'index'])->name('contactUs');
+Route::post('/contact-us', [ContactController::class, 'storeByAjax'])->name('contactUs.storeByAjax');
+
 Route::get('/programs', [ProgramPageController::class, 'index'])->name('programs');
 
 // Route::redirect('/', '/login');
@@ -58,6 +61,7 @@ Route::get('/send-otp-by-mail', [MailController::class, 'sendOtpByMail']);
 
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'storeByAjax'])->name('newsletters.subscribe');
 Route::post('/inquiries/storeByAjax', [InquiryController::class, 'storeByAjax'])->name('inquiries.storeByAjax');
+
 
 
 // Auth::routes(['register' => false]);

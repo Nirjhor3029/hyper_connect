@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 @section('content')
 @can('contact_create')
-    <div style="margin-bottom: 10px;" class="row">
+    {{-- <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.contacts.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.contact.title_singular') }}
             </a>
         </div>
-    </div>
+    </div> --}}
 @endcan
 <div class="card">
     <div class="card-header">
