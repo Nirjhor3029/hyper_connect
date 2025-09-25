@@ -2,16 +2,16 @@
 <div class="sidebar">
     <div class="sidebar-item-group">
         <a href="{{ route('home') }}">
-        <div class="sidebar-item">
-            {{-- <i class="fas fa-home"></i> --}}
-            <img src="{{ asset('assets/home/icons/home.svg') }}" alt="" srcset="">
-        </div>
+            <div class="sidebar-item">
+                {{-- <i class="fas fa-home"></i> --}}
+                <img src="{{ asset('assets/home/icons/home.svg') }}" alt="" srcset="">
+            </div>
         </a>
         <span class="sidebar-menu-text">Home</span>
     </div>
     <div class="sidebar-item-group">
         <a href="{{ route('programs') }}">
-            <div class="sidebar-item">
+            <div class="sidebar-item {{ request()->is('programs') ? 'active' : '' }}">
                 {{-- <i class="fa-solid fa-book-open"></i> --}}
                 <img src="{{ asset('assets/home/icons/programs.svg') }}" alt="" srcset="">
             </div>
@@ -20,10 +20,10 @@
     </div>
     <div class="sidebar-item-group">
         <a href="#">
-        <div class="sidebar-item">
-            {{-- <i class="fas fa-graduation-cap"></i> --}}
-            <img src="{{ asset('assets/home/icons/documents.svg') }}" alt="" srcset="">
-        </div>
+            <div class="sidebar-item">
+                {{-- <i class="fas fa-graduation-cap"></i> --}}
+                <img src="{{ asset('assets/home/icons/documents.svg') }}" alt="" srcset="">
+            </div>
         </a>
         <span class="sidebar-menu-text">Documents</span>
     </div>
@@ -40,5 +40,14 @@
             <img src="{{ asset('assets/home/icons/visa.svg') }}" alt="" srcset="">
         </div>
         <span class="sidebar-menu-text">Visa</span>
+    </div>
+    <div class="sidebar-item-group">
+        <a href="{{ route('application.form') }}">
+        <div class="sidebar-item {{ request()->is('application-form') ? 'active' : '' }}">
+            {{-- <i class="fas fa-envelope"></i> --}}
+            <img src="{{ asset('assets/home/icons/applications.svg') }}" alt="" srcset="">
+        </div>
+        </a>
+        <span class="sidebar-menu-text">Applications <br> & Offers</span>
     </div>
 </div>

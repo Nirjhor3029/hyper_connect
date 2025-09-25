@@ -173,8 +173,11 @@
 
                     <!-- Example Program Card -->
                     <div class="university-card-item">
-                        <h5>Asia Pacific University (APU)</h5>
-                        @for ($i = 0; $i < 4; $i++)
+                        <h5>
+                            <img src="{{ asset('assets/home/images/university/university_logo_1.png') }}" alt="APU Logo">
+                            Asia Pacific University (APU)
+                        </h5>
+                        @for ($i = 0; $i < 2; $i++)
                             <div class="card program-card">
                                 <div class="card-body">
                                     {{-- <div class="border p-3 rounded mb-2"> --}}
@@ -201,11 +204,39 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="row mt-2">
-                                        <div class="col-md-2">RM 00000 <br><small>Total Fee</small></div>
+                                    <div class="d-flex mt-2 ">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <div>
+                                                <strong>RM 2,000</strong> <br>
+                                                <small class="text-secondary">Total tuition Fee</small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <div>
+                                                <strong>RM 0000</strong> <br>
+                                                <small class="text-secondary">First year tuition Fee</small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <div>
+                                                <strong>RM 0000</strong> <br>
+                                                <small class="text-secondary">Second year tuition Fee</small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <div>
+                                                <strong>RM 0000</strong> <br>
+                                                <small class="text-secondary">Third year tuition Fee</small>
+                                            </div>
+                                        </div>
+                                        {{-- <div class="col-md-2">RM 00000 <br><small>Total Fee</small></div>
                                         <div class="col-md-2">00 Months <br><small>Duration</small></div>
                                         <div class="col-md-2">70 <br><small>IELTS/MOI</small></div>
-                                        <div class="col-md-2">70% <br><small>Min GPA</small></div>
+                                        <div class="col-md-2">70% <br><small>Min GPA</small></div> --}}
 
                                     </div>
                                     {{-- </div> --}}
