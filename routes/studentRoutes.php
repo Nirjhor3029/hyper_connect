@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UniversitiesController;
+use App\Http\Controllers\Student\StudentUploadController;
 use App\Http\Controllers\StudentAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,11 @@ Route::prefix('')->name('student.')->group(function () {
     // Route::get('/signup-otp', function () {
     //     return view('auth.signup_otp');
     // });
+
+
+    Route::post('/upload', [StudentUploadController::class, 'store'])->name('upload.store');
+    Route::delete('/upload/remove/{id}', [StudentUploadController::class, 'destroy'])->name('upload.destroy');
+
 
 
     Route::middleware(['auth:student', 'verified'])->group(function () {

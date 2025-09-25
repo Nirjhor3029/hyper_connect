@@ -6,6 +6,14 @@
         .top_header_after_login .dropdown-toggle::after {
             content: none !important;
         }
+
+        .university-logo {
+            /* width: 40px; */
+            height: 40px;
+            object-fit: contain;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
     </style>
 @endpush
 
@@ -174,10 +182,84 @@
                     <!-- Example Program Card -->
                     <div class="university-card-item">
                         <h5>
-                            <img src="{{ asset('assets/home/images/university/university_logo_1.png') }}" alt="APU Logo">
+                            <img class="university-logo" src="{{ asset('assets/home/images/university/university_logo_1.png') }}" alt="APU Logo">
                             Asia Pacific University (APU)
                         </h5>
                         @for ($i = 0; $i < 2; $i++)
+                            <div class="card program-card">
+                                <div class="card-body">
+                                    {{-- <div class="border p-3 rounded mb-2"> --}}
+                                    <div class="d-flex align-items-center justify-content-between ">
+                                        <div>
+                                            <h6 class="program-title">Master of Science in Computing</h6>
+                                            <div class="program-meta d-flex">
+                                                <div class="program-date-container-open" style="border-right: 1px solid #ccc;">
+                                                    Open: <span class="date">Jan 22</span>
+                                                </div>
+                                                <div class="program-date-container-close">
+                                                    Closed: <span class="date">May 22</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 text-end">
+                                            <button class="btn btn-nd btn-round btn-not-primary">
+                                                <i class="fa-regular fa-bookmark"></i>
+                                                {{-- <i class="fa-solid fa-bookmark"></i> --}}
+                                            </button>
+                                            <button class="btn btn-md btn-round btn-not-primary">Check Eligibility</button>
+                                            <button class="btn btn-primary btn-md btn-round">Apply Now</button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex mt-2 ">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <div>
+                                                <strong>RM 2,000</strong> <br>
+                                                <small class="text-secondary">Total tuition Fee</small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <div>
+                                                <strong>RM 0000</strong> <br>
+                                                <small class="text-secondary">First year tuition Fee</small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <div>
+                                                <strong>RM 0000</strong> <br>
+                                                <small class="text-secondary">Second year tuition Fee</small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <div>
+                                                <strong>RM 0000</strong> <br>
+                                                <small class="text-secondary">Third year tuition Fee</small>
+                                            </div>
+                                        </div>
+                                        {{-- <div class="col-md-2">RM 00000 <br><small>Total Fee</small></div>
+                                        <div class="col-md-2">00 Months <br><small>Duration</small></div>
+                                        <div class="col-md-2">70 <br><small>IELTS/MOI</small></div>
+                                        <div class="col-md-2">70% <br><small>Min GPA</small></div> --}}
+
+                                    </div>
+                                    {{-- </div> --}}
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
+
+
+                    <div class="university-card-item">
+                        <h5>
+                            <img class="university-logo" src="{{ asset('assets/home/images/university/university_logo_7.png') }}" alt="APU Logo">
+                            Binary University
+                        </h5>
+                        @for ($i = 0; $i < 3; $i++)
                             <div class="card program-card">
                                 <div class="card-body">
                                     {{-- <div class="border p-3 rounded mb-2"> --}}
