@@ -144,6 +144,22 @@
             font-weight: 500;
             cursor: pointer;
         }
+
+        .upload-box{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .upload-box p{
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .upload-box{
+                flex-direction: column;
+            }
+        }
     </style>
 @endpush
 
@@ -384,16 +400,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Document Checklist -->
-                                    {{-- <h6 class="fw-bold mt-4">Document Checklist</h6>
-                                    <div class="upload-area border rounded p-4 text-center bg-light" id="uploadfile">
-                                        <p class="mb-2">Drag and drop or <span
-                                                class="text-primary fw-bold browse">browse</span> to upload <b>Transcript
-                                                Certificate</b></p>
-                                        <input type="file" class="d-none" id="fileInput" accept=".jpg,.png,.pdf">
-                                        <small class="text-muted">Supports JPEG, PNG & PDF</small>
-                                        <div id="preview" class="mt-3"></div>
-                                    </div> --}}
+                                    
 
                                     <!-- Actions -->
                                     <div class="d-flex justify-content-end mt-4">
@@ -429,8 +436,8 @@
                                 <div class="file-list"></div>
 
                                 <!-- Upload Box -->
+                                <input type="file" id="fileInput" class="d-none" accept=".jpeg,.jpg,.png,.pdf">
                                 <div class="upload-box mt-3" id="uploadBox">
-                                    <input type="file" id="fileInput" class="d-none" accept=".jpeg,.jpg,.png,.pdf">
                                     <p>
                                         <i class="bi bi-upload"></i>
                                         Drag and drop or <span class="text-danger">browse</span> to upload <b>Transcript
@@ -442,40 +449,8 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-                {{-- <div class="upload-area border rounded p-4 text-center bg-light" id="uploadfile">
-                    <p class="mb-2">Drag and drop or <span class="text-primary fw-bold browse">browse</span> to upload
-                        <b>Transcript
-                            Certificate</b>
-                    </p>
-                    <input type="file" class="d-none" id="fileInput" accept=".jpg,.png,.pdf">
-                    <small class="text-muted">Supports JPEG, PNG & PDF</small>
-                    <div id="preview" class="mt-3"></div>
-                </div> --}}
             </div>
-
-
-            {{-- <div class="card p-3">
-                <div class="file-list"></div>
-
-                <!-- Upload Box -->
-                <div class="upload-box mt-3" id="uploadBox">
-                    <input type="file" id="fileInput" class="d-none" accept=".jpeg,.jpg,.png,.pdf">
-                    <p>
-                        <i class="bi bi-upload"></i>
-                        Drag and drop or <span class="text-danger">browse</span> to upload <b>Transcript Certificate</b>
-                    </p>
-                    <small class="text-muted">Supports JPEG, PNG & PDF</small>
-                </div>
-            </div> --}}
-
         </div>
-
-
     </div>
 @endsection
 
@@ -497,6 +472,8 @@
             const fileList = $(".file-list");
             const fileInput = $("#fileInput");
             const uploadBox = $("#uploadBox");
+            console.log("Script loaded");
+            
 
             function addFileRow(file) {
                 const row = $(`
