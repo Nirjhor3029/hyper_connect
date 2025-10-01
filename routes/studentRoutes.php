@@ -36,6 +36,7 @@ Route::prefix('')->name('student.')->group(function () {
     Route::middleware(['auth:student', 'verified'])->group(function () {
 
         Route::get('/application-form', [ApplicationFormPageController::class, 'index'])->name('application.form');
+        Route::post('/application-form', [ApplicationFormPageController::class, 'submit'])->name('application.form.submit');
 
 
 

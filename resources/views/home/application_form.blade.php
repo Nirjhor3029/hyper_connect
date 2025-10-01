@@ -2,165 +2,14 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/home/css/programs.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/home/css/application_form.css') }}">
     <style>
-        .top_header_after_login .dropdown-toggle::after {
-            content: none !important;
-        }
-
-        #headingOne .title {
-            color: var(--text-primary) !important;
-            background-color: transparent !important;
-            box-shadow: none !important;
-
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            justify-content: center;
-        }
-
-        #headingOne .title h4 {}
-
-        #headingOne .title::after {
-            align-self: end;
-            position: absolute;
-        }
-
-        #headingOne .title p {
-            margin: 0;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: end;
-            align-items: center;
-            /* margin-top: 10px; */
-            margin-right: 50px;
-        }
-
-        .action-buttons .btn {
-            border-radius: 20px;
-            min-width: 140px;
-            /* adjust as you like */
-            height: 40px;
-            /* same height */
-        }
-
-        .action-buttons .btn-cancel {
-            border: 1px solid var(--text-secondary);
-        }
-
-
-        /* overwrite bootstrap */
-        .form-floating>.form-control:focus~label,
-        .form-floating>.form-control:not(:placeholder-shown)~label,
-        .form-floating>.form-control-plaintext~label,
-        .form-floating>.form-select~label {
-            transform: scale(.85) translateY(-1.9rem) translateX(.15rem);
-        }
-
-        .form-floating>label {
-            margin-left: .75rem !important;
-        }
-
-        .input-group.form-floating>label {
-            margin-left: 3.25rem !important;
-            z-index: 100;
-        }
-
-        section {
-            margin-bottom: 50px;
-        }
-
-        .section-divider {
-            margin-bottom: 50px;
-        }
-
-        .form-check label {
-            cursor: pointer;
-        }
-
-
-        #documentAccordion {
-            margin-top: 50px;
-        }
-
-        .upload-area {
-            margin-top: 50px;
-            display: flex;
-            justify-content: space-between
-        }
-    </style>
-
-    <style>
-        .upload-box {
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            color: #777;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .upload-box.dragover {
-            background-color: #f9f9f9;
-            border-color: #007bff;
-            color: #007bff;
-        }
-
-        .file-row {
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .file-row .file-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .file-row .file-info i {
-            font-size: 24px;
-            color: #dc3545;
-        }
-
-        .file-status {
-            font-size: 14px;
-            font-weight: 600;
-            color: green;
-        }
-
-        .remove-btn {
-            border: none;
-            background: none;
-            color: #dc3545;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .upload-box {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .upload-box p {
-            margin: 0;
-        }
-
-        @media (max-width: 768px) {
-            .upload-box {
-                flex-direction: column;
-            }
-        }
+        /* .select2-container--default .select2-selection--single {
+            border: inherit;
+            border-radius: inherit;
+            height: calc(2.25rem + 2px);
+            padding: .375rem .75rem;
+        } */
     </style>
 @endpush
 
@@ -202,7 +51,9 @@
                             <div class="accordion-body">
 
 
-                                <form id="applicationForm">
+                                <form id="applicationForm" method="POST"
+                                    action="{{ route('student.application.form.submit') }}">
+                                    @csrf
 
                                     <!-- Personal Information -->
                                     <section class="personal-information">
@@ -228,9 +79,19 @@
                                                     class="form-control">
                                                 <label class="form-label" for="date_of_birth">Date of Birth</label>
                                             </div>
-                                            <div class="col-md-4 form-floating">
+                                            {{-- <div class="col-md-4 form-floating">
                                                 <input type="text" name="nationality" id="nationality"
                                                     class="form-control required" required placeholder="">
+                                                <label class="form-label" for="nationality">Nationality</label>
+                                            </div> --}}
+                                            <div class="col-md-4 form-floating">
+                                                <select class="form-select " name="nationality" id="nationality">
+                                                    <option value="" disabled selected>Select your country</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->name }}">
+                                                            {{ $country->name }}</option>
+                                                    @endforeach
+                                                </select>
                                                 <label class="form-label" for="nationality">Nationality</label>
                                             </div>
                                             <div class="col-md-4 form-floating">
@@ -407,9 +268,10 @@
                                     <div class="d-flex justify-content-end mt-4">
                                         {{-- <button type="button" class="btn btn-secondary">Cancel</button> --}}
                                         <div>
-                                            <button type="button" class="btn btn-outline-primary me-2">Save
-                                                changes</button>
-                                            <button type="submit" class="btn btn-primary">Send to Advisor</button>
+                                            <button type="button" class="btn btn-outline-primary me-2">
+                                                Send to Advisor
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
                                 </form>
@@ -456,208 +318,5 @@
 @endsection
 
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('.form-floating input[required], .form-floating select[required], .form-floating textarea[required]')
-                .each(function() {
-                    let $label = $(this).siblings('label'); // ওই ইনপুটের লেবেল খুঁজে বের করো
-                    if ($label.length && !$label.find('.required').length) {
-                        $label.append(" <span class='required'>*</span>");
-                    }
-                });
-        });
-    </script>
-
-
-
-    <script>
-        $(document).ready(function() {
-            const fileList = $(".file-list");
-            const fileInput = $("#fileInput");
-            const uploadBox = $("#uploadBox");
-
-            function addFileRow(file, response, percent = 0) {
-                const row = $(`
-            <div class="file-row" id="file-${response?.id || file.name.replace(/\W/g, '')}">
-                <div class="file-info">
-                    <i class="${ response?.file_type == 'pdf' ? 'fas fa-file-pdf' : 'fas fa-file-image' }"></i>
-                    <span>${response ? response.file_name : file.name}</span>
-                    <small class="text-muted">${(file.size / 1024).toFixed(1)} KB</small>
-                    <span class="file-status">${percent < 100 ? percent + "%" : "✔ Uploaded"}</span>
-                </div>
-                <div style="min-width:150px;">
-                    <div class="progress" style="height:6px; margin-bottom:6px;">
-                        <div class="progress-bar" role="progressbar" 
-                                style="width:${percent}%" 
-                                aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small class="text-muted">${response ? response.uploaded_at : ""}</small>
-                    ${response ? `<button class="remove-btn" data-id="${response.id}">Remove</button>` : ""}
-                </div>
-            </div>
-        `);
-                fileList.append(row);
-
-                // remove button bind (only after uploaded)
-                if (response) {
-                    row.find(".remove-btn").on("click", function() {
-                        const id = $(this).data("id");
-                        $.ajax({
-                            url: "/upload/remove/" + id,
-                            type: "DELETE",
-                            data: {
-                                _token: "{{ csrf_token() }}"
-                            },
-                            success: function() {
-                                row.remove();
-                            }
-                        });
-                    });
-                }
-                return row;
-            }
-
-            function uploadFile(file) {
-                let formData = new FormData();
-                formData.append("file", file);
-                formData.append("_token", "{{ csrf_token() }}");
-
-                // temporary row with 0% progress
-                let tempRow = addFileRow(file, null, 0);
-                let progressBar = tempRow.find(".progress-bar");
-                let statusText = tempRow.find(".file-status");
-
-                $.ajax({
-                    xhr: function() {
-                        let xhr = new window.XMLHttpRequest();
-                        xhr.upload.addEventListener("progress", function(evt) {
-                            if (evt.lengthComputable) {
-                                let percentComplete = Math.round((evt.loaded / evt.total) *
-                                100);
-                                progressBar.css("width", percentComplete + "%").attr(
-                                    "aria-valuenow", percentComplete);
-                                statusText.text(percentComplete + "%");
-                            }
-                        }, false);
-                        return xhr;
-                    },
-                    url: "/upload",
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        // replace temp row with final row
-                        tempRow.remove();
-                        addFileRow(file, response, 100);
-                        console.log("Upload successful");
-                        console.log(response);
-                        
-                    },
-                    error: function(xhr) {
-                        statusText.css("color", "red").text("Upload failed");
-                    }
-                });
-            }
-
-            // Browse
-            fileInput.on("change", function(e) {
-                const files = e.target.files;
-                for (let file of files) {
-                    uploadFile(file);
-                }
-            });
-
-            // Drag & Drop
-            uploadBox.on("dragover", function(e) {
-                e.preventDefault();
-                uploadBox.addClass("dragover");
-            });
-            uploadBox.on("dragleave", function(e) {
-                e.preventDefault();
-                uploadBox.removeClass("dragover");
-            });
-            uploadBox.on("drop", function(e) {
-                e.preventDefault();
-                uploadBox.removeClass("dragover");
-                const files = e.originalEvent.dataTransfer.files;
-                for (let file of files) {
-                    uploadFile(file);
-                }
-            });
-
-            // Click to browse
-            uploadBox.on("click", function() {
-                fileInput.click();
-            });
-        });
-    </script>
-
-
-
-
-
-
-    {{-- <script>
-        $(document).ready(function() {
-            const fileList = $(".file-list");
-            const fileInput = $("#fileInput");
-            const uploadBox = $("#uploadBox");
-            console.log("Script loaded");
-            
-
-            function addFileRow(file) {
-                const row = $(`
-          <div class="file-row">
-            <div class="file-info">
-              <i class="bi bi-file-earmark-pdf"></i>
-              <span>${file.name}</span>
-              <small class="text-muted">${(file.size / 1024).toFixed(1)} KB</small>
-              <span class="file-status">● APPROVED</span>
-            </div>
-            <div>
-              <small class="text-muted">${new Date().toLocaleDateString()}</small>
-              <button class="remove-btn">Remove</button>
-            </div>
-          </div>
-        `);
-                fileList.append(row);
-
-                row.find(".remove-btn").on("click", function() {
-                    row.remove();
-                });
-            }
-
-            // Handle browse file
-            fileInput.on("change", function(e) {
-                const files = e.target.files;
-                for (let file of files) {
-                    addFileRow(file);
-                }
-            });
-
-            // Handle drag and drop
-            uploadBox.on("dragover", function(e) {
-                e.preventDefault();
-                uploadBox.addClass("dragover");
-            });
-            uploadBox.on("dragleave", function(e) {
-                e.preventDefault();
-                uploadBox.removeClass("dragover");
-            });
-            uploadBox.on("drop", function(e) {
-                e.preventDefault();
-                uploadBox.removeClass("dragover");
-                const files = e.originalEvent.dataTransfer.files;
-                for (let file of files) {
-                    addFileRow(file);
-                }
-            });
-
-            // Open file browser when clicking upload box
-            uploadBox.on("click", function() {
-                fileInput.click();
-            });
-        });
-    </script> --}}
+    <script src="{{ asset('assets/home/js/application_form.js') }}"></script>
 @endpush

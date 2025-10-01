@@ -1,0 +1,161 @@
+.top_header_after_login .dropdown-toggle::after {
+    content: none !important;
+}
+
+#headingOne .title {
+    color: var(--text-primary) !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+#headingOne .title h4 {}
+
+#headingOne .title::after {
+    align-self: end;
+    position: absolute;
+}
+
+#headingOne .title p {
+    margin: 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
+    /* margin-top: 10px; */
+    margin-right: 50px;
+}
+
+.action-buttons .btn {
+    border-radius: 20px;
+    min-width: 140px;
+    /* adjust as you like */
+    height: 40px;
+    /* same height */
+}
+
+.action-buttons .btn-cancel {
+    border: 1px solid var(--text-secondary);
+}
+
+
+/* overwrite bootstrap */
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-control-plaintext~label,
+.form-floating>.form-select~label {
+    transform: scale(.85) translateY(-1.9rem) translateX(.15rem);
+}
+
+.form-floating>label {
+    margin-left: .75rem !important;
+}
+
+.input-group.form-floating>label {
+    margin-left: 3.25rem !important;
+    z-index: 100;
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+.section-divider {
+    margin-bottom: 50px;
+}
+
+.form-check label {
+    cursor: pointer;
+}
+
+
+#documentAccordion {
+    margin-top: 50px;
+}
+
+.upload-area {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between
+}
+
+
+
+/* Upload Box:Start */
+.upload-box {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: #777;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-box.dragover {
+    background-color: #f9f9f9;
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.file-row {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.file-row .file-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-row .file-info i {
+    font-size: 24px;
+    color: #dc3545;
+}
+
+.file-status {
+    font-size: 14px;
+    font-weight: 600;
+    color: green;
+}
+
+.remove-btn {
+    border: none;
+    background: none;
+    color: #dc3545;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.upload-box p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .upload-box {
+        flex-direction: column;
+    }
+}
+
+/* Upload Box:End */
