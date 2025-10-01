@@ -19,8 +19,10 @@
         <div class="container-fluid" style="padding:0 30px;">
             <div class="row w-100 px-5">
                 <div class="col-12 text-start">
-                    <img src="{{ asset('assets/images/hyper_connect_logo.png') }}" height="100px"
-                        alt="Hyper Connect Logo" class="logo">
+                    <a href="/" rel="noopener noreferrer">
+                        <img src="{{ asset('assets/images/hyper_connect_logo.png') }}" height="100px"
+                            alt="Hyper Connect Logo" class="logo">
+                    </a>
                 </div>
             </div>
         </div>
@@ -85,7 +87,7 @@
 
         $(".float-group input").on("focus blur", function() {
             console.log("called");
-            
+
             if ($(this).val() !== "") {
                 $(this).addClass("not-empty");
             } else {

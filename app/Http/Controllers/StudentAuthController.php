@@ -26,6 +26,8 @@ class StudentAuthController extends Controller
     // }
     public function dashboard()
     {
+        // $user = Auth::user();
+        // return $user;
         return view('student.dashboard');
     }
 

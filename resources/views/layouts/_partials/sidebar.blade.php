@@ -42,7 +42,7 @@
         <span class="sidebar-menu-text">Visa</span>
     </div>
     <div class="sidebar-item-group">
-        <a href="{{ route('application.form') }}">
+        <a href="{{ route('student.application.form') }}">
         <div class="sidebar-item {{ request()->is('application-form') ? 'active' : '' }}">
             {{-- <i class="fas fa-envelope"></i> --}}
             <img src="{{ asset('assets/home/icons/applications.svg') }}" alt="" srcset="">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UniversitiesController;
+use App\Http\Controllers\ApplicationFormPageController;
 use App\Http\Controllers\Student\StudentUploadController;
 use App\Http\Controllers\StudentAuthController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,11 @@ Route::prefix('')->name('student.')->group(function () {
 
 
     Route::middleware(['auth:student', 'verified'])->group(function () {
+
+        Route::get('/application-form', [ApplicationFormPageController::class, 'index'])->name('application.form');
+
+
+
         Route::get('/dashboard', [StudentAuthController::class, 'dashboard'])->name('dashboard');
         Route::put('/data-update/{student}', [StudentAuthController::class, 'dataUpdate'])->name('data.update');
         Route::get('/data-show', [StudentAuthController::class, 'dataShow'])->name('data.show');

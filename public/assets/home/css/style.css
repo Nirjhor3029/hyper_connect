@@ -631,3 +631,8 @@ body {
 .required {
     color: red;
 }
+
+
+.form-floating label{
+    color: rgba(43, 33, 30, .5);
+}

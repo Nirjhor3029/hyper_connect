@@ -44,7 +44,6 @@ Route::get('/contact-us', [ContactUsPageController::class, 'index'])->name('cont
 Route::post('/contact-us', [ContactController::class, 'storeByAjax'])->name('contactUs.storeByAjax');
 
 Route::get('/programs', [ProgramPageController::class, 'index'])->name('programs');
-Route::get('/application-form', [ApplicationFormPageController::class, 'index'])->name('application.form');
 
 // Route::redirect('/', '/login');
 Route::get('/home', function () {

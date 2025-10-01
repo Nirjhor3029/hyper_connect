@@ -1,3 +1,9 @@
+<style>
+    .dropdown-menu{
+        right: 0 !important;
+        left: auto !important;
+    }
+</style>
 <nav class="navbar navbar-expand-lg top-nav fixed-top">
     <div class="container-fluid px-4">
         <a class="navbar-brand" href="{{ route('home') }}">
@@ -36,7 +42,15 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li>
+                        {{-- <a class="dropdown-item" href="#">Logout</a> --}}
+                        <a href="{{ route('student.logout') }}" class="dropdown-item c-sidebar-nav-link"
+
+                            onclick="return confirm('Are you sure you want to logout?')">
+                            <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt"></i>
+                            {{ trans('global.logout') }}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
