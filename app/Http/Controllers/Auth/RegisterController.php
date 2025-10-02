@@ -82,7 +82,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             // Add default phone or other required fields if necessary
-            'phone' => $data['phone'] ?? '0000000000',
+            'phone' => $data['phone'] ?? '0',
         ]);
     }
 

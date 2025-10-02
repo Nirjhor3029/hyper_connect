@@ -55,7 +55,7 @@ class SocialiteController extends Controller
                     'google_id' => $googleUser->id,
                     // You might want to set a default password or handle it differently
                     'password' => Hash::make($googleUser->id),
-                    'phone'     => '0000000000',
+                    'phone'     => '0',
                     'email_verified_at' => now(), //must need to verify email
                     // 'password' => bcrypt(str()->random(16)),
                 ]);

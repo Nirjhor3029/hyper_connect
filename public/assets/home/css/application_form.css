@@ -156,6 +156,15 @@ section {
     .upload-box {
         flex-direction: column;
     }
+
+    .file-row {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .file-row .file-info {
+        flex-direction: column;
+    }
 }
 
 /* Upload Box:End */

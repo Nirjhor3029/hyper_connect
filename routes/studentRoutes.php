@@ -37,6 +37,9 @@ Route::prefix('')->name('student.')->group(function () {
 
         Route::get('/application-form', [ApplicationFormPageController::class, 'index'])->name('application.form');
         Route::post('/application-form', [ApplicationFormPageController::class, 'submit'])->name('application.form.submit');
+        Route::post('/application-form/update-file-name/{id}', [ApplicationFormPageController::class, 'updateFileName'])->name('application.form.updateFileName');
+
+        Route::get('/get-dial-code/{country_id}', [ApplicationFormPageController::class, 'getDialCode'])->name('application.form.getDialCode');
 
 
 

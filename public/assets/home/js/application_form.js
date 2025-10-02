@@ -1,4 +1,15 @@
 $(document).ready(function () {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    });
+
+
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+
     $('.form-floating input[required], .form-floating select[required], .form-floating textarea[required]')
         .each(function () {
             let $label = $(this).siblings('label'); // ওই ইনপুটের লেবেল খুঁজে বের করো
@@ -10,57 +21,72 @@ $(document).ready(function () {
 
 
 
-    // Upload Box Scripts
 
+    // Upload Box Scripts
     const fileList = $(".file-list");
     const fileInput = $("#fileInput");
     const uploadBox = $("#uploadBox");
 
     function addFileRow(file, response, percent = 0) {
         const row = $(`
-            <div class="file-row" id="file-${response?.id || file.name.replace(/\W/g, '')}">
-                <div class="file-info">
-                    <i class="${response?.file_type == 'pdf' ? 'fas fa-file-pdf' : 'fas fa-file-image'}"></i>
-                    <span>${response ? response.file_name : file.name}</span>
-                    <small class="text-muted">${(file.size / 1024).toFixed(1)} KB</small>
-                    <span class="file-status">${percent < 100 ? percent + "%" : "✔ Uploaded"}</span>
-                </div>
-                <div style="min-width:150px;">
-                    <div class="progress" style="height:6px; margin-bottom:6px;">
-                        <div class="progress-bar" role="progressbar" 
-                                style="width:${percent}%" 
-                                aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="file-row" id="file-${response?.id || file.name.replace(/\W/g, '')}">
+                        <div class="file-info">
+                            <i class="${response?.file_type == 'pdf' ? 'fas fa-file-pdf' : 'fas fa-file-image'}"></i>
+                            <span>${response ? response.file_name : file.name}</span>
+                            <small class="text-muted">${(file.size / 1024).toFixed(1)} KB</small>
+                            <span class="file-status">${percent < 100 ? percent + "%" : "✔ Uploaded"}</span>
+                        </div>
+                        <div style="min-width:150px;">
+                            <div class="progress" style="height:6px; margin-bottom:6px;">
+                                <div class="progress-bar" role="progressbar" 
+                                        style="width:${percent}%" 
+                                        aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small class="text-muted">${response ? response.uploaded_at : ""}</small>
+                            ${response ? `<button class="remove-btn" data-id="${response.id}">Remove</button>` : ""}
+                        </div>
                     </div>
-                    <small class="text-muted">${response ? response.uploaded_at : ""}</small>
-                    ${response ? `<button class="remove-btn" data-id="${response.id}">Remove</button>` : ""}
-                </div>
-            </div>
-        `);
+                `);
         fileList.append(row);
 
         // remove button bind (only after uploaded)
         if (response) {
             row.find(".remove-btn").on("click", function () {
                 const id = $(this).data("id");
-                $.ajax({
-                    url: "/upload/remove/" + id,
-                    type: "DELETE",
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function () {
-                        row.remove();
-                    }
-                });
+                removeFile(id,row);
             });
         }
         return row;
     }
 
+    $('.remove-btn').on("click", function () {
+        let that = $(this);
+        const id = that.data("id");
+        console.log(id);
+        
+        const row = that.closest(".file-row");
+        removeFile(id, row);
+    });
+
+    function removeFile(file_id,row) {
+        const response = confirm("Are you sure you want to delete this file?");
+        if (!response) return;
+        $.ajax({
+            url: "/upload/remove/" + file_id,
+            type: "DELETE",
+            data: {
+                _token: token
+            },
+            success: function () {
+                row.remove();
+            }
+        });
+    }
+
     function uploadFile(file) {
         let formData = new FormData();
         formData.append("file", file);
-        formData.append("_token", "{{ csrf_token() }}");
+        formData.append("_token", token);
 
         // temporary row with 0% progress
         let tempRow = addFileRow(file, null, 0);
@@ -130,6 +156,29 @@ $(document).ready(function () {
     uploadBox.on("click", function () {
         fileInput.click();
     });
+
+
+
+
+    // Dynamic Dial Code Change
+    $('#nationality').on('change', function () {
+        let countryId = $(this).val();
+        if (countryId) {
+            $.ajax({
+                url: '/get-dial-code/' + countryId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    // console.log(response.dial_code);
+                    $('.dial_code').text(response.dial_code);
+                }
+            });
+        } else {
+            $('.dial_code').text('');
+        }
+    });
+
+
 });
 
 

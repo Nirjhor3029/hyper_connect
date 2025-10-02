@@ -14,7 +14,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Student extends Authenticatable implements HasMedia, MustVerifyEmail 
+class Student extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use Notifiable, SoftDeletes, InteractsWithMedia, HasFactory;
 
@@ -89,7 +89,7 @@ class Student extends Authenticatable implements HasMedia, MustVerifyEmail
         'deleted_at',
         'password',
     ];
-    protected $hidden = ['password','remember_token'];
+    protected $hidden = ['password', 'remember_token'];
 
     protected function serializeDate(DateTimeInterface $date)
     {
@@ -134,7 +134,18 @@ class Student extends Authenticatable implements HasMedia, MustVerifyEmail
 
     public function setDobAttribute($value)
     {
-        $this->attributes['dob'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+        // if (!$value) {
+        //     $this->attributes['dob'] = null;
+        //     return;
+        // }
+
+        try {
+            $this->attributes['dob'] = Carbon::createFromFormat(config('panel.date_format'), $value)
+                ->format('Y-m-d');
+        } catch (\Exception $e) {
+            // fallback for Y-m-d
+            $this->attributes['dob'] = Carbon::parse($value)->format('Y-m-d');
+        }
     }
 
     public function lead_agent()
@@ -222,5 +233,19 @@ class Student extends Authenticatable implements HasMedia, MustVerifyEmail
     public function getOfferLetterAttachmentsAttribute()
     {
         return $this->getMedia('offer_letter_attachments');
+    }
+
+    public function educationLevel()
+    {
+        return $this->belongsToMany(EducationLevel::class, 'student_education_levels')->withPivot('program', 'grade');
+    }
+    public function tests()
+    {
+        return $this->hasMany(Test::class, 'student_id', 'id');
+    }
+
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class, 'student_id', 'id');
     }
 }
