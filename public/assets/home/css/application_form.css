@@ -13,7 +13,7 @@
     justify-content: center;
 }
 
-#headingOne .title h4 {}
+/* #headingOne .title h4 {} */
 
 #headingOne .title::after {
     align-self: end;

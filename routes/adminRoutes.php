@@ -44,6 +44,11 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
     Route::resource('user-settings', 'UserSettingsController');
 
     // Students
+
+    // Students Application
+    Route::get('students/applicant-list', [StudentsController::class, 'getApplicantList'])->name('students.getApplicantList');
+    Route::get('students/applicant-details/{id}', [StudentsController::class, 'getApplicantDetails'])->name('students.getApplicantDetails');
+
     Route::delete('students/destroy', 'StudentsController@massDestroy')->name('students.massDestroy');
     Route::post('students/media', 'StudentsController@storeMedia')->name('students.storeMedia');
     Route::post('students/ckmedia', 'StudentsController@storeCKEditorImages')->name('students.storeCKEditorImages');

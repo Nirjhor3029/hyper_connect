@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\EducationLevel;
 use Illuminate\Http\Request;
 use App\Models\Student;
@@ -21,9 +22,10 @@ use App\Models\Course;
 use App\Models\Document;
 
 use App\Models\User;
-use Gate;
+// use Gate;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,20 +41,20 @@ class StudentsController extends Controller
         abort_if(Gate::denies('student_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $query = Student::with([
-            'user', 
+            'user',
             'nationality',
             'confirm_country',
             'confirm_university',
-            'confirm_program' ,
+            'confirm_program',
             'confirm_subject',
-            'lead_agent', 
-            'handelling_agent', 
-            'interested_countries', 
-            'univertsities', 
-            'subjects', 
+            'lead_agent',
+            'handelling_agent',
+            'interested_countries',
+            'univertsities',
+            'subjects',
             // 'programs', 
-            'course_interesteds', 
-            'academic_attachments', 
+            'course_interesteds',
+            'academic_attachments',
             'media'
         ]);
 
@@ -128,7 +130,7 @@ class StudentsController extends Controller
 
 
 
-        return view('admin.students.create', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'subjects', 'univertsities', 'users','countries','max_education_levels'));
+        return view('admin.students.create', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'subjects', 'univertsities', 'users', 'countries', 'max_education_levels'));
     }
 
     public function getNationalities($countryId)
@@ -143,7 +145,7 @@ class StudentsController extends Controller
 
     public function store(StoreStudentRequest $request)
     {
-       $request['password'] = Hash::make('123456');
+        $request['password'] = Hash::make('123456');
         $data = $request->all();
 
         $user = Auth::user();
@@ -221,7 +223,7 @@ class StudentsController extends Controller
 
         $url = url()->previous();
 
-        return view('admin.students.edit', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users','max_education_levels','url'));
+        return view('admin.students.edit', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users', 'max_education_levels', 'url'));
     }
 
     public function convertProspectus($id)
@@ -252,10 +254,10 @@ class StudentsController extends Controller
         $academic_attachments = Document::pluck('file_url', 'id');
         $max_education_levels = EducationLevel::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $student= Student::find($id);
+        $student = Student::find($id);
         $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments');
 
-        return view('admin.students.convert_prospectus', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users','max_education_levels','url'));
+        return view('admin.students.convert_prospectus', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users', 'max_education_levels', 'url'));
     }
     public function offerLetters($id)
     {
@@ -285,10 +287,10 @@ class StudentsController extends Controller
         $academic_attachments = Document::pluck('file_url', 'id');
         $max_education_levels = EducationLevel::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $student= Student::find($id);
+        $student = Student::find($id);
         $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments');
 
-        return view('admin.students.offer_letter', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users','max_education_levels','url'));
+        return view('admin.students.offer_letter', compact('academic_attachments', 'course_interesteds', 'handelling_agents', 'interested_countries', 'lead_agents', 'nationalities', 'programs', 'student', 'subjects', 'univertsities', 'users', 'max_education_levels', 'url'));
     }
 
     public function update(UpdateStudentRequest $request, Student $student)
@@ -372,8 +374,6 @@ class StudentsController extends Controller
         } else {
             return redirect()->route('admin.students.index');
         }
-
-
     }
 
 
@@ -382,7 +382,7 @@ class StudentsController extends Controller
     {
         abort_if(Gate::denies('student_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent','confirm_country','confirm_university','confirm_program' ,'confirm_subject', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'studentApplications', 'studentCommissionDistributions');
+        $student->load('user', 'nationality', 'lead_agent', 'handelling_agent', 'confirm_country', 'confirm_university', 'confirm_program', 'confirm_subject', 'interested_countries', 'univertsities', 'subjects', 'programs', 'course_interesteds', 'academic_attachments', 'studentApplications', 'studentCommissionDistributions');
 
         return view('admin.students.show', compact('student'));
     }
@@ -417,5 +417,52 @@ class StudentsController extends Controller
         $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
+    }
+
+
+
+
+
+    public function getApplicantList()
+    {
+        // $applicants = Student::where('is_applicant', 1)->get();
+        $applicants = Student::get();
+        // return $applicants;
+        return view('admin.students.applicant_list', compact('applicants'));
+    }
+
+
+
+    public function getApplicantDetails($applicant_id)
+    {
+        $student_id = $applicant_id - 1000;
+        $applicant = Student::find($student_id);
+
+        // $authUser = auth()->user();
+
+        // $countries = Country::all();
+        // $selected_country = null;
+        // if (isset($authUser->country_id)) {
+        //     $selected_country = Country::find($authUser->country_id);
+        // }
+
+        $education_levels = EducationLevel::all();
+
+        $student_highest_education_level = isset($applicant->educationLevel)?  $applicant->educationLevel[0] : [];
+        $test = isset($applicant->tests)? $applicant->tests[0] : [];
+        // return $test;
+        // return $student_highest_education_level;
+
+        $uploads = $applicant->uploads;
+
+
+        // return $applicants;
+        return view('admin.students.applicant_details', compact(
+            'applicant',
+            'education_levels',
+            'student_highest_education_level',
+            'test',
+            'uploads'
+        ));
     }
 }

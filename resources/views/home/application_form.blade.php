@@ -4,12 +4,6 @@
     <link rel="stylesheet" href="{{ asset('assets/home/css/programs.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/home/css/application_form.css') }}">
     <style>
-        /* .select2-container--default .select2-selection--single {
-                                                                        border: inherit;
-                                                                        border-radius: inherit;
-                                                                        height: calc(2.25rem + 2px);
-                                                                        padding: .375rem .75rem;
-                                                                    } */
     </style>
 @endpush
 
@@ -384,7 +378,7 @@
                                                             <i class="fas fa-file-edit"></i>
                                                         </button>
                                                         <button class="remove-btn btn btn-outline-danger btn-sm"
-                                                            data-id="{{$item->id}}"
+                                                            data-id="{{ $item->id }}"
                                                             style="border: 1px solid red;border-radius: 50px;">
                                                             <i class="fa fa-trash"></i>
                                                             Remove
