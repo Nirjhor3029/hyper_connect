@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('uploads', function (Blueprint $table) {
-            $table->text('file_status_reason')->nullable()->after('file_status');
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -22,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('uploads', function (Blueprint $table) {
-            $table->dropColumn('file_status_reason');
+            $table->dropForeign(['updated_by']);
+            $table->dropColumn('updated_by');
         });
     }
 };

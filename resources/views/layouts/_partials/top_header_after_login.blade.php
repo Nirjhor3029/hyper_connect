@@ -36,7 +36,7 @@
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
                         role="button" data-bs-toggle="dropdown">
                         <div class="profile-avatar me-2">
-                            {{ Auth::user()->first_name }}
+                            {{ Auth::user()->first_name?? explode(' ', Auth::user()->name)[0] }}
                         </div>
                         <i class="fas fa-chevron-down"></i>
                     </a>

@@ -1,8 +1,10 @@
 @extends('layouts.admin')
 @section('styles')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/cdns/bootstrap-5.3.3.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/cdns/bootstrap-icons@1.11.3.min.css') }}"> --}}
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> --}}
     <style>
         body {
             background-color: #f8f9fa;
@@ -73,21 +75,21 @@
 
         /* Accordion Styling */
         /* .accordion-button {
-                                background-color: #e9ecef !important;
-                                font-weight: 600;
-                            } */
+                                                                                                                                                            background-color: #e9ecef !important;
+                                                                                                                                                            font-weight: 600;
+                                                                                                                                                        } */
 
         /* .accordion-button:not(.collapsed) {
-                                color: #0d6efd;
-                                background-color: #e7f1ff !important;
-                                box-shadow: none;
-                            } */
+                                                                                                                                                            color: #0d6efd;
+                                                                                                                                                            background-color: #e7f1ff !important;
+                                                                                                                                                            box-shadow: none;
+                                                                                                                                                        } */
 
         /* .accordion-item {
-                                margin-bottom: 10px;
-                                border-radius: 0.5rem;
-                                box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03);
-                            } */
+                                                                                                                                                            margin-bottom: 10px;
+                                                                                                                                                            border-radius: 0.5rem;
+                                                                                                                                                            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03);
+                                                                                                                                                        } */
 
         .detail-label {
             font-weight: 500;
@@ -124,13 +126,15 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="mb-4 text-primary"><i class="bi bi-person-lines-fill me-2"></i> Application Details: Sazzad Hossain Niyhor
+        <h1 class="mb-4 text-primary">
+            <i class="bi bi-person-lines-fill me-2"></i>
+            Application Details: {{ $applicant->name ?? $applicant->first_name }}
         </h1>
 
         <div class="d-flex justify-content-end mb-4">
-            <button class="btn btn-success me-2"><i class="bi bi-check-circle-fill"></i> Approve Application</button>
+            {{-- <button class="btn btn-success me-2"><i class="bi bi-check-circle-fill"></i> Approve Application</button>
             <button class="btn btn-danger me-2"><i class="bi bi-x-circle-fill"></i> Reject Application</button>
-            <button class="btn btn-outline-secondary"><i class="bi bi-pencil-square"></i> Edit Details</button>
+            <button class="btn btn-outline-secondary"><i class="bi bi-pencil-square"></i> Edit Details</button> --}}
         </div>
 
         <div class="accordion" id="applicationAccordion">
@@ -149,47 +153,48 @@
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Full Name:</div> {{$applicant->name ?? $applicant->first_name}}
+                                <div class="detail-label">Full Name:</div> {{ $applicant->name ?? $applicant->first_name }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Date of Birth:</div> {{$applicant->dob ?? 'N/A'}}
+                                <div class="detail-label">Date of Birth:</div> {{ $applicant->dob ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Gender:</div> {{$applicant->gender ?? 'N/A'}}
+                                <div class="detail-label">Gender:</div> {{ $applicant->gender ?? 'N/A' }}
                             </div>
 
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Nationality:</div> {{$applicant->nationality ?? 'N/A'}}
+                                <div class="detail-label">Nationality:</div> {{ $applicant->nationality ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Passport Number:</div> {{$applicant->passport_number ?? 'N/A'}}
+                                <div class="detail-label">Passport Number:</div> {{ $applicant->passport_no ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Marital Status:</div> {{$applicant->marital_status ?? 'N/A'}}
+                                <div class="detail-label">Marital Status:</div> {{ $applicant->marital_status ?? 'N/A' }}
                             </div>
 
                             <hr>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Primary Mobile:</div> 
+                                <div class="detail-label">Email:</div> {{ $applicant->email ?? 'N/A' }}
+                            </div>
+                            <div class="col-md-4 detail-item">
+                                <div class="detail-label">Primary Mobile:</div>
                                 {{-- +880 1685262326 --}}
-                                {{$applicant->phone ?? 'N/A'}}
+                                {{ $applicant->phone ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Alternate Mobile:</div> {{$applicant->alt_phone ?? 'N/A'}}
+                                <div class="detail-label">Alternate Mobile:</div> {{ $applicant->alt_phone ?? 'N/A' }}
                             </div>
-                            <div class="col-md-4 detail-item">
-                                <div class="detail-label">Email:</div> {{$applicant->email ?? 'N/A'}}
-                            </div>
+
 
                             <hr>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">City/District:</div> {{$applicant->city ?? 'N/A'}}
+                                <div class="detail-label">City/District:</div> {{ $applicant->city ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Country:</div> {{$applicant->country ?? 'N/A'}}
+                                <div class="detail-label">Country:</div> {{ $applicant->country ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Zipcode:</div> {{$applicant->zipcode ?? 'N/A'}}
+                                <div class="detail-label">Zipcode:</div> {{ $applicant->zipcode ?? 'N/A' }}
                             </div>
                         </div>
                     </div>
@@ -212,13 +217,16 @@
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Level:</div> Under Graduation
+                                <div class="detail-label">Level:</div>
+                                {{ $student_highest_education_level->title ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Program:</div> BSc in CSE
+                                <div class="detail-label">Program:</div>
+                                {{ $student_highest_education_level->pivot->program ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Grade/GPA:</div> 3.8
+                                <div class="detail-label">Grade/GPA:</div>
+                                {{ $student_highest_education_level->pivot->grade ?? 'N/A' }}
                             </div>
                         </div>
                     </div>
@@ -241,28 +249,28 @@
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Exam:</div> **IELTS**
+                                <div class="detail-label">Exam:</div> {{ $test->exam_type ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Date of Exam:</div> 02-10-2024
+                                <div class="detail-label">Date of Exam:</div> {{ $test->exam_date ?? 'N/A' }}
                             </div>
                             <div class="col-md-4 detail-item">
-                                <div class="detail-label">Overall Score:</div> **5.5**
+                                <div class="detail-label">Overall Score:</div> {{ $test->overall_score ?? 'N/A' }}
                             </div>
 
                             <hr>
 
                             <div class="col-md-3 detail-item">
-                                <div class="detail-label">Listening Score:</div> 5
+                                <div class="detail-label">Listening Score:</div> {{ $test->listening_score ?? 'N/A' }}
                             </div>
                             <div class="col-md-3 detail-item">
-                                <div class="detail-label">Reading Score:</div> 5
+                                <div class="detail-label">Reading Score:</div> {{ $test->reading_score ?? 'N/A' }}
                             </div>
                             <div class="col-md-3 detail-item">
-                                <div class="detail-label">Writing Score:</div> 5.5
+                                <div class="detail-label">Writing Score:</div> {{ $test->writing_score ?? 'N/A' }}
                             </div>
                             <div class="col-md-3 detail-item">
-                                <div class="detail-label">Speaking Score:</div> 6
+                                <div class="detail-label">Speaking Score:</div> {{ $test->speaking_score ?? 'N/A' }}
                             </div>
                         </div>
                     </div>
@@ -285,7 +293,82 @@
                     <div class="accordion-body">
                         <h4>Application Attachments</h4>
                         <p class="text-muted small">Review and approve/reject student-provided documents.</p>
-                        <div class="document-list-item bg-light p-2 rounded mb-2">
+
+
+                        @foreach ($uploads as $item)
+                            <div class="document-list-item bg-light p-2 rounded mb-2" data-id="{{ $item->id }}" id="file-{{ $item->id }}">
+                                <div>
+                                    <span class="file-name">{{ $item->file_custom_name }}</span>
+
+                                    @php
+                                        $file_status = '';
+                                        $badge_class = '';
+                                        $statusReason = '';
+                                        $statusIconClass = '';
+                                        switch ($item->file_status) {
+                                            case 'approved':
+                                                $file_status = 'Approved';
+                                                $badge_class = 'bg-success';
+                                                $statusIconClass = 'bi-check-circle';
+                                                break;
+                                            case 'rejected':
+                                                $file_status = 'Rejected';
+                                                $badge_class = 'bg-danger';
+                                                $statusIconClass = 'bi-x-circle';
+                                                $rejectedReason = $item->file_status_reason;
+                                                break;
+                                            default:
+                                                // $file_status: Uploaded
+                                                $file_status = 'Pending Review';
+                                                $badge_class = 'bg-warning';
+                                                $statusIconClass = 'bi-clock';
+                                        }
+                                    @endphp
+                                    <span class="badge {{ $badge_class }} file-status">
+                                        <i class="bi {{ $statusIconClass }}"></i>
+                                        {{ $file_status }}
+                                    </span>
+                                    @if ($statusReason !== '')
+                                        <small class="d-block text-danger">Reason: Low resolution copy.</small>
+                                    @endif
+
+                                    {{-- @if ($item->file_status == 'approved')
+                                        <span class="badge bg-success file-status">
+                                            <i class="bi bi-check-circle"></i>
+                                            Approved
+                                        </span>
+                                    @elseif ($item->file_status == 'rejected')
+                                    @else
+                                        <span class="badge bg-warning text-dark file-status">
+                                            <i class="bi bi-clock"></i>
+                                            Pending Review
+                                        </span>
+                                    @endif --}}
+
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ asset('storage/' . $item->file_path) }}" target="_blank"
+                                        class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-download"></i>
+                                        View
+                                    </a>
+                                    @if ($file_status != 'Approved')
+                                        <button type="button" class="btn btn-sm btn-success btn-approve me-1"><i
+                                                class="bi bi-check-circle"></i> Approve</button>
+                                    @endif
+
+                                    @if ($file_status != 'Rejected')
+                                        <button type="button" class="btn btn-sm btn-danger reject-btn">
+                                            <i class="bi bi-x-circle"></i>
+                                            Reject
+                                        </button>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+
+
+                        {{-- <div class="document-list-item bg-light p-2 rounded mb-2">
                             <div>
                                 <span class="file-name">Necter.job.pdf (CV/Resume)</span>
                                 <span class="badge bg-success file-status"><i class="bi bi-check-circle"></i>
@@ -294,8 +377,6 @@
                             <div class="btn-group" role="group">
                                 <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-download"></i>
                                     View</a>
-                                {{-- <button type="button" class="btn btn-sm btn-danger disabled"><i
-                                        class="bi bi-x-circle"></i> Reject</button> --}}
                                 <button type="button" class="btn btn-sm btn-danger reject-btn">
                                     <i class="bi bi-x-circle"></i>
                                     Reject
@@ -331,7 +412,7 @@
                                 <button type="button" class="btn btn-sm btn-success"><i class="bi bi-check-circle"></i>
                                     Approve</button>
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- <hr class="mt-4 mb-4">
 
@@ -495,10 +576,22 @@
     <script>
         $(document).ready(function() {
 
+            // actions (e.g., handling document approval/rejection via AJAX)
+
+            var documentId = null;
+
             // Trigger modal open when reject button is clicked
             $('.reject-btn').on('click', function() {
                 // Open the modal when the reject button is clicked
                 console.log("Reject button clicked");
+
+                var that = $(this);
+                documentId = that.closest('.document-list-item').data('id');
+
+                // that.closest('.document-list-item').find('.file-status')
+                //     .removeClass('bg-warning bg-success')
+                //     .addClass('bg-danger')
+                //     .html('<i class="bi bi-x-circle"></i> Rejected');
 
                 $('#rejectModal').modal('show');
             });
@@ -506,41 +599,99 @@
             // Handle rejection submission
             $('#submitRejection').on('click', function() {
                 var rejectionReason = $('#rejectionReason').val();
+                let documentListItem = $('.document-list-item[data-id="' + documentId + '"]');
 
-                if (rejectionReason.trim() === "") {
-                    alert("Please provide a rejection reason.");
-                    return;
-                }
+                console.log(documentId);
+                console.log(documentListItem);
+                // return;
+
+                // if (rejectionReason.trim() === "") {
+                //     alert("Please provide a rejection reason.");
+                //     return;
+                // }
 
                 // Simulating rejection with reason (you should replace this with your actual AJAX request to update the status)
-                alert("Document rejected with reason: " + rejectionReason);
+                // alert("Document rejected with reason: " + rejectionReason);
 
                 // After rejection, update UI and close modal
                 $('#rejectModal').modal('hide');
 
-                // Example of updating the UI (you can replace this part with your dynamic UI update)
-                $('.document-list-item:last-child .file-status').removeClass('bg-danger').addClass(
-                    'bg-warning').html('<i class="bi bi-clock"></i> Pending Review');
-                $('.document-list-item:last-child small').remove();
+                $.ajax({
+                    url: "{{ route('admin.students.changeDocumentStatus') }}",
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        status: 'rejected',
+                        id: documentId,
+                        status_reason: rejectionReason
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            documentListItem.find('.file-status')
+                                .removeClass('bg-warning bg-danger')
+                                .addClass('bg-success')
+                                .html('<i class="bi bi-check-circle-fill"></i> Approved');
+                            documentListItem.find('.btn-reject').remove();
 
-                // Optionally, add rejection reason in UI
-                $('.document-list-item:last-child').append('<small class="d-block text-danger">Reason: ' +
-                    rejectionReason + '</small>');
+                            $('.document-list-item:last-child').append(
+                                '<small class="d-block text-danger">Reason: ' +
+                                rejectionReason + '</small>');
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
             });
 
 
-            // Placeholder for jQuery actions (e.g., handling document approval/rejection via AJAX)
 
-            // Example of a click handler for document approval (simulated)
-            $('.btn-group button.btn-success').on('click', function() {
-                var docName = $(this).closest('.document-list-item').find('.file-name').text();
-                // In Laravel, you would make an AJAX call here to update the document status
-                alert('Simulating approval for: ' + docName +
-                    '\n(This action should trigger an AJAX request in your Laravel controller.)');
-                // You would then update the UI element on success.
+
+            // click handler for document approval (simulated)
+            $('.btn-approve').on('click', function() {
+
+                let that = $(this);
+                let fileID = that.closest('.document-list-item').data('id');
+                let documentListItem = that.closest('.document-list-item');
+                console.log(fileID);
+                // return;
+                $.ajax({
+                    url: "{{ route('admin.students.changeDocumentStatus') }}",
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        status: 'approved',
+                        id: fileID
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            documentListItem.find('.file-status')
+                                .removeClass('bg-warning bg-danger')
+                                .addClass('bg-success')
+                                .html('<i class="bi bi-check-circle-fill"></i> Approved');
+                            documentListItem.find('.btn-approve').remove();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+
+
+                // var docName = $(this).closest('.document-list-item').find('.file-name').text();
+                // // In Laravel, you would make an AJAX call here to update the document status
+                // alert('Simulating approval for: ' + docName +
+                //     '\n(This action should trigger an AJAX request in your Laravel controller.)');
+                // // You would then update the UI element on success.
             });
 
-            // Example of a click handler for file upload (simulated)
+
+
+            // click handler for file upload (simulated)
             $('#offerLetterForm').on('submit', function(e) {
                 e.preventDefault();
                 var fileName = $('#offerLetterFile').val().split('\\').pop(); // Get just the filename

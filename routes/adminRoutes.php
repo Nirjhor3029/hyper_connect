@@ -48,6 +48,7 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
     // Students Application
     Route::get('students/applicant-list', [StudentsController::class, 'getApplicantList'])->name('students.getApplicantList');
     Route::get('students/applicant-details/{id}', [StudentsController::class, 'getApplicantDetails'])->name('students.getApplicantDetails');
+    Route::post('students/applicants/documents/change-status', [StudentsController::class, 'changeDocumentStatus'])->name('students.changeDocumentStatus');
 
     Route::delete('students/destroy', 'StudentsController@massDestroy')->name('students.massDestroy');
     Route::post('students/media', 'StudentsController@storeMedia')->name('students.storeMedia');

@@ -231,7 +231,7 @@
                                                     </option>
                                                     @foreach ($education_levels as $item)
                                                         <option value="{{ $item->id }}"
-                                                            {{ $item->id == $student_highest_education_level->id ? 'selected' : '' }}>
+                                                            {{ optional($student_highest_education_level)->id == $item->id ? 'selected' : '' }}>
                                                             {{ $item->title }}
                                                             {{ isset($item->short_code) ? ' (' . $item->short_code . ')' : '' }}
                                                         </option>
@@ -265,12 +265,12 @@
                                         <div class="col-md-4 form-floating">
                                             <select class="form-select" name="exam_type" id="exam_type">
                                                 <option value="IELTS"
-                                                    {{ $test->exam_type == 'IELTS' ? 'selected' : '' }}>IELTS</option>
+                                                    {{ optional($test)->exam_type == 'IELTS' ? 'selected' : '' }}>IELTS</option>
                                                 <option value="TOEFL"
-                                                    {{ $test->exam_type == 'TOEFL' ? 'selected' : '' }}>TOEFL</option>
-                                                <option value="PTE" {{ $test->exam_type == 'PTE' ? 'selected' : '' }}>
+                                                    {{ optional($test)->exam_type == 'TOEFL' ? 'selected' : '' }}>TOEFL</option>
+                                                <option value="PTE" {{ optional($test)->exam_type == 'PTE' ? 'selected' : '' }}>
                                                     PTE</option>
-                                                <option value="MOI" {{ $test->exam_type == 'MOI' ? 'selected' : '' }}>
+                                                <option value="MOI" {{ optional($test)->exam_type == 'MOI' ? 'selected' : '' }}>
                                                     MOI</option>
                                             </select>
                                             <label class="form-label" for="exam_type">Exam Type</label>

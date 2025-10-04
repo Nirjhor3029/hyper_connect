@@ -38,7 +38,7 @@ class SocialiteController extends Controller
             $student = Student::where('google_id', $googleUser->id)->first();
             if ($student) {
                 Auth::login($student);
-                return redirect()->route('dashboard')->with('success', 'Logged in with Google successfully!');
+                return redirect()->route('student.application.form')->with('success', 'Logged in with Google successfully!');
             } else {
 
                 // dd($googleUser, $student, 'No student found, creating new one...');
@@ -65,7 +65,7 @@ class SocialiteController extends Controller
 
                 if ($newStudent) {
                     Auth::login($newStudent);
-                    return redirect()->route('student.dashboard')->with('success', 'Logged in with Google successfully!');
+                    return redirect()->route('student.application.form')->with('success', 'Logged in with Google successfully!');
                 }
             }
             // Here you would typically find or create a user in your database

@@ -20,7 +20,7 @@ use App\Models\Agent;
 
 use App\Models\Course;
 use App\Models\Document;
-
+use App\Models\Upload;
 use App\Models\User;
 // use Gate;
 
@@ -448,13 +448,14 @@ class StudentsController extends Controller
 
         $education_levels = EducationLevel::all();
 
-        $student_highest_education_level = isset($applicant->educationLevel)?  $applicant->educationLevel[0] : [];
-        $test = isset($applicant->tests)? $applicant->tests[0] : [];
+        $student_highest_education_level = (isset($applicant->educationLevel) && count($applicant->educationLevel) > 0) ?  $applicant->educationLevel[0] : [];
+        $test = (isset($applicant->tests) && count($applicant->tests) > 0) ? $applicant->tests[0] : [];
         // return $test;
-        // return $student_highest_education_level;
+        // return $student_highest_education_level->pivot->program;
 
         $uploads = $applicant->uploads;
 
+        // return $uploads;
 
         // return $applicants;
         return view('admin.students.applicant_details', compact(
@@ -464,5 +465,33 @@ class StudentsController extends Controller
             'test',
             'uploads'
         ));
+    }
+
+    public function changeDocumentStatus(Request $request)
+    {
+        if (!$request->id || !$request->status) {
+            return response()->json([
+                'success' => false,
+                'status' => '400',
+                'message' => 'File id or status is missing'
+            ], 400);
+        }
+
+        $file_id = $request->id;
+        $file_status = $request->status;
+        $status_reason = $request->status_reason ?? null;
+
+
+        $document = Upload::find($file_id);
+        $document->file_status = $file_status;
+        $document->admin_comment = $status_reason;
+        $document->updated_by = auth()->user()->id;
+        $document->save();
+
+        return response()->json([
+            'success' => true,
+            'status' => '200',
+            'message' => 'File status updated successfully'
+        ], 200);
     }
 }

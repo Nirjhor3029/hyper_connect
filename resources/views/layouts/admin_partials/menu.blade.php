@@ -186,6 +186,25 @@
                 </ul>
             </li>
         @endcan
+
+
+
+        {{-- applicants --}}
+        @can('student_access') 
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route('admin.students.getApplicantList') }}"
+                    class="c-sidebar-nav-link {{ request()->is('admin/students') || request()->is('admin/students/*') ? 'c-active' : '' }}">
+                    <i class="fa-fw fas fa-user-graduate c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('Applicants') }}
+                </a>
+            </li>
+        @endcan
+
+
+
+
         @can('student_access')
 
             <li

@@ -23,9 +23,14 @@ class ApplicationFormPageController extends Controller
         }
 
         $education_levels = EducationLevel::all();
+        // return $education_levels;
 
-        $student_highest_education_level = $authUser->educationLevel[0];
-        $test = $authUser->tests[0];
+        // $student_highest_education_level = $authUser->educationLevel[0];
+        // $test = $authUser->tests[0];
+
+        $student_highest_education_level = $authUser->educationLevel->first() ?? null;
+        $test = $authUser->tests->first() ?? null;
+
         // return $test;
         // return $student_highest_education_level;
 
