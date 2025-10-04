@@ -427,8 +427,10 @@ class StudentsController extends Controller
     {
         // $applicants = Student::where('is_applicant', 1)->get();
         $applicants = Student::get();
-        // return $applicants;
-        return view('admin.students.applicant_list', compact('applicants'));
+
+        $totalApplicants = count($applicants);
+        // return $applicants[5]->uploads->where('file_status','uploaded')->count();
+        return view('admin.students.applicant_list', compact('applicants','totalApplicants'));
     }
 
 

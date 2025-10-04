@@ -42,11 +42,11 @@
                 <div class="card text-white bg-primary mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Total Applicants</h5>
-                        <h1 class="card-text">125</h1>
+                        <h1 class="card-text">{{$totalApplicants}}</h1>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            {{-- <div class="col-md-3">
                 <div class="card text-white bg-warning mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Pending Review</h5>
@@ -69,7 +69,7 @@
                         <h1 class="card-text">22</h1>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="card">
@@ -112,6 +112,7 @@
                                 {{-- <th scope="col">Applied Date</th> --}}
                                 <th scope="col">Nationality</th>
                                 {{-- <th scope="col">Overall Status</th> --}}
+                                <th scope="col">New attachments (Pending Review)</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -127,6 +128,7 @@
                                     <td>{{ $item->email ?? '' }}</td>
                                     {{-- <td>2025-10-02</td> --}}
                                     <td>{{$item->nationality}}</td>
+                                    <td>{{$item->uploads->where('file_status','uploaded')->count()}}</td>
                                     {{-- <td><span class="badge bg-info text-dark status-pill">In Progress</span></td> --}}
                                     <td>
                                         {{-- <a href="/admin/applications/{{ $applicant_id }}" --}}

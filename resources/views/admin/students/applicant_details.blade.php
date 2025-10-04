@@ -285,19 +285,23 @@
                 <h2 class="accordion-header" id="headingFour">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        <i class="bi bi-folder-fill me-2"></i> Documents and Attachments
+                        <i class="bi bi-folder-fill me-2"></i> 
+                        Documents and Attachments 
+                        @if (count($uploads) > 0)
+                            (Total: {{ count($uploads) }})
+                        @endif
                     </button>
                 </h2>
                 <div id="collapseFour" class="accordion-collapse collapse " aria-labelledby="headingFour">
                     {{-- data-bs-parent="#applicationAccordion"> --}}
                     <div class="accordion-body">
-                        <h4>Application Attachments</h4>
+                        <h4>Application Attachments </h4>
                         <p class="text-muted small">Review and approve/reject student-provided documents.</p>
 
 
                         @foreach ($uploads as $item)
                             <div class="document-list-item bg-light p-2 rounded mb-2" data-id="{{ $item->id }}" id="file-{{ $item->id }}">
-                                <div>
+                                <div class="document_details">
                                     <span class="file-name">{{ $item->file_custom_name }}</span>
 
                                     @php
@@ -315,7 +319,7 @@
                                                 $file_status = 'Rejected';
                                                 $badge_class = 'bg-danger';
                                                 $statusIconClass = 'bi-x-circle';
-                                                $rejectedReason = $item->file_status_reason;
+                                                $statusReason = $item->admin_comment;
                                                 break;
                                             default:
                                                 // $file_status: Uploaded
@@ -329,7 +333,7 @@
                                         {{ $file_status }}
                                     </span>
                                     @if ($statusReason !== '')
-                                        <small class="d-block text-danger">Reason: Low resolution copy.</small>
+                                        <small class="d-block text-danger">Reason: {{$statusReason}}</small>
                                     @endif
 
                                     {{-- @if ($item->file_status == 'approved')
@@ -628,12 +632,12 @@
                     success: function(response) {
                         if (response.success) {
                             documentListItem.find('.file-status')
-                                .removeClass('bg-warning bg-danger')
-                                .addClass('bg-success')
-                                .html('<i class="bi bi-check-circle-fill"></i> Approved');
+                                .removeClass('bg-warning bg-success')
+                                .addClass('bg-danger')
+                                .html('<i class="bi bi-check-circle-fill"></i> Rejected');
                             documentListItem.find('.btn-reject').remove();
 
-                            $('.document-list-item:last-child').append(
+                            documentListItem.find('.document_details').append(
                                 '<small class="d-block text-danger">Reason: ' +
                                 rejectionReason + '</small>');
                         } else {
@@ -663,7 +667,8 @@
                     data: {
                         _token: "{{ csrf_token() }}",
                         status: 'approved',
-                        id: fileID
+                        id: fileID,
+                        status_reason: null
                     },
                     success: function(response) {
                         if (response.success) {
