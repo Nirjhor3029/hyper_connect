@@ -13,8 +13,9 @@ use App\Models\Course;
 use App\Models\State;
 use App\Models\Tag;
 use App\Models\University;
-use Gate;
+// use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 

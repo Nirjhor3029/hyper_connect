@@ -31,6 +31,12 @@
 
 
             <div class="row">
+
+
+
+
+
+
                 <!-- programs-leftbar -->
                 <div class="col-lg-3 mb-3">
                     <button class="btn btn-outline-primary w-100 filter-toggle">Show Filters</button>
@@ -162,6 +168,12 @@
                     </div>
                 </div>
 
+
+
+
+
+
+
                 <!-- Main Content -->
                 <div class="col-lg-9">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -179,10 +191,133 @@
                         </div>
                     </div>
 
+
+                    @foreach ($universities as $university)
+                        @if ($university->universityCourses->count() > 0)
+                            <div class="university-card-item">
+                                <h5>
+                                    <img class="university-logo" src="{{ $university->logo->getUrl() }}"
+                                        alt="{{ $university->name }}">
+                                    {{ $university->name }}
+                                    @if ($university->code)
+                                        ({{ $university->code }})
+                                    @endif
+                                </h5>
+
+                                @foreach ($university->universityCourses as $course)
+                                    <div class="card program-card">
+                                        <div class="card-body">
+                                            {{-- <div class="border p-3 rounded mb-2"> --}}
+                                            <div class="d-flex align-items-center justify-content-between ">
+                                                <div>
+                                                    <h6 class="program-title">{{ $course->name }}</h6>
+                                                    <div class="program-meta d-flex">
+                                                        <div class="program-date-container-open"
+                                                            style="border-right: 1px solid #ccc;">
+                                                            Open:
+                                                            <span class="date">
+                                                                {{ \Carbon\Carbon::parse($course->opening_date)->format('M d') }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="program-date-container-close">
+                                                            Closed:
+                                                            <span class="date">
+                                                                {{ \Carbon\Carbon::parse($course->closing_date)->format('M d') }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 text-end">
+                                                    <button class="btn btn-nd btn-round btn-not-primary" id="bookmarkBtn"
+                                                        data-action="bookmark">
+                                                        <i class="fa-regular fa-bookmark"></i>
+                                                        {{-- <i class="fa-solid fa-bookmark"></i> --}}
+                                                    </button>
+                                                    <button class="btn btn-md btn-round btn-not-primary"
+                                                        id="checkEligibilityBtn" type="button"
+                                                        data-action="checkEligibility">
+                                                        Check Eligibility
+                                                    </button>
+                                                    <button class="btn btn-primary btn-md btn-round btn-apply"
+                                                        id="applyBtn" type="button" data-program-id={{ $course->id }}
+                                                        data-action="applyNow">
+                                                        Apply Now
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="d-flex mt-2 ">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                        alt="" srcset="">
+                                                    <div>
+                                                        <strong>RM {{ $course->total_fees }}</strong> <br>
+                                                        <small class="text-secondary">Total tuition Fee</small>
+                                                    </div>
+                                                </div>
+                                                @php
+                                                    $year_fees = $course->year_fees;
+                                                    $year_fees = json_decode($year_fees, true);
+                                                    // echo $year_fees['1st_year_fees'];
+                                                @endphp
+                                                @if (isset($year_fees['1st_year_fees']))
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                            alt="" srcset="">
+                                                        <div>
+                                                            <strong>RM {{ $year_fees['1st_year_fees'] }}</strong> <br>
+                                                            <small class="text-secondary">First year tuition Fee</small>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                @if (isset($year_fees['2nd_year_fees']))
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                            alt="" srcset="">
+                                                        <div>
+                                                            <strong>RM {{ $year_fees['2nd_year_fees'] }}</strong> <br>
+                                                            <small class="text-secondary">Second year tuition Fee</small>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                @if (isset($year_fees['3rd_year_fees']))
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                            alt="" srcset="">
+                                                        <div>
+                                                            <strong>RM {{ $year_fees['3rd_year_fees'] }}</strong> <br>
+                                                            <small class="text-secondary">Third year tuition Fee</small>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                @if (isset($year_fees['4th_year_fees']))
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                            alt="" srcset="">
+                                                        <div>
+                                                            <strong>RM {{ $year_fees['4th_year_fees'] }}</strong> <br>
+                                                            <small class="text-secondary">Fourth year tuition Fee</small>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            {{-- </div> --}}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    @endforeach
+
                     <!-- Example Program Card -->
                     <div class="university-card-item">
                         <h5>
-                            <img class="university-logo" src="{{ asset('assets/home/images/university/university_logo_1.png') }}" alt="APU Logo">
+                            <img class="university-logo"
+                                src="{{ asset('assets/home/images/university/university_logo_1.png') }}" alt="APU Logo">
                             Asia Pacific University (APU)
                         </h5>
                         @for ($i = 0; $i < 2; $i++)
@@ -193,7 +328,8 @@
                                         <div>
                                             <h6 class="program-title">Master of Science in Computing</h6>
                                             <div class="program-meta d-flex">
-                                                <div class="program-date-container-open" style="border-right: 1px solid #ccc;">
+                                                <div class="program-date-container-open"
+                                                    style="border-right: 1px solid #ccc;">
                                                     Open: <span class="date">Jan 22</span>
                                                 </div>
                                                 <div class="program-date-container-close">
@@ -214,28 +350,32 @@
                                     <hr>
                                     <div class="d-flex mt-2 ">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <img src="{{ asset('assets/images/rm_image_130.svg') }}" alt=""
+                                                srcset="">
                                             <div>
                                                 <strong>RM 2,000</strong> <br>
                                                 <small class="text-secondary">Total tuition Fee</small>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <img src="{{ asset('assets/images/rm_image_130.svg') }}" alt=""
+                                                srcset="">
                                             <div>
                                                 <strong>RM 0000</strong> <br>
                                                 <small class="text-secondary">First year tuition Fee</small>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <img src="{{ asset('assets/images/rm_image_130.svg') }}" alt=""
+                                                srcset="">
                                             <div>
                                                 <strong>RM 0000</strong> <br>
                                                 <small class="text-secondary">Second year tuition Fee</small>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <img src="{{ asset('assets/images/rm_image_130.svg') }}" alt=""
+                                                srcset="">
                                             <div>
                                                 <strong>RM 0000</strong> <br>
                                                 <small class="text-secondary">Third year tuition Fee</small>
@@ -256,7 +396,8 @@
 
                     <div class="university-card-item">
                         <h5>
-                            <img class="university-logo" src="{{ asset('assets/home/images/university/university_logo_7.png') }}" alt="APU Logo">
+                            <img class="university-logo"
+                                src="{{ asset('assets/home/images/university/university_logo_7.png') }}" alt="APU Logo">
                             Binary University
                         </h5>
                         @for ($i = 0; $i < 3; $i++)
@@ -267,7 +408,8 @@
                                         <div>
                                             <h6 class="program-title">Master of Science in Computing</h6>
                                             <div class="program-meta d-flex">
-                                                <div class="program-date-container-open" style="border-right: 1px solid #ccc;">
+                                                <div class="program-date-container-open"
+                                                    style="border-right: 1px solid #ccc;">
                                                     Open: <span class="date">Jan 22</span>
                                                 </div>
                                                 <div class="program-date-container-close">
@@ -288,28 +430,32 @@
                                     <hr>
                                     <div class="d-flex mt-2 ">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <img src="{{ asset('assets/images/rm_image_130.svg') }}" alt=""
+                                                srcset="">
                                             <div>
                                                 <strong>RM 2,000</strong> <br>
                                                 <small class="text-secondary">Total tuition Fee</small>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <img src="{{ asset('assets/images/rm_image_130.svg') }}" alt=""
+                                                srcset="">
                                             <div>
                                                 <strong>RM 0000</strong> <br>
                                                 <small class="text-secondary">First year tuition Fee</small>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <img src="{{ asset('assets/images/rm_image_130.svg') }}" alt=""
+                                                srcset="">
                                             <div>
                                                 <strong>RM 0000</strong> <br>
                                                 <small class="text-secondary">Second year tuition Fee</small>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{asset('assets/images/rm_image_130.svg')}}" alt="" srcset="">
+                                            <img src="{{ asset('assets/images/rm_image_130.svg') }}" alt=""
+                                                srcset="">
                                             <div>
                                                 <strong>RM 0000</strong> <br>
                                                 <small class="text-secondary">Third year tuition Fee</small>
@@ -340,20 +486,50 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            // programs-leftbar toggle
-            $(".filter-toggle").click(function() {
-                $(".programs-leftbar").slideToggle();
+
+            // Handle button clicks
+            $("#bookmarkBtn, #checkEligibilityBtn, #applyBtn").click(function(e) {
+                    e.preventDefault();
+
+                    var action = $(this).data('action'); // Get the action from data-attribute
+
+                    // Check if the user is logged in using Laravel's built-in auth() helper
+                    @auth
+                    // User is logged in, perform the respective action
+                    if (action === 'applyNow') {
+                        // Your Apply Now logic here
+                        alert('Proceeding with the application...');
+                    } else if (action === 'checkEligibility') {
+                        // Your Check Eligibility logic here
+                        alert('Checking eligibility...');
+                    } else if (action === 'bookmark') {
+                        // Your Bookmark logic here
+                        alert('Bookmarking...');
+                    }
+                @else
+                    // User is not logged in, prompt them to sign in
+                    alert('You need to sign in first!');
+                    // Redirect to login page
+                    window.location.href = '{{ route('login') }}';
+                @endauth
             });
 
-            // Top search toggle
-            $("#toggleSearch").click(function() {
-                $(".search-bar").fadeToggle().focus();
-            });
 
-            // Institutes search toggle
-            $("#toggleInstituteSearch").click(function() {
-                $(".search-institutes").slideToggle().focus();
-            });
+
+        // programs-leftbar toggle
+        $(".filter-toggle").click(function() {
+            $(".programs-leftbar").slideToggle();
+        });
+
+        // Top search toggle
+        $("#toggleSearch").click(function() {
+            $(".search-bar").fadeToggle().focus();
+        });
+
+        // Institutes search toggle
+        $("#toggleInstituteSearch").click(function() {
+            $(".search-institutes").slideToggle().focus();
+        });
         });
     </script>
 @endpush

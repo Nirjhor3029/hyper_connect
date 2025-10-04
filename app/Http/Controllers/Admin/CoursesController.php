@@ -11,8 +11,9 @@ use App\Models\Country;
 use App\Models\Course;
 use App\Models\Program;
 use App\Models\University;
-use Gate;
+// use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,10 +41,11 @@ class CoursesController extends Controller
         $programs = collect();     // Empty collection initially
 
 
-        if (old('country_id', $defaultCountryId)) {
+        if ($defaultCountryId) {
             $universities = University::where('country_id', old('country_id', $defaultCountryId))->pluck('name', 'id');
             $programs = Program::where('country_id', old('country_id', $defaultCountryId))->pluck('type', 'id');
         }
+        // return $universities;
 
         return view('admin.courses.create', compact('countries', 'universities', 'programs'));
     }
@@ -51,12 +53,33 @@ class CoursesController extends Controller
 
     public function store(StoreCourseRequest $request)
     {
+
+        // return $request->all();
+
+        // Prepare the year fees array
+        $yearFees = [
+            '1st_year_fees' => $request->input('1st_year_fees') ?? null,
+            '2nd_year_fees' => $request->input('2nd_year_fees') ??  null,
+            '3rd_year_fees' => $request->input('3rd_year_fees') ??  null,
+            '4th_year_fees' => $request->input('4th_year_fees') ??  null,
+        ];
+
+        // Remove null values from the array
+        $yearFees = array_filter($yearFees, function ($value) {
+            return !is_null($value);  // Keep only non-null values
+        });
+
         $course = Course::create($request->except('country_id'));
 
+        if ($course) {
+            $course->year_fees = json_encode($yearFees);
+            $course->save();
 
-        if ($media = $request->input('ck-media', false)) {
-            Media::whereIn('id', $media)->update(['model_id' => $course->id]);
+            if ($media = $request->input('ck-media', false)) {
+                Media::whereIn('id', $media)->update(['model_id' => $course->id]);
+            }
         }
+
 
         return redirect()->route('admin.courses.index');
     }
@@ -132,5 +155,4 @@ class CoursesController extends Controller
             'programs' => $programs
         ]);
     }
-
 }

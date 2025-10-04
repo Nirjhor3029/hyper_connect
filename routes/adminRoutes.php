@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProgramsController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\UniversitiesController;
 use App\Http\Controllers\StudentAuthController;
@@ -65,7 +66,7 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
 
 
     // Universities
-    Route::delete('universities/destroy', 'UniversitiesController@massDestroy')->name('universities.massDestroy');
+    Route::delete('universities/destroy', [UniversitiesController::class, 'destroy'])->name('universities.massDestroy');
     Route::post('universities/media', 'UniversitiesController@storeMedia')->name('universities.storeMedia');
     Route::post('universities/ckmedia', 'UniversitiesController@storeCKEditorImages')->name('universities.storeCKEditorImages');
     Route::resource('universities', 'UniversitiesController');
@@ -77,7 +78,7 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
     Route::resource('university-partnerships', 'UniversityPartnershipsController');
 
     // Programs
-    Route::delete('programs/destroy', 'ProgramsController@massDestroy')->name('programs.massDestroy');
+    Route::delete('programs/destroy', [ProgramsController::class, 'destroy'])->name('programs.massDestroy');
     Route::post('programs/media', 'ProgramsController@storeMedia')->name('programs.storeMedia');
     Route::post('programs/ckmedia', 'ProgramsController@storeCKEditorImages')->name('programs.storeCKEditorImages');
     Route::resource('programs', 'ProgramsController');
@@ -132,7 +133,7 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
 
 
     // Courses
-    Route::delete('courses/destroy', 'CoursesController@massDestroy')->name('courses.massDestroy');
+    Route::delete('courses/destroy',[CoursesController::class, 'destroy'])->name('courses.massDestroy');
     Route::post('courses/media', 'CoursesController@storeMedia')->name('courses.storeMedia');
     Route::post('courses/ckmedia', 'CoursesController@storeCKEditorImages')->name('courses.storeCKEditorImages');
     Route::resource('courses', 'CoursesController');

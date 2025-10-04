@@ -55,6 +55,8 @@ class Course extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
+        'opening_date',
+        'closing_date',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
