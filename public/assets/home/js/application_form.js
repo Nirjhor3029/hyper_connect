@@ -53,7 +53,7 @@ $(document).ready(function () {
         if (response) {
             row.find(".remove-btn").on("click", function () {
                 const id = $(this).data("id");
-                removeFile(id,row);
+                removeFile(id, row);
             });
         }
         return row;
@@ -63,22 +63,58 @@ $(document).ready(function () {
         let that = $(this);
         const id = that.data("id");
         console.log(id);
-        
+
         const row = that.closest(".file-row");
         removeFile(id, row);
     });
 
-    function removeFile(file_id,row) {
-        const response = confirm("Are you sure you want to delete this file?");
-        if (!response) return;
-        $.ajax({
-            url: "/upload/remove/" + file_id,
-            type: "DELETE",
-            data: {
-                _token: token
-            },
-            success: function () {
-                row.remove();
+    function removeFile(file_id, row) {
+        // const response = confirm("Are you sure you want to delete this file?");
+        // if (!response) return;
+        // $.ajax({
+        //     url: "/upload/remove/" + file_id,
+        //     type: "DELETE",
+        //     data: {
+        //         _token: token
+        //     },
+        //     success: function () {
+        //         row.remove();
+        //     }
+        // });
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to delete this file?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/upload/remove/" + file_id,
+                    type: "DELETE",
+                    data: {
+                        _token: token
+                    },
+                    success: function () {
+                        row.remove();
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    },
+                    error: function () {
+                        Swal.fire(
+                            'Error!',
+                            'Something went wrong. Please try again.',
+                            'error'
+                        )
+                    }
+                });
             }
         });
     }

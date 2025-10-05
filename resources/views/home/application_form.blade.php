@@ -479,7 +479,8 @@
                                         }
                                     @endphp
                                     <div class="card bg-white mb-4">
-                                        <div class="card-header {{ $Offer_granted ? 'text-success' : 'text-secondary' }} ">
+                                        <div
+                                            class="card-header {{ $Offer_granted ? 'text-success' : 'text-secondary' }} ">
                                             <i class="bi bi-check-circle-fill"></i> {{ $course->university->name ?? '' }}
                                             @if ($Offer_granted)
                                                 <span class="badge bg-success uni-status-badge">Offer Granted</span>
@@ -505,16 +506,19 @@
                                             <hr>
 
                                             @if (isset($courseStudent) && isset($courseStudent->offer_letter_path))
-                                                <div class="offer-status-box alert-success mt-3">
-                                                    <i class="bi bi-file-earmark-pdf-fill"></i>
-                                                    <strong>Offer Letter Available:</strong>
-                                                    {{ $courseStudent->offer_letter_file_name ?? '' }}
-                                                    <a href="{{ asset($courseStudent->offer_letter_path) }}"
+                                                <div class="offer-status-box alert-success mt-3 d-flex justify-content-between">
+                                                    <div>
+                                                        <i class="bi bi-file-earmark-pdf-fill"></i>
+                                                        <strong>Offer Letter Available:</strong>
+                                                        {{ $courseStudent->offer_letter_file_name ?? '' }}
+                                                    </div>
+                                                    <a href="{{ asset('/storage/' . $courseStudent->offer_letter_path) }}"
                                                         target="_blank" class="btn btn-sm btn-success ms-2">
                                                         <i class="bi bi-download"></i>
-                                                        Download</a>
-                                                    <button class="btn btn-sm btn-danger ms-1 delete-offer-btn"
-                                                        data-uni-id="UT-1001"><i class="bi bi-trash"></i> Remove</button>
+                                                        Download
+                                                    </a>
+                                                    {{-- <button class="btn btn-sm btn-danger ms-1 delete-offer-btn"
+                                                        data-uni-id="UT-1001"><i class="bi bi-trash"></i> Remove</button> --}}
                                                 </div>
                                             @else
                                                 <div class="offer-status-box alert-warning mt-3">

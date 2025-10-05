@@ -230,16 +230,19 @@
 
                                                 @php
                                                     $applied = false;
-                                                    $authUserId = Auth::guard('student')->user()->id;
-                                                    $courseStudents = $course->courseStudents;
-                                                    // dd($courseStudents);
+                                                    if (Auth::guard('student')->user()) {
+                                                        $authUserId = Auth::guard('student')->user()->id;
+                                                        $courseStudents = $course->courseStudents;
+                                                        // dd($courseStudents);
 
-                                                    $courseStudentIds = $courseStudents->pluck('id')->toArray();
-                                                    // dd($courseStudentIds);
+                                                        $courseStudentIds = $courseStudents->pluck('id')->toArray();
+                                                        // dd($courseStudentIds);
 
-                                                    if (in_array($authUserId, $courseStudentIds)) {
-                                                        $applied = true;
+                                                        if (in_array($authUserId, $courseStudentIds)) {
+                                                            $applied = true;
+                                                        }
                                                     }
+
                                                 @endphp
 
                                                 @if (!$applied)
@@ -268,12 +271,13 @@
 
                                             </div>
                                             <hr>
-                                            <div class="d-flex mt-2 ">
+                                            <div class="d-flex mt-2 gap-5">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                        alt="" srcset="">
+                                                    {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                        alt="" srcset=""> --}}
                                                     <div>
-                                                        <strong>RM {{ $course->total_fees }}</strong> <br>
+                                                        <strong><span class="text-success">RM</span>
+                                                            {{ $course->total_fees }}</strong> <br>
                                                         <small class="text-secondary">Total tuition Fee</small>
                                                     </div>
                                                 </div>
@@ -284,10 +288,11 @@
                                                 @endphp
                                                 @if (isset($year_fees['1st_year_fees']))
                                                     <div class="d-flex align-items-center">
-                                                        <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                            alt="" srcset="">
+                                                        {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                            alt="" srcset=""> --}}
                                                         <div>
-                                                            <strong>RM {{ $year_fees['1st_year_fees'] }}</strong> <br>
+                                                            <strong><span class="text-success">RM</span>
+                                                                {{ $year_fees['1st_year_fees'] }}</strong> <br>
                                                             <small class="text-secondary">First year tuition Fee</small>
                                                         </div>
                                                     </div>
@@ -295,10 +300,11 @@
 
                                                 @if (isset($year_fees['2nd_year_fees']))
                                                     <div class="d-flex align-items-center">
-                                                        <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                            alt="" srcset="">
+                                                        {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                            alt="" srcset=""> --}}
                                                         <div>
-                                                            <strong>RM {{ $year_fees['2nd_year_fees'] }}</strong> <br>
+                                                            <strong><span class="text-success">RM</span>
+                                                                {{ $year_fees['2nd_year_fees'] }}</strong> <br>
                                                             <small class="text-secondary">Second year tuition Fee</small>
                                                         </div>
                                                     </div>
@@ -306,10 +312,11 @@
 
                                                 @if (isset($year_fees['3rd_year_fees']))
                                                     <div class="d-flex align-items-center">
-                                                        <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                            alt="" srcset="">
+                                                        {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                            alt="" srcset=""> --}}
                                                         <div>
-                                                            <strong>RM {{ $year_fees['3rd_year_fees'] }}</strong> <br>
+                                                            <strong><span class="text-success">RM</span>
+                                                                {{ $year_fees['3rd_year_fees'] }}</strong> <br>
                                                             <small class="text-secondary">Third year tuition Fee</small>
                                                         </div>
                                                     </div>
@@ -317,10 +324,11 @@
 
                                                 @if (isset($year_fees['4th_year_fees']))
                                                     <div class="d-flex align-items-center">
-                                                        <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                            alt="" srcset="">
+                                                        {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                            alt="" srcset=""> --}}
                                                         <div>
-                                                            <strong>RM {{ $year_fees['4th_year_fees'] }}</strong> <br>
+                                                            <strong><span class="text-success">RM</span>
+                                                                {{ $year_fees['4th_year_fees'] }}</strong> <br>
                                                             <small class="text-secondary">Fourth year tuition Fee</small>
                                                         </div>
                                                     </div>
@@ -396,9 +404,23 @@
                     }
                 @else
                     // User is not logged in, prompt them to sign in
-                    alert('You need to sign in first!');
                     // Redirect to login page
-                    window.location.href = '{{ route('login') }}';
+                    //alert('You need to sign in first!');
+                    //window.location.href = '{{ route('login') }}';
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'You are not signed in!',
+                        text: 'Please log in to apply for this program.',
+                        confirmButtonText: 'Sign In',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to login page if user clicks "Sign In"
+                            window.location.href = '{{ route('login') }}';
+                        }
+                    });
                 @endauth
             });
 
