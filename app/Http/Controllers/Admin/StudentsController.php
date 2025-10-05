@@ -537,6 +537,7 @@ class StudentsController extends Controller
             if ($courseStudent) {
                 $courseStudent->offer_letter_path = $path;
                 $courseStudent->offer_letter_file_name = $offer_letter_file_name;
+                $courseStudent->status = 'offer granted';
                 $courseStudent->save();
             }
 

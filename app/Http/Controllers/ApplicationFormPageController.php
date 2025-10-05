@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\Course;
+use App\Models\CourseStudent;
 use App\Models\EducationLevel;
 use App\Models\Student;
 use App\Models\StudentEducationLevel;
@@ -198,7 +199,25 @@ class ApplicationFormPageController extends Controller
 
         try {
             // $student->course_interesteds()->sync($course);
-            $student->course_interesteds()->syncWithoutDetaching($course);
+            // $student->course_interesteds()->syncWithoutDetaching($course);
+            $courseStudent = CourseStudent::where('student_id', $student->id)
+            ->where('course_id', $programID)
+            ->first();
+
+            if($courseStudent){
+                return response()->json([
+                    'states' => 400,
+                    'message' => 'You are already applied for this course'
+                ]);
+            }
+
+            $courseStudent = new CourseStudent();
+            $courseStudent->student_id = $student->id;
+            $courseStudent->course_id = $programID;
+            $courseStudent->status = 'processing';
+            $courseStudent->save();
+
+
         } catch (\Throwable $th) {
             return response()->json([
                 'states' => 400,

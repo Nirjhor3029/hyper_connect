@@ -322,8 +322,8 @@
                                     <div class="d-flex justify-content-end mt-4">
                                         {{-- <button type="button" class="btn btn-secondary">Cancel</button> --}}
                                         <div>
-                                            <button type="button" class="btn btn-outline-primary me-2">
-                                                Send to Advisor
+                                            <button type="button" class="btn btn-outline-primary me-2" disabled style="cursor: no-drop">
+                                                Send to Councilor
                                             </button>
                                             <button type="submit" class="btn btn-primary">Save changes</button>
                                         </div>
@@ -450,7 +450,7 @@
 
 
 
-                <div class="accordion" id="offerLetterAccordion" style="margin-top: 50px">
+                {{-- <div class="accordion" id="offerLetterAccordion" style="margin-top: 50px">
                     <div class="accordion-item">
                         <div class="accordion-header" id="headingOne">
                             <div class="accordion-button title" type="button" data-bs-toggle="collapse"
@@ -473,7 +473,6 @@
                                         $courseStudent = App\Models\CourseStudent::where('course_id', $course->id)
                                             ->where('student_id', $authUser->id)
                                             ->first();
-                                        // dd($courseStudent);
                                         if ($courseStudent->offer_letter_path != null) {
                                             $Offer_granted = true;
                                         }
@@ -517,8 +516,6 @@
                                                         <i class="bi bi-download"></i>
                                                         Download
                                                     </a>
-                                                    {{-- <button class="btn btn-sm btn-danger ms-1 delete-offer-btn"
-                                                        data-uni-id="UT-1001"><i class="bi bi-trash"></i> Remove</button> --}}
                                                 </div>
                                             @else
                                                 <div class="offer-status-box alert-warning mt-3">
@@ -532,7 +529,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

@@ -43,11 +43,30 @@
     </div>
     <div class="sidebar-item-group">
         <a href="{{ route('student.application.form') }}">
-        <div class="sidebar-item {{ request()->is('application-form') ? 'active' : '' }}">
-            {{-- <i class="fas fa-envelope"></i> --}}
-            <img src="{{ asset('assets/home/icons/applications.svg') }}" alt="" srcset="">
-        </div>
+            <div class="sidebar-item {{ request()->is('application-form') ? 'active' : '' }}">
+                {{-- <i class="fas fa-envelope"></i> --}}
+                <img src="{{ asset('assets/home/icons/applications.svg') }}" alt="" srcset="">
+            </div>
         </a>
-        <span class="sidebar-menu-text">Applications <br> & Offers</span>
+        {{-- <span class="sidebar-menu-text">Applications <br> & Offers</span> --}}
+        <span class="sidebar-menu-text">Application form</span>
     </div>
+    <div class="sidebar-item-group position-relative">
+        <a href="{{ route('student.offerLetters.index') }}">
+            <div class="sidebar-item {{ request()->is('offer-letters') ? 'active' : '' }}">
+                <img src="{{ asset('assets/home/icons/applications.svg') }}" alt="" srcset="">
+
+                @php
+                    // Example counter value
+                    $offerLettersCount = 3; // Replace with dynamic value from your controller
+                @endphp
+
+                @if ($offerLettersCount > 0)
+                    {{-- <span class="notification-badge">{{ $offerLettersCount }}</span> --}}
+                @endif
+            </div>
+        </a>
+        <span class="sidebar-menu-text">Offer Letters</span>
+    </div>
+
 </div>
