@@ -75,16 +75,16 @@
                                                     {{ $course->name ?? '' }}
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div class="detail-label">Application Status:</div> 
-                                                    {{ $courseStudent->status?? 'Under Review' }}
+                                                    <div class="detail-label">Application Status:</div>
+                                                    {{ $courseStudent->status ?? 'Under Review' }}
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div class="detail-label">Date Submitted:</div> 
+                                                    <div class="detail-label">Date Submitted:</div>
                                                     {{-- {{ \Carbon\Carbon::parse($courseStudent->created_at)->formatLocalized('%A, %d %B %Y') }} --}}
                                                     {{ \Carbon\Carbon::parse($courseStudent->created_at)->formatLocalized('%d %B %Y') }}
                                                 </div>
                                             </div>
-                                            <hr>
+                                            {{-- <hr> --}}
 
                                             @if (isset($courseStudent) && isset($courseStudent->offer_letter_path))
                                                 <div
@@ -101,6 +101,18 @@
                                                     </a>
                                                     {{-- <button class="btn btn-sm btn-danger ms-1 delete-offer-btn"
                                                         data-uni-id="UT-1001"><i class="bi bi-trash"></i> Remove</button> --}}
+                                                </div>
+                                                <hr>
+                                                <!-- Upload Box -->
+                                                <input type="file" id="fileInput" class="d-none"
+                                                    accept=".jpeg,.jpg,.png,.pdf">
+                                                <div class="upload-box mt-3" id="uploadBox">
+                                                    <p>
+                                                        <i class="bi bi-upload"></i>
+                                                        Drag and drop or <span class="text-danger">browse</span> to upload
+                                                        <b> Your Signed Documents</b>
+                                                    </p>
+                                                    <small class="text-muted">Supports JPEG, PNG & PDF</small>
                                                 </div>
                                             @else
                                                 <div class="offer-status-box alert-warning mt-3">

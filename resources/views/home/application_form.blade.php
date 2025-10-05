@@ -438,8 +438,9 @@
                                 <div class="upload-box mt-3" id="uploadBox">
                                     <p>
                                         <i class="bi bi-upload"></i>
-                                        Drag and drop or <span class="text-danger">browse</span> to upload <b>Transcript
-                                            Certificate</b>
+                                        Drag and drop or <span class="text-danger">browse</span> to upload 
+                                        <b> your documents</b>
+                                        {{-- <b>Transcript Certificate</b> --}}
                                     </p>
                                     <small class="text-muted">Supports JPEG, PNG & PDF</small>
                                 </div>
