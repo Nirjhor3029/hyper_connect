@@ -75,21 +75,21 @@
 
         /* Accordion Styling */
         /* .accordion-button {
-                                                                                                                                                            background-color: #e9ecef !important;
-                                                                                                                                                            font-weight: 600;
-                                                                                                                                                        } */
+                                                                                                                                                                                                            background-color: #e9ecef !important;
+                                                                                                                                                                                                            font-weight: 600;
+                                                                                                                                                                                                        } */
 
         /* .accordion-button:not(.collapsed) {
-                                                                                                                                                            color: #0d6efd;
-                                                                                                                                                            background-color: #e7f1ff !important;
-                                                                                                                                                            box-shadow: none;
-                                                                                                                                                        } */
+                                                                                                                                                                                                            color: #0d6efd;
+                                                                                                                                                                                                            background-color: #e7f1ff !important;
+                                                                                                                                                                                                            box-shadow: none;
+                                                                                                                                                                                                        } */
 
         /* .accordion-item {
-                                                                                                                                                            margin-bottom: 10px;
-                                                                                                                                                            border-radius: 0.5rem;
-                                                                                                                                                            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03);
-                                                                                                                                                        } */
+                                                                                                                                                                                                            margin-bottom: 10px;
+                                                                                                                                                                                                            border-radius: 0.5rem;
+                                                                                                                                                                                                            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03);
+                                                                                                                                                                                                        } */
 
         .detail-label {
             font-weight: 500;
@@ -285,8 +285,8 @@
                 <h2 class="accordion-header" id="headingFour">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        <i class="bi bi-folder-fill me-2"></i> 
-                        Documents and Attachments 
+                        <i class="bi bi-folder-fill me-2"></i>
+                        Documents and Attachments
                         @if (count($uploads) > 0)
                             (Total: {{ count($uploads) }})
                         @endif
@@ -300,7 +300,8 @@
 
 
                         @foreach ($uploads as $item)
-                            <div class="document-list-item bg-light p-2 rounded mb-2" data-id="{{ $item->id }}" id="file-{{ $item->id }}">
+                            <div class="document-list-item bg-light p-2 rounded mb-2" data-id="{{ $item->id }}"
+                                id="file-{{ $item->id }}">
                                 <div class="document_details">
                                     <span class="file-name">{{ $item->file_custom_name }}</span>
 
@@ -333,7 +334,7 @@
                                         {{ $file_status }}
                                     </span>
                                     @if ($statusReason !== '')
-                                        <small class="d-block text-danger">Reason: {{$statusReason}}</small>
+                                        <small class="d-block text-danger">Reason: {{ $statusReason }}</small>
                                     @endif
 
                                     {{-- @if ($item->file_status == 'approved')
@@ -454,14 +455,90 @@
                 <h2 class="accordion-header" id="headingFive">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                        <i class="bi bi-building-fill me-2"></i> University Applications (Total: 3) 🏫
+                        <i class="bi bi-building-fill me-2"></i> University Applications
+                        @if ($applicant->course_interesteds->count() > 0)
+                            (Total: {{ $applicant->course_interesteds->count() }}) 🏫
+                        @endif
                     </button>
                 </h2>
                 <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive">
                     {{-- data-bs-parent="#applicationAccordion"> --}}
                     <div class="accordion-body">
 
-                        <div class="uni-card bg-white">
+                        @foreach ($applicant->course_interesteds as $course)
+                            @php
+                                $Offer_granted = false;
+                                $courseStudent = App\Models\CourseStudent::where('course_id', $course->id)
+                                    ->where('student_id', $applicant->id)
+                                    ->first();
+                                // dd($courseStudent);
+                                if ($courseStudent->offer_letter_path != null) {
+                                    $Offer_granted = true;
+                                }
+                            @endphp
+                            <div class="uni-card bg-white">
+                                <div class="uni-card-header {{ $Offer_granted ? 'text-success' : 'text-secondary' }} ">
+                                    <i class="bi bi-check-circle-fill"></i> {{ $course->university->name ?? '' }}
+                                    @if ($Offer_granted)
+                                        <span class="badge bg-success uni-status-badge">Offer Granted</span>
+                                    @else
+                                        <span class="badge bg-warning text-dark uni-status-badge">Under Review</span>
+                                    @endif
+                                </div>
+                                <div class="p-3">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="detail-label">Course Applied:</div> {{ $course->name ?? '' }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="detail-label">Application Status:</div> Awaiting Student Acceptance
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="detail-label">Date Submitted:</div> 2025-09-01
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    @if (isset($courseStudent) && isset($courseStudent->offer_letter_path))
+                                        <div class="offer-status-box alert-success mt-3">
+                                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                                            <strong>Offer Letter Available:</strong>
+                                            {{ $courseStudent->offer_letter_file_name ?? '' }}
+                                            <a href="{{ asset($courseStudent->offer_letter_path) }}" target="_blank"
+                                                class="btn btn-sm btn-success ms-2">
+                                                <i class="bi bi-download"></i>
+                                                Download</a>
+                                            <button class="btn btn-sm btn-danger ms-1 delete-offer-btn"
+                                                data-uni-id="UT-1001"><i class="bi bi-trash"></i> Remove</button>
+                                        </div>
+                                    @else
+                                        <div class="offer-status-box alert-warning mt-3">
+                                            <i class="bi bi-exclamation-triangle-fill"></i>
+                                            <strong>No Offer Letter</strong> has been uploaded yet.
+                                        </div>
+                                        <form id="form-{{ $course->id }}" class="offer-upload-form mt-2"
+                                            {{-- action="/admin/upload-offer-letter/UT-1001" method="POST" --}} enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="text" name="applicant_id" value="{{ $applicant->id }}"
+                                                hidden>
+                                            <label for="offer_ut_1001" class="form-label small text-muted">Replace/Upload
+                                                New
+                                                Offer Letter:</label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control form-control-sm"
+                                                    id="offer_ut_1001" name="offer_letter_file" accept=".pdf" required>
+                                                <button type="submit" class="btn btn-sm btn-primary">Upload</button>
+                                            </div>
+                                        </form>
+                                        <div id="upload-status-{{ $course->id }}" class="mt-2"></div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+
+
+                        {{-- Demo:Start --}}
+                        {{-- <div class="uni-card bg-white">
                             <div class="uni-card-header text-success">
                                 <i class="bi bi-check-circle-fill"></i> **University of Toronto** (App ID: UT-1001)
                                 <span class="badge bg-success uni-status-badge">Offer Granted</span>
@@ -535,7 +612,8 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
+                        {{-- Demo:End --}}
 
                     </div>
                 </div>
@@ -579,6 +657,53 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
+
+
+
+
+            // Handle AJAX file upload for each university course form
+            $('.offer-upload-form').on('submit', function(e) {
+                e.preventDefault();
+
+                var form = $(this);
+                var courseId = form.attr('id').split('-')[1]; // Extract course id from form id
+                var formData = new FormData(this); // Create FormData object with form data
+
+                // Show loading message
+                $('#upload-status-' + courseId).html('<span class="text-muted">Uploading...</span>');
+
+                $.ajax({
+                    url: "/man-access/students/applicants/upload-offer-letter/" + courseId,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response.success) {
+                            $('#upload-status-' + courseId).html(
+                                '<span class="text-success">Offer letter uploaded successfully!</span>'
+                            );
+                            // Optionally, update the UI to show the new file or change the status badge
+                            $('form#form-' + courseId)
+                                .hide(); // Hide the upload form after successful submission
+                        } else {
+                            $('#upload-status-' + courseId).html(
+                                '<span class="text-danger">Error: ' + response.message +
+                                '</span>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $('#upload-status-' + courseId).html(
+                            '<span class="text-danger">Error: ' + error + '</span>');
+                    }
+                });
+            });
+
+
+
+
+
+
 
             // actions (e.g., handling document approval/rejection via AJAX)
 

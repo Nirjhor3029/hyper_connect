@@ -94,4 +94,9 @@ class Course extends Model implements HasMedia
     {
         return $this->belongsTo(Program::class, 'program_id');
     }
+
+    public function courseStudents()
+    {
+        return $this->belongsToMany(Student::class);
+    }
 }

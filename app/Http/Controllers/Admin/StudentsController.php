@@ -19,6 +19,7 @@ use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Agent;
 
 use App\Models\Course;
+use App\Models\CourseStudent;
 use App\Models\Document;
 use App\Models\Upload;
 use App\Models\User;
@@ -429,8 +430,10 @@ class StudentsController extends Controller
         $applicants = Student::get();
 
         $totalApplicants = count($applicants);
+
+        // $totalApplied = StudentCourse::where('status', 'applied')->count();
         // return $applicants[5]->uploads->where('file_status','uploaded')->count();
-        return view('admin.students.applicant_list', compact('applicants','totalApplicants'));
+        return view('admin.students.applicant_list', compact('applicants', 'totalApplicants'));
     }
 
 
@@ -495,5 +498,51 @@ class StudentsController extends Controller
             'status' => '200',
             'message' => 'File status updated successfully'
         ], 200);
+    }
+
+
+
+
+    public function uploadOfferLetter(Request $request, $courseId)
+    {
+        // Validate the file
+        $request->validate([
+            'offer_letter_file' => 'required|file|mimes:pdf|max:10240', // 10 MB limit
+            'applicant_id' => 'required|exists:students,id'
+        ]);
+
+        // return response()->json(['success' => true, 'message' => 'Offer letter uploaded successfully!']);
+
+        $authUserId = $request->applicant_id;
+        $applicant = Student::where('id', $authUserId)->first();
+        $storePath = 'offer_letters/' . $applicant->email ?? $applicant->id . '/';
+        // Find the course and upload the file
+        $course = Course::findOrFail($courseId);
+        if ($request->hasFile('offer_letter_file')) {
+            $file = $request->file('offer_letter_file');
+            $course_name = strtolower(str_replace(' ', '_', $course->name));
+            $offer_letter_file_name = $course_name . '_offer_letter.pdf';
+            $path = $file->storeAs($storePath, $offer_letter_file_name, 'public');
+
+            // Update the course or related model with the new file path
+            $courseStudent = CourseStudent::where('student_id', $authUserId)->where('course_id', $courseId)->first();
+
+            // return response()->json([
+            //     'success' => true, 
+            //     'authUserId' => $authUserId,
+            //     'courseId' => $courseId,
+            //     'courseStudent' => $courseStudent
+            // ]);
+
+            if ($courseStudent) {
+                $courseStudent->offer_letter_path = $path;
+                $courseStudent->offer_letter_file_name = $offer_letter_file_name;
+                $courseStudent->save();
+            }
+
+            return response()->json(['success' => true, 'message' => 'Offer letter uploaded successfully!']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'File upload failed.']);
     }
 }

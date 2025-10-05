@@ -265,12 +265,16 @@
                                         <div class="col-md-4 form-floating">
                                             <select class="form-select" name="exam_type" id="exam_type">
                                                 <option value="IELTS"
-                                                    {{ optional($test)->exam_type == 'IELTS' ? 'selected' : '' }}>IELTS</option>
+                                                    {{ optional($test)->exam_type == 'IELTS' ? 'selected' : '' }}>IELTS
+                                                </option>
                                                 <option value="TOEFL"
-                                                    {{ optional($test)->exam_type == 'TOEFL' ? 'selected' : '' }}>TOEFL</option>
-                                                <option value="PTE" {{ optional($test)->exam_type == 'PTE' ? 'selected' : '' }}>
+                                                    {{ optional($test)->exam_type == 'TOEFL' ? 'selected' : '' }}>TOEFL
+                                                </option>
+                                                <option value="PTE"
+                                                    {{ optional($test)->exam_type == 'PTE' ? 'selected' : '' }}>
                                                     PTE</option>
-                                                <option value="MOI" {{ optional($test)->exam_type == 'MOI' ? 'selected' : '' }}>
+                                                <option value="MOI"
+                                                    {{ optional($test)->exam_type == 'MOI' ? 'selected' : '' }}>
                                                     MOI</option>
                                             </select>
                                             <label class="form-label" for="exam_type">Exam Type</label>
@@ -330,6 +334,10 @@
                     </div>
                 </div>
 
+
+
+
+                {{-- Document Checklist --}}
                 <div class="accordion" id="documentAccordion">
                     <div class="accordion-item">
                         <div class="accordion-header" id="headingOne">
@@ -435,6 +443,88 @@
                                     </p>
                                     <small class="text-muted">Supports JPEG, PNG & PDF</small>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="accordion" id="offerLetterAccordion" style="margin-top: 50px">
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="headingOne">
+                            <div class="accordion-button title" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOfferLetter" aria-expanded="true"
+                                aria-controls="collapseOfferLetter">
+                                <div class="d-flex justify-content-between align-items-center w-100 gap-lg-4">
+                                    <div>
+                                        <h4>Offer Letters</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="collapseOfferLetter" class="accordion-collapse collapse show"
+                            aria-labelledby="headingOne" data-bs-parent="#offerLetterAccordion">
+                            <div class="accordion-body">
+                                @foreach ($authUser->course_interesteds as $course)
+                                    @php
+                                        $Offer_granted = false;
+                                        $courseStudent = App\Models\CourseStudent::where('course_id', $course->id)
+                                            ->where('student_id', $authUser->id)
+                                            ->first();
+                                        // dd($courseStudent);
+                                        if ($courseStudent->offer_letter_path != null) {
+                                            $Offer_granted = true;
+                                        }
+                                    @endphp
+                                    <div class="card bg-white mb-4">
+                                        <div class="card-header {{ $Offer_granted ? 'text-success' : 'text-secondary' }} ">
+                                            <i class="bi bi-check-circle-fill"></i> {{ $course->university->name ?? '' }}
+                                            @if ($Offer_granted)
+                                                <span class="badge bg-success uni-status-badge">Offer Granted</span>
+                                            @else
+                                                <span class="badge bg-warning text-dark uni-status-badge">Under
+                                                    Review</span>
+                                            @endif
+                                        </div>
+                                        <div class="card-body p-3">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="detail-label">Course Applied:</div>
+                                                    {{ $course->name ?? '' }}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="detail-label">Application Status:</div> Awaiting Student
+                                                    Acceptance
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="detail-label">Date Submitted:</div> 2025-09-01
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            @if (isset($courseStudent) && isset($courseStudent->offer_letter_path))
+                                                <div class="offer-status-box alert-success mt-3">
+                                                    <i class="bi bi-file-earmark-pdf-fill"></i>
+                                                    <strong>Offer Letter Available:</strong>
+                                                    {{ $courseStudent->offer_letter_file_name ?? '' }}
+                                                    <a href="{{ asset($courseStudent->offer_letter_path) }}"
+                                                        target="_blank" class="btn btn-sm btn-success ms-2">
+                                                        <i class="bi bi-download"></i>
+                                                        Download</a>
+                                                    <button class="btn btn-sm btn-danger ms-1 delete-offer-btn"
+                                                        data-uni-id="UT-1001"><i class="bi bi-trash"></i> Remove</button>
+                                                </div>
+                                            @else
+                                                <div class="offer-status-box alert-warning mt-3">
+                                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                                    <strong>No Offer Letter</strong> has been uploaded yet.
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

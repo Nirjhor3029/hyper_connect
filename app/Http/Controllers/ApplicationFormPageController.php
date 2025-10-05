@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Course;
 use App\Models\EducationLevel;
 use App\Models\Student;
 use App\Models\StudentEducationLevel;
+use App\Models\Subject;
 use App\Models\Test;
 use App\Models\Upload;
 use Illuminate\Http\Request;
@@ -170,5 +172,43 @@ class ApplicationFormPageController extends Controller
         $upload->save();
         return redirect()->back()->with('success', 'File name updated successfully!');
         // return response()->json(['message' => 'File name updated successfully']);
+    }
+
+
+    public function applyProgram(Request $request)
+    {
+        $programID = $request->program_id;
+        if (!$programID) {
+            return response()->json([
+                'states' => 400,
+                'message' => 'Program id is required'
+            ]);
+        }
+
+
+        $course = Course::where('id', $programID)->get();
+
+        
+        $student = Student::where('id', auth()->user()->id)->first();
+
+        // return response()->json([
+        //     'states' => 200,
+        //     'course' => $course
+        // ]);
+
+        try {
+            // $student->course_interesteds()->sync($course);
+            $student->course_interesteds()->syncWithoutDetaching($course);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'states' => 400,
+                'message' => $th->getMessage()
+            ]);
+        }
+
+        return response()->json([
+            'states' => 200,
+            'course' => $course
+        ]);
     }
 }
