@@ -21,6 +21,7 @@ use App\Models\Agent;
 use App\Models\Course;
 use App\Models\CourseStudent;
 use App\Models\Document;
+use App\Models\Notification;
 use App\Models\Upload;
 use App\Models\User;
 // use Gate;
@@ -539,6 +540,15 @@ class StudentsController extends Controller
                 $courseStudent->offer_letter_file_name = $offer_letter_file_name;
                 $courseStudent->status = 'offer granted';
                 $courseStudent->save();
+
+                $notification = new Notification();
+                $notification->student_id = $authUserId;
+                $notification->title = 'Got New Offer letter!';
+                $notification->body = 'You have got an offer letter from ' . $course->name;
+                $notification->type = 'offer_letter';
+                $notification->link = route('student.offerLetters.index');
+                $notification->save();
+
             }
 
             return response()->json(['success' => true, 'message' => 'Offer letter uploaded successfully!']);
