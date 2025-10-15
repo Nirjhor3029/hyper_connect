@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\Course;
 use App\Models\CourseStudent;
 use App\Models\EducationLevel;
+use App\Models\PaySlip;
 use App\Models\Student;
 use App\Models\StudentEducationLevel;
 use App\Models\Subject;
@@ -37,9 +38,16 @@ class ApplicationFormPageController extends Controller
         // return $test;
         // return $student_highest_education_level;
 
-        $uploads = $authUser->uploads;
+        $raw_uploads = $authUser->uploads;
 
-        // return $uploads;
+        $uploads = [];
+        foreach ($raw_uploads as $upload) {
+            $uploads[$upload->input_name][] = $upload;
+        }
+
+        $paySlip = PaySlip::where('student_id', $authUser->id)->first();
+
+        // return $uploads['passport-front'][0];
 
         return view('home.application_form', compact(
             'countries',
@@ -48,7 +56,8 @@ class ApplicationFormPageController extends Controller
             'education_levels',
             'student_highest_education_level',
             'test',
-            'uploads'
+            'uploads',
+            'paySlip'
         ));
     }
 

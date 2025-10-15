@@ -1,33 +1,28 @@
 $(document).ready(function () {
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
-    });
-
-
+    // Store token in a variable globally
     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+    console.log('upload_passport.js');
 
-    $('.form-floating input[required], .form-floating select[required], .form-floating textarea[required]')
-        .each(function () {
-            let $label = $(this).siblings('label'); // ওই ইনপুটের লেবেল খুঁজে বের করো
-            if ($label.length && !$label.find('.required').length) {
-                $label.append(" <span class='required_star'>*</span>");
-            }
-        });
-
-
-
-
+    let postFix = '-upload-passport';
 
     // Upload Box Scripts:Start
-    const fileList = $(".file-list");
-    const fileInput = $("#fileInput");
-    const uploadBox = $("#uploadBox");
 
-    function addFileRow(file, response, percent = 0) {
+
+    const fileInputID = "#fileInput" + postFix;
+
+
+    const uploadBoxContainerClass = ".upload-box-container";
+    const fileInputClass = ".file-input";
+    const uploadBoxClass = ".upload-box";
+    const fileListClass = ".file-list";
+
+
+    const fileInput = $(fileInputID);
+
+
+    function addFileRow(file, response, percent = 0, uploadBoxContainer) {
         const row = $(`
                     <div class="file-row" id="file-${response?.id || file.name.replace(/\W/g, '')}">
                         <div class="file-info">
@@ -47,6 +42,10 @@ $(document).ready(function () {
                         </div>
                     </div>
                 `);
+
+        console.log(uploadBoxContainer);
+
+        let fileList = uploadBoxContainer.find(fileListClass);
         fileList.append(row);
 
         // remove button bind (only after uploaded)
@@ -69,18 +68,6 @@ $(document).ready(function () {
     });
 
     function removeFile(file_id, row) {
-        // const response = confirm("Are you sure you want to delete this file?");
-        // if (!response) return;
-        // $.ajax({
-        //     url: "/upload/remove/" + file_id,
-        //     type: "DELETE",
-        //     data: {
-        //         _token: token
-        //     },
-        //     success: function () {
-        //         row.remove();
-        //     }
-        // });
 
         Swal.fire({
             title: 'Are you sure?',
@@ -119,13 +106,28 @@ $(document).ready(function () {
         });
     }
 
-    function uploadFile(file) {
+    function logFormData(formData) {
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ": " + pair[1]);
+        }
+    }
+
+
+    function uploadFile(file, uploadBoxContainer) {
+
+        let fileInput = uploadBoxContainer.find(fileInputClass);
+
         let formData = new FormData();
         formData.append("file", file);
         formData.append("_token", token);
+        formData.append("file_name", fileInput.attr("name"));
+        // logFormData(formData);
+        // console.log(file);
+        // return;
+
 
         // temporary row with 0% progress
-        let tempRow = addFileRow(file, null, 0);
+        let tempRow = addFileRow(file, null, 0, uploadBoxContainer);
         let progressBar = tempRow.find(".progress-bar");
         let statusText = tempRow.find(".file-status");
 
@@ -151,7 +153,7 @@ $(document).ready(function () {
             success: function (response) {
                 // replace temp row with final row
                 tempRow.remove();
-                addFileRow(file, response, 100);
+                addFileRow(file, response, 100, uploadBoxContainer);
                 console.log("Upload successful");
                 console.log(response);
 
@@ -163,123 +165,65 @@ $(document).ready(function () {
     }
 
     // Browse
-    fileInput.on("change", function (e) {
+    $(document).on('change',fileInputClass,function (e) {
+    // fileInput.on("change", function (e) {
+        console.log();
+        
+        let that = $(this);
+        let uploadBoxContainer = that.closest(uploadBoxContainerClass);
         const files = e.target.files;
         for (let file of files) {
-            uploadFile(file);
+            uploadFile(file, uploadBoxContainer);
         }
     });
 
+
+    // function getCurrentUploadBox(that) {
+
+    // }
+
     // Drag & Drop
-    uploadBox.on("dragover", function (e) {
+    $(document).on("dragover", uploadBoxClass, function (e) {
         e.preventDefault();
+        console.log('dragover');
+
+        let that = $(this);
+        let uploadBoxContainer = that.closest(uploadBoxContainerClass);
+        let uploadBox = uploadBoxContainer.find(uploadBoxClass);
         uploadBox.addClass("dragover");
+        // console.log(uploadBox);
     });
-    uploadBox.on("dragleave", function (e) {
+    $(document).on("dragleave", uploadBoxClass, function (e) {
         e.preventDefault();
+
+        let that = $(this);
+        let uploadBoxContainer = that.closest(uploadBoxContainerClass);
+        let uploadBox = uploadBoxContainer.find(uploadBoxClass);
         uploadBox.removeClass("dragover");
     });
-    uploadBox.on("drop", function (e) {
+
+    $(document).on("drop", uploadBoxClass, function (e) {
         e.preventDefault();
+
+        let that = $(this);
+        let uploadBoxContainer = that.closest(uploadBoxContainerClass);
+        let uploadBox = uploadBoxContainer.find(uploadBoxClass);
         uploadBox.removeClass("dragover");
         const files = e.originalEvent.dataTransfer.files;
         for (let file of files) {
-            uploadFile(file);
+            uploadFile(file, uploadBoxContainer);
         }
     });
 
     // Click to browse
-    uploadBox.on("click", function () {
+    $(document).on("click", uploadBoxClass, function () {
+        let that = $(this);
+        let uploadBoxContainer = that.closest(uploadBoxContainerClass);
+        let fileInput = uploadBoxContainer.find(fileInputClass);
         fileInput.click();
     });
     // Upload Box Scripts:Start
 
 
-
-    // Dynamic Dial Code Change
-    $('#nationality').on('change', function () {
-        let countryId = $(this).val();
-        if (countryId) {
-            $.ajax({
-                url: '/get-dial-code/' + countryId,
-                type: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                    // console.log(response.dial_code);
-                    $('.dial_code').text(response.dial_code);
-                }
-            });
-        } else {
-            $('.dial_code').text('');
-        }
-    });
-
-
 });
 
-
-
-
-
-
-
-// Upload Box Scripts previous version
-
-// const fileList = $(".file-list");
-// const fileInput = $("#fileInput");
-// const uploadBox = $("#uploadBox");
-// console.log("Script loaded");
-
-
-// function addFileRow(file) {
-//     const row = $(`
-//       <div class="file-row">
-//         <div class="file-info">
-//           <i class="bi bi-file-earmark-pdf"></i>
-//           <span>${file.name}</span>
-//           <small class="text-muted">${(file.size / 1024).toFixed(1)} KB</small>
-//           <span class="file-status">● APPROVED</span>
-//         </div>
-//         <div>
-//           <small class="text-muted">${new Date().toLocaleDateString()}</small>
-//           <button class="remove-btn">Remove</button>
-//         </div>
-//       </div>
-//     `);
-//     fileList.append(row);
-
-//     row.find(".remove-btn").on("click", function () {
-//         row.remove();
-//     });
-// }
-
-// // Handle browse file
-// fileInput.on("change", function (e) {
-//     const files = e.target.files;
-//     for (let file of files) {
-//         addFileRow(file);
-//     }
-// });
-
-// // Handle drag and drop
-// uploadBox.on("dragover", function (e) {
-//     e.preventDefault();
-//     uploadBox.addClass("dragover");
-// });
-// uploadBox.on("dragleave", function (e) {
-//     e.preventDefault();
-//     uploadBox.removeClass("dragover");
-// });
-// uploadBox.on("drop", function (e) {
-//     e.preventDefault();
-//     uploadBox.removeClass("dragover");
-//     const files = e.originalEvent.dataTransfer.files;
-//     for (let file of files) {
-//         addFileRow(file);
-//     }
-// });
-
-// // Open file browser when clicking upload box
-// uploadBox.on("click", function () {
-//     fileInput.click();
-// });

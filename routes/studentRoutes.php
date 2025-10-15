@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\UniversitiesController;
 use App\Http\Controllers\ApplicationFormPageController;
 use App\Http\Controllers\OfferLetterPageController;
+use App\Http\Controllers\PaySlipController;
 use App\Http\Controllers\Student\StudentUploadController;
 use App\Http\Controllers\StudentAuthController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,9 @@ Route::prefix('')->name('student.')->group(function () {
         Route::get('/get-dial-code/{country_id}', [ApplicationFormPageController::class, 'getDialCode'])->name('application.form.getDialCode');
         Route::post('/application-form-apply-program', [ApplicationFormPageController::class, 'applyProgram'])->name('application.form.applyProgram');
         
+        Route::post('/pay-slip/submit', [PaySlipController::class, 'store']);
+
+
         Route::get('/offer-letters', [OfferLetterPageController::class, 'index'])->name('offerLetters.index');
 
         Route::get('/dashboard', [StudentAuthController::class, 'dashboard'])->name('dashboard');

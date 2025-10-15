@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Upload extends Model
+class PaySlip extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'file_name',
-        'file_path',
-        'file_custom_name',
-        'file_type',
-        'file_size',
         'student_id',
-        'input_name'
-        
+        'upload_id',
+        'transaction_date',
+        'category',
+        'bank_account_number',
+        'amount',
     ];
 }

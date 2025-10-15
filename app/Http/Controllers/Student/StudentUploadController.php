@@ -12,11 +12,20 @@ class StudentUploadController extends Controller
 {
     public function store(Request $request)
     {
+
+
+
         $request->validate([
             // 'file' => 'required|mimes:jpeg,png,jpg,pdf|max:2048' // 2MB
             'file' => 'required|mimes:jpeg,png,jpg,pdf|max:10240', // 10MB
-            'custom_name' => 'nullable|string|max:255'
+            'custom_name' => 'nullable|string|max:255',
+            'file_name' => 'nullable|string|max:255'
         ]);
+
+        // return response()->json([
+        //     'message' => 'File uploaded successfully.',
+        //     'data' => $request->all()
+        // ], 200);
 
         $user = Auth::user();
 
@@ -29,6 +38,19 @@ class StudentUploadController extends Controller
         } else {
             $folder = "uploads";
         }
+
+
+        $input_name = $request->input('file_name') ?? null;
+        $sub_folder = $this->getSubFolderName($input_name);
+
+        if ($input_name && $sub_folder) {
+            $folder = $folder . '/' . $sub_folder;
+        }
+
+        // return response()->json([
+        //     'status' => 200,
+        //     'folder' => $folder
+        // ]);
 
 
 
@@ -48,6 +70,7 @@ class StudentUploadController extends Controller
 
         $upload = Upload::create([
             'student_id'   => isset($user->id) ? $user->id : null,
+            'input_name'   => $request->input('file_name') ?? null,
             'file_name' => $fileName,
             'file_custom_name' => $custom_name,
             'file_path' => $path,
@@ -64,6 +87,50 @@ class StudentUploadController extends Controller
             'file_type'  => $upload->file_type,
             'uploaded_at' => now()->format('M d, Y')
         ]);
+    }
+
+    public function getSubFolderName($input_name)
+    {
+        $subFolder = '';
+        switch ($input_name) {
+            case 'passport-front':
+                $subFolder = 'passport';
+                break;
+            case 'passport-full':
+                $subFolder = 'passport';
+                break;
+            case 'photo-own':
+                $subFolder = 'photo';
+                break;
+            case 'academic-certificates':
+                $subFolder = 'academic-certificates';
+                break;
+            case 'language-certificates-ielts':
+                $subFolder = 'language-certificates';
+                break;
+            case 'language-certificates-moi':
+                $subFolder = 'language-certificates';
+                break;
+            case 'language-certificates-pte':
+                $subFolder = 'language-certificates';
+                break;
+            case 'language-certificates-others':
+                $subFolder = 'language-certificates';
+                break;
+            case 'personal-attachments':
+                $subFolder = 'personal-attachments';
+                break;
+            case 'other-documents':
+                $subFolder = 'other-documents';
+                break;
+            case 'pay-slip':
+                $subFolder = 'pay-slip';
+                break;
+            default:
+                $subFolder = null;
+                break;
+        }
+        return $subFolder;
     }
 
     public function destroy($id)

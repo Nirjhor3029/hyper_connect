@@ -14,6 +14,18 @@
             margin-right: 10px;
             vertical-align: middle;
         }
+
+        .bg-gray-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ECECEB;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+        }
     </style>
 @endpush
 
@@ -271,70 +283,96 @@
 
                                             </div>
                                             <hr>
-                                            <div class="d-flex mt-2 gap-5">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex mt-2 gap-5">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="bg-gray-circle">
+                                                            <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                                alt="" srcset="">
+                                                        </div>
+                                                        <div>
+                                                            <strong><span class="">RM</span>
+                                                                {{ $course->total_fees }}</strong> <br>
+                                                            <small class="text-secondary">Total tuition Fee</small>
+                                                        </div>
+                                                    </div>
+                                                    @php
+                                                        $year_fees = $course->year_fees;
+                                                        $year_fees = json_decode($year_fees, true);
+                                                        // echo $year_fees['1st_year_fees'];
+                                                    @endphp
+                                                    @if (isset($year_fees['1st_year_fees']))
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-gray-circle">
+                                                                <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                                    alt="" srcset="">
+                                                            </div>
+                                                            <div>
+                                                                <strong><span class="">RM</span>
+                                                                    {{ $year_fees['1st_year_fees'] }}</strong> <br>
+                                                                <small class="text-secondary">First year tuition
+                                                                    Fee</small>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+
+                                                    @if (isset($year_fees['2nd_year_fees']))
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-gray-circle">
+                                                                <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                                    alt="" srcset="">
+                                                            </div>
+                                                            <div>
+                                                                <strong><span class="">RM</span>
+                                                                    {{ $year_fees['2nd_year_fees'] }}</strong> <br>
+                                                                <small class="text-secondary">Second year tuition
+                                                                    Fee</small>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+
+                                                    @if (isset($year_fees['3rd_year_fees']))
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-gray-circle">
+                                                                <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                                    alt="" srcset="">
+                                                            </div>
+                                                            <div>
+                                                                <strong><span class="">RM</span>
+                                                                    {{ $year_fees['3rd_year_fees'] }}</strong> <br>
+                                                                <small class="text-secondary">Third year tuition
+                                                                    Fee</small>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+
+                                                    @if (isset($year_fees['4th_year_fees']))
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-gray-circle">
+                                                                <img src="{{ asset('assets/images/rm_image_130.svg') }}"
+                                                                    alt="" srcset="">
+                                                            </div>
+                                                            <div>
+                                                                <strong><span class="">RM</span>
+                                                                    {{ $year_fees['4th_year_fees'] }}</strong> <br>
+                                                                <small class="text-secondary">Fourth year tuition
+                                                                    Fee</small>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>
                                                 <div class="d-flex align-items-center">
-                                                    {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                        alt="" srcset=""> --}}
+                                                    <div class='bg-gray-circle'>
+                                                        <img src="{{ asset('assets/home/icons/calendar.svg') }}"
+                                                            alt="" srcset="">
+                                                    </div>
                                                     <div>
-                                                        <strong><span class="text-success">RM</span>
-                                                            {{ $course->total_fees }}</strong> <br>
-                                                        <small class="text-secondary">Total tuition Fee</small>
+                                                        <strong>{{ $course->duration }} months</strong> <br>
+                                                        <small class="text-secondary">Duration</small>
                                                     </div>
                                                 </div>
-                                                @php
-                                                    $year_fees = $course->year_fees;
-                                                    $year_fees = json_decode($year_fees, true);
-                                                    // echo $year_fees['1st_year_fees'];
-                                                @endphp
-                                                @if (isset($year_fees['1st_year_fees']))
-                                                    <div class="d-flex align-items-center">
-                                                        {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                            alt="" srcset=""> --}}
-                                                        <div>
-                                                            <strong><span class="text-success">RM</span>
-                                                                {{ $year_fees['1st_year_fees'] }}</strong> <br>
-                                                            <small class="text-secondary">First year tuition Fee</small>
-                                                        </div>
-                                                    </div>
-                                                @endif
-
-                                                @if (isset($year_fees['2nd_year_fees']))
-                                                    <div class="d-flex align-items-center">
-                                                        {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                            alt="" srcset=""> --}}
-                                                        <div>
-                                                            <strong><span class="text-success">RM</span>
-                                                                {{ $year_fees['2nd_year_fees'] }}</strong> <br>
-                                                            <small class="text-secondary">Second year tuition Fee</small>
-                                                        </div>
-                                                    </div>
-                                                @endif
-
-                                                @if (isset($year_fees['3rd_year_fees']))
-                                                    <div class="d-flex align-items-center">
-                                                        {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                            alt="" srcset=""> --}}
-                                                        <div>
-                                                            <strong><span class="text-success">RM</span>
-                                                                {{ $year_fees['3rd_year_fees'] }}</strong> <br>
-                                                            <small class="text-secondary">Third year tuition Fee</small>
-                                                        </div>
-                                                    </div>
-                                                @endif
-
-                                                @if (isset($year_fees['4th_year_fees']))
-                                                    <div class="d-flex align-items-center">
-                                                        {{-- <img src="{{ asset('assets/images/rm_image_130.svg') }}"
-                                                            alt="" srcset=""> --}}
-                                                        <div>
-                                                            <strong><span class="text-success">RM</span>
-                                                                {{ $year_fees['4th_year_fees'] }}</strong> <br>
-                                                            <small class="text-secondary">Fourth year tuition Fee</small>
-                                                        </div>
-                                                    </div>
-                                                @endif
                                             </div>
-                                            {{-- </div> --}}
+
                                         </div>
                                     </div>
                                 @endforeach
