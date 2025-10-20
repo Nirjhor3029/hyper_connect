@@ -15,8 +15,9 @@
         <div>
             <div class="d-flex justify-content-between align-items-center">
                 <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#editFileModal{{ $loop->index }}">
+                    data-bs-target="#editFileModal{{ $loop->index }}" style="border-radius: 50px;margin-right: 10px;">
                     <i class="fas fa-file-edit"></i>
+                    Edit
                 </button>
                 <button class="remove-btn btn btn-outline-danger btn-sm" data-id="{{ $item->id }}"
                     style="border: 1px solid red;border-radius: 50px;">

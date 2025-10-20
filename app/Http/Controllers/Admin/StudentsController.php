@@ -425,16 +425,81 @@ class StudentsController extends Controller
 
 
 
-    public function getApplicantList()
+    public function getApplicantList(Request $request)
     {
         // $applicants = Student::where('is_applicant', 1)->get();
-        $applicants = Student::get();
 
-        $totalApplicants = count($applicants);
+        $selected_filter = $request->input('filter') ?? 'all';
+
+        $studetns = [];
+        $countData = [];
+
+        // all students
+        $allStudents = Student::paginate(10);
+        $countAll = $allStudents->total();
+        $countData['all'] = $countAll;
+
+        // new registered
+        $newRegistered = Student::whereBetween('created_at', [now()->subDay()->format('Y-m-d H:i:s'), now()->format('Y-m-d H:i:s')])
+            ->paginate(10);
+        $countNewRegistered =  $newRegistered->total();
+        $countData['new-registered'] = $countNewRegistered;
+
+
+        // new applied
+        $newApplied = Student::whereHas('course_interesteds',function($query){
+            $query->where('status','processing');
+        })->paginate(10);
+        $countNewApplied = $newApplied->total();
+        $countData['new-applied'] = $countNewApplied;
+
+        // payment-done
+        $paymentDone = Student::whereHas('uploads',function($query){
+            $query->where('input_name','pay-slip');
+        })->paginate(10);
+        $countPaymentDone = $paymentDone->total();
+        $countData['payment-done'] = $countPaymentDone;
+
+        // got-offer
+        $gotOffer = Student::whereHas('course_interesteds',function($query){
+            $query->whereNotNull('offer_letter_path');
+        })->paginate(10);
+        $countGotOffer = $gotOffer->total();
+        $countData['got-offer'] = $countGotOffer;
+
+
+        if ($selected_filter == 'all') {
+            $studetns = $allStudents;
+        }
+        else if ($selected_filter == 'new-registered') {
+            $studetns = $newRegistered;
+        }
+        else if ($selected_filter == 'new-applied') {
+            $studetns = $newApplied;
+        }
+        elseif ($selected_filter == 'payment-done') {
+            $studetns = $paymentDone;
+        }
+        elseif ($selected_filter == 'got-offer') {
+            $studetns = $gotOffer;
+        }
+        else{
+            $studetns = [];
+        }
+
+        // $totalApplicants = count($students);
+
+
+        // return $studetns;
 
         // $totalApplied = StudentCourse::where('status', 'applied')->count();
         // return $applicants[5]->uploads->where('file_status','uploaded')->count();
-        return view('admin.students.applicant_list', compact('applicants', 'totalApplicants'));
+        // return view('admin.students.applicant_list', compact('applicants', 'totalApplicants'));
+        return view('admin.students.applicant_list_tabs', compact(
+            'selected_filter',
+            'countData',
+            'studetns',
+        ));
     }
 
 
@@ -548,7 +613,6 @@ class StudentsController extends Controller
                 $notification->type = 'offer_letter';
                 $notification->link = route('student.offerLetters.index');
                 $notification->save();
-
             }
 
             return response()->json(['success' => true, 'message' => 'Offer letter uploaded successfully!']);
