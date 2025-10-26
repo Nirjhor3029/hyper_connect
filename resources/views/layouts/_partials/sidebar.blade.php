@@ -1,5 +1,13 @@
+<!-- Toggle Button for Mobile -->
+<div class="mobile-sidebar-toggle d-md-none">
+    <img src="{{ asset('assets/home/icons/menu.svg') }}" alt="menu" id="sidebarToggleBtn">
+</div>
+
 <!-- Fixed Sidebar -->
-<div class="sidebar">
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Fixed Sidebar -->
+<div class="sidebar" id="sidebarMenu">
     <div class="sidebar-item-group">
         <a href="{{ route('home') }}">
             <div class="sidebar-item">
@@ -67,6 +75,18 @@
             </div>
         </a>
         <span class="sidebar-menu-text">Offer Letters</span>
+    </div>
+
+    <div class="sidebar-item-group">
+        <a href="{{ route('online-application') }}">
+            <div class="sidebar-item {{ request()->is('online-application') ? 'active' : '' }}">
+                {{-- <i class="fas fa-home"></i> --}}
+                <img src="{{ asset('assets/home/icons/applications.svg') }}" alt="" srcset="">
+            </div>
+        </a>
+        <span class="sidebar-menu-text">
+            Online Application
+        </span>
     </div>
 
 </div>

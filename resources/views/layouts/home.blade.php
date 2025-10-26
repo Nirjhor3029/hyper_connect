@@ -45,6 +45,69 @@
             color: #007bff !important;
         }
     </style>
+
+
+    <style>
+        /* Sidebar toggle Styles */
+        /* Sidebar Base Style */
+        .sidebar {
+            width: 80px;
+            /* background: #fff; */
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1050;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Sidebar overlay for mobile */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+        }
+
+        /* Mobile menu toggle button */
+        .mobile-sidebar-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1100;
+            background: #fff;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+
+        .mobile-sidebar-toggle img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Hide sidebar by default on mobile */
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -250px;
+                width: 250px;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -112,23 +175,6 @@
                     </div>
                 </div>
                 <hr style="margin: 10px 0;color: gray;">
-                {{-- <div class="row">
-                    <div class="col-md-6">
-                        <div class="d-flex align-items-center">
-                            <span class="navbar-brand" style="color: white; margin-right: 20px;">
-                                HYPER<br><small style="font-size: 12px;">CONNECT</small>
-                            </span>
-                            <small>© 2025 All rights reserved by HyperIT</small>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-end">
-                        <small>
-                            <a href="#" style="color: #ccc; text-decoration: none; margin-right: 15px;">Terms of
-                                Service</a>
-                            <a href="#" style="color: #ccc; text-decoration: none;">Privacy Policy</a>
-                        </small>
-                    </div>
-                </div> --}}
                 <div class="terms-section">
                     <p>© @php echo date('Y'); @endphp All rights reserved By VenusIT.</p>
                     <img src="{{ asset('assets/images/hyper_connect_logo_no_bg.png') }}" height="60px"
@@ -201,6 +247,25 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebarMenu');
+            const overlay = document.getElementById('sidebarOverlay');
+            const toggleBtn = document.getElementById('sidebarToggleBtn');
+
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('active');
+            });
+
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            });
+        });
+    </script>
+
 
     <!-- Stack for page-specific scripts -->
     @stack('scripts')

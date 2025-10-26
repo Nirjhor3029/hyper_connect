@@ -522,13 +522,19 @@ body {
         padding-left: 0;
     }
 
-    .sidebar {
+    /* .sidebar {
         width: 100%;
         height: auto;
         position: relative;
         flex-direction: row;
         justify-content: center;
         padding: 10px 0;
+    } */
+
+    .footer .terms-section{
+        flex-direction: column;
+        row-gap: 10px;
+        text-align: center;
     }
 
     .sidebar-item {

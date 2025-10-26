@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\ContactUsPageController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Mails\MailController;
+use App\Http\Controllers\OnlineApplicationPageController;
 use App\Http\Controllers\ProgramPageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,12 @@ Route::get('/contact-us', [ContactUsPageController::class, 'index'])->name('cont
 Route::post('/contact-us', [ContactController::class, 'storeByAjax'])->name('contactUs.storeByAjax');
 
 Route::get('/programs', [ProgramPageController::class, 'index'])->name('programs');
+Route::get('/programs/filter', [ProgramPageController::class, 'filter'])->name('programs.filter');
+
+
+Route::get('/online-application', [OnlineApplicationPageController::class, 'index'])->name('online-application');
+Route::post('/application/store', [OnlineApplicationPageController::class, 'store'])->name('application.store');
+
 
 // Route::redirect('/', '/login');
 Route::get('/home', function () {
