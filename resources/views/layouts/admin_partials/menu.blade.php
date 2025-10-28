@@ -202,6 +202,19 @@
             </li>
         @endcan
 
+        {{-- online applications --}}
+        @can('online_application_access') 
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route('admin.online-applications.index') }}"
+                    class="c-sidebar-nav-link {{ request()->is('man-access/online-applications') || request()->is('man-access/online-applications/*') ? 'c-active' : '' }}">
+                    <i class="fa-fw fas fa-graduation-cap c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('Online Applications') }}
+                </a>
+            </li>
+        @endcan
+
 
 
 

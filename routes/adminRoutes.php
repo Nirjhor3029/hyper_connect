@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\NewsletterController;
+use App\Http\Controllers\Admin\OnlineApplicationController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProgramsController;
 use App\Http\Controllers\Admin\StudentsController;
@@ -196,6 +197,12 @@ Route::group(['prefix' => 'man-access', 'as' => 'admin.', 'namespace' => 'Admin'
     Route::post('programs/media', 'ProgramController@storeMedia')->name('programs.storeMedia');
     Route::post('programs/ckmedia', 'ProgramController@storeCKEditorImages')->name('programs.storeCKEditorImages');
     Route::resource('programs', 'ProgramController');
+
+
+    Route::get('online-applications', [OnlineApplicationController::class, 'index'])->name('online-applications.index');
+    Route::get('online-applications/{id}', [OnlineApplicationController::class, 'show'])->name('online-applications.show');
+
+
 
     // Other Fee
     Route::delete('other-fees/destroy', 'OtherFeeController@massDestroy')->name('other-fees.massDestroy');

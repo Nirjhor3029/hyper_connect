@@ -655,7 +655,7 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 160,
                 'title' => 'university_manage_access',
             ],
-			[
+            [
                 'id'    => 161,
                 'title' => 'newsletter_create',
             ],
@@ -716,6 +716,28 @@ class PermissionsTableSeeder extends Seeder
             [
                 'id'    => 175,
                 'title' => 'contact_access',
+            ],
+
+
+            [
+                'id'    => 176,
+                'title' => 'online_application_show',
+            ],
+            [
+                'id'    => 177,
+                'title' => 'online_application_edit',
+            ],
+            [
+                'id'    => 178,
+                'title' => 'online_application_delete',
+            ],
+            [
+                'id'    => 179,
+                'title' => 'online_application_create',
+            ],
+            [
+                'id'    => 180,
+                'title' => 'online_application_access',
             ],
 
         ];
