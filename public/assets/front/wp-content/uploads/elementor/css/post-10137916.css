@@ -1,0 +1,118 @@
+.elementor-1013 .elementor-element.elementor-element-af4b93e > .elementor-container{max-width:1440px;}.elementor-1013 .elementor-element.elementor-element-af4b93e{transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;margin-top:100px;margin-bottom:100px;z-index:1;}.elementor-1013 .elementor-element.elementor-element-af4b93e > .elementor-background-overlay{transition:background 0.3s, border-radius 0.3s, opacity 0.3s;}.elementor-1013 .elementor-element.elementor-element-b4a0479 > .elementor-element-populated{transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;}.elementor-1013 .elementor-element.elementor-element-b4a0479 > .elementor-element-populated > .elementor-background-overlay{transition:background 0.3s, border-radius 0.3s, opacity 0.3s;}.elementor-1013 .elementor-element.elementor-element-b4a0479 > .elementor-element-populated > .elementor-widget-wrap{padding:0px 170px 0px 170px;}.elementor-1013 .elementor-element.elementor-element-be7d888 > .elementor-widget-container{background-color:#FFFFFF;}@media(max-width:767px){.elementor-1013 .elementor-element.elementor-element-b4a0479 > .elementor-element-populated > .elementor-widget-wrap{padding:0px 0px 0px 0px;}}/* Start custom CSS for html, class: .elementor-element-be7d888 */#general-enquiry {
+    padding: 5% 10%;
+}
+.enterprise_plan_interested {
+    vertical-align: middle;
+    margin-left: 20px;
+    margin-top: -4px;
+    width: 20px;
+    height: 20px;
+}
+.input-field {
+    font-family: DM Sans;
+    font-size: 14px;
+    color: #293B4A;
+}
+.input-field input[type='text'], 
+.input-field input[list='city'],
+.input-field input[list='country']{
+    font-family: DM Sans;
+    font-size: 20px;
+    font-weight: 400;
+    color: #293B4A;
+    border-radius: 0px;
+    border: none;
+    background-color: #f5f5f5;
+    width: 100%;
+    padding: 5px 10px;
+    height: 60px;
+}
+.grid-2 .input-field:first-child {
+    padding-right: 15px;
+} 
+.grid-2 .input-field:last-child {
+    padding-left: 15px;
+} 
+.input-field select {
+    font-family: DM Sans;
+    font-size: 20px;
+    font-weight: 400;
+    color: #293B4A;
+    border-radius: 0px;
+    border: none;
+    background-color: #f5f5f5;
+    width: 100%;
+    padding: 5px 10px;
+    height: 60px;
+    -webkit-appearance: none;
+}
+.input-field textarea {
+    font-family: DM Sans;
+    font-size: 20px;
+    font-weight: 400;
+    color: #293B4A;
+    border-radius: 0px;
+    border: none;
+    background-color: #f5f5f5;
+    width: 100%;
+    padding: 5px 10px;
+    height: 120px;
+}
+.input-field .general-enquiry-submit {
+    font-family: DM Sans;
+    font-size: 14px;
+    font-weight: 500;
+    color: #293B4A;
+    border-radius: 0px;
+    border: 2px solid #293B4A;
+    background-color: transparent;
+    padding: 10px 34px !important;
+    display: inline-block;
+}
+.select-wrapper {
+    position: relative;
+}
+.select-wrapper:after {
+    content: "\f078";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    color: #19AD4A;
+    transform: translate(0px,-50%);
+}
+.grid-2 { font-size: 0px; }
+.grid-2 .input-field {
+    width: 50%;
+    display: inline-block;
+}
+.success-msg {
+    color: #19AD4A;
+}
+.success-msg.error {
+    color: #FF340C !important;
+}
+.robot-msg.error {
+    color: #FF340C !important;
+}
+.margin-5 { margin-top: 5px; }
+.margin-10 { margin-top: 10px; }
+.margin-20 { margin-top: 20px; }
+.margin-40 { margin-top: 40px; }
+
+.btn-sf {
+    font-family: DM Sans;
+    font-size: 14px !important;
+    font-weight: 500;
+    color: #293B4A !important;
+    border-radius: 0px !important;
+    border: 2px solid #293B4A !important;
+    background-color: transparent !important;
+    padding: 13px 34px !important;
+    transition: background-color 0.25s ease, color 0.25s ease !important;
+}
+.btn-sf:hover {
+    color: #fff !important;
+    background-color: #293B4A !important;
+    transition: background-color 0.25s ease, color 0.25s ease !important;
+}/* End custom CSS */

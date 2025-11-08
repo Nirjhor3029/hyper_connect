@@ -1,0 +1,32 @@
+.elementor-2465 .elementor-element.elementor-element-4f91190 > .elementor-container{max-width:1440px;}.elementor-2465 .elementor-element.elementor-element-4f91190:not(.elementor-motion-effects-element-type-background), .elementor-2465 .elementor-element.elementor-element-4f91190 > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#F5F5F5;}.elementor-2465 .elementor-element.elementor-element-4f91190{transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;padding:50px 30px 100px 30px;}.elementor-2465 .elementor-element.elementor-element-4f91190 > .elementor-background-overlay{transition:background 0.3s, border-radius 0.3s, opacity 0.3s;}/* Start custom CSS for text-editor, class: .elementor-element-73444db */.subheader-grey{
+    font-family:DM Sans;
+    font-size: 32px;
+    color: #293b4a;
+}
+.margin-80{
+    margin-top: 80px;
+}
+.margin-50{
+    margin-top: 50px;
+}
+.margin-30{
+    margin-top: 30px;
+}
+.margin-10{
+    margin-top: 10px;
+}
+.paragraph-header-grey{
+    font-family:DM Sans;
+    font-size: 20px;
+    font-weight: 500;
+    color: #293b4a;
+}
+.copy-grey{
+    font-family:DM Sans;
+    font-size: 20px;
+    color: #293b4a;
+}
+.copy-grey ul{
+    padding: 0px 0px 0px 50px;
+    margin: 10px 0px 10px 0px;
+}/* End custom CSS */

@@ -1,0 +1,72 @@
+
+/*--------------------------------------------------------------
+## Home
+--------------------------------------------------------------*/
+.home .site-header {
+	background-color: #293B4A !important;
+}
+.testimonial-quote .elementor-text-editor {
+    top: -10px;
+    position: relative;
+}
+.testimonial-quote {
+	margin-bottom: 0px !important;
+}
+.testimonial-quote p {
+    margin: 0px;
+}
+.testimonial-from p {
+    margin: 0px;
+}
+.dot-container {
+    margin-left: 60px;
+    margin-top: 40px;
+    line-height: 8px;
+}
+.testimonial-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.testimonial-dot.selected {
+    background-color: #FFCD00;
+    border: none;
+}
+.testimonial-carousel .swiper-pagination-bullets {
+    display: none;
+}
+figcaption.elementor-image-carousel-caption {
+    display: none;
+}
+.testimonial-carousel .elementor-image-carousel-wrapper {
+    padding-bottom: 0px !important;
+    font-size: 0px;
+}
+.elementor-element-1ecc56c h2,
+.elementor-element-d1052f4 h2 {
+    position: relative;
+    top: 10px;
+}
+.university-carousel span.swiper-pagination-bullet {
+    background-color: transparent !important;
+    border: 1px solid #293B4A;
+    opacity: 1;
+}
+.university-carousel span.swiper-pagination-bullet-active {
+    background-color: #19AD4A !important;
+    border: 1px solid #19AD4A;
+}
+.text-outline-green, .text-outline-yellow, .text-outline {
+    line-height: 4.861111111111111vw;
+    padding-bottom: 15px;
+}
+
+
+@media screen and (max-width: 1440px) {
+    .elementor-widget-wrap-mr160 .elementor-column-wrap .elementor-widget-wrap {
+        padding: 0px 0px 0px 0px !important;
+    }
+}

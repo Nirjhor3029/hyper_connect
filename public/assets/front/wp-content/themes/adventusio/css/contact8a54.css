@@ -1,0 +1,184 @@
+
+/*--------------------------------------------------------------
+## Contact Us
+--------------------------------------------------------------*/
+.page-id-1008 .site-header {
+    background-color: #19AD4A !important;
+}
+.page-id-1008 .mobile-submenu .btn-white {
+	border: 2px solid #fff;
+}
+.input-field .general-enquiry-submit {
+	transition: background-color 0.25s ease, color 0.25s ease !important;
+}
+.input-field .general-enquiry-submit:hover {
+	color: #fff !important;
+    background-color: #293B4A !important;
+    transition: background-color 0.25s ease, color 0.25s ease !important;
+}
+/*.page-id-1008 a.btn-white-outline:hover {
+    color: #19AD4A;
+    transition: color 0.25s ease;
+}*/
+.elementor-element.elementor-element-8b989cc a:hover {
+    border: 1px solid #19AD4A !important;
+    color: #19AD4A !important;
+}
+section.elementor-element.elementor-element-00b2b40 {
+    height: 0px;
+}
+input.careers-submit {
+	border-radius: 0px;
+}
+input.careers-submit:hover {
+    color: #fff !important;
+    background-color: #293B4A !important;
+    transition: all 0.3s ease !important;
+}
+#careers {
+    padding: 5% 10%;
+}
+#careers .input-field {
+    font-family: DM Sans;
+    font-size: 14px;
+    color: #293B4A;
+}
+#careers .input-field input[type='text'] {
+    font-family: DM Sans;
+    font-size: 20px;
+    font-weight: 400;
+    color: #293B4A;
+    border-radius: 0px;
+    border: none;
+    background-color: #f5f5f5;
+    width: 100%;
+    padding: 5px 10px;
+    height: 60px;
+}
+#careers .grid-2 .input-field:first-child {
+    padding-right: 15px;
+} 
+#careers .grid-2 .input-field:last-child {
+    padding-left: 15px;
+} 
+#careers .input-field select {
+    font-family: DM Sans;
+    font-size: 20px;
+    font-weight: 400;
+    color: #293B4A;
+    border-radius: 0px;
+    border: none;
+    background-color: #f5f5f5;
+    width: 100%;
+    padding: 5px 10px;
+    height: 60px;
+    -webkit-appearance: none;
+}
+#careers .input-field textarea {
+    font-family: DM Sans;
+    font-size: 20px;
+    font-weight: 400;
+    color: #293B4A;
+    border-radius: 0px;
+    border: none;
+    background-color: #f5f5f5;
+    width: 100%;
+    padding: 5px 10px;
+    height: 120px;
+}
+#careers .input-field .careers-submit,
+#careers .input-field .refers-submit {
+    font-family: DM Sans;
+    font-size: 14px;
+    font-weight: 500;
+    color: #293B4A;
+    border-radius: 0px;
+    border: 2px solid #293B4A;
+    background-color: transparent;
+    padding: 10px 34px !important;
+    display: inline-block;
+}
+#careers .input-field .careers-submit-blue,
+#careers .input-field .refers-submit-blue {
+    color: #fff;
+    border: 2px solid #293B4A;
+    background-color: #293B4A;
+    min-height: 45px;
+}
+#careers .input-field .careers-submit-blue:hover,
+#careers .input-field .refers-submit-blue:hover {
+	color: #293B4A !important;
+	background-color: transparent !important;
+}
+#careers .select-wrapper {
+    position: relative;
+}
+#careers .select-wrapper:after {
+    content: "\f078";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    color: #19AD4A;
+    transform: translate(0px,-50%);
+}
+#careers .grid-2 { font-size: 0px; }
+#careers .grid-2 .input-field {
+    width: 50%;
+    display: inline-block;
+}
+#careers .careers-success-msg,
+#careers .refers-success-msg {
+    color: #19AD4A;
+}
+#careers .careers-success-msg.error,
+#careers .refers-success-msg.error {
+    color: #FF340C !important;
+}
+#careers .margin-5 { margin-top: 5px; }
+#careers .margin-10 { margin-top: 10px; }
+#careers .margin-20 { margin-top: 20px; }
+#careers .margin-40 { margin-top: 40px; }
+
+input#careers-cv {
+    width: 100%;
+    border: 1px solid #19AD4A;
+    padding: 14px;
+}
+.single-adventus_careers {
+
+}
+.single-adventus_careers header#masthead {
+	background-color: #f5f5f5 !important;
+}
+.single-adventus_careers .menu-main-menu-container > ul > li > a,
+.single-adventus_careers .other-links a {
+	color: #293B4A;
+}
+.single-adventus_careers .site-branding .logo img {
+	filter: invert(17%) sepia(50%) saturate(466%) hue-rotate(165deg) brightness(90%) contrast(84%) !important;
+}
+.single-adventus_careers .site-branding .logo,
+.single-adventus_careers .site-header .menu-item:hover:after {
+    border-bottom: 1px solid #293B4A;
+}
+.single-adventus_careers .other-links .btn-white,
+.single-adventus_careers .mobile-submenu .btn-white {
+	border: 2px solid #293B4A;
+	background-color: #293B4A;
+	color: #fff !important;
+}
+.single-adventus_careers .other-links .btn-white:hover,
+.single-adventus_careers .mobile-submenu .btn-white:hover {
+	background-color: transparent;
+	color: #293B4A !important;
+}
+
+.single-adventus_careers .mobile-menu-hamburger:before,
+.single-adventus_careers .mobile-menu-hamburger:after {
+	background-color: #293B4A !important;
+}
+.single-adventus_careers .mobile-submenu {
+	background-color: #f5f5f5 !important;
+	border-bottom: 1px solid #e7e7e7 !important;
+}

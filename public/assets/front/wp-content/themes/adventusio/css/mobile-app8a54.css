@@ -1,0 +1,106 @@
+.text-me select {
+    height: 42px;
+    font-size: 14px;
+    color: #19AD4A;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    font-family: 'DM Sans';
+    background-color: #F1F3F5;
+    padding: 0px 24px 0px 8px;
+    -webkit-appearance: none;
+    border: 0px;
+}
+.text-me .select-wrapper {
+    position: relative;
+}
+.text-me .select-wrapper:after {
+    content: "\f0d7";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    color: #19AD4A;
+    transform: translate(0px,-50%);
+    font-size: 14px;
+}
+.text-me input {
+    background-color: #F1F3F5;
+    font-family: 'DM Sans';
+    padding: 0px 16px;
+    width: 100%;
+    max-width: 225px;
+    border: 0px;
+    border-radius: 0px;
+    border-left: 2px solid #fff;
+}
+.text-me button {
+    border-radius: 0px;
+    border: 0px;
+    background-color: #19AD4A;
+    color: #fff;
+    font-family: 'DM Sans';
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    padding: 0px 42px;
+}
+.app-feature-tab {
+    display: flex;
+    width: 100%;
+    max-width: 1024px;
+    height: 48px;
+    border-radius: 48px;
+    background-color:  white;
+    box-shadow: 4.42105px 11.0526px 22.1053px rgba(0, 0, 0, 0.1);
+    margin: 0px auto;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+}
+.app-feature-tab a {
+    font-family: DM Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+    color: #293B4A;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s linear;
+}
+.app-feature-tab a.selected {
+    color: #fff;
+    transition: all 0.3s linear;
+}
+.bg {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    z-index: 0;
+    transform: translate(0px, -50%);
+    background-color: #19AD4A;
+    height: 63px;
+    border-radius: 63px;
+    transition: all 0.3s ease;
+}
+
+@media only screen and (max-width: 768px) {
+    .elementor-15248 .elementor-element.elementor-element-90731b4 {
+        overflow-x: hidden;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .elementor-15248 .elementor-element.elementor-element-90731b4 {
+        overflow-x: visible;
+    }
+    .app-feature-tab a { 
+        font-size: 9px;
+    }
+    .app-feature-tab, .bg {
+        height: 40px;
+    }
+}

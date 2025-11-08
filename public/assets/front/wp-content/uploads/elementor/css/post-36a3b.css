@@ -1,0 +1,43 @@
+.elementor-3 .elementor-element.elementor-element-252173bd > .elementor-container{max-width:1380px;}.elementor-3 .elementor-element.elementor-element-252173bd:not(.elementor-motion-effects-element-type-background), .elementor-3 .elementor-element.elementor-element-252173bd > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#F5F5F5;}.elementor-3 .elementor-element.elementor-element-252173bd{transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;padding:50px 0px 100px 0px;}.elementor-3 .elementor-element.elementor-element-252173bd > .elementor-background-overlay{transition:background 0.3s, border-radius 0.3s, opacity 0.3s;}.elementor-3 .elementor-element.elementor-element-ed6d6a7 > .elementor-element-populated > .elementor-widget-wrap{padding:0px 30px 0px 30px;}/* Start custom CSS for text-editor, class: .elementor-element-45cbc7a3 */.subheader-grey{
+    font-family:DM Sans;
+    font-size: 32px;
+    color: #293b4a;
+}
+.margin-80{
+    margin-top: 80px;
+}
+.margin-50{
+    margin-top: 50px;
+}
+.margin-30{
+    margin-top: 30px;
+}
+.margin-10{
+    margin-top: 10px;
+}
+.paragraph-header-grey{
+    font-family:DM Sans;
+    font-size: 25px;
+    font-weight: 500;
+    color: #293b4a;
+    margin-top: 40px
+}
+.copy-grey{
+    font-family:DM Sans;
+    font-size: 20px;
+    color: #293b4a;
+}
+.copy-grey ul{
+    padding: 0px 0px 0px 50px;
+    margin: 10px 0px 10px 0px;
+}
+table, tr, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+th {
+    text-align: left;
+    padding: 10px;
+    background-color: #bfbfbf;
+}/* End custom CSS */

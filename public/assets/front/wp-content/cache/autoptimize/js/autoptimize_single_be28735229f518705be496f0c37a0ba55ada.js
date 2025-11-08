@@ -1,0 +1,5 @@
+jQuery(document).ready(function($){$(".tab-click a").click(function(e){e.preventDefault();var url=$(this).attr("href");var pieces=url.split("#");if(pieces[1]=="aus"){$("#elementor-tab-title-3422").click();window.scrollTo(0,offset($(".meet-the-team")[0])['top']);}
+if(pieces[1]=="usa"){$("#elementor-tab-title-3425").click();window.scrollTo(0,offset($(".meet-the-team")[0])['top']);}
+if(pieces[1]=="canada"){$("#elementor-tab-title-3424").click();window.scrollTo(0,offset($(".meet-the-team")[0])['top']);}
+if(pieces[1]=="europe"){$("#elementor-tab-title-3423").click();window.scrollTo(0,offset($(".meet-the-team")[0])['top']);}});function offset(el){var rect=el.getBoundingClientRect(),scrollLeft=window.pageXOffset||document.documentElement.scrollLeft,scrollTop=window.pageYOffset||document.documentElement.scrollTop;return{top:rect.top+scrollTop,left:rect.left+scrollLeft}}
+$(".open-contact a").click(function(e){e.preventDefault();$(this).closest(".open-contact").next(".contact-details").show();$(this).closest(".open-contact").next().next(".contact-details").show();});});

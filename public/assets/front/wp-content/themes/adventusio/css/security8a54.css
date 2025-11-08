@@ -1,0 +1,62 @@
+/*--------------------------------------------------------------
+## Security
+--------------------------------------------------------------*/
+
+.security-container {
+    position: relative;
+}
+
+.security-lock {
+    position: absolute;
+    max-width: 400px;
+    width: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+}
+
+.security-container>img {
+    filter: blur(10px);
+}
+
+.security-lock>svg {
+    max-width: 225px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.15));
+}
+
+.security-lock .login-container {
+    max-width: 300px;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(0px, -50%);
+    font-size: 0px;
+    line-height: 0px;
+    z-index: -1;
+}
+
+.security-lock .login-container svg {
+    transform: translate(-300px, 0px);
+    height: 100%;
+}
+
+.page-id-4769 header#masthead {
+    background-color: #19AD4A;
+}
+
+.page-id-4769 .site-branding .logo,
+.page-id-4769 .site-header .menu-item:hover:after {
+    border-bottom: 1px solid #fff;
+}
+
+.cta-extra-column {
+    width: calc( 50vw - 690px)!important;
+}

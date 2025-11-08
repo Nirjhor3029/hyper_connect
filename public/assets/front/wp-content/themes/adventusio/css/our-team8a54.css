@@ -1,0 +1,199 @@
+.team-tabs .elementor-tabs-wrapper {
+    justify-content: center;
+    display: flex;
+}
+.team-tabs .elementor-tab-title {
+    background-color: #fff;
+    border-radius: 58px;
+    border: none !important;
+    padding: 16px 0px !important;
+    width: 190px;
+    text-align: center;
+    margin: 0px 10px;
+}
+.team-tabs .elementor-tab-title:hover {
+    background-color: #19AD4A;
+    
+}
+.team-tabs .elementor-tab-title:hover a {
+    color: #fff !important;
+}
+.team-tabs .elementor-tab-title a {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: left;
+    color: #293B4A !important;
+    letter-spacing: 0.15em;
+}
+.team-tabs .elementor-tab-title.elementor-active {
+    background-color: #19AD4A;
+}
+.team-tabs .elementor-tab-title.elementor-active a {
+    color: #fff !important;
+}
+.team-tabs .elementor-tab-content {
+    border: none !important;
+}
+.team-tabs .elementor-tab-title:before, 
+.team-tabs .elementor-tab-title:after {
+    border: none !important;
+}
+.aus .elementor-image {
+    position: relative;
+}
+.aus .elementor-image:after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/flag-australia.svg);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    background-size: cover;
+    transform: translate(calc(-50% - 65px), 6px);
+}
+
+.can .elementor-image {
+    position: relative;
+}
+.can .elementor-image:after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/flag-canada.svg);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    background-size: cover;
+    transform: translate(calc(-50% - 65px), 6px);
+}
+
+.usa .elementor-image {
+    position: relative;
+}
+.usa .elementor-image:after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/flag-usa.svg);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    background-size: cover;
+    transform: translate(calc(-50% - 65px), 6px);
+}
+
+.eur .elementor-image {
+    position: relative;
+}
+.eur .elementor-image:before {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/flag-uk.svg);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    background-size: cover;
+    transform: translate(calc(-50% - 80px), 6px);
+}
+.eur .elementor-image:after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/flag-europe.svg);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    background-size: cover;
+    transform: translate(calc(-50% - 65px), 6px);
+}
+.eur-only .elementor-image:after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/flag-europe.svg);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    background-size: cover;
+    transform: translate(calc(-50% - 65px), 6px);
+}
+.canusa .elementor-image:before {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/flag-canada.svg);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    background-size: cover;
+    transform: translate(calc(-50% - 80px), 6px);
+}
+.canusa .elementor-image:after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/flag-usa.svg);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    background-size: cover;
+    transform: translate(calc(-50% - 65px), 6px);
+}
+.contact-details {
+    display: none;
+}
+
+.insto-team .elementor-column.elementor-col-25 .elementor-column-wrap, 
+.insto-team .elementor-column.elementor-col-25 .elementor-column-wrap .elementor-widget-wrap {
+    min-height: 685px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.insto-team .elementor-widget:not(:last-child) {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .insto-team .elementor-column.elementor-col-25 .elementor-column-wrap, 
+    .insto-team .elementor-column.elementor-col-25 .elementor-column-wrap .elementor-widget-wrap {
+        min-height: 0px !important;
+    }
+
+    .insto-team .elementor-element {
+        min-height: unset !important;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .team-tabs .elementor-tabs-wrapper {
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .team-tabs .elementor-tab-title a {
+        line-height: 18px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .team-tabs .elementor-tab-title {
+        border-radius: 20px;
+        padding: 9px 0px !important;
+        width: 47%;
+        margin: 9px 0px;
+    }
+    .team-tabs .elementor-tab-title:first-child {
+        margin: 9px 25%;
+    }
+    .team-tabs .elementor-icon-box-wrapper {
+        flex-wrap: nowrap;
+        display: flex;
+    }
+    .team-tabs .elementor-icon-box-wrapper .elementor-icon-box-content {
+        margin-left: 10px;
+    }
+}

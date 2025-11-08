@@ -166,11 +166,14 @@
 
 {{-- Academic certificates --}}
 <div id="academic-certificates" class="instruction-content" style="display: none;">
-    <h5>Medical Screening:</h5>
-    <ul>
-        <li>Submit a certified medical report</li>
-        <li>Medical tests must be done by a registered clinic</li>
-    </ul>
+    <h5>Upload Academic Certificates</h5>
+    <p>
+        All students are required to upload their academic certificates during the application process.
+        Please ensure that the documents are clear, valid, and in PDF format. These certificates are
+        essential for verifying your academic qualifications and processing your application smoothly.
+        Incomplete or unclear uploads may result in delays or rejection of the application.
+
+    </p>
 </div>
 
 {{-- english-language-requirement --}}

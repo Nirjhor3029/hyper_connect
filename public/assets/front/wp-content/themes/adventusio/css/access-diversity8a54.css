@@ -1,0 +1,75 @@
+.text-marquee {
+    font-size: 70px;
+    line-height: 80px;
+    font-weight: 700;
+    color: #fff;
+    opacity: 0.1;
+    white-space: nowrap;
+}
+.text-marquee div {
+    display: inline-flex;
+}
+.text-marquee div span {
+    margin: 0px 15px;
+}
+.ad-slider-image .elementor-image {
+    display: flex;
+    align-items: flex-end;
+    height: 320px;
+    justify-content: center;
+}   
+.highlighted a {
+    color:  #fff !important;
+    background-color: #293B4A !important;
+}
+lottie-player#ad-1 {
+    position: absolute;
+    top: 21%;
+    left: 50%;
+    width: 85%;
+    transform: translate(-50%, 0px);
+    height: auto;
+}
+lottie-player#ad-2 {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    width: 85%;
+    transform: translate(-50%, 0px);
+    height: auto;
+}
+lottie-player#ad-3 {
+    position: absolute;
+    top: 73%;
+    left: 50%;
+    width: 85%;
+    transform: translate(-50%, 0px);
+    height: auto;
+}
+
+.elementor-element.elementor-element-3aa1f6f.elementor-absolute.elementor-widget.elementor-widget-html {
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+    .featured-cta,
+    header#masthead {
+        width: 100vw;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    html, body {
+        overflow-x: hidden;
+    }
+    .text-marquee {
+        font-size: 40px;
+        line-height: 45px;
+    }
+    .ad-slider-image .elementor-image {
+        height: 100px;
+    }   
+    .elementor-14815 .elementor-element.elementor-element-e93e32c .elementor-swiper-button {
+        font-size: 32px !important;
+    }
+}

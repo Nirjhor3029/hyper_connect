@@ -1,0 +1,193 @@
+/*--------------------------------------------------------------
+## Careers
+--------------------------------------------------------------*/
+.page-id-2717 .site-branding .logo img {
+    filter: invert(1) !important;
+}
+
+.page-id-2717 .site-header .menu-item-has-children ul.sub-menu li:hover a {
+	color: #fff !important;
+}
+
+.page-id-2717 .site-header {
+    background-color: #19AD4A !important;
+    outline: 1px solid #fff !important;
+}
+
+.page-id-2717 .site-branding .logo {
+	border-bottom: 1px solid #fff;
+}
+.page-id-2717 a.mobile-menu-hamburger:before {
+    background-color: #fff;
+}
+.page-id-2717 a.mobile-menu-hamburger:after {
+    background-color: #fff;
+}
+.page-id-2717 .mobile-submenu {
+    background-color: #19AD4A !important;
+    border-bottom: 1px solid #fff;
+}
+.page-id-2717 .mobile-submenu .btn-white {
+	border: 2px solid #fff;
+	color: #19AD4A !important;
+	background-color: #fff;
+}
+
+
+/*--------------------------------------------------------------
+## Careers block
+--------------------------------------------------------------*/
+.careers-block {
+    background-color: #f7f7f7;
+    padding: 27px 56px 27px 56px;
+    border-style: solid;
+    border-width: 0px 0px 0px 1px;
+    border-color: #293B4A;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+.careers-block:last-child {
+	margin-bottom: 0px;
+}
+.careers-title {
+	font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #293B4A;
+    max-width: 75%;
+}
+.careers-link {
+    font-family: "DM Sans";
+    color: #293B4A;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    border: 2px solid #293B4A;
+    padding: 12px 24px;
+}
+
+.careers-cat {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.careers-link:hover {
+	color: #FFFFFF;
+    background-color: #293B4A;
+    border-color: #293B4A;
+}
+
+/* remove this */
+.elementor-element.elementor-element-e9e0a9a {
+    text-align: center;
+}
+
+select#filter-careers-country {
+    font-family: "DM Sans";
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #293B4A;
+    font-size: 20px;
+    padding: 5px 0px;
+    width: 100%;
+    outline: none;
+}
+
+select#filter-careers-category {
+    font-family: "DM Sans";
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #293B4A;
+    font-size: 20px;
+    padding: 5px 0px;
+    width: 100%;
+    outline: none;
+}
+
+.accent-container {
+	position: relative;
+	width: 48%;
+    display: inline-block;
+}
+
+.accent-container:after {
+    position: absolute;
+    content: "";
+    height: 1px;
+    width: 100px;
+    left: 0px;
+    bottom: -1px;
+    background-color: #293B4A;
+}
+.single-career {
+	position: relative;
+}
+.single-career .inner {
+	max-width: 1440px;
+	width: 100%;
+	margin: 0px auto;
+	padding: 60px 40px;
+}
+.single-adventus_careers h1,
+.single-adventus_careers h2 {
+    color: #19AD4A;
+    font-size: 42px;
+    line-height: 48px;
+    font-family: DM Sans !important;
+}
+.single-adventus_careers h3 {
+    color: #19AD4A;
+    font-size: 24px;
+    line-height: 42px;
+    font-family: DM Sans !important;
+}
+.single-adventus_careers h4 {
+    color: #19AD4A;
+    font-size: 14px;
+    line-height: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    font-family: DM Sans !important;
+}
+.single-adventus_careers ul {
+    margin: 0;
+}
+.single-adventus_careers ul li {
+    margin-bottom: 10px;
+}
+.tabs a {
+    display: inline-block;
+    padding: 20px 0px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    color: #293B4A;
+    width: 40%;
+    text-align: center;
+    background-color: #f5f5f5;
+    margin-right: 20px;
+}
+.tabs a.active-tab {
+    background-color: #293B4A;
+    color: #fff;
+}
+.tabs a:hover {
+    color: #fff;
+    background-color: #293B4A;
+}
+#refer-a-friend {
+	display: none;
+}

@@ -1,0 +1,63 @@
+.swiper-mod {
+    overflow: hidden;
+    /* Ensures smooth scrolling */
+}
+
+.swiper-wrapper-mod {
+    padding: 2rem 0rem;
+    transition-timing-function: linear !important;
+    /* Forces linear scrolling */
+}
+
+.swiper-slide-mod {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    width: 100%;
+    padding: 0rem 2rem;
+}
+
+.swiper-slide-mod img {
+    display: block;
+    width: 230px !important;
+    height: 80px !important;
+    object-fit:fill;
+}
+
+/* For Mobile */
+/* @media(max-width: 767px) {
+    .swiper-slide-mod img {
+        width: 200px !important;
+        height: 90px !important;
+    }
+
+    .swiper-slide-mod {
+        width: 100% !important;
+    }
+} */
+
+/* For Mobile (Wider screen) */
+/* @media (min-width: 500px) and (max-width: 767px) {
+    .swiper-slide-mod {
+        width: 50% !important;
+    }
+} */
+
+/* For Tablet */
+/* @media(min-width: 768px) and (max-width: 1024px) {
+    .swiper-slide-mod {
+        width: 33.3% !important;
+    }
+} */
+
+/* In case if you want to restore the elementor images carousel you need to add below styles in the custom css option in the advance tab */
+/* selector .swiper-wrapper{
+  -webkit-transition-timing-function: linear !important;
+  transition-timing-function: linear !important; 
+}
+
+selector img {
+    max-height: 120px;
+} */

@@ -1,0 +1,72 @@
+.elementor-19896 .elementor-element.elementor-element-1d80e8d > .elementor-background-overlay{background-color:#FFFFFF;opacity:1;}.elementor-19896 .elementor-element.elementor-element-1d80e8d{margin-top:0px;margin-bottom:0px;}.elementor-19896 .elementor-element.elementor-element-fd5021f > .elementor-container{max-width:1440px;}.elementor-19896 .elementor-element.elementor-element-fd5021f{margin-top:80px;margin-bottom:40px;z-index:1;}.elementor-19896 .elementor-element.elementor-element-829b68c > .elementor-element-populated > .elementor-widget-wrap{padding:0px 80px 0px 80px;}.elementor-19896 .elementor-element.elementor-element-cc52956{text-align:center;color:#293B4A;font-family:"DM Sans", DM Sans;font-size:24px;font-weight:500;}.elementor-19896 .elementor-element.elementor-element-cc52956 > .elementor-widget-container{margin:0px 0px 0px 0px;}.elementor-19896 .elementor-element.elementor-element-bbe8239{--e-image-carousel-slides-to-show:4;}.elementor-19896 .elementor-element.elementor-element-bbe8239 .swiper-wrapper{display:flex;align-items:center;}.elementor-19896 .elementor-element.elementor-element-bbe8239 > .elementor-widget-container{margin:20px 0px 50px 0px;}.elementor-19896 .elementor-element.elementor-element-709ed27 > .elementor-widget-container{margin:20px 0px 50px 0px;}@media(max-width:1024px){.elementor-19896 .elementor-element.elementor-element-fd5021f{margin-top:50px;margin-bottom:50px;}.elementor-19896 .elementor-element.elementor-element-bbe8239{--e-image-carousel-slides-to-show:3;}}@media(max-width:767px){.elementor-19896 .elementor-element.elementor-element-bbe8239{--e-image-carousel-slides-to-show:2;}}/* Start custom CSS for image-carousel, class: .elementor-element-bbe8239 */.elementor-19896 .elementor-element.elementor-element-bbe8239 .swiper-wrapper{
+  -webkit-transition-timing-function: linear !important;
+  transition-timing-function: linear !important; 
+  
+  
+ 
+}
+
+.elementor-19896 .elementor-element.elementor-element-bbe8239 img {
+    max-height: 120px;
+}/* End custom CSS */
+/* Start Custom Fonts CSS */@font-face {
+	font-family: 'DM Sans';
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-Regular.eot');
+	src: url('../../2020/04/DMSans-Regulard41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-Regular.woff2') format('woff2'),
+		url('../../2020/04/DMSans-Regular.woff') format('woff'),
+		url('../../2020/04/DMSans-Regular.ttf') format('truetype'),
+		url('../../2020/04/DMSans-Regular.svg#DMSans') format('svg');
+}
+@font-face {
+	font-family: 'DM Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-Medium.eot');
+	src: url('../../2020/04/DMSans-Mediumd41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-Medium.woff2') format('woff2'),
+		url('../../2020/04/DMSans-Medium.woff') format('woff'),
+		url('../../2020/04/DMSans-Medium.ttf') format('truetype'),
+		url('../../2020/04/DMSans-Medium.svg#DMSans') format('svg');
+}
+@font-face {
+	font-family: 'DM Sans';
+	font-style: italic;
+	font-weight: normal;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-Italic.eot');
+	src: url('../../2020/04/DMSans-Italicd41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-Italic.woff2') format('woff2'),
+		url('../../2020/04/DMSans-Italic.woff') format('woff'),
+		url('../../2020/04/DMSans-Italic.ttf') format('truetype'),
+		url('../../2020/04/DMSans-Italic.svg#DMSans') format('svg');
+}
+@font-face {
+	font-family: 'DM Sans';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-Bold.eot');
+	src: url('../../2020/04/DMSans-Boldd41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-Bold.woff2') format('woff2'),
+		url('../../2020/04/DMSans-Bold.woff') format('woff'),
+		url('../../2020/04/DMSans-Bold.ttf') format('truetype'),
+		url('../../2020/04/DMSans-Bold.svg#DMSans') format('svg');
+}
+@font-face {
+	font-family: 'DM Sans';
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-BoldItalic.eot');
+	src: url('../../2020/04/DMSans-BoldItalicd41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-BoldItalic.woff2') format('woff2'),
+		url('../../2020/04/DMSans-BoldItalic.woff') format('woff'),
+		url('../../2020/04/DMSans-BoldItalic.ttf') format('truetype'),
+		url('../../2020/04/DMSans-BoldItalic.svg#DMSans') format('svg');
+}
+/* End Custom Fonts CSS */

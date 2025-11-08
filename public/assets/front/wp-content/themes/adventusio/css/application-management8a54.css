@@ -1,0 +1,111 @@
+/*--------------------------------------------------------------
+## Application Management
+--------------------------------------------------------------*/
+
+.app-container {
+    position: relative;
+    font-size: 0px;
+}
+
+.app-container:after {
+    content: "";
+    position: absolute;
+    width: 50vw;
+    height: 1px;
+    top: 46%;
+    left: 50%;
+    z-index: -1;
+    background-color: #fff;
+}
+
+svg#application-window {
+    position: relative;
+    z-index: 2;
+}
+
+.student-slider {
+    position: absolute;
+    top: 0px;
+    left: 4.8%;
+    width: 69.8%;
+    height: 64%;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    z-index: 2;
+}
+
+.student-slider .inner {
+    display: flex;
+}
+
+.student-slider img {
+    width: 100px;
+    /*transition: all 0.5s ease;*/
+}
+
+.student-slider img:not(.current) {
+    transform: scale(0.8);
+    opacity: 0.2;
+    /*transition: all 0.5s ease; */
+}
+
+.application-results {
+    position: absolute;
+    top: calc(46% - 18px);
+    left: calc(100% - 53px);
+    width: 50vw;
+    height: 36px;
+    overflow: hidden;
+}
+
+.application-results img {
+    height: 100% !important;
+    z-index: 1;
+    transform: scale(0);
+    transform-origin: center;
+}
+
+.application-results img.approved {
+    margin-left: 70px;
+    transform: scale(1);
+    transform-origin: center;
+    transition: all 0.5s ease;
+}
+
+.application-results img:first-child {
+    margin-left: 0px;
+}
+
+.applicants-container {
+    position: absolute;
+    top: 48%;
+    right: 95%;
+    transform: translate(0px, -50%);
+    transform-origin: center right;
+    width: 50vw;
+    z-index: -1;
+}
+
+.process-01-text path,
+.process-01-text line,
+.process-02-text path,
+.process-02-text line,
+.process-03-text path,
+.process-03-text line,
+.process-04-text path,
+.process-04-text line,
+.process-05-text path,
+.process-05-text line,
+.process-06-text path,
+.process-06-text line {
+    transition: opacity 0.3s ease;
+}
+
+.page-id-4282 .mobile-submenu {
+    background-color: #293B4A !important;
+}
+
+.cta-extra-column {
+    width: calc( 50vw - 690px)!important;
+}

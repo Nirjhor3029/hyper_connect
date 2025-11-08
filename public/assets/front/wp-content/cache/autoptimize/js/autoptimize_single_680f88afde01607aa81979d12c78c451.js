@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){const swiperContainer=document.querySelector('.swiper-mod');const swiper=new Swiper(swiperContainer,{slidesPerView:1,direction:'horizontal',loop:true,speed:2000,autoplay:{delay:0,disableOnInteraction:false,},breakpoints:{768:{slidesPerView:4}}});});

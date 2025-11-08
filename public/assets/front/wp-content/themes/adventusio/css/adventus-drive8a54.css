@@ -1,0 +1,33 @@
+.scroll-fill p,
+.scroll-fill-2 p {
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+}
+
+a.hide-teaser i {
+    position: relative;
+}
+
+a.hide-teaser i:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 0 6px 9px;
+    border-color: transparent transparent transparent #ffcc00;
+    position: absolute;
+    top: 50%;
+    left: 57%;
+    transform: translate(-50%, -50%);
+}
+
+.elementor-15083 .elementor-element.elementor-element-81c069a h2.elementor-heading-title.elementor-size-default,
+.elementor-15083 .elementor-element.elementor-element-b0ff996 .elementor-heading-title,
+.elementor-15083 .elementor-element.elementor-element-bfac435 .elementor-heading-title {
+    text-shadow: 1px 1px 10px rgb(0 0 0 / 30%) !important;
+}
+@media only screen and (max-width: 480px) {
+    .elementor-element.elementor-element-f5386cb.elementor-widget.elementor-widget-html {
+        margin-top: 50px;
+    }
+}

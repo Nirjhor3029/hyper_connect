@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\ApplicationFormPageController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\ContactUsPageController;
+use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Mails\MailController;
 use App\Http\Controllers\OnlineApplicationPageController;
@@ -38,6 +39,15 @@ Route::get('/forgot-password', function () {
 Route::get('/set-password', function () {
     return view('set_password');
 });
+
+
+
+
+
+
+Route::get('/home2', [PageController::class, 'home'])->name('front.home');
+
+
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
 

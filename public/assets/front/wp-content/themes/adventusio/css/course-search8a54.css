@@ -1,0 +1,64 @@
+/*--------------------------------------------------------------
+## Course Search
+--------------------------------------------------------------*/
+
+.text-scroller {
+    overflow-x: hidden;
+    white-space: nowrap;
+    display: flex;
+}
+
+.text-scroller a {
+    color: #dee1e4;
+    transition: color 0.3s ease;
+}
+
+.text-scroller a:hover {
+    color: #293B4A !important;
+    transition: color 0.3s ease;
+}
+
+.page-id-4229 header#masthead {
+    background-color: #f5f5f5;
+}
+
+.page-id-4229 .menu-main-menu-container>ul>li>a,
+.page-id-4229 .other-links a {
+    color: #293B4A;
+}
+
+.page-id-4229 .site-branding .logo img {
+    filter: invert(17%) sepia(50%) saturate(466%) hue-rotate(165deg) brightness(90%) contrast(84%) !important;
+}
+
+.page-id-4229 .site-branding .logo,
+.page-id-4229 .site-header .menu-item:hover:after {
+    border-bottom: 1px solid #293B4A;
+}
+
+.page-id-4229 .other-links .btn-white,
+.page-id-4229 .mobile-submenu .btn-white {
+    border: 2px solid #293B4A;
+    background-color: #293B4A;
+    color: #fff !important;
+}
+
+.page-id-4229 .other-links .btn-white:hover,
+.page-id-4229 .mobile-submenu .btn-white:hover {
+    background-color: transparent;
+    color: #293B4A !important;
+}
+
+.page-id-4229 .mobile-menu-hamburger:before,
+.page-id-4229 .mobile-menu-hamburger:after {
+    background-color: #293B4A !important;
+}
+
+.page-id-4229 .mobile-submenu {
+    background-color: #f5f5f5 !important;
+    border-bottom: 1px solid #e7e7e7 !important;
+}
+
+.cta-extra-column {
+    width: calc( 50vw - 690px)!important;
+}

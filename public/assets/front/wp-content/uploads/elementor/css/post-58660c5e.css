@@ -1,0 +1,90 @@
+.elementor-5866 .elementor-element.elementor-element-5f1a5d3 > .elementor-container{min-height:336px;}.elementor-5866 .elementor-element.elementor-element-5f1a5d3:not(.elementor-motion-effects-element-type-background), .elementor-5866 .elementor-element.elementor-element-5f1a5d3 > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#FFCD00;}.elementor-5866 .elementor-element.elementor-element-5f1a5d3{transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;}.elementor-5866 .elementor-element.elementor-element-5f1a5d3 > .elementor-background-overlay{transition:background 0.3s, border-radius 0.3s, opacity 0.3s;}.elementor-5866 .elementor-element.elementor-element-83aaa00 > .elementor-container{max-width:1440px;}.elementor-5866 .elementor-element.elementor-element-3dabd0c > .elementor-element-populated > .elementor-widget-wrap{padding:0px 0px 0px 30px;}.elementor-5866 .elementor-element.elementor-element-dbc944c .elementor-heading-title{color:#293B4A;font-family:"DM Sans", DM Sans;font-size:56px;font-weight:500;line-height:70px;}.elementor-5866 .elementor-element.elementor-element-dbc944c > .elementor-widget-container{padding:0px 0px 0px 45px;border-style:solid;border-width:0px 0px 0px 1px;border-color:#293B4A;}.elementor-5866 .elementor-element.elementor-element-4eae3c8 > .elementor-container{max-width:1440px;}.elementor-5866 .elementor-element.elementor-element-4eae3c8{margin-top:60px;margin-bottom:60px;}.elementor-5866 .elementor-element.elementor-element-e522d83 > .elementor-element-populated > .elementor-widget-wrap{padding:0px 30px 0px 30px;}.elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tab-title, .elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tab-title:before, .elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tab-title:after, .elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tab-content, .elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tabs-content-wrapper{border-width:0px;}.elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tab-title, .elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tab-title a{color:rgba(245, 245, 245, 0.2);}.elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tab-title.elementor-active,
+					 .elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tab-title.elementor-active a{color:#FFCD00;}.elementor-5866 .elementor-element.elementor-element-9265ed4 .elementor-tab-title{font-size:32px;font-weight:700;}@media(max-width:1024px) and (min-width:768px){.elementor-5866 .elementor-element.elementor-element-3dabd0c{width:90%;}.elementor-5866 .elementor-element.elementor-element-56a5fd6{width:10%;}}@media(max-width:1024px){.elementor-5866 .elementor-element.elementor-element-5f1a5d3 > .elementor-container{min-height:250px;}.elementor-5866 .elementor-element.elementor-element-dbc944c .elementor-heading-title{font-size:32px;}}/* Start custom CSS for tabs, class: .elementor-element-9265ed4 */.institutions-tabs .elementor-tab-content {
+    padding: 0px;
+}
+.institutions-tabs .elementor-tabs-content-wrapper {
+    border: 0px !important;
+}
+.institutions-tabs .elementor-tabs-wrapper .elementor-tab-title:after {
+    border-right: 0px !important;
+}
+.institutions-tabs .elementor-tabs-wrapper .elementor-tab-title.elementor-active {
+    border-left: 1px solid #fff !important;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+}
+.elementor-831 .elementor-element.elementor-element-9265ed4 .elementor-tab-title, .elementor-831 .elementor-element.elementor-element-9265ed4 .elementor-tab-title:before, .elementor-831 .elementor-element.elementor-element-9265ed4 .elementor-tab-title:after, .elementor-831 .elementor-element.elementor-element-9265ed4 .elementor-tab-content, .elementor-831 .elementor-element.elementor-element-9265ed4 .elementor-tabs-content-wrapper {
+    border-width: 0px;
+}
+.elementor-widget-tabs .elementor-tab-content, .elementor-widget-tabs .elementor-tab-title, .elementor-widget-tabs .elementor-tab-title:after, .elementor-widget-tabs .elementor-tab-title:before, .elementor-widget-tabs .elementor-tabs-content-wrapper {
+    border: 1px #d4d4d4;
+    border-right: 0px;
+}
+.institutions-tabs .elementor-tab-title.elementor-active a:after {
+    content: "\f0da";
+    font-family: FontAwesome;
+    margin-left: 30px;
+    vertical-align: bottom;
+}/* End custom CSS */
+/* Start Custom Fonts CSS */@font-face {
+	font-family: 'DM Sans';
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-Regular.eot');
+	src: url('../../2020/04/DMSans-Regulard41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-Regular.woff2') format('woff2'),
+		url('../../2020/04/DMSans-Regular.woff') format('woff'),
+		url('../../2020/04/DMSans-Regular.ttf') format('truetype'),
+		url('../../2020/04/DMSans-Regular.svg#DMSans') format('svg');
+}
+@font-face {
+	font-family: 'DM Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-Medium.eot');
+	src: url('../../2020/04/DMSans-Mediumd41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-Medium.woff2') format('woff2'),
+		url('../../2020/04/DMSans-Medium.woff') format('woff'),
+		url('../../2020/04/DMSans-Medium.ttf') format('truetype'),
+		url('../../2020/04/DMSans-Medium.svg#DMSans') format('svg');
+}
+@font-face {
+	font-family: 'DM Sans';
+	font-style: italic;
+	font-weight: normal;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-Italic.eot');
+	src: url('../../2020/04/DMSans-Italicd41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-Italic.woff2') format('woff2'),
+		url('../../2020/04/DMSans-Italic.woff') format('woff'),
+		url('../../2020/04/DMSans-Italic.ttf') format('truetype'),
+		url('../../2020/04/DMSans-Italic.svg#DMSans') format('svg');
+}
+@font-face {
+	font-family: 'DM Sans';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-Bold.eot');
+	src: url('../../2020/04/DMSans-Boldd41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-Bold.woff2') format('woff2'),
+		url('../../2020/04/DMSans-Bold.woff') format('woff'),
+		url('../../2020/04/DMSans-Bold.ttf') format('truetype'),
+		url('../../2020/04/DMSans-Bold.svg#DMSans') format('svg');
+}
+@font-face {
+	font-family: 'DM Sans';
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../../2020/04/DMSans-BoldItalic.eot');
+	src: url('../../2020/04/DMSans-BoldItalicd41d.eot?#iefix') format('embedded-opentype'),
+		url('../../2020/04/DMSans-BoldItalic.woff2') format('woff2'),
+		url('../../2020/04/DMSans-BoldItalic.woff') format('woff'),
+		url('../../2020/04/DMSans-BoldItalic.ttf') format('truetype'),
+		url('../../2020/04/DMSans-BoldItalic.svg#DMSans') format('svg');
+}
+/* End Custom Fonts CSS */

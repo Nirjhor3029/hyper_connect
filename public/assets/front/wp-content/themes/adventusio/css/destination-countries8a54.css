@@ -1,0 +1,446 @@
+.destination-country {
+    width: 100%;
+    height: 475px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.destination-country-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #293b4aa6;
+}
+
+h2.destination-country-title {
+    color: #FFF;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 125%; 
+}
+
+
+a.destination-country-cta {
+    color: #F1F3F5;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 15px 60px;
+    border: 1px solid #F1F3F5;
+    text-decoration: none;
+    text-align: center;
+}
+
+
+/* ================ Map Section ================ */
+
+.destinations-map-section {
+    position: relative;
+}
+
+.covid-beacon,
+.covid-beacon .b2,
+.covid-beacon .b3,
+.covid-beacon .b4,
+.covid-beacon .p1 {
+    pointer-events: none;
+}
+.covid-beacon text,
+.covid-beacon .b1 {
+    pointer-events: all;
+    cursor: pointer;
+}
+  
+.ct-dropdown {
+    position: absolute !important;
+    right: 5%;
+    top: 50px;
+}
+
+div#covid-destination {
+    border: none;
+    background-color: #f1f1f1;
+    width: 100%;
+    height: 100%;
+    max-height: 42px;
+    font-family: DM Sans;
+    font-weight: 500;
+    font-size: 18px;
+    overflow: hidden;
+}
+
+#covid-destination a {
+    display: flex;
+    background-color: #f1f1f1;
+    height: 42px;
+    align-items: center;
+    padding: 0px 15px;
+    color: rgba(41,59,74,0.5);
+    outline: none;
+    font-weight: 400;
+}
+
+div#covid-destination:hover {
+    overflow: visible;
+    box-shadow: 0px 14px 26px rgb(0 0 0 / 10%);
+}
+
+div#covid-destination:hover a {
+    background-color: #fff;
+}
+
+#covid-destination a:hover {
+    background-color: #f1f1f1 !important;
+}
+
+.destinations-map > div {
+    overflow: hidden;
+}
+.border-details {
+    position: absolute;
+    top: 170px;
+    right: 0px;
+    transform: translate(550px, 680px);
+    z-index: 2;
+}
+.border-info {
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    box-shadow: 14px 14px 26px rgb(0 0 0 / 20%);
+}
+.border-title {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 700;
+    background-color: #293B4A;
+    height: 82px;
+    line-height: 82px;
+    padding: 0px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.border-desc {
+    background-color: #fff;
+    padding: 30px;
+    color: #293B4A;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+}
+.border-desc h5 {
+	font-weight: 700;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin: 20px 0px 10px 0px;
+	color: #c4c4c4;
+}
+.border-desc h5:first-child {
+	margin-top: 0px;
+}
+a.btn-guide {
+    display: flex;
+    background-color: #19AD4A;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    padding: 15px 15px 15px 35px;
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+}
+a.close-details {
+    width: 25px;
+    height: 25px;
+}
+a.close-details > div:first-child {
+    background-color: #fff;
+    width: 100%;
+    height: 2px;
+    transform: translate(0px, 9px) rotate(45deg);
+}
+a.close-details > div:last-child {
+    background-color: #fff;
+    width: 100%;
+    height: 2px;
+    transform: translate(0px, 7px) rotate(-45deg);
+}
+
+.border-details-mobile > div {
+    position: initial;
+    top: 0px;
+    right: 0px;
+    transform: translate(0, 0px);
+    z-index: 10;
+}
+.border-details-mobile {
+    max-height: 0px;
+    overflow: hidden;
+}
+.hideDetails {
+    position: absolute;
+    width: 0%;
+    top: 791px;
+    left: 0px;
+    height: calc(100vh - 111px);
+    z-index: 1;
+}
+
+
+/* ================ Single Page ================ */
+
+.destination-country-main-banner {
+    width: 100%;
+    height: 466px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.destination-country-main-banner-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: #293b4a33;
+    display: flex;
+    align-items: center;
+}
+
+.destination-country-main-banner-inner {
+    display: block;
+    width: 90%;
+    height: unset;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.destination-country-main-banner-content {
+    width: 40%;
+}
+
+h1.destination-country-name {
+    color: #FFF;
+    font-family: "DM Sans";
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 125%; 
+    border-left: 1px solid #fff;
+    padding-left: 50px;
+    text-shadow: 0px 0px 2px #2c2c2c;
+    margin: 0 0 30px 0;
+}
+
+p.destination-country-description {
+    color: #FFF;
+    font-family: "DM Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 108%;
+    padding-left: 50px;
+    text-shadow: 0px 0px 2px #2c2c2c;
+    margin: 0;
+}
+
+.destination-country-ksp-summary {
+    width: 100%;
+    height: auto;
+    background-color: #293B4A;
+    padding: 50px 0 75px 0;
+}
+
+.ksp-summary-inner {
+    width: 90%;
+    max-width: 1440px;
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    gap: 75px;
+}
+
+.ksp-summary {
+    width: calc( 20% - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+img.ksp-summary-icon {
+    width: 80px;
+    height: 80px;
+    object-position: center;
+}
+
+p.ksp-name {
+    color: #FFF;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    margin: 40px 0 0 0;
+}
+
+.destination-country-ksp-details {
+    background-color: #F1F3F5;
+    width: 100%;
+    padding: 25px 0 50px 0;
+}
+
+.ksp-details-inner {
+    display: block;
+    width: 90%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ksp-details-item {
+    display: grid;
+    grid-template-columns: 1fr 3fr 6fr;
+    grid-gap: 45px;
+    padding: 25px 15px;
+    border-bottom: 1px solid #5CC46E;
+}
+
+.ksp-detail-content-col {
+    padding-left: 40px;
+}
+
+img.ksp-detail-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.ksp-detail-icon-wrapper {
+    padding: 15px;
+    border: 1px solid #19AD4A;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+}
+
+.ksp-details-item:last-child {
+    border: none;
+}
+
+p.ksp-detail-title {
+    color: #293B4A;
+    font-family: "DM Sans";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 116.667%; 
+    margin: 15px 0 30px 0;
+}
+
+span.ksp-detail-sub-title {
+    color: #293B4A;
+    font-family: "DM Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; 
+    margin: 0 0 30px 0;
+}
+
+.ksp-detail-content-col p, 
+.ksp-detail-content-col li, 
+.ksp-detail-content-col span, 
+.ksp-detail-content-col {
+    color: #293B4A;
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.ksp-detail-content-col ul {
+    margin-left: unset;
+}
+
+ul.accordion-list {
+    margin-left: unset;
+    padding-left: unset;
+    list-style: none;
+}
+
+h4.accordion-title {
+    color: #19AD4A;
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 137.5%;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+h4.accordion-title:after {
+    align-items: center;
+    border: 1px solid #19ad4a;
+    border-radius: 50%;
+    color: #19ad4a;
+    content: "+"!important;
+    display: flex;
+    font-size: 22px;
+    height: 22px;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 22px;
+    font-weight: 300;
+    padding-bottom: 2px;
+}
+
+.active h4.accordion-title:after {
+    content: '-' !important;
+    background-color: #19ad4a;
+    color: #fff;
+}
+
+li.accordion-list-item {
+    border-bottom: 1px solid #19AD4A;
+    margin-bottom: 30px;
+}
+
+a.ksp-detail-cta {
+    color: #19AD4A;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 60px;
+    border: 1px solid #19AD4A;
+}

@@ -1,0 +1,57 @@
+lottie-player#d1 {
+    position: absolute;
+    top: 10%;
+    right: 27%;
+    width: 43%;
+    z-index: 2;
+}
+lottie-player#d2 {
+    position: absolute;
+    top: 11%;
+    right: 17%;
+    width: 33%;
+    z-index: 2;
+}
+lottie-player#d3 {
+    position: absolute;
+    top: 9%;
+    right: 3%;
+    width: 24%;
+    z-index: 2;
+}
+svg#elevate_svg .icon {
+    transform: scale(0.8) translate(-3px, 16px);
+}
+
+@media only screen and (max-width: 768px) {
+    lottie-player#d3 {
+        position: absolute;
+        top: 3%;
+        right: 7%;
+        width: 24%;
+        z-index: 2;
+    }
+}
+@media only screen and (max-width: 480px) {
+    lottie-player#d1 {
+        position: absolute;
+        top: 10%;
+        right: 8%;
+        width: 52%;
+        z-index: 2;
+    }
+    lottie-player#d2 {
+        position: absolute;
+        top: 11%;
+        right: 9%;
+        width: 41%;
+        z-index: 2;
+    }
+    lottie-player#d3 {
+        position: absolute;
+        top: 10%;
+        right: 9%;
+        width: 29%;
+        z-index: 2;
+    }
+}

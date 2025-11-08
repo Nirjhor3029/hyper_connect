@@ -1,0 +1,1 @@
+var $=jQuery;$(document).ready(function(){xheight=($(document).height())-75;ywidth=($(document).width())*0.75;$('a.pdf-media').media({width:ywidth,height:xheight});});

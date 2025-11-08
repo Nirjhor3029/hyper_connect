@@ -1,0 +1,222 @@
+section.institution-success-stories-wrapper {
+    background-color: #f5f5f5;
+    padding: 150px 0;
+    position: relative;
+}
+
+.success-story-video-card {
+    width: 90%;
+    max-width: 1110px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    background-color: #fff;
+    margin-bottom: 30px;
+    border-radius: 9px;
+}
+
+div.success-story-video-wrapper {
+    position: relative;
+}
+
+video.success-story-video {
+    width: 100%;
+    border-radius: 9px 0 0 9px;
+    height: 100%;
+}
+
+video.success-story-video[poster] {
+    object-fit: cover;
+}
+
+.elementor-custom-embed-play {
+    cursor: pointer;
+}
+
+p.success-story-customer-name {
+    color: #293b4a;
+    font-family: "DM Sans", DM Sans;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+    padding: 30px 40px 20px;
+    margin: unset;
+}
+
+p.success-story-short-description {
+    color: #293b4a;
+    font-family: "DM Sans", DM Sans;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    padding: 0 40px 40px;
+    margin: unset;
+}
+
+.success-story-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 40px 30px;
+    width: 90%;
+    max-width: 1110px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.success-story-cards a {
+    text-decoration: none;
+    color: unset;
+}
+
+.institution-banner-image {
+    width: 100%;
+    padding-top: 66%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-radius: 9px 9px 0 0;
+}
+
+.institution-banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(41, 59, 74, 0.5);
+    border-radius: 9px 9px 0 0;
+}
+
+.institution-banner-overlay img.institution-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 66%;
+    height: auto;
+}
+
+.success-story-card {
+    border-radius: 9px;
+    background-color: #fff;
+    height: 100%;
+}
+
+p.success-story-card-institution-name {
+    color: #293b4a;
+    font-family: "DM Sans", DM Sans;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 48px;
+    padding: 30px 40px 20px 40px;
+    margin: unset;
+}
+
+p.success-story-card-short-description {
+    color: #293b4a;
+    font-family: "DM Sans", DM Sans;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    padding: 0 40px 40px;
+    margin: unset;
+}
+
+.success-story-cards a:hover div.success-story-card {
+    scale: 1.05;
+    transition: 0.5s all;
+}
+
+.video-success-stories {
+    position: relative;
+}
+
+.success-story-cards {
+    position: relative;
+}
+
+a.success-story-readmore {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "DM Sans", DM Sans;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    fill: #fff;
+    color: #fff;
+    background-color: #19ad4a;
+    border-style: solid;
+    border-color: #19ad4a;
+    border-radius: 0px 0px 0px 0px;
+    padding: 12px 30px;
+    width: fit-content;
+    margin-bottom: 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a.success-story-readmore:hover {
+    color: #19ad4a;
+    background-color: #00000000;
+    border-color: #19ad4a;
+}
+
+@media screen and (max-width: 1240px) {
+    p.success-story-card-institution-name {
+        font-size: 37px;
+        line-height: 43px;
+    }
+}
+
+@media (min-width: 991px) and (max-width: 1240px)  {
+    .success-story-cards {
+        display: flex;
+        flex-wrap: wrap;
+        grid-gap: 40px 30px;
+        width: 90%;
+        max-width: 1110px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .success-story-cards a {
+        width: calc( 33% - 18px);
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .success-story-video-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .success-story-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    video.success-story-video {
+        border-radius: 9px 9px 0px 0px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .success-story-cards {
+        grid-template-columns: 1fr;
+    }
+
+    p.success-story-customer-name,
+    p.success-story-card-institution-name {
+        font-size: 32px;
+        line-height: 36px;
+        padding: 30px 30px 20px 30px;
+    }
+
+    p.success-story-short-description,
+    p.success-story-card-short-description {
+        font-size: 18px;
+        line-height: 24px;
+        padding: 0 30px 30px;
+    }
+}

@@ -1,0 +1,62 @@
+.page-id-14997 header#masthead {
+	background-color: #19AD4A;
+}
+.page-id-14997 .site-branding .logo,
+.page-id-14997 .site-header .menu-item:hover:after {
+    border-bottom: 1px solid #fff;
+}
+.scroll-fill p {
+	-webkit-background-clip: text !important;
+  	-webkit-text-fill-color: transparent;
+}
+.aq-copy {
+	transition: all 0.3s;
+}
+.fade {
+	opacity: 0.2;
+	transition: all 0.3s;
+}
+.always-qualified-svg { position: relative; text-align: center; }
+
+img#student-1 {
+    position: absolute;
+    right: 31%;
+    top: 13.5%;
+}
+
+img#student-2 {
+    position: absolute;
+    top: 51%;
+    right: 31%;
+}
+.elementor-element.elementor-element-6cf6cf7b.lines.white div.elementor-widget-container div {
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.elementor-element.elementor-element-6cf6cf7b.lines.white div.elementor-widget-container div:nth-child(1) {
+    border-left-color: #fff0 !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .featured-cta,
+    header#masthead {
+        width: 100vw;
+    }
+}
+@media only screen and (max-width: 480px) {
+    html, body {
+        overflow-x: hidden;
+    }
+    img#student-1 {
+        right: 26%;
+        top: 11.5%;
+        width: 70px;
+    }
+    img#student-2 {
+        top: 48%;
+        right: 26%;
+        width: 70px;
+    }
+}
+
+

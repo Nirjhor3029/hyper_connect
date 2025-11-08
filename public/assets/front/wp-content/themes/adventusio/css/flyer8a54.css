@@ -1,0 +1,34 @@
+.pdf-media{
+    display: block;
+    margin: 0 auto;
+}
+
+a.flyer-download, embed {
+    display: none;
+}
+
+@media screen and (max-width: 991px) {
+    .pdf-media{
+        display: none;
+    }
+
+    a.flyer-download {
+        display: block;
+        padding: 16px 32px;
+        margin: 50px auto;
+        background-color: #19AD4A;
+        color: #fff;
+        width: fit-content;
+        text-decoration: none;
+        font-family: 'DM sans';
+        font-size: 16px;
+        line-height: 125%;
+        text-transform: uppercase;
+    }
+
+    embed {
+        display: block;
+        margin: 20px auto;
+        height: 875px !important;
+    }
+}

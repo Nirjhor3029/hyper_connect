@@ -1,0 +1,2 @@
+var videos=document.getElementsByClassName("success-story-video");var circlePlayButton=document.getElementsByClassName("elementor-custom-embed-play");for(let i=0;i<circlePlayButton.length;i++){let playBtn=circlePlayButton[i];let video=videos[i];function togglePlay(){if(video.paused||video.ended){video.play();playBtn.style.opacity=0;video.setAttribute("controls","controls")}else{video.pause();playBtn.style.opacity=1;video.removeAttribute("controls")}}
+playBtn.addEventListener('click',togglePlay);video.addEventListener('click',togglePlay);}

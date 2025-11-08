@@ -1,0 +1,67 @@
+/*--------------------------------------------------------------
+## Institutions Directory
+--------------------------------------------------------------*/
+.page-id-5866 .site-branding .logo img {
+    filter: invert(17%) sepia(50%) saturate(466%) hue-rotate(165deg) brightness(90%) contrast(84%) !important;
+}
+.page-id-5866 .site-branding a {
+	color: #293B4A !important;
+}
+.page-id-5866 .site-header .menu-item-has-children ul.sub-menu li:hover a {
+	color: #fff !important;
+}
+.page-id-5866 .mobile-submenu {
+    background-color: #FFCD00 !important;
+    border-bottom: 1px solid #293B4A;
+}
+.page-id-5866 .mobile-submenu .btn-white {
+	color: #FFCD00 !important;
+	background-color: #293B4A;
+	border: 2px solid #293B4A;
+}
+.page-id-5866 .site-header {
+    background-color: #FFCD00 !important;
+    outline: 1px solid #293B4A !important;
+}
+.page-id-5866 .other-links .btn-yellow, .page-id-5866 .other-links .btn-white {
+    border-color: #293B4A !important;
+    transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+    background-color: transparent;
+}
+.page-id-5866 .other-links .btn-yellow:hover,
+.page-id-5866 .other-links .btn-white:hover {
+	border-color: #293B4A !important;
+	color: #FFCD00 !important;
+	background-color: #293B4A !important;
+	transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+}
+.page-id-5866 .site-branding .logo {
+	border-bottom: 1px solid #293B4A;
+}
+.page-id-5866 a.mobile-menu-hamburger:before {
+    background-color: #293B4A;
+}
+.page-id-5866 a.mobile-menu-hamburger:after {
+    background-color: #293B4A;
+}
+.institution-name {
+	color: #FFFFFF;
+    font-family: "DM Sans", DM Sans;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+/*.page-id-5866 a.btn-white-outline:after {
+    background-color: #293B4A;
+}
+.page-id-5866 a.btn-white-outline:hover:after {
+    background-color: #293B4A;
+}*/
+.institutions-tabs .elementor-tab-title:hover a {
+    color: #FFCD00 !important;
+}
+.institution-column {
+    padding: 0px 30px;
+    width: calc(100% / 3);
+    display: inline-block;
+    vertical-align: top;
+}

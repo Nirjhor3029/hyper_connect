@@ -1,0 +1,48 @@
+.page-id-15028 header#masthead {
+    background-color: #19AD4A;
+}
+.page-id-15028 .site-branding .logo,
+.page-id-15028 .site-header .menu-item:hover:after {
+    border-bottom: 1px solid #fff;
+}
+.scroll-fill p {
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+}
+.highlighted a {
+    color: #fff !important;
+    background-color: #293B4A !important;
+}
+
+lottie-player#ad-1 {
+    position: absolute;
+    bottom: -31.5%;
+    left: 18.4%;
+    z-index: 2;
+    width: 70.6%;
+}
+lottie-player#ad-2 {
+    position: absolute;
+    bottom: 5%;
+    left: -7%;
+    width: 65%;
+}
+lottie-player#ad-3 {
+    position: absolute;
+    bottom: 0%;
+    right: -40%;
+    width: 82%;
+}
+
+@media only screen and (max-width: 768px) {
+    .featured-cta,
+    header#masthead {
+        width: 100vw;
+    }
+}
+@media only screen and (max-width: 480px) {
+    html, body {
+        overflow-x: hidden;
+    }
+}
+

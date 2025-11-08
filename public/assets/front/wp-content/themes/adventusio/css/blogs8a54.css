@@ -1,0 +1,182 @@
+/*--------------------------------------------------------------
+## Blog
+--------------------------------------------------------------*/
+.page-id-2582 .site-header .menu-item-has-children ul.sub-menu li:hover a {
+	color: #fff !important;
+}
+.page-id-2582 .site-header {
+    background-color: #19AD4A !important;
+}
+.page-id-2582 .mobile-submenu .btn-white {
+	border: 2px solid #fff;
+}
+/*
+.page-id-2582 .site-branding .logo img {
+    filter: invert(17%) sepia(50%) saturate(466%) hue-rotate(165deg) brightness(90%) contrast(84%) !important;
+}
+.page-id-2582 .site-branding a {
+	color: #293B4A !important;
+}
+
+.page-id-2582 .other-links .btn-yellow, .page-id-2582 .other-links .btn-white {
+    border-color: #293B4A !important;
+    transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+    background-color: transparent;
+}
+.page-id-2582 .other-links .btn-yellow:hover,
+.page-id-2582 .other-links .btn-white:hover {
+	border-color: #293B4A !important;
+	color: #FFCD00 !important;
+	background-color: #293B4A !important;
+	transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+}
+.page-id-2582 .site-branding .logo {
+	border-bottom: 1px solid #293B4A;
+}
+.page-id-2582 a.mobile-menu-hamburger:before {
+    background-color: #293B4A;
+}
+.page-id-2582 a.mobile-menu-hamburger:after {
+    background-color: #293B4A;
+}*/
+
+
+.single-post #content h2 {
+	font-size: 42px;
+	line-height: 48px;
+	margin-top: 50px;
+}
+.single-post #content .post-content h3 {
+	font-size: 24px;
+	line-height: 48px;
+	margin-top: 50px;
+}
+.single-post #content .post-content a {
+	color: #19AD4A;
+	text-decoration: underline;
+}
+.single-post #content .post-content ul {
+	margin-left: 0px;
+    padding-left: 0px;
+    list-style: none;
+}
+.post-excerpt .elementor-widget-container {
+    text-align: left;
+}
+.single-post #content .post-content ul li:before {
+    content: "•";
+    font-size: 30px;
+    vertical-align: top;
+    transform: translate(-26px, 0px);
+    margin-right: 10px;
+    color: #19AD4A;
+}
+.single .site-header {
+	background-color: #19AD4A !important;
+}
+.elementor-element-7aa16e7 input {
+    padding-left: 15px;
+}
+.single blockquote.wp-block-quote {
+    color: #19AD4A;
+    font-size: 36px;
+    font-weight: 700;
+    padding: 30px 60px;
+    line-height: 48px;
+    font-style: italic;
+    margin: 50px 0px;
+    border-top: 1px solid #19Ad4A;
+    border-bottom: 1px solid #19AD4A;
+    text-align: center;
+    quotes: "“" "”" "‘" "’"
+}
+.single blockquote.wp-block-quote p {
+    margin: 0px;
+    display: inline;
+}
+.single blockquote.wp-block-quote:before {
+    content: open-quote;
+}
+.single blockquote.wp-block-quote:after {
+    content: close-quote;
+}
+.single .wp-block-image {
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.single cite {
+    font-size: 19px;
+    color: #293B4A;
+    font-style: normal;
+    margin-top: 15px;
+    display: block;
+}
+.single .wp-block-image figcaption {
+    font-size: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.single .elementor-widget-theme-post-excerpt {
+    text-align: center;
+}
+.elementor-grid-tablet-2 .elementor-post__text {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.elementor-post__badge {
+    position: relative !important;
+    margin: 10px 0px 0px 0px !important;
+    background-color: transparent !important;
+    padding: 0px !important;
+    font-size: 16px !important;
+    color: #19AD4A !important;
+    font-weight: 700 !important;
+}
+img.wp-image-3631 {
+    float: left;
+    margin-right: 20px;
+}
+.author-image {
+    width: 110px;
+    min-width: 110px;
+}
+.author-image img {
+    border-radius: 50% !important;
+    width: 75px;
+    height: 75px !important;
+    object-fit: cover;
+    object-position: center;
+    min-width: 75px;
+    min-height: 75px;
+}
+.author-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+.author-job-title {
+    font-size: 14px;
+    color: #19AD4A;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+.author-description {
+	margin-top: 5px;
+	font-size: 14px;
+	line-height: 20px;
+}
+.social-icons {
+	width: 260px;
+	display:  flex;
+	justify-content: flex-end;
+	font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+.social-icons a {
+    font-size: 21px;
+    color: #293B4A !important;
+    margin-left: 8px;
+}

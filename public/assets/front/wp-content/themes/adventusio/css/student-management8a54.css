@@ -1,0 +1,25 @@
+/*--------------------------------------------------------------
+## Student Management
+--------------------------------------------------------------*/
+
+.page-id-4231 header#masthead {
+    background-color: #19AD4A;
+}
+
+.page-id-4231 .site-branding .logo,
+.page-id-4231 .site-header .menu-item:hover:after {
+    border-bottom: 1px solid #fff;
+}
+
+.ss-importer,
+.fb-integration {
+    max-width: 550px;
+}
+
+.elementor-element.elementor-element-190bcc4.elementor-widget.elementor-widget-html {
+    max-width: 550px;
+}
+
+.cta-extra-column {
+    width: calc( 50vw - 690px)!important;
+}
