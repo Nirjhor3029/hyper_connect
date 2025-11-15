@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
+require __DIR__.'/frontRoutes.php';
 require __DIR__.'/studentRoutes.php';
 require __DIR__.'/adminRoutes.php';
 
@@ -45,7 +46,7 @@ Route::get('/set-password', function () {
 
 
 
-Route::get('/home2', [PageController::class, 'home'])->name('front.home');
+// Route::get('/home2', [PageController::class, 'home'])->name('front.home');
 
 
 

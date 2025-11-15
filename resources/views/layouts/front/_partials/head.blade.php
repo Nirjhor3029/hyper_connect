@@ -52,8 +52,8 @@
 
 
 
-{{-- <link rel='stylesheet' id='swiper-css-css'
-    href='../cdn.jsdelivr.net/npm/swiper%4011/swiper-bundle.min87ed.css?ver=5.9.12' type='text/css' media='all' /> --}}
+<link rel='stylesheet' id='swiper-css-css'
+    href='{{ asset('/assets/front') }}/cdn.jsdelivr.net/npm/swiper%4011/swiper-bundle.min87ed.css?ver=5.9.12' type='text/css' media='all' />
 
 
 <link rel='stylesheet' id='custom-swiper-style-css'
@@ -126,8 +126,8 @@
 <script type='text/javascript' defer
     src='{{ asset('/assets/front') }}/wp-content/cache/autoptimize/js/autoptimize_single_680f88afde01607aa81979d12c78c451.js'
     id='custom-swiper-script-js'></script>
-<script type='text/javascript' src='wp-includes/js/jquery/jquery.minaf6c.js?ver=3.6.0' id='jquery-core-js'></script>
-<script type='text/javascript' defer src='wp-includes/js/jquery/jquery-migrate.mind617.js?ver=3.3.2'
+<script type='text/javascript' src='{{ asset('/assets/front') }}/wp-includes/js/jquery/jquery.minaf6c.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' defer src='{{ asset('/assets/front') }}/wp-includes/js/jquery/jquery-migrate.mind617.js?ver=3.3.2'
     id='jquery-migrate-js'></script>
 <script type='text/javascript' defer
     src='{{ asset('/assets/front') }}/wp-content/themes/adventusio/js/lottie.min8377.js?ver=1761889918'
@@ -164,4 +164,4 @@
 
 
 {{-- Copy all the CSS from here to layout_style.css --}}
-<link rel="stylesheet" href="{{ asset('/assets/css/front/layout_style.css') }}" />
+<link rel="stylesheet" href="{{ asset('/assets/front/layout_style.css') }}" />
