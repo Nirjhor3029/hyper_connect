@@ -1,29 +1,36 @@
 <header id="masthead" class="site-header">
     <div class="site-branding">
-        <a class="logo" href="index.html"><img alt="Adventus" width="160" height="20"
-                data-src="https://adventus.io/wp-content/themes/adventusio/images/logo.svg" class="lazyload"
-                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><noscript><img
-                    src="wp-content/themes/adventusio/images/logo.svg" alt="Adventus" width="160"
-                    height="20"></noscript></a>
+        {{-- <a class="logo" href="/"> --}}
+        <a class="" href="/">
+            <img alt="Adventus" width="160" height="20"
+                data-src="{{ asset('/assets') }}/images/hyper_connect_logo_no_bg.png" class="lazyload"
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+
+        </a>
         <div class="menu-main-menu-container">
             <ul id="menu-main-menu-1" class="menu">
                 <li
                     class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-30089">
                     <a href="#">For Recruiters</a>
                     <ul class="sub-menu">
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30183"><a
-                                href="recruiters/100-commission/index.html">100% Commission</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5242"><a
-                                href="recruiters/course-search/index.html">Course Search facility</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5241"><a
-                                href="recruiters/student-management/index.html">Student Management</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5240"><a
-                                href="recruiters/application-management/index.html">Application Management</a>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30183">
+                            <a href="recruiters/100-commission/index.html">100% Commission</a>
                         </li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5238"><a
-                                href="recruiters/support-training/index.html">Support &#038; Training</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22601"><a
-                                href="indexb5eb.html?page_id=20007">Success Stories</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5242">
+                            <a href="recruiters/course-search/index.html">Course Search facility</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5241">
+                            <a href="recruiters/student-management/index.html">Student Management</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5240">
+                            <a href="recruiters/application-management/index.html">Application Management</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5238">
+                            <a href="recruiters/support-training/index.html">Support &#038; Training</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22601">
+                            <a href="indexb5eb.html?page_id=20007">Success Stories</a>
+                        </li>
                     </ul>
                 </li>
                 <li
