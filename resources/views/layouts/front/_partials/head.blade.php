@@ -82,7 +82,7 @@
 <link rel='stylesheet' id='adventus-institution-success-css-css'
     href='{{ asset('/assets/front') }}/wp-content/themes/adventusio/css/institution-success-story8a54.css?ver=1.0.0'
     type='text/css' media='all' />
-<link rel='stylesheet' id='font-awesome-official-css' href='../use.fontawesome.com/releases/v5.13.0/css/all.css'
+<link rel='stylesheet' id='font-awesome-official-css' href='{{ asset('/assets/front') }}/use.fontawesome.com/releases/v5.13.0/css/all.css'
     type='text/css' media='all'
     integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
 <link rel='stylesheet' id='elementor-icons-css'

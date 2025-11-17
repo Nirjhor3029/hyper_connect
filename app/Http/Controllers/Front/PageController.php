@@ -11,4 +11,15 @@ class PageController extends Controller
     {
         return view('front.home');
     }
+
+
+    public function recruitersCourseSearch()
+    {
+        return view('front.recruiters.course-search');
+    }
+
+    public function searchCourse()
+    {
+        return view('front.search-course');
+    }
 }
