@@ -50,4 +50,9 @@ class PageController extends Controller
     {
         return view('front.institution-directory');
     }
+
+    public function recruiterSuccessStories()
+    {
+        return view('front.recruiter-success-stories');
+    }
 }
