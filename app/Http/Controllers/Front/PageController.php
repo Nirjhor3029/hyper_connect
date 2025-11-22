@@ -55,4 +55,8 @@ class PageController extends Controller
     {
         return view('front.recruiter-success-stories');
     }
+    public function recruitersPricingNew()
+    {
+        return view('front.pricing-recruiters-new');
+    }
 }
