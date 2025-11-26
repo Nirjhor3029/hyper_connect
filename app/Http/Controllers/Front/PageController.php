@@ -12,6 +12,11 @@ class PageController extends Controller
         return view('front.home');
     }
 
+
+    /**
+     * For Recruiters :Start 
+     * all sub menu done in mega menu blade file
+     */
     // Recruiters Pages:Start
     public function recruitersCourseSearch()
     {
@@ -67,4 +72,13 @@ class PageController extends Controller
     {
         return view('front.mobile-app');
     }
+    public function recruiterCaseStudies()
+    {
+        return view('front.recruiter-case-studies');
+    }
+
+    /**
+     * For Recruiters :End 
+     * all sub menu done in mega menu blade file
+     */
 }

@@ -1,39 +1,39 @@
 <div class="mega-menu" id="Recruiters" data-title="For Recruiters"style="display: none;">
     <div class="mega-menu-left">
         <div class="">
-            <a href="recruiters/100-commission/index.html">
+            <a href="{{ route('front.recruiters.100-commission') }}">
                 <div class="menu-title">100% commission</div>
                 <div class="menu-description">
                     Earn more with our Premium Institution partners — no extra effort needed
                 </div>
             </a>
-            <a href="recruiters/course-search/index.html">
+            <a href="{{ route('front.recruiters.course-search') }}">
                 <div class="menu-title">Course search</div>
                 <div class="menu-description">Access <span class="institutions">1,500</span>+ institutions in
                     leading study destinations. Growing daily</div>
             </a>
-            <a href="recruiters/support-training/index.html">
+            <a href="{{ route('front.recruiters.support-training') }}">
                 <div class="menu-title">Support & training</div>
                 <div class="menu-description">Guidance to make your counsellors smarter, faster</div>
             </a>
-            <a href="recruiters/student-management/index.html">
+            <a href="{{ route('front.recruiters.student-management') }}">
                 <div class="menu-title">Student CRM</div>
                 <div class="menu-description">Keep your data in one safe and reliable place</div>
             </a>
-            <a href="adventus-io-mobile-app/index.html">
+            <a href="{{ route('front.mobile-app') }}">
                 <div class="menu-title">Adventus.io App Assistant <!-- <div class="note-green">NEW</div> -->
                 </div>
                 <div class="menu-description">Make your counselling process easy and fast</div>
             </a>
-            <a href="recruiter-case-studies/index.html">
+            <a href="{{ route('front.recruiter-success-stories') }}">
                 <div class="menu-title">Success stories</div>
                 <div class="menu-description">Hear from our recruiter partners</div>
             </a>
-            <a href="recruiters/application-management/index.html">
+            <a href="{{ route('front.recruiters.application-management') }}">
                 <div class="menu-title">Application processing</div>
                 <div class="menu-description">Speed up the processing power of your counsellors</div>
             </a>
-            <a href="pricing-recruiters-new/index.html">
+            <a href="{{ route('front.pricing-recruiters-new') }}">
                 <div class="menu-title">Earnings</div>
                 <div class="menu-description">Simplified Pricing, Maximum Value</div>
             </a>

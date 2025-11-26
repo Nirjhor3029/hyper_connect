@@ -1,3 +1,7 @@
+@php
+    $assetsUrl = asset('/assets/front/');
+    // echo $assetsUrl;
+@endphp
 <script defer id="leadin-script-loader-js-js-extra"
     src="data:text/javascript;base64,Ci8qIDwhW0NEQVRBWyAqLwp2YXIgbGVhZGluX3dvcmRwcmVzcyA9IHsidXNlclJvbGUiOiJ2aXNpdG9yIiwicGFnZVR5cGUiOiJob21lIiwibGVhZGluUGx1Z2luVmVyc2lvbiI6IjguNy4zIn07Ci8qIF1dPiAqLwo=">
 </script>
