@@ -37,6 +37,10 @@ class PageController extends Controller
     {
         return view('front.recruiters.security');
     }
+    public function recruiters100Commission()
+    {
+        return view('front.recruiters.100-commission');
+    }
     // Recruiters Pages:End
 
 
@@ -58,5 +62,9 @@ class PageController extends Controller
     public function recruitersPricingNew()
     {
         return view('front.pricing-recruiters-new');
+    }
+    public function mobileApp()
+    {
+        return view('front.mobile-app');
     }
 }

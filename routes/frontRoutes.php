@@ -24,5 +24,6 @@ Route::group(['as' => 'front.'], function () {
     Route::get('/recruiter-success-stories', [PageController::class, 'recruiterSuccessStories'])->name('recruiter-success-stories');
 
     Route::get('/pricing-recruiters-new', [PageController::class, 'recruitersPricingNew'])->name('pricing-recruiters-new');
+    Route::get('/mobile-app', [PageController::class, 'mobileApp'])->name('mobile-app');
 });
 // Route::get('/home2', [PageController::class, 'home'])->name('front.home');

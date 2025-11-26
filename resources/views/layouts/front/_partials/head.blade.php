@@ -1,8 +1,12 @@
+@php
+    $assetsUrl = asset('/assets/front/');
+    // echo $assetsUrl;
+@endphp
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {{-- <link rel="profile" href="https://gmpg.org/xfn/11"> --}}
 <link rel="icon" type="image/png"
-    href="{{ asset('/assets/front') }}/wp-content/uploads/2020/04/Logo-circle_green.png">
+    href="{{ $assetsUrl }}/wp-content/uploads/2020/04/Logo-circle_green.png">
 <link rel="canonical" href="index.html">
 
 
@@ -27,7 +31,7 @@
     content="HyperConnect is a discovery and booking platform for international student recruitment. Enabling institutions, recruiters, and service providers to seamlessly find and transact with each other, anywhere in the world. Transforming the way the world accesses international education." /> --}}
 <meta property="article:publisher" content="https://www.facebook.com/hyperconnectglobal/" />
 <meta property="article:modified_time" content="2025-08-20T06:59:10+00:00" />
-<meta property="og:image" content="{{ asset('/assets/front') }}/wp-content/uploads/2024/11/Group-3652.png" />
+<meta property="og:image" content="{{ $assetsUrl }}/wp-content/uploads/2024/11/Group-3652.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:label1" content="Est. reading time" />
 <meta name="twitter:data1" content="44 minutes" />
@@ -53,61 +57,61 @@
 
 
 <link rel='stylesheet' id='swiper-css-css'
-    href='{{ asset('/assets/front') }}/cdn.jsdelivr.net/npm/swiper%4011/swiper-bundle.min87ed.css?ver=5.9.12' type='text/css' media='all' />
+    href='{{ $assetsUrl }}/cdn.jsdelivr.net/npm/swiper%4011/swiper-bundle.min87ed.css?ver=5.9.12' type='text/css' media='all' />
 
 
 <link rel='stylesheet' id='custom-swiper-style-css'
-    href='{{ asset('/assets/front') }}/wp-content/plugins/adventus-elementor-widget/styles8377.css?ver=1761889918'
+    href='{{ $assetsUrl }}/wp-content/plugins/adventus-elementor-widget/styles8377.css?ver=1761889918'
     type='text/css' media='all' />
 <link rel='stylesheet' id='open-course-search-css-css'
-    href='{{ asset('/assets/front') }}/wp-content/plugins/open-course-sarch/css/open-course-search87ed.css?ver=5.9.12'
+    href='{{ $assetsUrl }}/wp-content/plugins/open-course-sarch/css/open-course-search87ed.css?ver=5.9.12'
     type='text/css' media='all' />
-<link rel='stylesheet' id='dashicons-css' href='wp-includes/css/dashicons.min87ed.css?ver=5.9.12' type='text/css'
+<link rel='stylesheet' id='dashicons-css' href='{{ $assetsUrl }}/wp-includes/css/dashicons.min87ed.css?ver=5.9.12' type='text/css'
     media='all' />
 <link rel='stylesheet' id='adventusio-style-min-css'
-    href='{{ asset('/assets/front') }}/wp-content/themes/adventusio/style8a54.css?ver=1.0.0' type='text/css'
+    href='{{ $assetsUrl }}/wp-content/themes/adventusio/style8a54.css?ver=1.0.0' type='text/css'
     media='all' />
 <link rel='stylesheet' id='adventus-drivetabs-css-css'
-    href='{{ asset('/assets/front') }}/wp-content/themes/adventusio/css/drive-tabs8a54.css?ver=1.0.0'
+    href='{{ $assetsUrl }}/wp-content/themes/adventusio/css/drive-tabs8a54.css?ver=1.0.0'
     type='text/css' media='all' />
 <link rel='stylesheet' id='adventus-institutions-css-css'
-    href='{{ asset('/assets/front') }}/wp-content/themes/adventusio/css/institutions8a54.css?ver=1.0.0'
+    href='{{ $assetsUrl }}/wp-content/themes/adventusio/css/institutions8a54.css?ver=1.0.0'
     type='text/css' media='all' />
 <link rel='stylesheet' id='adventus-home-css-css'
-    href='{{ asset('/assets/front') }}/wp-content/themes/adventusio/css/home8a54.css?ver=1.0.0' type='text/css'
+    href='{{ $assetsUrl }}/wp-content/themes/adventusio/css/home8a54.css?ver=1.0.0' type='text/css'
     media='all' />
 <link rel='stylesheet' id='adventus-reecruiter-success-css-css'
-    href='{{ asset('/assets/front') }}/wp-content/themes/adventusio/css/recruiter-success-story8a54.css?ver=1.0.0'
+    href='{{ $assetsUrl }}/wp-content/themes/adventusio/css/recruiter-success-story8a54.css?ver=1.0.0'
     type='text/css' media='all' />
 <link rel='stylesheet' id='adventus-institution-success-css-css'
-    href='{{ asset('/assets/front') }}/wp-content/themes/adventusio/css/institution-success-story8a54.css?ver=1.0.0'
+    href='{{ $assetsUrl }}/wp-content/themes/adventusio/css/institution-success-story8a54.css?ver=1.0.0'
     type='text/css' media='all' />
-<link rel='stylesheet' id='font-awesome-official-css' href='{{ asset('/assets/front') }}/use.fontawesome.com/releases/v5.13.0/css/all.css'
+<link rel='stylesheet' id='font-awesome-official-css' href='{{ $assetsUrl }}/use.fontawesome.com/releases/v5.13.0/css/all.css'
     type='text/css' media='all'
     integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
 <link rel='stylesheet' id='elementor-icons-css'
-    href='{{ asset('/assets/front') }}/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min7816.css?ver=5.15.0'
+    href='{{ $assetsUrl }}/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min7816.css?ver=5.15.0'
     type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-frontend-legacy-css'
-    href='{{ asset('/assets/front') }}/wp-content/plugins/elementor/assets/css/frontend-legacy.min5aed.css?ver=3.6.4'
+    href='{{ $assetsUrl }}/wp-content/plugins/elementor/assets/css/frontend-legacy.min5aed.css?ver=3.6.4'
     type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-frontend-css'
-    href='{{ asset('/assets/front') }}/wp-content/plugins/elementor/assets/css/frontend.min5aed.css?ver=3.6.4'
+    href='{{ $assetsUrl }}/wp-content/plugins/elementor/assets/css/frontend.min5aed.css?ver=3.6.4'
     type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-post-8-css'
-    href='{{ asset('/assets/front') }}/wp-content/uploads/elementor/css/post-8d6b7.css?ver=1738259458'
+    href='{{ $assetsUrl }}/wp-content/uploads/elementor/css/post-8d6b7.css?ver=1738259458'
     type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-pro-css'
-    href='{{ asset('/assets/front') }}/wp-content/plugins/elementor-pro/assets/css/frontend.min3ab2.css?ver=3.6.5'
+    href='{{ $assetsUrl }}/wp-content/plugins/elementor-pro/assets/css/frontend.min3ab2.css?ver=3.6.5'
     type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-global-css'
-    href='{{ asset('/assets/front') }}/wp-content/uploads/elementor/css/globald6b7.css?ver=1738259458'
+    href='{{ $assetsUrl }}/wp-content/uploads/elementor/css/globald6b7.css?ver=1738259458'
     type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-post-63-css'
-    href='{{ asset('/assets/front') }}/wp-content/uploads/elementor/css/post-63f57d.css?ver=1755673165'
+    href='{{ $assetsUrl }}/wp-content/uploads/elementor/css/post-63f57d.css?ver=1755673165'
     type='text/css' media='all' />
 <link rel='stylesheet' id='moove_gdpr_frontend-css'
-    href='{{ asset('/assets/front') }}/wp-content/plugins/gdpr-cookie-compliance/dist/styles/gdpr-main-nf7bcd.css?ver=4.8.3'
+    href='{{ $assetsUrl }}/wp-content/plugins/gdpr-cookie-compliance/dist/styles/gdpr-main-nf7bcd.css?ver=4.8.3'
     type='text/css' media='all' />
 
 {{-- <link rel='stylesheet' id='font-awesome-official-v4shim-css'
@@ -115,22 +119,22 @@
     integrity="sha384-/7iOrVBege33/9vHFYEtviVcxjUsNCqyeMnlW/Ms+PH8uRdFkKFmqf9CbVAN0Qef" crossorigin="anonymous" /> --}}
 
 <link rel='stylesheet' id='elementor-icons-shared-0-css'
-    href='{{ asset('/assets/front') }}/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min52d5.css?ver=5.15.3'
+    href='{{ $assetsUrl }}/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min52d5.css?ver=5.15.3'
     type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-icons-fa-solid-css'
-    href='{{ asset('/assets/front') }}/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min52d5.css?ver=5.15.3'
+    href='{{ $assetsUrl }}/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min52d5.css?ver=5.15.3'
     type='text/css' media='all' />
 <script type='text/javascript' defer
-    src='{{ asset('/assets/front') }}/wp-content/plugins/elementor/assets/lib/swiper/swiper.min48f5.js?ver=5.3.6'
+    src='{{ $assetsUrl }}/wp-content/plugins/elementor/assets/lib/swiper/swiper.min48f5.js?ver=5.3.6'
     id='swiper-js'></script>
 <script type='text/javascript' defer
-    src='{{ asset('/assets/front') }}/wp-content/cache/autoptimize/js/autoptimize_single_680f88afde01607aa81979d12c78c451.js'
+    src='{{ $assetsUrl }}/wp-content/cache/autoptimize/js/autoptimize_single_680f88afde01607aa81979d12c78c451.js'
     id='custom-swiper-script-js'></script>
-<script type='text/javascript' src='{{ asset('/assets/front') }}/wp-includes/js/jquery/jquery.minaf6c.js?ver=3.6.0' id='jquery-core-js'></script>
-<script type='text/javascript' defer src='{{ asset('/assets/front') }}/wp-includes/js/jquery/jquery-migrate.mind617.js?ver=3.3.2'
+<script type='text/javascript' src='{{ $assetsUrl }}/wp-includes/js/jquery/jquery.minaf6c.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' defer src='{{ $assetsUrl }}/wp-includes/js/jquery/jquery-migrate.mind617.js?ver=3.3.2'
     id='jquery-migrate-js'></script>
 <script type='text/javascript' defer
-    src='{{ asset('/assets/front') }}/wp-content/themes/adventusio/js/lottie.min8377.js?ver=1761889918'
+    src='{{ $assetsUrl }}/wp-content/themes/adventusio/js/lottie.min8377.js?ver=1761889918'
     id='adventus-lottie-min-js-js'></script>
 <link rel="https://api.w.org/" href="wp-json/index.html" />
 <link rel="alternate" type="application/json" href="wp-json/wp/v2/pages/63.json" />
